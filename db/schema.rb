@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160605180302) do
+ActiveRecord::Schema.define(version: 20160605212729) do
 
   create_table "reactions", force: :cascade do |t|
-    t.string   "type"
-    t.string   "referer"
+    t.string   "name"
+    t.string   "referrer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "reactions", ["referer"], name: "index_reactions_on_referer"
-  add_index "reactions", ["type"], name: "index_reactions_on_type"
+  add_index "reactions", ["name"], name: "index_reactions_on_name"
+  add_index "reactions", ["referrer"], name: "index_reactions_on_referrer"
 
 end
