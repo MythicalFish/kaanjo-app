@@ -10,7 +10,7 @@ default: &default
   database: ebdb
   username: root
   password: q34tq34FF12$
-  host: aaofmg84l2twmg.c5zojllxjdxt.eu-west-1.rds.amazonaws.com
+  host: aa6ickke8bieon.c5zojllxjdxt.eu-west-1.rds.amazonaws.com
   port: 3306
 
 development:
@@ -26,8 +26,3 @@ test:
 
 production:
   <<: *default
-  database: <%= ENV['RDS_DB_NAME'] %>
-  username: <%= ENV['RDS_USERNAME'] %>
-  password: <%= ENV['RDS_PASSWORD'] %>
-  host:     <%= ENV['RDS_HOSTNAME'] %>
-  port:     <%= ENV['RDS_PORT'] %>
