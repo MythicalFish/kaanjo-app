@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20160605180302) do
 
   create_table "reactions", force: :cascade do |t|
-    t.integer  "type"
+    t.string   "type"
     t.string   "referer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

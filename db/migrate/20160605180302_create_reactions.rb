@@ -1,7 +1,7 @@
 class CreateReactions < ActiveRecord::Migration
   def change
     create_table :reactions do |t|
-      t.integer :type
+      t.string :type
       t.string :referer
 
       t.timestamps null: false
