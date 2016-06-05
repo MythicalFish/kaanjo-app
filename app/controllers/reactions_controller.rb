@@ -9,7 +9,7 @@ class ReactionsController < ApplicationController
   end
 
   def reaction_params
-    params.require(:user).permit(:name,:referrer)
+    params.require(:reaction).permit(:name,:referrer)
   end
 
 end
