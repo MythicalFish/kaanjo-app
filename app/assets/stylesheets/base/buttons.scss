@@ -1,0 +1,10 @@
+button, input[type="submit"] {
+  @extend .btn;
+  background: $black;
+  -webkit-appearance: none;
+  -webkit-border-radius:0; 
+}
+a {
+  color: $orange;
+  text-decoration: none;
+}

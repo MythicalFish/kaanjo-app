@@ -1,0 +1,11 @@
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+h1 { @extend .h1; }
+h2 { @extend .h2; }
+h3 { @extend .h3; }
+h5 { @extend .h4; }
+h6 { @extend .h6; }
+.lh0 {
+  line-height: 0;
+}

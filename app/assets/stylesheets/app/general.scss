@@ -1,0 +1,17 @@
+* {
+  outline: none!important;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+html, body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  background-color: $gray-darkest;
+  color: $gray-lighterer;
+  margin: 0;
+}

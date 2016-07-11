@@ -1,0 +1,19 @@
+@mixin vendor($name, $argument) {
+  -webkit-#{$name}: #{$argument};
+  -ms-#{$name}: #{$argument};
+  #{$name}: #{$argument};
+}
+@mixin flexbox() {
+  display:-webkit-box!important;
+  display:-moz-box!important;
+  display:-ms-flexbox!important;
+  display:-webkit-flex!important;
+  display:flex!important;
+}
+@mixin flexitem($val) {
+  -webkit-box-flex:$val;
+  -moz-box-flex: $val;
+  -webkit-flex:$val;
+  -ms-flex:$val;
+  flex:$val;
+}

@@ -1,0 +1,5 @@
+%ul
+  - @webmasters.each do |w|
+    %li 
+      %a{href:webmaster_path(w)}= w.email
+  

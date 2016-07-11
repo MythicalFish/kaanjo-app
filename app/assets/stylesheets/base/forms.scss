@@ -1,0 +1,27 @@
+input[type="text"],input[type="password"],input[type="email"],input[type="email"],input[type="tel"],input[type="search"],select,textarea {
+  @extend .input;
+  border-radius: 0;
+  border: 0;
+  padding: 1rem 1.2rem;
+}
+textarea {
+  @extend .textarea;
+}
+select {
+  @extend .select;
+  height: auto;
+}
+label {
+  @extend .label;
+}
+.field_with_errors {
+  position: relative;
+}
+.field_with_errors::before {
+  content: "\f054";
+  font-family: 'FontAwesome';
+  position: absolute;
+  left: -20px;
+  top: 12px;
+  color: $red;
+}

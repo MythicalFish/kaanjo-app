@@ -1,0 +1,131 @@
+
+// Colors
+
+$black:           #000;
+$gray-darkest:    lighten($black, 12.5%);
+$gray-darkerer:   lighten($black, 17.5%);
+$gray-darker:     lighten($black, 25%);
+$gray-dark:       lighten($black, 37.5%);
+$gray:            lighten($black, 50%);
+$gray-light:      lighten($black, 62.5%);
+$gray-lighter:    lighten($black, 75%);
+$gray-lighterer:  lighten($black, 87.5%);
+$gray-lightest:   #F6F6F6;
+$white:           #FFF;
+
+$aqua: #7fdbff;
+$blue: #0074d9;
+$navy: #001f3f;
+$teal: #39cccc;
+$green: #2ecc40;
+$olive: #3d9970;
+$lime: #01ff70;
+$yellow: #ffdc00;
+$orange: #ff851b;
+$red: #ff4136;
+$fuchsia: #f012be;
+$purple: #b10dc9;
+$maroon: #85144b;
+$silver: #ddd;
+$gray: #aaa;
+
+$darken-1: rgba(0, 0, 0, .1);
+$darken-2: rgba(0, 0, 0, .2);
+$darken-3: rgba(0, 0, 0, .3);
+$darken-4: rgba(0, 0, 0, .4);
+$darken-5: rgba(0, 0, 0, .5); // Custom
+$darken-6: rgba(0, 0, 0, .6); // Custom
+$darken-7: rgba(0, 0, 0, .7); // Custom
+$darken-8: rgba(0, 0, 0, .8); // Custom
+$darken-9: rgba(0, 0, 0, .9); // Custom
+
+$lighten-1: rgba(255, 255, 255, .0625);
+$lighten-2: rgba(255, 255, 255, .125);
+$lighten-3: rgba(255, 255, 255, .25);
+$lighten-4: rgba(255, 255, 255, .5);
+
+// Highlights
+
+$hljs-comment: $silver;
+$hljs-keyword: white;
+$hljs-number: $lime;
+$hljs-string: $red;
+$hljs-title: $red;
+$hljs-type: $aqua;
+$hljs-tag: $aqua;
+$hljs-attribute: $lime;
+$hljs-regexp: $lime;
+$hljs-symbol: $fuchsia;
+$hljs-built-in: $aqua;
+$hljs-preprocessor: $silver;
+$hljs-deletion: $fuchsia;
+$hljs-addition: $lime;
+$hljs-change: $aqua;
+$hljs-chunk: $gray;
+
+// Breakpoints
+
+$breakpoint-xs: '(max-width: 40em)';
+$breakpoint-sm: '(min-width: 40em)';
+$breakpoint-md: '(min-width: 52em)';
+$breakpoint-lg: '(min-width: 64em)';
+$breakpoint-sm-md: '(min-width: 40em) and (max-width: 52em)';
+$breakpoint-md-lg: '(min-width: 52em) and (max-width: 64em)';
+
+// Typography
+
+$h1: 3rem;
+$h2: 2.4rem;
+$h3: 1.8rem;
+$h4: 1.2rem;
+$h5: .875rem;
+$h6: .75rem;
+
+$line-height-1: 1;
+$line-height-2: 1.125;
+$line-height-3: 1.25;
+$line-height-4: 1.5;
+$letter-spacing: 1;
+$caps-letter-spacing: .2em;
+$bold-font-weight: bold;
+
+// Borders
+
+$border-width: 1px;
+$border-radius: 0px;
+
+// Buttons
+
+$button-color: $orange;
+$button-background-color: $black;
+$button-font-family: inherit;
+$button-font-size: inherit;
+$button-font-weight: $bold-font-weight;
+$button-line-height: 1.125rem;
+$button-padding-y: .5rem;
+$button-padding-x: 1rem;
+
+// Forms
+
+$form-field-padding-x: 1rem;
+$form-field-padding-y: .8rem;
+$form-field-height: 2.25rem;
+$range-thumb-width: $form-field-padding-x;
+$range-thumb-height: ( $form-field-height - ($form-field-padding-y * 2) );
+$range-track-height: ( $form-field-padding-y / 2 );
+$range-thumb-offset: ( $range-thumb-height / -2 + ($range-track-height / 2) );
+$range-thumb-pseudo-size: $form-field-height;
+
+// Widths
+
+$width-1: 24rem;
+$width-2: 32rem;
+$width-3: 48rem;
+$width-4: 64rem;
+
+// Spacing
+
+$space-1: .5rem;
+$space-2: 1rem;
+$space-3: 2rem;
+$space-4: 4rem;
