@@ -43,6 +43,13 @@ Webmaster.all.each do |w|
 
     { reaction_type_id: 2, customer_id: 789789, product: 'Mighty Mouse', product_url: 'https://www.amazon.co.uk/Apple-MB829Z-A-Magic-Mouse/dp/B002NX0M8C'},
     { reaction_type_id: 2, customer_id: 789789, product: 'Asus Ultra 4K Monitor', product_url: 'https://www.amazon.co.uk/Asus-PB287Q-Widescreen-Ultra-Monitor/dp/B00JEZTC3I'}
-    
+
   ])
 end
+
+ReactionType.create([
+  { name: 'Like' },
+  { name: 'Love' },
+  { name: 'Meh' },
+  { name: 'Hate' }
+])

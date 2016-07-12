@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712082617) do
+ActiveRecord::Schema.define(version: 20160712110137) do
+
+  create_table "reaction_types", force: :cascade do |t|
+    t.string "name", limit: 255, null: false
+  end
 
   create_table "reactions", force: :cascade do |t|
     t.datetime "created_at",                   null: false
