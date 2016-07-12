@@ -11,26 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712110137) do
+ActiveRecord::Schema.define(version: 20160712154522) do
+
+  create_table "impressions", force: :cascade do |t|
+    t.integer  "product_id",  limit: 4, null: false
+    t.integer  "customer_id", limit: 4, null: false
+    t.datetime "created_at",            null: false
+  end
+
+  add_index "impressions", ["created_at"], name: "index_impressions_on_created_at", using: :btree
+  add_index "impressions", ["customer_id"], name: "index_impressions_on_customer_id", using: :btree
+  add_index "impressions", ["product_id"], name: "index_impressions_on_product_id", using: :btree
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name",         limit: 255, null: false
+    t.string   "url",          limit: 255, null: false
+    t.integer  "webmaster_id", limit: 4,   null: false
+    t.datetime "created_at",               null: false
+  end
+
+  add_index "products", ["created_at"], name: "index_products_on_created_at", using: :btree
+  add_index "products", ["name"], name: "index_products_on_name", using: :btree
+  add_index "products", ["webmaster_id"], name: "index_products_on_webmaster_id", using: :btree
 
   create_table "reaction_types", force: :cascade do |t|
     t.string "name", limit: 255, null: false
   end
 
   create_table "reactions", force: :cascade do |t|
-    t.datetime "created_at",                   null: false
-    t.integer  "reaction_type_id", limit: 4,   null: false
-    t.integer  "webmaster_id",     limit: 4,   null: false
-    t.integer  "customer_id",      limit: 4,   null: false
-    t.string   "product_url",      limit: 255, null: false
-    t.string   "product",          limit: 255, null: false
+    t.datetime "created_at",                 null: false
+    t.integer  "reaction_type_id", limit: 4, null: false
+    t.integer  "customer_id",      limit: 4, null: false
+    t.integer  "product_id",       limit: 4
   end
 
   add_index "reactions", ["customer_id"], name: "index_reactions_on_customer_id", using: :btree
-  add_index "reactions", ["product"], name: "index_reactions_on_product", using: :btree
-  add_index "reactions", ["product_url"], name: "index_reactions_on_product_url", using: :btree
+  add_index "reactions", ["product_id"], name: "index_reactions_on_product_id", using: :btree
   add_index "reactions", ["reaction_type_id"], name: "index_reactions_on_reaction_type_id", using: :btree
-  add_index "reactions", ["webmaster_id"], name: "index_reactions_on_webmaster_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false
