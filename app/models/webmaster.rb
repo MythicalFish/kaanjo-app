@@ -14,24 +14,19 @@ class Webmaster < User
   to: Time.now, 
   order_by: 'count(*)', 
   order_direction: 'DESC', 
-  reaction_types: ReactionType.all )
+  reaction_type_ids: ReactionType.ids )
 
-    o = []
 
-    reactions.
-      joins(:reaction_type).
-      where(
-        created_at: from..to,
-        reaction_type: reaction_types
-      ).
-      group('product').
-      order("#{order_by} #{order_direction}").
-      count.
-    each do |name,count|
-      o << { product: name, total_reactions: count }
-    end
-
-    o 
+  reactions.
+    joins(:reaction_type).
+    where('
+      reactions.created_at BETWEEN ? AND ? and
+      reaction_types.id IN (?)',
+      from,to,
+      reaction_type_ids
+    ).
+    group('product').
+    order("#{order_by} #{order_direction}")
 
   end
 
