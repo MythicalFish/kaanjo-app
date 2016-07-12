@@ -29,3 +29,20 @@ webmasters = User.create([
   { email:'webmaster19@site19.com', password:'test1234' },
   { email:'webmaster20@site20.com', password:'test1234' }
 ])
+
+Webmaster.all.each do |w|
+  w.reactions.create([
+
+    { reaction_type_id: 1, customer_id: 123123, product: 'Macbook Pro', product_url: 'https://www.amazon.co.uk/Apple-MacBook-Display-MJLQ2B-Storage/dp/B00Y98VHGK'},
+    { reaction_type_id: 1, customer_id: 123123, product: 'Mighty Mouse', product_url: 'https://www.amazon.co.uk/Apple-MB829Z-A-Magic-Mouse/dp/B002NX0M8C'},
+    { reaction_type_id: 1, customer_id: 123123, product: 'Asus Ultra 4K Monitor', product_url: 'https://www.amazon.co.uk/Asus-PB287Q-Widescreen-Ultra-Monitor/dp/B00JEZTC3I'},
+
+    { reaction_type_id: 1, customer_id: 456456, product: 'Macbook Pro', product_url: 'https://www.amazon.co.uk/Apple-MacBook-Display-MJLQ2B-Storage/dp/B00Y98VHGK'},
+    { reaction_type_id: 2, customer_id: 456456, product: 'Mighty Mouse', product_url: 'https://www.amazon.co.uk/Apple-MB829Z-A-Magic-Mouse/dp/B002NX0M8C'},
+    { reaction_type_id: 3, customer_id: 456456, product: 'Asus Ultra 4K Monitor', product_url: 'https://www.amazon.co.uk/Asus-PB287Q-Widescreen-Ultra-Monitor/dp/B00JEZTC3I'},
+
+    { reaction_type_id: 2, customer_id: 789789, product: 'Mighty Mouse', product_url: 'https://www.amazon.co.uk/Apple-MB829Z-A-Magic-Mouse/dp/B002NX0M8C'},
+    { reaction_type_id: 2, customer_id: 789789, product: 'Asus Ultra 4K Monitor', product_url: 'https://www.amazon.co.uk/Asus-PB287Q-Widescreen-Ultra-Monitor/dp/B00JEZTC3I'}
+    
+  ])
+end

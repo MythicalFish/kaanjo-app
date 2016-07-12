@@ -7,8 +7,9 @@ class WebmastersController < ApplicationController
   end
 
   def create
-    if Webmaster.create(webmaster_params)
-      render 'show'
+    w = Webmaster.new(webmaster_params)
+    if w.save
+      redirect_to webmaster_path(w)
     else
       
     end
