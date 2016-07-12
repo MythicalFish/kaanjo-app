@@ -10,11 +10,11 @@ class Webmaster < User
 
   def products(
 
-  from: Time.new(1970), 
-  to: Time.now.end_of_day, 
-  order_by: 'count(*)', 
-  order_direction: 'DESC', 
-  reaction_type_ids: ReactionType.ids )
+  from:               Time.new(1970), 
+  to:                 Time.now.end_of_day, 
+  order_by:           'count(*)', 
+  order_direction:    'DESC', 
+  reaction_type_ids:  ReactionType.ids )
 
 
     products = reactions.
@@ -31,12 +31,24 @@ class Webmaster < User
     results = {}
 
     products.each do |p,count|
+
       product = p[0]
       reaction_type = ReactionType.find(p[1]).name
+
       results[product] ||= {}
+      results[product]['Impressions'] ||= 0
+      results[product]['Reactions'] ||= 0
+
       results[product][reaction_type] = count
-      results[product]['Total'] ||= 0
-      results[product]['Total'] += count
+      results[product]['Impressions'] += count
+      results[product]['Reactions'] += count unless reaction_type == 'None'
+
+    end
+
+    ReactionType.all.each do |r|
+      results.each do |product,counts|
+        results[product][r.name] ||= 0
+      end
     end
 
     results

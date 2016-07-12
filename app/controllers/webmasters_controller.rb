@@ -3,7 +3,8 @@ class WebmastersController < ApplicationController
   before_action :authorize
 
   def show
-
+    @webmaster = Webmaster.find(params[:id])
+    @products = @webmaster.products
   end
 
   def create

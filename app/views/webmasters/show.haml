@@ -1,0 +1,19 @@
+%table
+  %thead
+    %tr
+      %td
+        Product name
+      - ReactionType.all.each do |r|
+        %td= r.name
+      %td
+        Impressions
+      %td
+        Reactions
+  - @products.each do |name, counts|
+    %tr
+      %td= name
+      - ReactionType.all.each do |r|
+        %td= counts[r.name]
+      %td= counts['Impressions']
+      %td= counts['Reactions']
+  

@@ -3,10 +3,10 @@ class DashboardController < ApplicationController
   def show
     if current_user.admin?
       @webmasters = Webmaster.all
-      render 'admin'
+      render 'admin/dashboard'
     else
       @products = current_user.products
-      render 'webmaster'
+      render 'webmasters/show'
     end
   end
 

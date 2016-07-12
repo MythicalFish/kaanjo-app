@@ -33,21 +33,35 @@ webmasters = User.create([
 Webmaster.all.each do |w|
   w.reactions.create([
 
-    { reaction_type_id: 1, customer_id: 123123, product: 'Macbook Pro', product_url: 'https://www.amazon.co.uk/Apple-MacBook-Display-MJLQ2B-Storage/dp/B00Y98VHGK'},
-    { reaction_type_id: 1, customer_id: 123123, product: 'Mighty Mouse', product_url: 'https://www.amazon.co.uk/Apple-MB829Z-A-Magic-Mouse/dp/B002NX0M8C'},
-    { reaction_type_id: 1, customer_id: 123123, product: 'Asus Ultra 4K Monitor', product_url: 'https://www.amazon.co.uk/Asus-PB287Q-Widescreen-Ultra-Monitor/dp/B00JEZTC3I'},
+    { reaction_type_id: rand(0..4), customer_id: 123123, product: 'Macbook Pro', product_url: 'https://www.amazon.co.uk/Apple-MacBook-Display-MJLQ2B-Storage/dp/B00Y98VHGK'},
+    { reaction_type_id: rand(0..4), customer_id: 123123, product: 'Olympus Tough TG-4 Camera - Red', product_url: 'https://www.amazon.co.uk/Olympus-Tough-TG-4-Camera-Red/dp/B00VWJYJEG'},
+    { reaction_type_id: rand(0..4), customer_id: 123123, product: 'Olympus Tough TG-4 Camera - Black', product_url: 'https://www.amazon.co.uk/Olympus-Tough-TG-4-Camera-Black/dp/B00VWJYJPK'},
+    { reaction_type_id: rand(0..4), customer_id: 123123, product: 'Sandisk 32GB Ultra SDHC Memory Card', product_url: 'https://www.amazon.co.uk/Sandisk-Ultra-Memory-Olympus-Camera/dp/B00HAJDK7E'},
+    { reaction_type_id: rand(0..4), customer_id: 123123, product: 'Amazon Fire TV', product_url: 'https://www.amazon.co.uk/dp/B00UH2O6T2'},
+    { reaction_type_id: rand(0..4), customer_id: 123123, product: 'Mighty Mouse', product_url: 'https://www.amazon.co.uk/Apple-MB829Z-A-Magic-Mouse/dp/B002NX0M8C'},
+    { reaction_type_id: rand(0..4), customer_id: 123123, product: 'Asus Ultra 4K Monitor', product_url: 'https://www.amazon.co.uk/Asus-PB287Q-Widescreen-Ultra-Monitor/dp/B00JEZTC3I'},
 
-    { reaction_type_id: 1, customer_id: 456456, product: 'Macbook Pro', product_url: 'https://www.amazon.co.uk/Apple-MacBook-Display-MJLQ2B-Storage/dp/B00Y98VHGK'},
-    { reaction_type_id: 2, customer_id: 456456, product: 'Mighty Mouse', product_url: 'https://www.amazon.co.uk/Apple-MB829Z-A-Magic-Mouse/dp/B002NX0M8C'},
-    { reaction_type_id: 3, customer_id: 456456, product: 'Asus Ultra 4K Monitor', product_url: 'https://www.amazon.co.uk/Asus-PB287Q-Widescreen-Ultra-Monitor/dp/B00JEZTC3I'},
+    { reaction_type_id: rand(0..4), customer_id: 456456, product: 'Macbook Pro', product_url: 'https://www.amazon.co.uk/Apple-MacBook-Display-MJLQ2B-Storage/dp/B00Y98VHGK'},
+    { reaction_type_id: rand(0..4), customer_id: 456456, product: 'Olympus Tough TG-4 Camera - Red', product_url: 'https://www.amazon.co.uk/Olympus-Tough-TG-4-Camera-Red/dp/B00VWJYJEG'},
+    { reaction_type_id: rand(0..4), customer_id: 456456, product: 'Olympus Tough TG-4 Camera - Black', product_url: 'https://www.amazon.co.uk/Olympus-Tough-TG-4-Camera-Black/dp/B00VWJYJPK'},
+    { reaction_type_id: rand(0..4), customer_id: 456456, product: 'Sandisk 32GB Ultra SDHC Memory Card', product_url: 'https://www.amazon.co.uk/Sandisk-Ultra-Memory-Olympus-Camera/dp/B00HAJDK7E'},
+    { reaction_type_id: rand(0..4), customer_id: 456456, product: 'Amazon Fire TV', product_url: 'https://www.amazon.co.uk/dp/B00UH2O6T2'},
+    { reaction_type_id: rand(0..4), customer_id: 456456, product: 'Mighty Mouse', product_url: 'https://www.amazon.co.uk/Apple-MB829Z-A-Magic-Mouse/dp/B002NX0M8C'},
+    { reaction_type_id: rand(0..4), customer_id: 456456, product: 'Asus Ultra 4K Monitor', product_url: 'https://www.amazon.co.uk/Asus-PB287Q-Widescreen-Ultra-Monitor/dp/B00JEZTC3I'},
 
-    { reaction_type_id: 2, customer_id: 789789, product: 'Mighty Mouse', product_url: 'https://www.amazon.co.uk/Apple-MB829Z-A-Magic-Mouse/dp/B002NX0M8C'},
-    { reaction_type_id: 2, customer_id: 789789, product: 'Asus Ultra 4K Monitor', product_url: 'https://www.amazon.co.uk/Asus-PB287Q-Widescreen-Ultra-Monitor/dp/B00JEZTC3I'}
+    { reaction_type_id: rand(0..4), customer_id: 789789, product: 'Macbook Pro', product_url: 'https://www.amazon.co.uk/Apple-MacBook-Display-MJLQ2B-Storage/dp/B00Y98VHGK'},
+    { reaction_type_id: rand(0..4), customer_id: 789789, product: 'Olympus Tough TG-4 Camera - Red', product_url: 'https://www.amazon.co.uk/Olympus-Tough-TG-4-Camera-Red/dp/B00VWJYJEG'},
+    { reaction_type_id: rand(0..4), customer_id: 789789, product: 'Olympus Tough TG-4 Camera - Black', product_url: 'https://www.amazon.co.uk/Olympus-Tough-TG-4-Camera-Black/dp/B00VWJYJPK'},
+    { reaction_type_id: rand(0..4), customer_id: 789789, product: 'Sandisk 32GB Ultra SDHC Memory Card', product_url: 'https://www.amazon.co.uk/Sandisk-Ultra-Memory-Olympus-Camera/dp/B00HAJDK7E'},
+    { reaction_type_id: rand(0..4), customer_id: 789789, product: 'Amazon Fire TV', product_url: 'https://www.amazon.co.uk/dp/B00UH2O6T2'},
+    { reaction_type_id: rand(0..4), customer_id: 789789, product: 'Mighty Mouse', product_url: 'https://www.amazon.co.uk/Apple-MB829Z-A-Magic-Mouse/dp/B002NX0M8C'},
+    { reaction_type_id: rand(0..4), customer_id: 789789, product: 'Asus Ultra 4K Monitor', product_url: 'https://www.amazon.co.uk/Asus-PB287Q-Widescreen-Ultra-Monitor/dp/B00JEZTC3I'}
 
   ])
 end
 
 ReactionType.create([
+  { name: 'None' },
   { name: 'Like' },
   { name: 'Love' },
   { name: 'Meh' },

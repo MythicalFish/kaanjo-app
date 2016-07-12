@@ -5,4 +5,5 @@ class Reaction < ActiveRecord::Base
 
   alias_method :type, :reaction_type
 
+
 end
