@@ -1,0 +1,20 @@
+%table
+  %thead
+    %tr
+      %td
+        Product name
+      %td
+        Impressions
+      %td
+        Reactions
+      - ReactionType.all.each do |r|
+        %td= r.name
+  - @products.each do |p|
+    %tr
+      %td
+        %a{href:p.url}= p.name
+      %td= p.impression_count
+      %td= p.reaction_count
+      - ReactionType.all.each do |r|
+        %td= p.reaction_count(r)
+  

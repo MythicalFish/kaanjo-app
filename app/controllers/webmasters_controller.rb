@@ -4,7 +4,8 @@ class WebmastersController < ApplicationController
 
   def show
     @webmaster = Webmaster.find(params[:id])
-    @products = @webmaster.products
+    @products = @webmaster.products.includes([:impressions,:reactions])
+    render 'webmasters/products/index'
   end
 
   def create
