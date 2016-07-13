@@ -5,8 +5,7 @@ class DashboardController < ApplicationController
       @webmasters = Webmaster.all
       render 'webmasters/index'
     else
-      @products = current_user.products.includes([:impressions,:reactions])
-      render 'webmasters/products/index'
+      redirect_to products_path
     end
   end
 

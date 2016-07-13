@@ -1,0 +1,23 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  thead {
+    background: $gray-darker;
+    color: $gray-lightest;
+    font-weight: bold;
+  }
+  tbody {
+    @extend .b1-left;
+    @extend .b1-right;
+    tr {
+      @extend .b1-bottom;
+      td:not(:last-child) {
+        @extend .b1-right;
+      }
+    }
+  }
+  td {
+    padding: $space-2;
+  }
+}

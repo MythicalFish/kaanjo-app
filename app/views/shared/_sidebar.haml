@@ -1,0 +1,12 @@
+%ul.py1.px0
+  - if current_user.admin?
+    %li
+      %a{href:'/'}
+        Webmasters
+  - else
+    %li
+      %a{href:'/'}
+        Products
+  %li
+    %a{href:edit_user_registration_path}
+      Account settings
