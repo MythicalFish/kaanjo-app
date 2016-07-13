@@ -3,5 +3,6 @@
     %a.block.h3{href:'/'}
       Reactions
   .flex-none
-    %a{href:edit_user_registration_path}
-      Account
+    - if current_user
+      %a{href:edit_user_registration_path}
+        Account
