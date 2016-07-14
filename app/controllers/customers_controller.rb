@@ -10,12 +10,16 @@ class CustomersController < WebsocketRails::BaseController
   end
 
   def create
-
+puts 'creating'
+puts params
     @customer = Customer.create
-
+    
     if @customer
+puts 'created'
       trigger_success({ :sid => @customer.sid })
     else
+puts 'failed'
+puts @customer.errors
       trigger_failure({ :sid => nil })
     end
 
