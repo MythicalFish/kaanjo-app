@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712154522) do
+ActiveRecord::Schema.define(version: 20160713133700) do
+
+  create_table "customers", force: :cascade do |t|
+    t.string "sid", limit: 255, null: false
+    t.string "ip",  limit: 255, null: false
+  end
+
+  add_index "customers", ["sid"], name: "index_customers_on_sid", using: :btree
 
   create_table "impressions", force: :cascade do |t|
     t.integer  "product_id",  limit: 4, null: false
