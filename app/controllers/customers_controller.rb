@@ -1,22 +1,24 @@
-class CustomersController < ApplicationController
+class CustomersController < WebsocketRails::BaseController
 
-  def index
-    @customers = current_user.customers
+  def initialize_session
+    controller_store[:message_count] = 0
   end
 
-  def show
-    @customer = current_user.customers.find(params[:id])
+  def find
+    @customer = Customer.find_by_sid(params[:sid])
+
   end
 
   def create
+
     @customer = Customer.create
-    respond_to do |format|
-      format.json { render json: { sid: @customer.sid } }
+
+    if @customer
+      trigger_success({ :sid => @customer.sid })
+    else
+      trigger_failure({ :sid => nil })
     end
+
   end
-
-  private
-
- 
   
 end
