@@ -4,5 +4,6 @@
       Reactions
   .flex-none
     - if current_user
-      %a{href:edit_user_registration_path}
-        Account
+      %a{href:destroy_user_session_path, 'data-method':'delete'} Logout
+      |
+      %a{href:edit_user_registration_path} Account
