@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = current_user.products
+    @products = current_webmaster.products.includes([:impressions,:reactions])
   end
 
   def show
