@@ -81,3 +81,5 @@ Rails.application.configure do
   config.middleware.delete Rack::Lock
 
 end
+
+Thread.new { EventMachine.run } unless EventMachine.reactor_running? && EventMachine.reactor_thread.alive?
