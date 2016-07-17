@@ -37,11 +37,11 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_product
 
-    @product = Product.find(message[:id])
+    @product = webmaster.products.find_by_name(message[:product_name])
 
     if @product
       trigger_success({
-        reactions: reaction_totals
+        data: @product.reaction_totals
       })
     else
       trigger_failure({ errors: @product.errors })
@@ -49,8 +49,12 @@ class ReactionsApi < WebsocketRails::BaseController
     
   end
 
-  def create
-    # this should be done by the webmaster
+  private
+
+  def webmaster
+    if id = controller_store[:webmaster_id]
+      Webmaster.find(id)
+    end
   end
 
 end
