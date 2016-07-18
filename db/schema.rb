@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160717094836) do
+ActiveRecord::Schema.define(version: 20160718132402) do
 
   create_table "customers", force: :cascade do |t|
     t.string "sid", limit: 255, null: false
@@ -31,14 +31,18 @@ ActiveRecord::Schema.define(version: 20160717094836) do
   add_index "impressions", ["product_id"], name: "index_impressions_on_product_id", using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.string   "name",         limit: 255, null: false
-    t.string   "url",          limit: 255, null: false
-    t.integer  "webmaster_id", limit: 4,   null: false
-    t.datetime "created_at",               null: false
+    t.string   "name",              limit: 255,             null: false
+    t.string   "url",               limit: 255,             null: false
+    t.integer  "webmaster_id",      limit: 4,               null: false
+    t.datetime "created_at",                                null: false
+    t.integer  "impressions_count", limit: 4,   default: 0
+    t.integer  "reactions_count",   limit: 4,   default: 0
   end
 
   add_index "products", ["created_at"], name: "index_products_on_created_at", using: :btree
+  add_index "products", ["impressions_count"], name: "index_products_on_impressions_count", using: :btree
   add_index "products", ["name"], name: "index_products_on_name", using: :btree
+  add_index "products", ["reactions_count"], name: "index_products_on_reactions_count", using: :btree
   add_index "products", ["webmaster_id"], name: "index_products_on_webmaster_id", using: :btree
 
   create_table "reaction_types", force: :cascade do |t|
@@ -71,6 +75,8 @@ ActiveRecord::Schema.define(version: 20160717094836) do
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
     t.string   "website",                limit: 255
+    t.string   "first_name",             limit: 255
+    t.string   "last_name",              limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -2,6 +2,10 @@ class WebmastersController < ApplicationController
 
   before_action :authorize
 
+  def index
+    @title = "Webmasters"
+  end
+
   def show
     @webmaster = Webmaster.find(params[:id])
     @products = @webmaster.products.includes([:impressions,:reactions])

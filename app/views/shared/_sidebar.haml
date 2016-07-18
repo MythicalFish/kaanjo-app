@@ -1,17 +1,26 @@
-%ul.py1.px0
+#logo 
+  Reactions Demo
+%ul
   - if current_user
     - if current_user.admin?
       %li
-        %a{href:'/'}
+        %a{href:'/',class:cp('/')}
+          %i.fa.fa-user.mr1
           Webmasters
     - else
       %li
-        %a{href:'/'}
+        %a{href:'/',class:cp('/')}
           Products
     %li
-      %a{href:edit_user_registration_path}
+      %a{href:edit_user_registration_path,class:cp(edit_user_registration_path)}
+        %i.fa.fa-gear.mr1
         Account settings
+    %li
+      %a{href:destroy_user_session_path, 'data-method':'delete'} 
+        %i.fa.fa-sign-out.mr1
+        Logout
   - else
     %li
       %a{href:'/login'}
+        %i.fa.fa-sign-in.mr1
         Login

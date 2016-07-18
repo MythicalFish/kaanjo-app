@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'dashboard#show'
 
   resources :products
-  resources :webmasters
+  resources :webmasters, skip: [:index]
   
   devise_for :users, :skip => [:sessions, :registrations]
   

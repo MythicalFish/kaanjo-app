@@ -2,6 +2,7 @@ class DashboardController < ApplicationController
 
   def show
     if current_user.admin?
+      @title = "Webmasters"
       @webmasters = Webmaster.all
       render 'webmasters/index'
     else

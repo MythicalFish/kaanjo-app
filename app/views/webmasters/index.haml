@@ -1,5 +1,24 @@
-%ul
+%table
+  %thead
+    %tr
+      %td
+        Name
+      %td
+        Website
+      %td
+        Impressions
+      %td
+        Reactions
   - @webmasters.each do |w|
-    %li 
-      %a{href:webmaster_path(w)}= w.email
+    %tr
+      %td
+        %a{href:webmaster_path(w)}
+          = w.name
+      %td
+        %a{href:w.website}
+          = w.website
+      %td
+        x
+      %td
+        x
   
