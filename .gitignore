@@ -22,3 +22,5 @@
 !.elasticbeanstalk/*.global.yml
 
 .byebug_history
+
+*.DS_Store
