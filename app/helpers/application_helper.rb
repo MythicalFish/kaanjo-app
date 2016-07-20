@@ -28,27 +28,46 @@ module ApplicationHelper
   end
 
   def from_date
-    if params[:timeago]
-      Time.now - date_ranges[params[:timeago]][:secs]
-    else
-      Time.now - (30*60)
-    end
+    Time.now - selected_date_range[:secs]
   end
 
   def to_date
     Time.now
   end
 
+  def selected_date_range
+    if params[:timeago]
+      session[:timeago] = params[:timeago]
+      date_ranges[params[:timeago]]
+    elsif session[:timeago]
+      date_ranges[session[:timeago]]
+    else
+      date_ranges['05']
+    end
+  end
+
   def date_ranges
     {
-      '05' => { label: '30 mins',  secs: 60*30 },
-      '1'  => { label: '1 hour',   secs: 60*60 },
-      '3'  => { label: '3 hours',  secs: 60*60*3 },
-      '6'  => { label: '6 hours',  secs: 60*60*6 },
-      '12' => { label: '12 hours', secs: 60*60*12 },
-      '24' => { label: '24 hours', secs: 60*60*24 },
-      '48' => { label: '48 hours', secs: 60*60*48 }
+      '05' => { label: 'Last 30 minutes',  secs: 60*30 },
+      '1'  => { label: 'Last hour',   secs: 60*60 },
+      '3'  => { label: 'Last 3 hours',  secs: 60*60*3 },
+      '6'  => { label: 'Last 6 hours',  secs: 60*60*6 },
+      '12' => { label: 'Last 12 hours', secs: 60*60*12 },
+      '24' => { label: 'Last 24 hours', secs: 60*60*24 },
+      '48' => { label: 'Last 48 hours', secs: 60*60*48 }
     }
+  end
+
+  def devise_mapping
+    Devise.mappings[:user]
+  end
+
+  def resource_name
+    devise_mapping.name
+  end
+
+  def resource_class
+    devise_mapping.to
   end
 
 end

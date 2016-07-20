@@ -12,6 +12,15 @@ class WebmastersController < ApplicationController
     @products = @webmaster.products.includes([:impressions,:reactions])
   end
 
+  def edit 
+    @webmaster = Webmaster.find(params[:id])
+  end
+
+  def product
+    @webmaster = Webmaster.find(params[:id])
+    @product = @webmaster.products.find(params[:product_id])
+  end
+
   def create
     w = Webmaster.new(webmaster_params)
     if w.save

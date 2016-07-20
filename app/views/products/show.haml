@@ -1,3 +1,9 @@
-%h1= @product.name
+#header.flex
+  .flex-auto
+    %h1
+      Product:
+      %span= @product.name
+  .flex-none
+    = render partial: 'shared/datepicker'
 
-= render partial: 'products/data-table', locals: { products: [@product] }
+= render partial: 'products/data_table', locals: { products: [@product] }

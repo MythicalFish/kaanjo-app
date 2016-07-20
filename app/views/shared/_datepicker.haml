@@ -1,12 +1,10 @@
-%ul.datepicker
-  - if params[:timeago]
-    %li
-      = date_ranges[params[:timeago]][:label]
-  - date_ranges.each do |key,date|
-    - next if params[:timeago] == key
-    %li
-      %a{href:url_replace(request.original_url,{timeago:key})}
-        = date[:label]
-  %li
-    %button
-      Custom range
+.datepicker
+  %span 
+    = selected_date_range[:label]
+    %i.fa.fa-chevron-down.ml1.gray-light
+  %ul
+    - date_ranges.each do |key,date|
+      - next if selected_date_range == date
+      %li
+        %a{href:url_replace(request.original_url,{timeago:key})}
+          = date[:label]

@@ -1,8 +1,11 @@
 #header.flex
   .flex-auto
-    %h1= @title
+    %h1
+      Webmasters:
+      %span Overview
   .flex-none
     = render partial: 'shared/datepicker'
+    
 #body.p2.lg-p3
   %table
     %thead
@@ -19,6 +22,8 @@
           Total CTR
         - ReactionType.all.each do |r|
           %td.bg-gray-darkerer= r.name
+        %td
+          Actions
     - @webmasters.each do |w|
       %tr
         %td
@@ -35,4 +40,6 @@
           = "#{w.ctr(from_date,to_date)}%"
         - ReactionType.all.each do |r|
           %td= w.reaction_count(from_date,to_date,r)
+        %td
+          %a{href:edit_webmaster_url(w)} Edit
     
