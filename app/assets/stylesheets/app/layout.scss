@@ -21,6 +21,9 @@ body {
     line-height: 1;
     font-weight: normal;
     text-transform: uppercase;
+    span {
+      color: $gray;
+    }
   }
 }
 #sidebar {

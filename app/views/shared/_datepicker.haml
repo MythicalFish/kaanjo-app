@@ -1,0 +1,12 @@
+%ul.datepicker
+  - if params[:timeago]
+    %li
+      = date_ranges[params[:timeago]][:label]
+  - date_ranges.each do |key,date|
+    - next if params[:timeago] == key
+    %li
+      %a{href:url_replace(request.original_url,{timeago:key})}
+        = date[:label]
+  %li
+    %button
+      Custom range

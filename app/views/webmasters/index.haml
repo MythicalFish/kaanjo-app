@@ -1,24 +1,38 @@
-%table
-  %thead
-    %tr
-      %td
-        Name
-      %td
-        Website
-      %td
-        Impressions
-      %td
-        Reactions
-  - @webmasters.each do |w|
-    %tr
-      %td
-        %a{href:webmaster_path(w)}
-          = w.name
-      %td
-        %a{href:w.website}
-          = w.website
-      %td
-        x
-      %td
-        x
-  
+#header.flex
+  .flex-auto
+    %h1= @title
+  .flex-none
+    = render partial: 'shared/datepicker'
+#body.p2.lg-p3
+  %table
+    %thead
+      %tr
+        %td
+          Name
+        %td
+          Website
+        %td
+          Impressions
+        %td
+          Total Reactions
+        %td
+          Total CTR
+        - ReactionType.all.each do |r|
+          %td.bg-gray-darkerer= r.name
+    - @webmasters.each do |w|
+      %tr
+        %td
+          %a{href:webmaster_path(w)}
+            = w.name
+        %td
+          %a{href:w.website}
+            = w.website
+        %td
+          = w.impression_count(from_date,to_date)
+        %td
+          = w.reaction_count(from_date,to_date)
+        %td
+          = "#{w.ctr(from_date,to_date)}%"
+        - ReactionType.all.each do |r|
+          %td= w.reaction_count(from_date,to_date,r)
+    

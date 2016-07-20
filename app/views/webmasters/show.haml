@@ -1,4 +1,7 @@
 #header
-  %h1= @title
+  %h1
+    Webmaster:
+    %span= @webmaster.name
+
 #body.p2.lg-p3
   = render partial: 'products/data-table', locals: { products: @products }

@@ -4,9 +4,14 @@ table {
   border-spacing: 0;
   background: $white;
   thead {
-    background: $gray-darker;
+    tr:first-child {
+      background: $gray-darker;
+      color: $gray-lightest;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    background: $gray-dark;
     color: $gray-lightest;
-    font-weight: bold;
   }
   tbody {
     @extend .b1-left;

@@ -8,8 +8,8 @@ class WebmastersController < ApplicationController
 
   def show
     @webmaster = Webmaster.find(params[:id])
+    @title = "Webmaster: #{@webmaster.name}"
     @products = @webmaster.products.includes([:impressions,:reactions])
-    render 'products/index'
   end
 
   def create

@@ -50,11 +50,11 @@ Webmaster.all.each do |w|
     customer_ids = [123,456,789,111,222,333]
 
     rand(51..300).times do
-      p.impressions.create(customer_id:customer_ids.sample)
+      p.impressions.create(customer_id:customer_ids.sample,webmaster_id:w.id)
     end
 
     rand(5..50).times do
-      p.reactions.create(reaction_type_id: rand(1..4),customer_id:customer_ids.sample)
+      p.reactions.create(reaction_type_id: rand(1..4),customer_id:customer_ids.sample,webmaster_id:w.id)
     end
 
   end

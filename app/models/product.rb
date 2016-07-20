@@ -4,6 +4,43 @@ class Product < ActiveRecord::Base
   has_many :reactions
   belongs_to :webmaster
 
+  scope :by_date, -> { order('created_at DESC') }
+
+  def self.with_counts
+    
+    query = "products.*" <<
+      ",COUNT(impressions.id) as impression_count" <<
+      ",COUNT(reactions.id) as reaction_total"
+
+    ReactionType.all.each do |type|
+      query << ",COUNT(reactions.id) as type_count_#{type.id}"
+    end
+
+    select(query).
+      joins("LEFT OUTER JOIN impressions ON (impressions.product_id = products.id)").
+      joins("LEFT OUTER JOIN reactions ON (reactions.product_id = products.id)").
+      group("products.id")
+
+  end
+
+  scope :with_impression_counts, -> do
+    select("products.*, COUNT(impressions.id) as impression_count").
+      joins("LEFT OUTER JOIN impressions ON (impressions.product_id = products.id)").
+      group("products.id")
+  end
+
+  scope :with_reaction_counts_for, -> (type) do
+    select("products.*, COUNT(reactions.id) as type_count_#{type.id}").
+      joins("LEFT OUTER JOIN reactions ON (reactions.product_id = products.id && reactions.reaction_type_id = #{type.id})").
+      group("products.id")
+  end
+
+  scope :with_reaction_totals, -> do
+    select("products.*, COUNT(reactions.id) as reaction_total").
+      joins("LEFT OUTER JOIN reactions ON (reactions.product_id = products.id)").
+      group("products.id")
+  end
+
   def impression_count
     impressions.length
   end
@@ -30,5 +67,6 @@ class Product < ActiveRecord::Base
       reactions.length
     end
   end
+
 
 end

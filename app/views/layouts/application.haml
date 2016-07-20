@@ -11,7 +11,4 @@
       %nav#sidebar.flex-none
         = render partial: 'shared/sidebar'
       .flex-auto
-        #header
-          %h1= @title
-        #body.p2.lg-p3
-          = yield
+        = yield
