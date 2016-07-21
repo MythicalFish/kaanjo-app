@@ -1,9 +1,14 @@
-#header.flex
-  .flex-auto
-    %h1
-      Product:
-      %span= @product.name
-  .flex-none
-    = render partial: 'shared/datepicker'
-
-= render partial: 'products/data_table', locals: { products: [@product] }
+- content_for(:header) do
+  - if current_user.admin?
+    %i.fa.fa-user.mr1
+    %a{href:'/'} Webmasters
+    %a{href:edit_webmaster_path(@product.webmaster)}= @product.webmaster.name
+    %a{href:webmaster_path(@product.webmaster)} Products
+    = @product.name
+  - else
+    %a{href:'/products'} Products
+    = @product.name
+    
+#body
+  
+  

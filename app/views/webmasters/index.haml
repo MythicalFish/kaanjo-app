@@ -1,13 +1,11 @@
-#header.flex
-  .flex-auto
-    %h1
-      %i.fa.fa-user.mr1
-      Webmasters    
+- content_for(:header) do
+  %i.fa.fa-user.mr1
+  Webmasters    
     
 #body
   
-  %header.flex
-    .flex-auto
+  .flex
+    %header.flex-auto
       Overview
     .flex-none
       = render partial: 'shared/datepicker'
@@ -25,7 +23,7 @@
         %td
           Total CTR
         - ReactionType.all.each do |r|
-          %td.bg-gray-darkerer= r.name
+          %td= r.name
         %td
           Actions
     - @webmasters.each do |w|

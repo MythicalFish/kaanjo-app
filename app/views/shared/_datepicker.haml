@@ -1,7 +1,7 @@
 .datepicker
   %span 
     = selected_date_range[:label]
-    %i.fa.fa-chevron-down.ml1.gray-light
+    %i.fa.fa-angle-down.ml1.gray-light
   %ul
     - date_ranges.each do |key,date|
       - next if selected_date_range == date

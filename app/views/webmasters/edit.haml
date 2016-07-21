@@ -1,9 +1,12 @@
-#header
-  %h1
-    %i.fa.fa-user.mr1
-    %a{href:'/'} Webmasters
-    %a{href:webmaster_path(@webmaster)}= @webmaster.name
-    Edit
+- content_for(:header) do
+  %i.fa.fa-user.mr1
+  %a{href:'/'} Webmasters
+  %a{href:webmaster_path(@webmaster)}= @webmaster.name
+  Edit
+
+- content_for(:actions) do   
+  %a{href:'/webmasters'} Cancel
+
 
 #body.p2.lg-p3
   .container-narrow

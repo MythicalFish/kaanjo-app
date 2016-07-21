@@ -1,17 +1,26 @@
 header {
   background: $gray-lightest;
+  padding: $space-3;
+  text-transform: uppercase;
+  @extend .b1-bottom;
 }
 .datepicker {
   text-align: right;
   position: relative;
+  background: $white;
   a, span {
     display: block;
   }
   a {
     padding: $space-2 $space-3;
   }
+  a:hover {
+    background: $gray-lightest;
+  }
   span {
     padding: $space-3;
+    @extend .b1-bottom;
+    @extend .b1-left;
   }
   ul {
     list-style: none;
@@ -23,6 +32,8 @@ header {
     right: 0;
     display: none;
     background: $white;
+    @extend .b1-bottom;
+    @extend .b1-left;
     li {
       border-top: 1px solid $gray-lightest;
     }

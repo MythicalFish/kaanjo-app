@@ -4,14 +4,10 @@ table {
   border-spacing: 0;
   background: $white;
   thead {
-    tr:first-child {
-      background: $gray-darker;
-      color: $gray-lightest;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-    background: $gray-dark;
-    color: $gray-lightest;
+    background: $gray-lightest;
+    color: $gray-dark;
+    text-transform: uppercase;
+    @extend .b2-bottom;
   }
   tbody {
     @extend .b1-left;
@@ -25,5 +21,10 @@ table {
   }
   td {
     padding: $space-2;
+  }
+  tr {
+    td:first-child {
+      padding-left: $space-3;
+    }
   }
 }

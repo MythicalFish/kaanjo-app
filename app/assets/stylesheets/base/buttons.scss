@@ -1,9 +1,11 @@
-button, input[type="submit"] {
-  @extend .btn;
+.btn {
   background: $aqua;
   color: $white;
   -webkit-appearance: none;
   -webkit-border-radius:0; 
+}
+button, input[type="submit"] {
+  @extend .btn;
 }
 a {
   color: $blue;
