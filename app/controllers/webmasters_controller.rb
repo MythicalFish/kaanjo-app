@@ -4,13 +4,13 @@ class WebmastersController < ApplicationController
 
   def index
     @title = "Webmasters"
-    @webmasters = Webmaster.all
+    @webmasters = Webmaster.with_counts(from_date,to_date)
   end
 
   def show
     @webmaster = Webmaster.find(params[:id])
     @title = "Webmaster: #{@webmaster.name}"
-    @products = @webmaster.products.includes([:impressions,:reactions])
+    @products = @webmaster.products.with_counts
   end
 
   def edit 

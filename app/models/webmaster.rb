@@ -10,6 +10,24 @@ class Webmaster < User
 
   default_scope { where('admin = ?', false) }
 
+  def self.with_counts(from,to)
+    
+    query = "users.*" <<
+      ",COUNT(impressions.id) as impression_count" <<
+      ",COUNT(reactions.id) as reaction_total"
+
+    ReactionType.all.each do |type|
+      query << ",COUNT(distinct case when reactions.reaction_type_id = #{type.id} then reactions.id end) AS type_count_#{type.id}"
+    end
+    
+    select(query).
+      joins(:reactions).
+      joins(:impressions).
+      group("users.id").
+      where(created_at:from..to)
+
+  end
+
   def impression_count(from,to)
     impressions.where(created_at:from..to).length
   end

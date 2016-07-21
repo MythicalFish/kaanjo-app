@@ -13,12 +13,12 @@ class Product < ActiveRecord::Base
       ",COUNT(reactions.id) as reaction_total"
 
     ReactionType.all.each do |type|
-      query << ",COUNT(reactions.id) as type_count_#{type.id}"
+      query << ",COUNT(distinct case when reactions.reaction_type_id = #{type.id} then reactions.id end) AS type_count_#{type.id}"
     end
-
+    
     select(query).
-      joins("LEFT OUTER JOIN impressions ON (impressions.product_id = products.id)").
-      joins("LEFT OUTER JOIN reactions ON (reactions.product_id = products.id)").
+      joins(:reactions).
+      joins(:impressions).
       group("products.id")
 
   end
