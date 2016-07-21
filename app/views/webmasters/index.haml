@@ -35,13 +35,13 @@
           %a{href:w.website}
             = w.website
         %td
-          = w.impression_count(from_date,to_date)
+          = w.impression_count
         %td
-          = w.reaction_count(from_date,to_date)
+          = w.reaction_total
         %td
-          = "#{w.ctr(from_date,to_date)}%"
+          = "#{ctr(w.impression_count,w.reaction_total)}%"
         - ReactionType.all.each do |r|
-          %td= w.reaction_count(from_date,to_date,r)
+          %td= w.send("type_count_#{r.id}")
         %td
           %a{href:edit_webmaster_url(w)} Edit
     

@@ -1,10 +1,10 @@
 .datepicker
   %span 
-    = selected_date_range[:label]
+    = selected_date[:label]
     %i.fa.fa-angle-down.ml1.gray-light
   %ul
-    - date_ranges.each do |key,date|
-      - next if selected_date_range == date
+    - dates.each do |key,date|
+      - next if selected_date == date
       %li
         %a{href:url_replace(request.original_url,{t:key})}
           = date[:label]

@@ -10,11 +10,11 @@ class Webmaster < User
 
   default_scope { where('admin = ?', false) }
 
-  def self.with_counts(from,to)
+  def self.with_counts(from,to,order=:impression_count,direction='DESC')
     
     query = "users.*" <<
-      ",COUNT(impressions.id) as impression_count" <<
-      ",COUNT(reactions.id) as reaction_total"
+      ",COUNT(distinct impressions.id) as impression_count" <<
+      ",COUNT(distinct reactions.id) as reaction_total"
 
     ReactionType.all.each do |type|
       query << ",COUNT(distinct case when reactions.reaction_type_id = #{type.id} then reactions.id end) AS type_count_#{type.id}"
@@ -24,24 +24,19 @@ class Webmaster < User
       joins(:reactions).
       joins(:impressions).
       group("users.id").
-      where(created_at:from..to)
+      where(created_at:from..to).
+      order("#{order} #{direction}")
 
   end
 
-  def impression_count(from,to)
+  def impression_counter(from,to)
     impressions.where(created_at:from..to).length
   end
 
-  def reaction_count(from,to,type=nil)
+  def reaction_counter(from,to,type=nil)
     type_id = type.id if type
     type_id = ReactionType.ids unless type_id
     reactions.where(reaction_type_id:type_id,created_at:from..to).length
-  end
-
-  def ctr(from,to,type=nil)
-    ctr = ((reaction_count(from,to).to_f / impression_count(from,to).to_f) * 100).round(3) 
-    return 0 unless ctr > 0
-    ctr
   end
 
   protected

@@ -41,33 +41,42 @@ module ApplicationHelper
   end
 
   def from_date
-    Time.now - selected_date_range[:secs]
-  end
-
-  def to_date
-    Time.now
-  end
-
-  def selected_date_range
-    if params[:t]
-      session[:t] = params[:t]
-      date_ranges[params[:t]]
-    elsif session[:t]
-      date_ranges[session[:t]]
+    if selected_date[:secs] == 'today'
+      Time.now.end_of_day
     else
-      date_ranges['05']
+      Time.now - selected_date[:secs]
     end
   end
 
-  def date_ranges
+  def to_date
+    if selected_date[:secs] == 'today'
+      Time.now.beginning_of_day
+    else
+      Time.now
+    end
+  end
+
+  def selected_date
+    if params[:t]
+      session[:t] = params[:t]
+      dates[params[:t]]
+    elsif session[:t]
+      dates[session[:t]]
+    else
+      dates['today']
+    end
+  end
+
+  def dates
     {
-      '05' => { label: 'Last 30 minutes',  secs: 60*30 },
-      '1'  => { label: 'Last hour',   secs: 60*60 },
-      '3'  => { label: 'Last 3 hours',  secs: 60*60*3 },
-      '6'  => { label: 'Last 6 hours',  secs: 60*60*6 },
-      '12' => { label: 'Last 12 hours', secs: 60*60*12 },
-      '24' => { label: 'Last 24 hours', secs: 60*60*24 },
-      '48' => { label: 'Last 48 hours', secs: 60*60*48 }
+      'today' =>  { label: "Today (#{Time.now.strftime('%e %b')})", secs: 'today' },
+      '05' =>     { label: 'Last 30 minutes',  secs: 60*30 },
+      '1'  =>     { label: 'Last hour',   secs: 60*60 },
+      '3'  =>     { label: 'Last 3 hours',  secs: 60*60*3 },
+      '6'  =>     { label: 'Last 6 hours',  secs: 60*60*6 },
+      '12' =>     { label: 'Last 12 hours', secs: 60*60*12 },
+      '24' =>     { label: 'Last 24 hours', secs: 60*60*24 },
+      '48' =>     { label: 'Last 48 hours', secs: 60*60*48 }
     }
   end
 
@@ -81,6 +90,12 @@ module ApplicationHelper
 
   def resource_class
     devise_mapping.to
+  end
+
+  def ctr(impressions,reactions)
+    ctr = ((impressions.to_f / reactions.to_f) * 100).round(3) 
+    return 0 unless ctr > 0
+    ctr
   end
 
 end
