@@ -2,46 +2,45 @@
   %i.fa.fa-user.mr1
   Webmasters    
     
-#body
   
-  .flex
-    %header.flex-auto
-      Overview
-    .flex-none
-      = render partial: 'shared/datepicker'
-  %table
-    %thead
-      %tr
-        %td
-          Name
-        %td
-          Website
-        %td
-          Impressions
-        %td
-          Total Reactions
-        %td
-          Total CTR
-        - ReactionType.all.each do |r|
-          %td= r.name
-        %td
-          Actions
-    - @webmasters.each do |w|
-      %tr
-        %td
-          %a{href:webmaster_path(w)}
-            = w.name
-        %td
-          %a{href:w.website}
-            = w.website
-        %td
-          = w.impression_count
-        %td
-          = w.reaction_total
-        %td
-          = "#{ctr(w.impression_count,w.reaction_total)}%"
-        - ReactionType.all.each do |r|
-          %td= w.send("type_count_#{r.id}")
-        %td
-          %a{href:edit_webmaster_url(w)} Edit
-    
+.flex
+  %header.flex-auto
+    Activity Overview
+  .flex-none
+    = render partial: 'shared/datepicker'
+%table
+  %thead
+    %tr
+      %td
+        Name
+      %td
+        Website
+      %td
+        Impressions
+      %td
+        Total Reactions
+      %td
+        Total CTR
+      - ReactionType.all.each do |r|
+        %td= r.name
+      %td
+        Actions
+  - @webmasters.each do |w|
+    %tr
+      %td
+        %a{href:webmaster_path(w)}
+          = w.name
+      %td
+        %a{href:w.website}
+          = w.website
+      %td
+        = w.impression_count
+      %td
+        = w.reaction_total
+      %td
+        = "#{ctr(w.impression_count,w.reaction_total)}%"
+      - ReactionType.all.each do |r|
+        %td= w.send("type_count_#{r.id}")
+      %td
+        %a{href:edit_webmaster_url(w)} Edit
+  

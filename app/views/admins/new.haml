@@ -1,0 +1,26 @@
+- content_for(:header) do
+  %i.fa.fa-user.mr1
+  %a{href:admins_path} Administrators  
+  New
+
+.flex-auto.flex.items-center
+  .container-narrower.mx-auto.p2.md-p4.bg-white
+    = form_for(Admin.new) do |f|
+      .mb2
+        = f.label :first_name
+        = f.text_field :first_name, autofocus: true
+      .mb2
+        = f.label :last_name
+        = f.text_field :last_name, autofocus: true
+      .mb2
+        = f.label :email
+        = f.email_field :email, autofocus: true
+      .mb2
+        = f.label :password
+        = f.password_field :password, autocomplete: "off"
+      .mb2
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, autocomplete: "off"
+
+      .actions
+        = f.submit "Create"

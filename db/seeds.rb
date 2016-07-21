@@ -51,12 +51,12 @@ Webmaster.all.each do |w|
 
     rand(51..400).times do
       t = Time.now - rand(0..172800)
-      p.impressions.create(customer_id:customer_ids.sample,webmaster_id:w.id,created_at:t)
+      p.impressions.create(customer_id:customer_ids.sample,created_at:t)
     end
 
     rand(2..20).times do
       t = Time.now - rand(0..172800)
-      p.reactions.create(reaction_type_id: rand(1..4),customer_id:customer_ids.sample,webmaster_id:w.id,created_at:t)
+      p.reactions.create(reaction_type_id: rand(1..4),customer_id:customer_ids.sample,created_at:t)
     end
 
   end

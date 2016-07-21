@@ -3,20 +3,20 @@
 - if current_user
   #user
     = current_user.name
-    .h5.muted-2
+    .h5.aqua
       - if current_user.admin?
-        Admin
+        Administrator
       - else
         = current_user.website
 %ul
   - if current_user
     - if current_user.admin?
       %li
-        %a{href:'/',class:cc('administrators')}
+        %a{href:admins_path,class:cc('admins')}
           %i.fa.fa-user.mr1
           Administrators
       %li
-        %a{href:'/',class:cc('webmasters')}
+        %a{href:webmasters_path,class:cc('webmasters')}
           %i.fa.fa-user.mr1
           Webmasters
     - else

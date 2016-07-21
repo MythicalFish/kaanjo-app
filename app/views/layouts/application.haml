@@ -10,7 +10,7 @@
     .flex-auto.flex
       %nav#sidebar.flex-none
         = render partial: 'shared/sidebar'
-      .flex-auto
+      .flex-auto.flex.flex-column
         = render partial: 'shared/header'
         = render partial: 'shared/flashes'
         = yield

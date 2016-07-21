@@ -12,6 +12,8 @@
         Impressions
       %td
         Reactions
+      %td 
+        CTR
       - ReactionType.all.each do |r|
         %td= r.name
   - products.each do |p|
@@ -21,6 +23,8 @@
           %a{href:product_path(p)}= p.name
         %td= p.impression_count
         %td= p.reaction_count
+        %td
+          = "#{ctr(p.impression_count,p.reaction_total)}%"
         - ReactionType.all.each do |r|
           %td= p.reaction_count(r)
     

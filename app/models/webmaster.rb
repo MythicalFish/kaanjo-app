@@ -24,7 +24,7 @@ class Webmaster < User
       joins(:reactions).
       joins(:impressions).
       group("users.id").
-      where(created_at:from..to).
+      where("reactions.created_at BETWEEN '#{from}' AND '#{to}'").
       order("#{order} #{direction}")
 
   end

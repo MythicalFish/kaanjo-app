@@ -1,0 +1,28 @@
+- content_for(:header) do
+  %i.fa.fa-user.mr1
+  Administrators  
+
+- content_for(:actions) do
+  %a{href:new_admin_path}
+    Create
+    
+%table
+  %thead
+    %tr
+      %td
+        Name
+      %td
+        Email address
+      %td
+        Actions
+  - @admins.each do |a|
+    %tr
+      %td
+        %a{href:edit_admin_path(a)}
+          = a.name
+      %td
+        = a.email
+      %td
+        %a.btn.mr1{href:edit_admin_path(a)} Edit
+        %a.btn.bg-orange{href:edit_admin_path(a)} Delete
+  

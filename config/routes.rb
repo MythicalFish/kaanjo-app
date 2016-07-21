@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :products
   resources :webmasters
-  #get '/webmasters/:id/products/:product_id', to: 'webmasters#product', as: 'webmaster_product'
+  resources :admins, skip: [:show]
 
   devise_for :users, :skip => [:sessions, :registrations]
   

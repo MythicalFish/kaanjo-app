@@ -42,7 +42,7 @@ module ApplicationHelper
 
   def from_date
     if selected_date[:secs] == 'today'
-      Time.now.end_of_day
+      Time.now.beginning_of_day
     else
       Time.now - selected_date[:secs]
     end
@@ -50,7 +50,7 @@ module ApplicationHelper
 
   def to_date
     if selected_date[:secs] == 'today'
-      Time.now.beginning_of_day
+      Time.now.end_of_day
     else
       Time.now
     end
@@ -93,7 +93,7 @@ module ApplicationHelper
   end
 
   def ctr(impressions,reactions)
-    ctr = ((impressions.to_f / reactions.to_f) * 100).round(3) 
+    ctr = ((reactions.to_f / impressions.to_f) * 100).round(3) 
     return 0 unless ctr > 0
     ctr
   end
