@@ -4,6 +4,7 @@ class WebmastersController < ApplicationController
 
   def index
     @title = "Webmasters"
+    @webmasters = Webmaster.all
   end
 
   def show
@@ -14,6 +15,27 @@ class WebmastersController < ApplicationController
 
   def edit 
     @webmaster = Webmaster.find(params[:id])
+    @title = @webmaster.name
+  end
+
+  def update
+
+    @webmaster = Webmaster.find(params[:id])
+
+    if params[:webmaster][:password].blank?
+      params[:webmaster].delete(:password)
+      params[:webmaster].delete(:password_confirmation)
+    end
+
+    if !passwords_match
+      flash[:alert] = "Error: passwords did not match"
+    elsif @webmaster.update_attributes(webmaster_params)
+      flash[:notice] = 'Webmaster updated'
+    else
+      flash[:alert] = "Error: #{@webmaster.errors.full_messages.to_sentence}"
+    end
+    redirect_to edit_webmaster_path(@webmaster)
+
   end
 
   def product
@@ -36,8 +58,17 @@ class WebmastersController < ApplicationController
 
   private
 
+  def passwords_match
+    if params[:webmaster][:password]
+      if params[:webmaster][:password] != params[:webmaster][:password_confirmation]
+        return false
+      end
+    end
+    true
+  end
+
   def webmaster_params
-    params.permit(:email,:password)
+    params.require(:webmaster).permit(:email, :password, :first_name, :last_name, :website)
   end
 
   def authorize

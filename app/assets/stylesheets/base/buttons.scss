@@ -1,6 +1,7 @@
 button, input[type="submit"] {
   @extend .btn;
-  background: $black;
+  background: $aqua;
+  color: $white;
   -webkit-appearance: none;
   -webkit-border-radius:0; 
 }

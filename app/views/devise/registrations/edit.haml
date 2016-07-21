@@ -1,4 +1,39 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = render partial: 'form', locals: {f:f}
+- content_for(:page_title) { "Account" }
+
+#header
+  %h1
+    %i.fa.fa-gear.mr1
+    Account settings
+#body.p2.lg-p3
+  .container-narrow.mx0
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+      = devise_error_messages!
+      .mb2.row
+        .col-md-6
+          = f.label :first_name
+          = f.text_field :first_name
+        .col-md-6
+          = f.label :last_name
+          = f.text_field :last_name
+      .mb2
+        = f.label :email
+        = f.email_field :email
+      - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+        .p2.bg-orange.mb2
+          Currently waiting confirmation for: #{resource.unconfirmed_email}
+      - if resource.webmaster?
+        .mb2
+          = f.label :website
+          = f.text_field :website
+      .mb2.p3.bg-darken-1
+        .mb2
+          %b Change password
+          %i (leave blank for no change)
+        .mb2.row
+          .col-md-6
+            = f.password_field :password, autocomplete: "off", placeholder: "New password"
+          .col-md-6
+            = f.password_field :password_confirmation, autocomplete: "off", placeholder: "New password (again)"
+      .actions
+        = f.password_field :current_password, autocomplete: "off", placeholder: "Your current password (required)", required:'required'
+        = f.submit "Update"

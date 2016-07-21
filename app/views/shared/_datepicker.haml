@@ -6,5 +6,5 @@
     - date_ranges.each do |key,date|
       - next if selected_date_range == date
       %li
-        %a{href:url_replace(request.original_url,{timeago:key})}
+        %a{href:url_replace(request.original_url,{t:key})}
           = date[:label]

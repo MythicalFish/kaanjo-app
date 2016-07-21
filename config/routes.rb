@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   
   post '/create-reaction', to: 'reactions#create'
-  root to: 'dashboard#show'
+  root to: 'application#dashboard'
 
   resources :products
-  resources :webmasters, skip: [:index]
+  resources :webmasters
   #get '/webmasters/:id/products/:product_id', to: 'webmasters#product', as: 'webmaster_product'
 
   devise_for :users, :skip => [:sessions, :registrations]

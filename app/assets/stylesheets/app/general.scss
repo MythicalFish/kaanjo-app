@@ -14,3 +14,12 @@ body {
   color: $gray-darker;
   margin: 0;
 }
+.flash {
+  padding: $space-2;
+  background: $aqua;
+  color: $white;
+  font-weight: bold;
+}
+.flash.alert {
+  background: $orange;
+}

@@ -8,7 +8,7 @@
 
 puts 'seeding data'
 
-Admin.create({ email:'jake@freshsector.com', password:'test1234' })
+Admin.create({ email:'jake@freshsector.com', password:'test1234', first_name: 'Jake',        last_name: 'Broughton'  })
 
 Webmaster.create([
   { email:'webmaster1@site1.com', password:'test1234',       website: 'site1.com',             first_name: 'Webmaster',   last_name: 'One' },
@@ -49,12 +49,14 @@ Webmaster.all.each do |w|
 
     customer_ids = [123,456,789,111,222,333]
 
-    rand(51..300).times do
-      p.impressions.create(customer_id:customer_ids.sample,webmaster_id:w.id)
+    rand(51..400).times do
+      t = Time.now - rand(0..172800)
+      p.impressions.create(customer_id:customer_ids.sample,webmaster_id:w.id,created_at:t)
     end
 
-    rand(5..50).times do
-      p.reactions.create(reaction_type_id: rand(1..4),customer_id:customer_ids.sample,webmaster_id:w.id)
+    rand(2..20).times do
+      t = Time.now - rand(0..172800)
+      p.reactions.create(reaction_type_id: rand(1..4),customer_id:customer_ids.sample,webmaster_id:w.id,created_at:t)
     end
 
   end

@@ -21,7 +21,9 @@ class Webmaster < User
   end
 
   def ctr(from,to,type=nil)
-    ((reaction_count(from,to).to_f / impression_count(from,to).to_f) * 100).round(3)
+    ctr = ((reaction_count(from,to).to_f / impression_count(from,to).to_f) * 100).round(3) 
+    return 0 unless ctr > 0
+    ctr
   end
 
   protected

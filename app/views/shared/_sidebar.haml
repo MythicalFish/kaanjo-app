@@ -1,10 +1,22 @@
 #logo 
   Reactions Demo
+- if current_user
+  #user
+    = current_user.name
+    .h5.muted-2
+      - if current_user.admin?
+        Admin
+      - else
+        = current_user.website
 %ul
   - if current_user
     - if current_user.admin?
       %li
-        %a{href:'/',class:cp('/')}
+        %a{href:'/',class:cc('administrators')}
+          %i.fa.fa-user.mr1
+          Administrators
+      %li
+        %a{href:'/',class:cc('webmasters')}
           %i.fa.fa-user.mr1
           Webmasters
     - else

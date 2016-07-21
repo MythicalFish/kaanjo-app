@@ -1,7 +1,11 @@
-#header
-  %h1
-    Webmaster:
-    %span= @webmaster.name
+#header.flex
+  .flex-auto
+    %h1
+      %i.fa.fa-user.mr1
+      %a{href:'/'} Webmasters
+      = @webmaster.name
+  .flex-none.p3
+    %a{href:edit_webmaster_path(@webmaster)} Edit webmaster
 
 #body.p2.lg-p3
   = render partial: 'products/data_table', locals: { products: @products }

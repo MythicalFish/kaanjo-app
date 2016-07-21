@@ -1,5 +1,14 @@
 module ApplicationHelper
 
+  def page_title
+    return "#{@title} | Reactions Demo" if @title
+    if content_for(:page_title)
+      content_for(:page_title) << " | Reactions Demo"
+    else
+      "~ | Reactions Demo"
+    end
+  end
+
   def current_webmaster
     if current_user && current_user.webmaster?
       Webmaster.find(current_user.id)
@@ -8,6 +17,10 @@ module ApplicationHelper
 
   def cp(path)
     "current" if current_page?(path)
+  end
+
+  def cc(name)
+    "current" if controller_name == name
   end
 
   def date_range_url(from,to)
@@ -36,11 +49,11 @@ module ApplicationHelper
   end
 
   def selected_date_range
-    if params[:timeago]
-      session[:timeago] = params[:timeago]
-      date_ranges[params[:timeago]]
-    elsif session[:timeago]
-      date_ranges[session[:timeago]]
+    if params[:t]
+      session[:t] = params[:t]
+      date_ranges[params[:t]]
+    elsif session[:t]
+      date_ranges[session[:t]]
     else
       date_ranges['05']
     end

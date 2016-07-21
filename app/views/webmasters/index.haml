@@ -1,12 +1,16 @@
 #header.flex
   .flex-auto
     %h1
-      Webmasters:
-      %span Overview
-  .flex-none
-    = render partial: 'shared/datepicker'
+      %i.fa.fa-user.mr1
+      Webmasters    
     
-#body.p2.lg-p3
+#body
+  
+  %header.flex
+    .flex-auto
+      Overview
+    .flex-none
+      = render partial: 'shared/datepicker'
   %table
     %thead
       %tr
