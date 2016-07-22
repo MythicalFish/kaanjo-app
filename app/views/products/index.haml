@@ -1,4 +1,9 @@
-#header
-  = @title
-#body.p2.lg-p3
-  = render partial: 'products/data_table', locals: { products: @products }
+- content_for(:header) do
+  Products   
+
+.flex
+  %header.flex-auto
+    Activity Overview
+  .flex-none
+    = render partial: 'shared/datepicker'
+= render partial: 'products/data_table', locals: { products: @products }

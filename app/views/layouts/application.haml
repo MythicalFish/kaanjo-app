@@ -5,6 +5,7 @@
     %title= page_title
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = favicon_link_tag 'favicon.png'
     = csrf_meta_tags
   %body.vh-ymin100.flex.flex-column.items-stretch{class:controller_name}
     .flex-auto.flex
@@ -14,4 +15,3 @@
         = render partial: 'shared/header'
         = render partial: 'shared/flashes'
         = yield
-  }
