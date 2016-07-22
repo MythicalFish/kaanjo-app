@@ -21,8 +21,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    custom_attributes = [:first_name, :last_name, :website]
+    custom_attributes = [:first_name, :last_name, :website_url, :website_name]
     devise_parameter_sanitizer.permit(:account_update, keys: custom_attributes)
+    devise_parameter_sanitizer.permit(:sign_up, keys: custom_attributes)
   end
 
 

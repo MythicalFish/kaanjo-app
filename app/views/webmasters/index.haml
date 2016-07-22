@@ -1,7 +1,10 @@
 - content_for(:header) do
   %i.fa.fa-user.mr1
   Webmasters    
-    
+
+- content_for(:actions) do
+  %a{href:new_webmaster_path}
+    Create    
   
 .flex
   %header.flex-auto
@@ -31,8 +34,9 @@
         %a{href:webmaster_path(w)}
           = w.name
       %td
-        %a{href:w.website}
-          = w.website
+        %a{href:"http://#{w.website_url}"}
+          .gray-darker= w.website_name
+          %i.h4= w.website_url
       %td
         = w.impression_count
       %td

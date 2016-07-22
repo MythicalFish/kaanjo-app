@@ -11,23 +11,8 @@
 #body.p2.lg-p3
   .container-narrow
     = form_for(@webmaster) do |f|
-      .mb2.row
-        .col-md-6
-          = f.label :first_name
-          = f.text_field :first_name
-        .col-md-6
-          = f.label :last_name
-          = f.text_field :last_name
-      .mb2
-        = f.label :email
-        = f.email_field :email
-      - if devise_mapping.confirmable? && @webmaster.pending_reconfirmation?
-        .p2.bg-orange.mb2
-          Currently waiting confirmation for: #{@webmaster.unconfirmed_email}
-      .mb2
-        = f.label :website
-        = f.text_field :website
-      .mb2.p3.bg-darken-1
+      = render partial: 'form', locals: {f:f}
+      .mb2.p3.bg-white
         .mb2
           %b Change password
           %i (leave blank for no change)
@@ -38,4 +23,3 @@
             = f.password_field :password_confirmation, autocomplete: "off", placeholder: "New password (again)"
       .actions
         = f.submit "Update"
-

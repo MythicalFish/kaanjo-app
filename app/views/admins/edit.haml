@@ -1,9 +1,9 @@
 - content_for(:header) do
   %i.fa.fa-user.mr1
   %a{href:admins_path} Administrators  
-  New
+  = @admin.name
 
 .flex-auto.flex.items-center
   .container-narrower.mx-auto.p2.md-p4.bg-white
-    = form_for(Admin.new) do |f|
-      = render partial: 'form', locals: {f:f,label:'Create'}
+    = form_for(@admin) do |f|
+      = render partial: 'form', locals: {f:f,label:'Update'}

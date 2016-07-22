@@ -11,26 +11,26 @@ puts 'seeding data'
 Admin.create({ email:'jake@freshsector.com', password:'test1234', first_name: 'Jake',        last_name: 'Broughton'  })
 
 Webmaster.create([
-  { email:'webmaster1@site1.com', password:'test1234',       website: 'site1.com',             first_name: 'Webmaster',   last_name: 'One' },
-  { email:'jake@demo-shop.vertaxe.com', password:'test1234', website: 'demo-shop.vertaxe.com', first_name: 'Jake',        last_name: 'Broughton' },
-  { email:'jake@localhost:8000', password:'test1234',        website: 'localhost:8000',        first_name: 'Jake',        last_name: 'Broughton' },
-  { email:'webmaster4@site4.com', password:'test1234',       website: 'site4.com',             first_name: 'Webmaster',   last_name: 'Four' },
-  { email:'webmaster5@site5.com', password:'test1234',       website: 'site5.com',             first_name: 'Webmaster',   last_name: 'Five' },
-  { email:'webmaster6@site6.com', password:'test1234',       website: 'site6.com',             first_name: 'Webmaster',   last_name: 'Six' },
-  { email:'webmaster7@site7.com', password:'test1234',       website: 'site7.com',             first_name: 'Webmaster',   last_name: 'Seven' },
-  { email:'webmaster8@site8.com', password:'test1234',       website: 'site8.com',             first_name: 'Webmaster',   last_name: 'Eight' },
-  { email:'webmaster9@site9.com', password:'test1234',       website: 'site9.com',             first_name: 'Webmaster',   last_name: 'Nine' },
-  { email:'webmaster10@site10.com', password:'test1234',     website: 'site10.com',            first_name: 'Webmaster',   last_name: 'Ten' },
-  { email:'webmaster11@site11.com', password:'test1234',     website: 'site11.com',            first_name: 'Webmaster',   last_name: 'Eleven' },
-  { email:'webmaster12@site12.com', password:'test1234',     website: 'site12.com',            first_name: 'Webmaster',   last_name: 'Twelve' },
-  { email:'webmaster13@site13.com', password:'test1234',     website: 'site13.com',            first_name: 'Webmaster',   last_name: 'Thirteen' },
-  { email:'webmaster14@site14.com', password:'test1234',     website: 'site14.com',            first_name: 'Webmaster',   last_name: 'Fourteen' },
-  { email:'webmaster15@site15.com', password:'test1234',     website: 'site15.com',            first_name: 'Webmaster',   last_name: 'Fifteen' },
-  { email:'webmaster16@site16.com', password:'test1234',     website: 'site16.com',            first_name: 'Webmaster',   last_name: 'Sixteen' },
-  { email:'webmaster17@site17.com', password:'test1234',     website: 'site17.com',            first_name: 'Webmaster',   last_name: 'Seventeen' },
-  { email:'webmaster18@site18.com', password:'test1234',     website: 'site18.com',            first_name: 'Webmaster',   last_name: 'Eighteen' },
-  { email:'webmaster19@site19.com', password:'test1234',     website: 'site19.com',            first_name: 'Webmaster',   last_name: 'Nineteen' },
-  { email:'webmaster20@site20.com', password:'test1234',     website: 'site20.com',            first_name: 'Webmaster',   last_name: 'Twenty' }
+  { email:'webmaster1@site1.com', password:'test1234',       website_url: 'http://site1.com',             website_name: 'Site 1', first_name: 'Webmaster',   last_name: 'One' },
+  { email:'jake@demo-shop.vertaxe.com', password:'test1234', website_url: 'http://demo-shop.vertaxe.com', website_name: 'Demo Shop', first_name: 'Jake',        last_name: 'Broughton' },
+  { email:'jake@localhost:8000', password:'test1234',        website_url: 'http://localhost:8000',        website_name: 'localhost', first_name: 'Jake',        last_name: 'Broughton' },
+  { email:'webmaster4@site4.com', password:'test1234',       website_url: 'http://site4.com',             website_name: 'Site 4', first_name: 'Webmaster',   last_name: 'Four' },
+  { email:'webmaster5@site5.com', password:'test1234',       website_url: 'http://site5.com',             website_name: 'Site 5', first_name: 'Webmaster',   last_name: 'Five' },
+  { email:'webmaster6@site6.com', password:'test1234',       website_url: 'http://site6.com',             website_name: 'Site 6', first_name: 'Webmaster',   last_name: 'Six' },
+  { email:'webmaster7@site7.com', password:'test1234',       website_url: 'http://site7.com',             website_name: 'Site 7', first_name: 'Webmaster',   last_name: 'Seven' },
+  { email:'webmaster8@site8.com', password:'test1234',       website_url: 'http://site8.com',             website_name: 'Site 8', first_name: 'Webmaster',   last_name: 'Eight' },
+  { email:'webmaster9@site9.com', password:'test1234',       website_url: 'http://site9.com',             website_name: 'Site 9', first_name: 'Webmaster',   last_name: 'Nine' },
+  { email:'webmaster10@site10.com', password:'test1234',     website_url: 'http://site10.com',            website_name: 'Site 10', first_name: 'Webmaster',   last_name: 'Ten' },
+  { email:'webmaster11@site11.com', password:'test1234',     website_url: 'http://site11.com',            website_name: 'Site 11', first_name: 'Webmaster',   last_name: 'Eleven' },
+  { email:'webmaster12@site12.com', password:'test1234',     website_url: 'http://site12.com',            website_name: 'Site 12', first_name: 'Webmaster',   last_name: 'Twelve' },
+  { email:'webmaster13@site13.com', password:'test1234',     website_url: 'http://site13.com',            website_name: 'Site 13', first_name: 'Webmaster',   last_name: 'Thirteen' },
+  { email:'webmaster14@site14.com', password:'test1234',     website_url: 'http://site14.com',            website_name: 'Site 14', first_name: 'Webmaster',   last_name: 'Fourteen' },
+  { email:'webmaster15@site15.com', password:'test1234',     website_url: 'http://site15.com',            website_name: 'Site 15', first_name: 'Webmaster',   last_name: 'Fifteen' },
+  { email:'webmaster16@site16.com', password:'test1234',     website_url: 'http://site16.com',            website_name: 'Site 16', first_name: 'Webmaster',   last_name: 'Sixteen' },
+  { email:'webmaster17@site17.com', password:'test1234',     website_url: 'http://site17.com',            website_name: 'Site 17', first_name: 'Webmaster',   last_name: 'Seventeen' },
+  { email:'webmaster18@site18.com', password:'test1234',     website_url: 'http://site18.com',            website_name: 'Site 18', first_name: 'Webmaster',   last_name: 'Eighteen' },
+  { email:'webmaster19@site19.com', password:'test1234',     website_url: 'http://site19.com',            website_name: 'Site 19', first_name: 'Webmaster',   last_name: 'Nineteen' },
+  { email:'webmaster20@site20.com', password:'test1234',     website_url: 'http://site20.com',            website_name: 'Site 20', first_name: 'Webmaster',   last_name: 'Twenty' }
 ])
 
 Webmaster.all.each do |w|

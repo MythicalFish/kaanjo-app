@@ -2,13 +2,15 @@ class AdminsController < ApplicationController
 
   before_action :authorize
 
+  respond_to :html
+
   def index
     @title = "Administrators"
     @admins = Admin.all
   end
 
   def edit 
-    @admin = admin.find(params[:id])
+    @admin = Admin.find(params[:id])
     @title = @admin.name
   end
 
@@ -18,7 +20,7 @@ class AdminsController < ApplicationController
 
   def update
 
-    @admin = admin.find(params[:id])
+    @admin = Admin.find(params[:id])
 
     if params[:admin][:password].blank?
       params[:admin].delete(:password)
@@ -36,22 +38,16 @@ class AdminsController < ApplicationController
 
   end
 
-  def product
-    @admin = admin.find(params[:id])
-    @product = @admin.products.find(params[:product_id])
-  end
-
   def create
-    w = admin.new(admin_params)
-    if w.save
-      redirect_to admin_path(w)
+    @admin = Admin.new(admin_params)
+    @admin.confirmed_at = Time.now
+    if @admin.save!(validate:false)
+      flash[:notice] = "Admin created"
+      redirect_to admins_path
     else
-      
+      flash[:alert] = "Admin creation failed: #{@admin.errors.full_messages.to_sentence}"
+      respond_with @admin, location: new_admin_path
     end
-  end
-
-  def products
-
   end
 
   private
@@ -66,7 +62,7 @@ class AdminsController < ApplicationController
   end
 
   def admin_params
-    params.require(:admin).permit(:email, :password, :first_name, :last_name, :website)
+    params.require(:admin).permit(:email, :password, :first_name, :last_name, :website_url, :website_name)
   end
 
   def authorize

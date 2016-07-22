@@ -7,7 +7,7 @@
       - if current_user.admin?
         Administrator
       - else
-        = current_user.website
+        = current_user.website_name
 %ul
   - if current_user
     - if current_user.admin?

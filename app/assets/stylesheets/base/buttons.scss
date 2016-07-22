@@ -16,6 +16,10 @@ button, input[type="submit"] {
   font-size: $h4;
   text-transform: uppercase;
 }
+.btn.btn-sm {
+  padding: 0.8rem;
+  font-size: $h5;
+}
 a {
   color: $blue;
   text-decoration: none;

@@ -1,0 +1,16 @@
+- content_for(:header) do
+  %i.fa.fa-user-plus.mr1
+  %a{href:webmasters_path} Webmasters
+  New
+
+#body.p2.lg-p3
+  .container-narrow
+    = form_for(Webmaster.new) do |f|
+      = render partial: 'form', locals: {f:f}
+      .mb2
+        = f.password_field :password, autocomplete: "off", placeholder: "Password"
+      .mb2
+        = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Password (again)"
+      .actions
+        = f.submit "Create"
+

@@ -1,0 +1,20 @@
+.mb2.row
+  .col-md-6
+    = f.label :first_name
+    = f.text_field :first_name
+  .col-md-6
+    = f.label :last_name
+    = f.text_field :last_name
+.mb2
+  = f.label :email
+  = f.email_field :email
+- if @webmaster
+  - if devise_mapping.confirmable? && @webmaster.pending_reconfirmation?
+    .p2.bg-orange.mb2
+      Currently waiting confirmation for: #{@webmaster.unconfirmed_email}
+.mb2
+  = f.label :website_name
+  = f.text_field :website_name
+.mb2
+  = f.label :website_url
+  = f.text_field :website_url

@@ -1,5 +1,10 @@
 - content_for(:page_title) { "Login" }
 
+- if devise_mapping.confirmable? && controller_name != 'confirmations'
+  .flash.success
+    %i.fa.fa-envelope.mr1
+    Please check your inbox for the confirmation link.
+
 .flex-auto.flex.items-center
   .container-narrower.mx-auto.p2.md-p4.bg-white
     %h2 Login

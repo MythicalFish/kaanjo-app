@@ -15,13 +15,13 @@ Rails.application.routes.draw do
     get    'signup' => 'devise/registrations#new', :as => :new_user_registration 
     get    'account' => 'devise/registrations#edit', :as => :edit_user_registration 
     
-    get    'users/cancel' => 'devise/registrations#cancel', :as => :cancel_user_registration 
+    get    'signup/cancel' => 'devise/registrations#cancel', :as => :cancel_user_registration 
     post   'login' => 'devise/sessions#create', :as => :user_session
     delete 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session
-    delete 'users' => 'devise/registrations#destroy'
-    post   'users' => 'devise/registrations#create', :as => :user_registration 
-    patch  'users' => 'devise/registrations#update'
-    put    'users' => 'devise/registrations#update'
+    delete 'account' => 'devise/registrations#destroy'
+    post   'signup' => 'devise/registrations#create', :as => :user_registration 
+    patch  'account' => 'devise/registrations#update'
+    put    'account' => 'devise/registrations#update'
 
   end
   

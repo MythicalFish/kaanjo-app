@@ -6,7 +6,7 @@ class Webmaster < User
   has_many :impressions
   has_many :reactions
 
-  before_validation :smart_add_url_protocol
+  before_validation :sanitize_website_url
 
   default_scope { where('admin = ?', false) }
 
@@ -29,22 +29,12 @@ class Webmaster < User
 
   end
 
-  def impression_counter(from,to)
-    impressions.where(created_at:from..to).length
-  end
-
-  def reaction_counter(from,to,type=nil)
-    type_id = type.id if type
-    type_id = ReactionType.ids unless type_id
-    reactions.where(reaction_type_id:type_id,created_at:from..to).length
-  end
-
   protected
 
-  def smart_add_url_protocol
-    unless self.website[/\Ahttp:\/\//] || self.website[/\Ahttps:\/\//]
-      self.website = "http://#{self.website}"
-    end
+  def sanitize_website_url
+    return if website_url
+    uri = URI.parse(self.website_url)
+    self.website_url = uri.host.gsub('\Awww\.', '')
   end
 
 end

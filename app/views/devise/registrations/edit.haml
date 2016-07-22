@@ -22,8 +22,11 @@
         Currently waiting confirmation for: #{resource.unconfirmed_email}
     - if resource.webmaster?
       .mb2
-        = f.label :website
-        = f.text_field :website
+        = f.label :website_name
+        = f.text_field :website_name
+      .mb2
+        = f.label :website_url
+        = f.text_field :website_url
     .mb2.p3.bg-darken-1
       .mb2
         %b Change password

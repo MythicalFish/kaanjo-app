@@ -2,6 +2,8 @@ class WebmastersController < ApplicationController
 
   before_action :authorize
 
+  respond_to :html
+
   def index
     @title = "Webmasters"
     @webmasters = Webmaster.with_counts(from_date,to_date)
@@ -16,6 +18,10 @@ class WebmastersController < ApplicationController
   def edit 
     @webmaster = Webmaster.find(params[:id])
     @title = @webmaster.name
+  end
+
+  def new
+    @title = "New webmaster"
   end
 
   def update
@@ -44,16 +50,15 @@ class WebmastersController < ApplicationController
   end
 
   def create
-    w = Webmaster.new(webmaster_params)
-    if w.save
-      redirect_to webmaster_path(w)
+    @webmaster = Webmaster.new(webmaster_params)
+    @webmaster.confirmed_at = Time.now
+    if @webmaster.save
+      flash[:notice] = "Webmaster created"
+      redirect_to webmasters_path
     else
-      
+      flash[:alert] = "Webmaster creation failed: #{@webmaster.errors.full_messages.to_sentence}"
+      respond_with @webmaster, location: new_webmaster_path
     end
-  end
-
-  def products
-
   end
 
   private
@@ -68,7 +73,7 @@ class WebmastersController < ApplicationController
   end
 
   def webmaster_params
-    params.require(:webmaster).permit(:email, :password, :first_name, :last_name, :website)
+    params.require(:webmaster).permit(:email, :password, :first_name, :last_name, :website_url, :website_name)
   end
 
   def authorize

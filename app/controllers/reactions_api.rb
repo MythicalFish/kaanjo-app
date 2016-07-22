@@ -8,7 +8,7 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_webmaster
 
-    @webmaster = Webmaster.find_by_website(message[:website])
+    @webmaster = Webmaster.find_by_website_url(message[:website])
     
     if @webmaster
       controller_store[:webmaster_id] = @webmaster.id
