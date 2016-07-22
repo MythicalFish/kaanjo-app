@@ -26,8 +26,8 @@ class Webmaster < User
       joins(:impressions).
       group("users.id").
       where(
-        "reactions.created_at": opts[:from]..opts[:to],
-        "impressions.created_at": opts[:from]..opts[:to]
+        "reactions.created_at" => opts[:from]..opts[:to],
+        "impressions.created_at" => opts[:from]..opts[:to]
       ).order("#{opts[:order]} #{opts[:direction]}")
 
   end

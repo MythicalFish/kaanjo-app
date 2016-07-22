@@ -8,7 +8,11 @@
 
 puts 'seeding data'
 
-Admin.create({ email:'jake@freshsector.com', password:'test1234', first_name: 'Jake',        last_name: 'Broughton'  })
+a = Admin.new({ email:'jake@freshsector.com', password:'test1234', first_name: 'Jake',        last_name: 'Broughton'  })
+a.save!(validate:false)
+
+a = Admin.new({ email:'adrien_lepert@yahoo.fr', password:'test1234', first_name: 'Adrien',        last_name: 'Lepert'  })
+a.save!(validate:false)
 
 Webmaster.create([
   { email:'webmaster1@site1.com', password:'test1234',       website_url: 'http://site1.com',             website_name: 'Site 1', first_name: 'Webmaster',   last_name: 'One' },
