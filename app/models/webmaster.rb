@@ -25,8 +25,10 @@ class Webmaster < User
       joins(:reactions).
       joins(:impressions).
       group("users.id").
-      where("reactions.created_at BETWEEN '#{opts[:from]}' AND '#{opts[:to]}'").
-      order("#{opts[:order]} #{opts[:direction]}")
+      where(
+        "reactions.created_at": opts[:from]..opts[:to],
+        "impressions.created_at": opts[:from]..opts[:to]
+      ).order("#{opts[:order]} #{opts[:direction]}")
 
   end
 

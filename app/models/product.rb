@@ -21,8 +21,10 @@ class Product < ActiveRecord::Base
       joins(:reactions).
       joins(:impressions).
       group("products.id").
-      where("reactions.created_at BETWEEN '#{opts[:from]}' AND '#{opts[:to]}'").
-      order("#{opts[:order]} #{opts[:direction]}")
+      where(
+        "reactions.created_at": opts[:from]..opts[:to],
+        "impressions.created_at": opts[:from]..opts[:to]
+      ).order("#{opts[:order]} #{opts[:direction]}")
 
   end
 
