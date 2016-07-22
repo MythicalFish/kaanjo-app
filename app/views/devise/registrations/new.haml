@@ -1,27 +1,21 @@
 - content_for(:page_title) { "Sign up" }
 
-- content_for(:header) do
-  %i.fa.fa-user-plus.mr1
-  Sign up
-
-.container-narrow.p2.lg-p3
-  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-    = devise_error_messages!
-    .field
-      = f.label :email
-      %br/
-      = f.email_field :email, autofocus: true
-    .field
-      = f.label :password
-      - if @minimum_password_length
-        %em
-          (#{@minimum_password_length} characters minimum)
-      %br/
-      = f.password_field :password, autocomplete: "off"
-    .field
-      = f.label :password_confirmation
-      %br/
-      = f.password_field :password_confirmation, autocomplete: "off"
-    .actions
-      = f.submit "Sign up"
-  = render "devise/shared/links"
+.flex-auto.flex.items-center
+  .container-narrower.mx-auto.p2.md-p4.bg-white
+    %h2 Sign up for Reactions
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = devise_error_messages!
+      .mb2.row
+        .col-md-6
+          = f.text_field :first_name, autofocus: true, placeholder: "First name"
+        .col-md-6
+          = f.text_field :last_name, placeholder: "Last name"
+      .mb2
+        = f.text_field :website, placeholder: "Website address"
+      .mb2
+        = f.email_field :email, placeholder: "Email address"
+      .mb2
+        = f.password_field :password, autocomplete: "off", placeholder: "Password"
+      .mb2
+        = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Password (again)"
+      = f.submit "Sign up", class: "btn btn-full btn-lg"

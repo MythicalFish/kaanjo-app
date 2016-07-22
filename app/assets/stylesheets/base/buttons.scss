@@ -7,6 +7,15 @@
 button, input[type="submit"] {
   @extend .btn;
 }
+.btn-full {
+  display: block;
+  width: 100%;
+}
+.btn.btn-lg {
+  padding: 1.5rem;
+  font-size: $h4;
+  text-transform: uppercase;
+}
 a {
   color: $blue;
   text-decoration: none;

@@ -33,6 +33,10 @@
         Logout
   - else
     %li
-      %a{href:'/login'}
+      %a{href:'/login',class:cp('/login')}
         %i.fa.fa-sign-in.mr1
         Login
+    %li
+      %a{href:'/signup',class:cp('/signup')}
+        %i.fa.fa-user-plus.mr1
+        Sign up

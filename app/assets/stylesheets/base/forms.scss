@@ -2,9 +2,12 @@ input[type="text"],input[type="password"],input[type="email"],input[type="email"
   @extend .input;
   border-radius: 0;
   border: 0;
-  padding: 1.5rem;
+  padding: 0.8rem 0;
   height: auto;
   margin: 0;
+  font-size: $h4;
+  border-bottom: 2px solid $gray-lighterer;
+  color: $gray-darker;
 }
 textarea {
   @extend .textarea;
@@ -26,4 +29,7 @@ label {
   left: -20px;
   top: 12px;
   color: $red;
+}
+input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,input[type="email"]:focus,input[type="tel"]:focus,input[type="search"]:focus,select:focus,textarea:focus {
+  border-color: $gray;
 }

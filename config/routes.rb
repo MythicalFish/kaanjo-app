@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   as :user do
 
     get    'login' => 'devise/sessions#new', :as => :new_user_session
-    get    'register' => 'devise/registrations#new', :as => :new_user_registration 
+    get    'signup' => 'devise/registrations#new', :as => :new_user_registration 
     get    'account' => 'devise/registrations#edit', :as => :edit_user_registration 
     
     get    'users/cancel' => 'devise/registrations#cancel', :as => :cancel_user_registration 

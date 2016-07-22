@@ -1,5 +1,6 @@
 body {
   font-family: 'Source Sans Pro', sans-serif;
+  color: $gray-darkerer;
 }
 h1 { @extend .h1; }
 h2 { @extend .h2; }
