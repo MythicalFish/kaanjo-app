@@ -5,14 +5,17 @@ class WebmastersController < ApplicationController
   respond_to :html
 
   def index
+    
     @title = "Webmasters"
-    @webmasters = Webmaster.with_counts(from_date,to_date)
+
+    @webmasters = Webmaster.with_counts(args)
+
   end
 
   def show
     @webmaster = Webmaster.find(params[:id])
     @title = "Webmaster: #{@webmaster.name}"
-    @products = @webmaster.products.with_counts
+    @products = @webmaster.products.with_counts(args)
   end
 
   def edit 
@@ -62,6 +65,19 @@ class WebmastersController < ApplicationController
   end
 
   private
+
+  def args
+    args = {
+      from: from_date,
+      to: to_date
+    }
+
+    args[:order] = params[:a] if params[:a]
+    args[:direction] = params[:d] if params[:d]
+    args[:direction] = 'ASC' if args[:direction] == 'up'
+    args[:direction] = 'DESC' if args[:direction] == 'down'
+    args
+  end
 
   def passwords_match
     if params[:webmaster][:password]

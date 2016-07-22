@@ -6,11 +6,12 @@ class Product < ActiveRecord::Base
 
   scope :by_date, -> { order('created_at DESC') }
 
-  def self.with_counts
+  def self.with_counts(opts = {from:nil, to:nil, order: :impression_count, direction:'DESC'})
     
     query = "products.*" <<
-      ",COUNT(impressions.id) as impression_count" <<
-      ",COUNT(reactions.id) as reaction_total"
+      ",COUNT(impressions.id) AS impression_count" <<
+      ",COUNT(reactions.id) AS reaction_total" <<
+      ",(COUNT(distinct reactions.id) / COUNT(distinct impressions.id)) * 100 AS total_ctr"
 
     ReactionType.all.each do |type|
       query << ",COUNT(distinct case when reactions.reaction_type_id = #{type.id} then reactions.id end) AS type_count_#{type.id}"
@@ -19,24 +20,26 @@ class Product < ActiveRecord::Base
     select(query).
       joins(:reactions).
       joins(:impressions).
-      group("products.id")
+      group("products.id").
+      where("reactions.created_at BETWEEN '#{opts[:from]}' AND '#{opts[:to]}'").
+      order("#{opts[:order]} #{opts[:direction]}")
 
   end
 
   scope :with_impression_counts, -> do
-    select("products.*, COUNT(impressions.id) as impression_count").
+    select("products.*, COUNT(impressions.id) AS impression_count").
       joins("LEFT OUTER JOIN impressions ON (impressions.product_id = products.id)").
       group("products.id")
   end
 
   scope :with_reaction_counts_for, -> (type) do
-    select("products.*, COUNT(reactions.id) as type_count_#{type.id}").
+    select("products.*, COUNT(reactions.id) AS type_count_#{type.id}").
       joins("LEFT OUTER JOIN reactions ON (reactions.product_id = products.id && reactions.reaction_type_id = #{type.id})").
       group("products.id")
   end
 
   scope :with_reaction_totals, -> do
-    select("products.*, COUNT(reactions.id) as reaction_total").
+    select("products.*, COUNT(reactions.id) AS reaction_total").
       joins("LEFT OUTER JOIN reactions ON (reactions.product_id = products.id)").
       group("products.id")
   end

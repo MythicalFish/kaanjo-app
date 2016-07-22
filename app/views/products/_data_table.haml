@@ -2,13 +2,13 @@
   %thead        
     %tr
       %td
-        Product name
+        = sort_link('name', 'Product name')
       %td
-        Impressions
+        = sort_link('impression_count', 'Impressions')
       %td
-        Reactions
+        = sort_link('reaction_total', 'Total reactions')
       %td 
-        CTR
+        = sort_link('total_ctr', 'CTR')
       - ReactionType.all.each do |r|
         %td= r.name
   - products.each do |p|
@@ -19,7 +19,7 @@
         %td= p.impression_count
         %td= p.reaction_count
         %td
-          = "#{ctr(p.impression_count,p.reaction_total)}%"
+          = "#{p.total_ctr}%"
         - ReactionType.all.each do |r|
           %td= p.reaction_count(r)
     

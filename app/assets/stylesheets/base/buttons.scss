@@ -24,3 +24,17 @@ a {
   color: $blue;
   text-decoration: none;
 }
+.sorter-up,.sorter-down {
+  color: inherit;
+}
+.sorter-up::after,.sorter-down::after {
+  @extend .fa;
+  margin-left: $space-1;
+  color: rgba(0,0,0,0.4);
+  content: "\f107";
+}
+.sorter-up.current::after {
+  content: "\f106";
+}
+.sorter-down::after {
+}

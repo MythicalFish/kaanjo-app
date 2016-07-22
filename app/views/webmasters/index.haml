@@ -15,15 +15,15 @@
   %thead
     %tr
       %td
-        Name
+        = sort_link('first_name', 'Name')
       %td
-        Website
+        = sort_link('website_name', 'Website')
       %td
-        Impressions
+        = sort_link('impression_count', 'Impressions')
       %td
-        Total Reactions
+        = sort_link('reaction_total', 'Total Reactions')
       %td
-        Total CTR
+        = sort_link('total_ctr', 'Total CTR')
       - ReactionType.all.each do |r|
         %td= r.name
       %td
@@ -42,7 +42,7 @@
       %td
         = w.reaction_total
       %td
-        = "#{ctr(w.impression_count,w.reaction_total)}%"
+        = "#{w.total_ctr}%"
       - ReactionType.all.each do |r|
         %td= w.send("type_count_#{r.id}")
       %td
