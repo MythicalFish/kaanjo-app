@@ -80,6 +80,9 @@ Rails.application.configure do
   # Enable websocket-rails to work
   config.middleware.delete Rack::Lock
 
+  config.action_mailer.default_url_options = { :host => 'reactions.vertaxe.com' }
+
+
 end
 
 Thread.new { EventMachine.run } unless EventMachine.reactor_running? && EventMachine.reactor_thread.alive?
