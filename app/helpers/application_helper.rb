@@ -23,12 +23,6 @@ module ApplicationHelper
     "current" if controller_name == name
   end
 
-  def date_range_url(from,to)
-    u = request.original_url
-    u = url_replace(u,{from:from.to_i})
-    url_replace(u,{to:to.to_i})
-  end
-
   def url_replace( target, *args )
     uri = URI.parse(URI::DEFAULT_PARSER.escape target)
     uri.path = CGI.escape(args.first)  if args.first.kind_of?(String)
@@ -43,6 +37,8 @@ module ApplicationHelper
   def from_date
     if selected_date[:secs] == 'today'
       Time.now.beginning_of_day
+    elsif selected_date[:secs] == 'range'
+      Time.parse(params[:f])
     else
       Time.now - selected_date[:secs]
     end
@@ -51,6 +47,8 @@ module ApplicationHelper
   def to_date
     if selected_date[:secs] == 'today'
       Time.now.end_of_day
+    elsif selected_date[:secs] == 'range'
+      Time.parse(params[:u])
     else
       Time.now
     end
@@ -70,6 +68,7 @@ module ApplicationHelper
   def dates
     {
       'today' =>  { label: "Today (#{Time.now.strftime('%e %b')})", secs: 'today' },
+      'range' =>  { label: "Custom: #{params[:f]} until #{params[:u]}",  secs: 'range' },
       '05' =>     { label: 'Last 30 minutes',  secs: 60*30 },
       '1'  =>     { label: 'Last hour',   secs: 60*60 },
       '3'  =>     { label: 'Last 3 hours',  secs: 60*60*3 },

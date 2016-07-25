@@ -2,9 +2,11 @@
   %span 
     = selected_date[:label]
     %i.fa.fa-angle-down.ml1.gray-light
-  %ul
+  %ul.hide
+    %li
+      %a.range-selector Custom range
     - dates.each do |key,date|
       - next if selected_date == date
       %li
-        %a{href:url_replace(request.original_url,{t:key})}
+        %a{href:url_for(t:key)}
           = date[:label]

@@ -2,9 +2,13 @@
   background: $aqua;
   color: $white;
   -webkit-appearance: none;
-  -webkit-border-radius:0; 
+  -webkit-border-radius:0;
+  outline: 0!important;
 }
 button, input[type="submit"] {
+  @extend .btn;
+}
+button:focus {
   @extend .btn;
 }
 .btn-full {

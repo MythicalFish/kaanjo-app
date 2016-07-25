@@ -13,6 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
 //= require websocket_rails/main
+//= require moment
+
+//= require app
+//= require datepicker
+//= require vendor/jquery-date-range-picker/jquery.daterangepicker
 

@@ -4,38 +4,42 @@
   %i.fa.fa-gear.mr1
   Account settings
 
-.container-narrow.p2.lg-p3
+.container-narrow.p2.lg-p3.bg-white
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
     = devise_error_messages!
-    .mb2.row
+    .mb3.row
       .col-md-6
         = f.label :first_name
         = f.text_field :first_name
       .col-md-6
         = f.label :last_name
         = f.text_field :last_name
-    .mb2
+    .mb3
       = f.label :email
       = f.email_field :email
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-      .p2.bg-orange.mb2
+      .p2.bg-orange.mb3
         Currently waiting confirmation for: #{resource.unconfirmed_email}
     - if resource.webmaster?
-      .mb2
+      .mb3
         = f.label :website_name
         = f.text_field :website_name
-      .mb2
+      .mb3
         = f.label :website_url
         = f.text_field :website_url
-    .mb2.p3.bg-darken-1
-      .mb2
+    .mb4.p3.bg-gray-lightest
+      .mb3
         %b Change password
         %i (leave blank for no change)
-      .mb2.row
+      .mb3.row
         .col-md-6
           = f.password_field :password, autocomplete: "off", placeholder: "New password"
         .col-md-6
           = f.password_field :password_confirmation, autocomplete: "off", placeholder: "New password (again)"
-    .actions
-      = f.password_field :current_password, autocomplete: "off", placeholder: "Your current password (required)", required:'required'
-      = f.submit "Update"
+    .row
+      .col-md-8
+        = f.password_field :current_password, autocomplete: "off", placeholder: "Your current password (required)", required:'required'
+      .col-md-4
+        %button.btn.btn-full{type:'submit'}
+          %i.fa.fa-save.mr1
+          Update

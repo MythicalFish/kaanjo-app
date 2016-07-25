@@ -3,6 +3,7 @@ header {
   padding: $space-3;
   text-transform: uppercase;
   @extend .b1-bottom;
+  line-height: 1;
 }
 .datepicker {
   text-align: right;
@@ -10,6 +11,7 @@ header {
   background: $white;
   a, span {
     display: block;
+    cursor: pointer;
   }
   a {
     padding: $space-2 $space-3;
@@ -18,9 +20,16 @@ header {
     background: $gray-lightest;
   }
   span {
+    background: transparent;
     padding: $space-3;
+    border-top: 0;
+    border-right: 0;
+    color: inherit;
+    font-weight: normal;
     @extend .b1-bottom;
     @extend .b1-left;
+    line-height: inherit;
+    cursor: pointer;
   }
   ul {
     list-style: none;
@@ -30,17 +39,11 @@ header {
     top: 100%;
     left: 0;
     right: 0;
-    display: none;
     background: $white;
     @extend .b1-bottom;
     @extend .b1-left;
     li {
-      border-top: 1px solid $gray-lightest;
+      border-top: 1px solid $gray-lighterer;
     }
-  }
-}
-.datepicker:hover {
-  ul {
-    display: block;
   }
 }
