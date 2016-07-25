@@ -3,14 +3,14 @@
   %a{href:webmasters_path} Webmasters
   New
 
-#body.p2.md-p3.lg-p4
-  .container-narrow
-    = form_for(Webmaster.new) do |f|
-      = render partial: 'form', locals: {f:f}
-      .mb2
-        = f.password_field :password, autocomplete: "off", placeholder: "Password"
-      .mb2
-        = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Password (again)"
-      .actions
-        = f.submit "Create"
+
+.container-narrow.p2.md-p3.lg-p4.bg-white.flex-auto
+  = form_for(Webmaster.new) do |f|
+    = render partial: 'form', locals: {f:f}
+    .mb2
+      = f.password_field :password, autocomplete: "off", placeholder: "Password"
+    .mb2
+      = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Password (again)"
+    .actions
+      = f.submit "Create"
 

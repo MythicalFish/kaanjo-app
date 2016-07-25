@@ -8,18 +8,18 @@
   %a{href:'/webmasters'} Cancel
 
 
-#body.p2.md-p3.lg-p4
-  .container-narrow
-    = form_for(@webmaster) do |f|
-      = render partial: 'form', locals: {f:f}
-      .mb2.p3.bg-white
-        .mb2
-          %b Change password
-          %i (leave blank for no change)
-        .mb2.row
-          .col-md-6
-            = f.password_field :password, autocomplete: "off", placeholder: "New password"
-          .col-md-6
-            = f.password_field :password_confirmation, autocomplete: "off", placeholder: "New password (again)"
-      .actions
-        = f.submit "Update"
+
+.container-narrow.p2.md-p3.lg-p4.bg-white
+  = form_for(@webmaster) do |f|
+    = render partial: 'form', locals: {f:f}
+    .mb2.p3.bg-white
+      .mb2
+        %b Change password
+        %i (leave blank for no change)
+      .mb2.row
+        .col-md-6
+          = f.password_field :password, autocomplete: "off", placeholder: "New password"
+        .col-md-6
+          = f.password_field :password_confirmation, autocomplete: "off", placeholder: "New password (again)"
+    .actions
+      = f.submit "Update"

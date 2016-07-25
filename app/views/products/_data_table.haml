@@ -5,21 +5,21 @@
         = sort_link('name', 'Product name')
       %td
         = sort_link('impression_count', 'Impressions')
+      - ReactionType.all.each do |r|
+        %td= r.name
       %td
         = sort_link('reaction_total', 'Total reactions')
       %td 
         = sort_link('total_ctr', 'CTR')
-      - ReactionType.all.each do |r|
-        %td= r.name
   - products.each do |p|
     %tbody
       %tr
         %td
-          %a{href:product_path(p)}= p.name
+          %a{href:product_path(p.sid)}= p.name
         %td= p.impression_count
+        - ReactionType.all.each do |r|
+          %td= p.reaction_count(r)
         %td= p.reaction_count
         %td
           = "#{p.total_ctr}%"
-        - ReactionType.all.each do |r|
-          %td= p.reaction_count(r)
     

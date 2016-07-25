@@ -8,7 +8,36 @@
   - else
     %a{href:'/products'} Products
     = @product.name
+
+- content_for(:actions) do
+  %a{href:@product.url,target:'_blank'} View product
     
-#body
+.flex
+  %header.flex-auto
+    Activity Overview
+  .flex-none
+    = render partial: 'shared/datepicker'
+%table
+  %thead        
+    %tr
+      %td
+        = sort_link('device', 'Device type')
+      %td
+        = sort_link('impression_count', 'Impressions')
+      - ReactionType.all.each do |r|
+        %td= r.name
+      %td
+        = sort_link('reaction_total', 'Total reactions')
+      %td 
+        = sort_link('total_ctr', 'CTR')
+  %tbody
+    %tr
+      %td
+      %td
+      - ReactionType.all.each do |r|
+        %td
+      %td
+      %td
+        
   
-  
+

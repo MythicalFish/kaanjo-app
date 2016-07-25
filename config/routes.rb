@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   post '/create-reaction', to: 'reactions#create'
   root to: 'application#dashboard'
 
-  resources :products
+  get '/products/:sid', to: 'products#show', as: 'product'
+  resources :products, except: 'show'
+
   resources :webmasters
-  resources :admins, skip: [:show]
+  resources :admins, except: [:show]
 
   devise_for :users, :skip => [:sessions, :registrations]
 

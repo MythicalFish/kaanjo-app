@@ -13,7 +13,7 @@
     - if current_user.admin?
       %li
         %a{href:admins_path,class:cc('admins')}
-          %i.fa.fa-user.mr1
+          %i.fa.fa-star.mr1
           Administrators
       %li
         %a{href:webmasters_path,class:cc('webmasters')}
@@ -21,10 +21,12 @@
           Webmasters
     - else
       %li
-        %a{href:'/',class:cp('/')}
+        %a{href:products_path,class:cc('products')}
+          %i.fa.fa-shopping-basket.mr1
           Products
       %li
         %a{href:'/setup',class:cp('/setup')}
+          %i.fa.fa-code.mr1
           Setup Reactions
     %li
       %a{href:edit_user_registration_path,class:cp(edit_user_registration_path)}

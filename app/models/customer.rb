@@ -3,7 +3,7 @@ class Customer < ActiveRecord::Base
   has_many :impressions
   has_many :reactions
 
-  before_save :generate_sid
+  before_create :generate_sid
 
   private
 

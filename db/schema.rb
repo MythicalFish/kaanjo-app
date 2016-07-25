@@ -11,13 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160722091436) do
+ActiveRecord::Schema.define(version: 20160725120734) do
 
   create_table "customers", force: :cascade do |t|
-    t.string "sid", limit: 255, null: false
-    t.string "ip",  limit: 255
+    t.string "sid",        limit: 255, null: false
+    t.string "ip",         limit: 255
+    t.string "browser",    limit: 255
+    t.string "device",     limit: 255
+    t.string "ip_address", limit: 255
+    t.string "location",   limit: 255
   end
 
+  add_index "customers", ["browser"], name: "index_customers_on_browser", using: :btree
+  add_index "customers", ["device"], name: "index_customers_on_device", using: :btree
+  add_index "customers", ["ip_address"], name: "index_customers_on_ip_address", using: :btree
+  add_index "customers", ["location"], name: "index_customers_on_location", using: :btree
   add_index "customers", ["sid"], name: "index_customers_on_sid", using: :btree
 
   create_table "impressions", force: :cascade do |t|
@@ -37,10 +45,12 @@ ActiveRecord::Schema.define(version: 20160722091436) do
     t.string   "url",          limit: 255, null: false
     t.integer  "webmaster_id", limit: 4,   null: false
     t.datetime "created_at",               null: false
+    t.string   "sid",          limit: 255
   end
 
   add_index "products", ["created_at"], name: "index_products_on_created_at", using: :btree
   add_index "products", ["name"], name: "index_products_on_name", using: :btree
+  add_index "products", ["sid"], name: "index_products_on_sid", using: :btree
   add_index "products", ["webmaster_id"], name: "index_products_on_webmaster_id", using: :btree
 
   create_table "reaction_types", force: :cascade do |t|

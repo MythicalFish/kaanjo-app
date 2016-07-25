@@ -3,6 +3,7 @@ class Product < ActiveRecord::Base
   has_many :impressions
   has_many :reactions
   belongs_to :webmaster
+  before_create :generate_sid 
 
   scope :by_date, -> { order('created_at DESC') }
 
@@ -46,6 +47,10 @@ class Product < ActiveRecord::Base
       group("products.id")
   end
 
+  def breakdown
+    
+  end
+
   def impression_count
     impressions.length
   end
@@ -73,5 +78,13 @@ class Product < ActiveRecord::Base
     end
   end
 
+  private
+
+  def generate_sid
+    begin
+      secure_id = SecureRandom.hex(12)
+    end while Product.where(:sid => secure_id).exists?
+    self.sid = secure_id
+  end
 
 end
