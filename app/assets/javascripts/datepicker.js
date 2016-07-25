@@ -7,7 +7,7 @@ $(document).ready(function() {
       $('.datepicker ul:not(.hide)').addClass('hide');
   });
 
-  $('.datepicker span').on('click', function() {
+  $('body').on('click', '.datepicker span', function() {
     setTimeout(function() {
       app.datepicker.find('ul').removeClass('hide');
     },50);

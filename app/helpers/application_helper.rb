@@ -38,7 +38,7 @@ module ApplicationHelper
     if selected_date[:secs] == 'today'
       Time.now.beginning_of_day
     elsif selected_date[:secs] == 'range'
-      Time.parse(params[:f])
+      Time.parse(session[:f])
     else
       Time.now - selected_date[:secs]
     end
@@ -48,7 +48,7 @@ module ApplicationHelper
     if selected_date[:secs] == 'today'
       Time.now.end_of_day
     elsif selected_date[:secs] == 'range'
-      Time.parse(params[:u])
+      Time.parse(session[:u])
     else
       Time.now
     end
@@ -57,6 +57,8 @@ module ApplicationHelper
   def selected_date
     if params[:t]
       session[:t] = params[:t]
+      session[:f] = params[:f] if params[:f]
+      session[:u] = params[:u] if params[:u]
       dates[params[:t]]
     elsif session[:t]
       dates[session[:t]]
@@ -68,7 +70,7 @@ module ApplicationHelper
   def dates
     {
       'today' =>  { label: "Today (#{Time.now.strftime('%e %b')})", secs: 'today' },
-      'range' =>  { label: "Custom: #{params[:f]} until #{params[:u]}",  secs: 'range' },
+      'range' =>  { label: "Custom: #{session[:f]} until #{session[:u]}",  secs: 'range' },
       '05' =>     { label: 'Last 30 minutes',  secs: 60*30 },
       '1'  =>     { label: 'Last hour',   secs: 60*60 },
       '3'  =>     { label: 'Last 3 hours',  secs: 60*60*3 },

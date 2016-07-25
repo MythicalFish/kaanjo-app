@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :admins, skip: [:show]
 
   devise_for :users, :skip => [:sessions, :registrations]
-  
+
   as :user do
 
     get    'login' => 'devise/sessions#new', :as => :new_user_session
@@ -24,5 +24,8 @@ Rails.application.routes.draw do
     put    'account' => 'devise/registrations#update'
 
   end
+
+  get '/:id', to: 'pages#show'
+  
   
 end
