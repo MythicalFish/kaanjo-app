@@ -1,5 +1,5 @@
-.flex.items-center.justify-end.b1-bottom
-  .flex-auto
+.flex.items-center.justify-end
+  .flex-auto.b1-bottom
     .p2.md-p3.bold
       %i.fa.fa-dashboard.mr1
       Dashboard
@@ -10,13 +10,19 @@
   .container.p2.md-p3.lg-p4
     .row.col-xs-12.center
       .col.col-md-6
-        .p2.md-p3.lg-p4
-          %h3 Total impressions
-          .h1= @impression_count
-      .col.col-md-6
+        .p2.md-p3.b1.b0-bottom
+          %h4.m0 Total impressions
+          .h2= @impression_count
         .p2.md-p3.lg-p4.bg-aqua.white
-          %h3 Total reactions
+          %h3.m0.upcase Total reactions
           .h1= @reaction_total
+        %table
+          - @reaction_counts.each do |r|
+            %tr
+              %td= r.name
+              %td= r.count
+      .col.col-md-6
+        %h4 Top products by reaction type
         %table
           - @reaction_counts.each do |r|
             %tr

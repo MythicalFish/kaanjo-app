@@ -1,9 +1,9 @@
 module ApplicationHelper
 
   def page_title
-    return "#{@title} | Reactions Demo" if @title
+    return "#{@title} | #{site_name}" if @title
     if content_for(:page_title)
-      content_for(:page_title) << " | Reactions Demo"
+      content_for(:page_title) << " | #{site_name}"
     else
       "~ | Reactions Demo"
     end
