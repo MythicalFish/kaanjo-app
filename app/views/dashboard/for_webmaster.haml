@@ -1,21 +1,25 @@
-- content_for(:header) do
-  %i.fa.fa-dashboard.mr1
-  Dashboard
-
-.flex.justify-end.b1-bottom
+.flex.items-center.justify-end.b1-bottom
+  .flex-auto
+    .p2.md-p3.bold
+      %i.fa.fa-dashboard.mr1
+      Dashboard
   .flex-none
     = render partial: 'shared/datepicker'
 
-.p2.md-p3.lg-p4.bg-white.flex-auto
-  .row.col-xs-12.center
-    .col.col-md-6.p2.md-p3.lg-p4.bg-aqua.white
-      %h3 Total impressions
-      .h1= @impression_count
-    .col.col-md-6.p2.md-p3.lg-p4.bg-aqua.white
-      %h3 Total reactions
-      .h1= @reaction_total
-    - @reaction_counts.each do |r|
-      .col.col-md-4.p2.md-p3
-        %h4= r.name
-        .h2= r.count
+.bg-white.flex-auto
+  .container.p2.md-p3.lg-p4
+    .row.col-xs-12.center
+      .col.col-md-6
+        .p2.md-p3.lg-p4
+          %h3 Total impressions
+          .h1= @impression_count
+      .col.col-md-6
+        .p2.md-p3.lg-p4.bg-aqua.white
+          %h3 Total reactions
+          .h1= @reaction_total
+        %table
+          - @reaction_counts.each do |r|
+            %tr
+              %td= r.name
+              %td= r.count
 
