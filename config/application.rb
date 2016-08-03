@@ -27,5 +27,8 @@ module ReactionsAdmin
     #  'Access-Control-Allow-Origin' => '*',
     #  'Access-Control-Request-Method' => '*'
     #}) TODO
+
+    config.site_name = 'Kaanjo'
+
   end
 end

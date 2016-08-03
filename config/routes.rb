@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   
-  post '/create-reaction', to: 'reactions#create'
-  root to: 'application#dashboard'
+  root to: 'dashboard#show'
 
   get '/products/:sid', to: 'products#show', as: 'product'
   resources :products, except: 'show'

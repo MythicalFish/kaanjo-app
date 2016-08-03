@@ -1,47 +1,20 @@
 #logo 
-  Reactions Demo
+  = site_name
+
 - if current_user
-  #user
+
+  #user.mb2
     = current_user.name
     .h5.aqua
-      - if current_user.admin?
-        Administrator
-      - else
-        = current_user.website_name
-%ul
-  - if current_user
-    - if current_user.admin?
-      %li
-        %a{href:admins_path,class:cc('admins')}
-          %i.fa.fa-star.mr1
-          Administrators
-      %li
-        %a{href:webmasters_path,class:cc('webmasters')}
-          %i.fa.fa-user.mr1
-          Webmasters
-    - else
-      %li
-        %a{href:products_path,class:cc('products')}
-          %i.fa.fa-shopping-basket.mr1
-          Products
-      %li
-        %a{href:'/setup',class:cp('/setup')}
-          %i.fa.fa-code.mr1
-          Setup Reactions
-    %li
-      %a{href:edit_user_registration_path,class:cp(edit_user_registration_path)}
-        %i.fa.fa-gear.mr1
-        Account settings
-    %li
-      %a{href:destroy_user_session_path, 'data-method'=>'delete'} 
-        %i.fa.fa-sign-out.mr1
-        Logout
+      = current_user.subtitle
+
+  - if current_user.admin?
+    = render partial: 'shared/sidebar/for_admin'
   - else
-    %li
-      %a{href:'/login',class:cp('/login')}
-        %i.fa.fa-sign-in.mr1
-        Login
-    %li
-      %a{href:'/signup',class:cp('/signup')}
-        %i.fa.fa-user-plus.mr1
-        Sign up
+    = render partial: 'shared/sidebar/for_webmaster'
+
+  = render partial: 'shared/sidebar/for_all'
+  
+- else
+  = render partial: 'shared/sidebar/for_guest'
+

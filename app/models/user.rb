@@ -18,4 +18,12 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def subtitle
+    if admin?
+      "Administrator"
+    else
+      website_name
+    end
+  end
+
 end

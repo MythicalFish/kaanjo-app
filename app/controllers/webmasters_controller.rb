@@ -1,21 +1,20 @@
 class WebmastersController < ApplicationController
 
-  before_action :authorize
+  include ReactionQueries
+
+  before_action :enforce_admin
 
   respond_to :html
 
   def index
-    
     @title = "Webmasters"
-
-    @webmasters = Webmaster.with_counts(args)
-
+    @webmasters = Webmaster.with_counts(reaction_sorting)
   end
 
   def show
     @webmaster = Webmaster.find(params[:id])
     @title = "Webmaster: #{@webmaster.name}"
-    @products = @webmaster.products.with_counts(args)
+    @products = @webmaster.products.with_counts(reaction_sorting)
   end
 
   def edit 
@@ -66,19 +65,6 @@ class WebmastersController < ApplicationController
 
   private
 
-  def args
-    args = {
-      from: from_date,
-      to: to_date
-    }
-
-    args[:order] = params[:a] if params[:a]
-    args[:direction] = params[:d] if params[:d]
-    args[:direction] = 'ASC' if args[:direction] == 'up'
-    args[:direction] = 'DESC' if args[:direction] == 'down'
-    args
-  end
-
   def passwords_match
     if params[:webmaster][:password]
       if params[:webmaster][:password] != params[:webmaster][:password_confirmation]
@@ -92,7 +78,7 @@ class WebmastersController < ApplicationController
     params.require(:webmaster).permit(:email, :password, :first_name, :last_name, :website_url, :website_name)
   end
 
-  def authorize
+  def enforce_admin
     unless current_user && current_user.admin?
       head(403)
     end
