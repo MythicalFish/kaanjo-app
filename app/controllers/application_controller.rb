@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   include ApplicationHelper
   include DateHelper
+  include UserHelper
 
   protected
 
