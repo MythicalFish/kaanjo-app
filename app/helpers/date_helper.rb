@@ -36,7 +36,7 @@ module DateHelper
   def dates
     {
       'today' =>  { label: "Today (#{Time.now.strftime('%e %b')})", secs: 'today' },
-      'range' =>  { label: "Custom: #{session[:f]} until #{session[:u]}",  secs: 'range' },
+      'range' =>  { label: "#{session[:f]} - #{session[:u]}",  secs: 'range' },
       '05' =>     { label: 'Last 30 minutes',  secs: 60*30 },
       '1'  =>     { label: 'Last hour',   secs: 60*60 },
       '3'  =>     { label: 'Last 3 hours',  secs: 60*60*3 },

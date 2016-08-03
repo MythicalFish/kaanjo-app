@@ -1,33 +1,13 @@
 class Product < ActiveRecord::Base
 
+  include ReactionQueries
+
   has_many :impressions
   has_many :reactions
   belongs_to :webmaster
   before_create :generate_sid 
 
   scope :by_date, -> { order('created_at DESC') }
-
-  def self.with_counts(opts = {from:nil, to:nil, order: :impression_count, direction:'DESC'})
-    
-    query = "products.*" <<
-      ",COUNT(impressions.id) AS impression_count" <<
-      ",COUNT(reactions.id) AS reaction_total" <<
-      ",(COUNT(distinct reactions.id) / COUNT(distinct impressions.id)) * 100 AS total_ctr"
-
-    ReactionType.all.each do |type|
-      query << ",COUNT(distinct case when reactions.reaction_type_id = #{type.id} then reactions.id end) AS type_count_#{type.id}"
-    end
-    
-    select(query).
-      joins(:reactions).
-      joins(:impressions).
-      group("products.id").
-      where(
-        "reactions.created_at" => opts[:from]..opts[:to],
-        "impressions.created_at" => opts[:from]..opts[:to]
-      ).order("#{opts[:order]} #{opts[:direction]}")
-
-  end
 
   scope :with_impression_counts, -> do
     select("products.*, COUNT(impressions.id) AS impression_count").
@@ -45,10 +25,6 @@ class Product < ActiveRecord::Base
     select("products.*, COUNT(reactions.id) AS reaction_total").
       joins("LEFT OUTER JOIN reactions ON (reactions.product_id = products.id)").
       group("products.id")
-  end
-
-  def breakdown
-    
   end
 
   def impression_count

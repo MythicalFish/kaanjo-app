@@ -1,6 +1,6 @@
 class WebmastersController < ApplicationController
 
-  include ReactionQueries
+  include ReactionSorting
 
   before_action :enforce_admin
 

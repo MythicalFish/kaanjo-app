@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  include ReactionQueries
+  include ReactionSorting
 
   def index
     @title = "Products"

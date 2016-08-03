@@ -1,4 +1,7 @@
-$(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
+
+  if(!$('.datepicker').is('*'))
+    return;
 
   app.datepicker = $('.datepicker').first();
 
@@ -14,11 +17,10 @@ $(document).ready(function() {
   });
 
   $('.datepicker .range-selector').dateRangePicker({}).
-    bind('datepicker-change',function(e,o) {
-      from = o.value.split(' to ')[0];
-      until = o.value.split(' to ')[1];
-      window.location = window.location.href.split('?')[0] + '?t=range&f='+from+'&u='+until;
-    });
-
+  bind('datepicker-change',function(e,o) {
+    from = o.value.split(' to ')[0];
+    until = o.value.split(' to ')[1];
+    window.location = window.location.href.split('?')[0] + '?t=range&f='+from+'&u='+until;
+  });
 
 });

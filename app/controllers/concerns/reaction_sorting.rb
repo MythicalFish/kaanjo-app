@@ -1,4 +1,4 @@
-module ReactionQueries
+module ReactionSorting
   extend ActiveSupport::Concern
   included do
 
