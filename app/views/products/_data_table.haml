@@ -6,7 +6,7 @@
       %td
         = sort_link('impression_count', 'Impressions')
       - ReactionType.all.each do |r|
-        %td= r.name
+        %td= sort_link("type_count_#{r.id}", r.name)
       %td
         = sort_link('reaction_total', 'Total reactions')
       %td 
@@ -18,8 +18,8 @@
           %a{href:product_path(p.sid)}= p.name
         %td= p.impression_count
         - ReactionType.all.each do |r|
-          %td= p.reaction_count(r)
-        %td= p.reaction_count
+          %td= p.attributes["type_count_#{r.id}"]
+        %td= p.reaction_total
         %td
           = ctr_for p
     

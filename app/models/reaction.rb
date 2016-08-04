@@ -23,12 +23,11 @@ class Reaction < ActiveRecord::Base
   end
 
   def self.counts from, to
-    ReactionType.
-      select( "reaction_types.*, 
-              COUNT(reactions.id) AS count" ).
-      joins(  :reactions ).
-      where(  "reactions.created_at" => from..to ).
-      group(  "reaction_types.id" )
+    select( "reaction_types.*, 
+            COUNT(reactions.id) AS count" ).
+    joins(  :reaction_type ).
+    where(  "reactions.created_at" => from..to ).
+    group(  "reaction_types.id" )
   end
 
   private

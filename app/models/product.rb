@@ -9,22 +9,38 @@ class Product < ActiveRecord::Base
 
   scope :by_date, -> { order('created_at DESC') }
 
-  def self.top_by_reaction_type from, to
-      select( "products.*, 
-              COUNT(reactions.id) AS count,
-              reaction_types.name AS type_name" ).
-      joins(  :reactions ).
+  def self.top_by_type from,to
+    select(   "products.*,
+              COUNT(distinct reactions.id) AS count,
+              reaction_types.name AS type_name").
+      joins(  "LEFT JOIN reactions ON reactions.product_id = products.id" ).
       joins(  "LEFT JOIN reaction_types ON reactions.reaction_type_id = reaction_types.id" ).
-      where(  "reactions.created_at" => from..to ).
-      group(  "reactions.reaction_type_id" ).
-      order(  "count DESC")
-  end
+      where(  "reactions.created_at" => from..to, ).
+      order(  "count DESC" ).
+      group(  "products.id").
+      limit(  10 )
+  end 
 
   def devices
     Impression.
       where( :product_id => id ).
       group( :device_type ).
       count
+  end
+
+  def device_stats from, to
+
+    select(   "products.*, 
+              COUNT(impressions.id) AS impressions_count,
+              COUNT(reactions.id) AS reactions_total," ).
+      joins(  :reactions ).
+      joins(  "LEFT JOIN reaction_types ON reactions.reaction_type_id = reaction_types.id" ).
+      where(  "products.id" => id,
+              "reactions.created_at" => from..to ).
+      group(  "reactions.reaction_type_id" ).
+      order(  "count DESC").
+      first
+
   end
 
   private

@@ -6,28 +6,30 @@
   .flex-none
     = render partial: 'shared/datepicker'
 
-.bg-white.flex-auto
-  .container.p2.md-p3.lg-p4
-    .row.col-xs-12
-      .col.col-md-6.center
-        .md-mr1
-          .p2.md-p3.b1.b0-bottom
-            %h4.m0 Total impressions
-            .h2= @impression_total
-          .p2.md-p3.lg-p4.bg-aqua.white
-            %h3.m0.upcase Total reactions
-            .h1= @reaction_total
-          %table
-            - @reaction_counts.each do |r|
-              %tr
-                %td= r.name
-                %td= r.count
-      .col.col-md-6
-        .md-ml1
-          %h3 Top products by reaction type
-          %table
-            - @products.each do |p|
-              %tr
-                %td= p.name
-                %td= "#{p.count} x #{p.type_name}"
-
+.bg-white.flex-auto.p2.md-p3.lg-p4
+  .row.col-xs-12
+    .col.col-md-6.center
+      .md-mr1
+        .p2.md-p3.b1.b0-bottom
+          %h4.m0 Total impressions
+          .h2= @impression_total
+        .p2.md-p3.lg-p4.bg-aqua.white
+          %h3.m0.upcase Total reactions
+          .h1= @reaction_total
+        %table
+          - @reaction_counts.each do |r|
+            %tr
+              %td= r.name
+              %td= r.count
+    .col.col-md-6
+      .md-ml1
+        %table
+          %thead
+            %tr
+              %td{colspan:2}
+                %h4.p2.m0.b1.b0-bottom Most reacted products
+          - @products.each do |p|
+            %tr
+              %td
+                %a.block{href:product_path(p.sid)}= p.name
+              %td= p.count
