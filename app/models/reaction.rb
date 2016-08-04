@@ -14,7 +14,7 @@ class Reaction < ActiveRecord::Base
 
   alias_method :type, :reaction_type
 
-  def self.count_between from, to
+  def self.total from, to
     if from && to
       self.where(created_at:from..to).length
     else
@@ -22,7 +22,7 @@ class Reaction < ActiveRecord::Base
     end
   end
 
-  def self.type_counts_between from, to
+  def self.counts from, to
     ReactionType.
       select( "reaction_types.*, 
               COUNT(reactions.id) AS count" ).

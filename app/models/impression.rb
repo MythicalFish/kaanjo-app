@@ -10,7 +10,7 @@ class Impression < ActiveRecord::Base
 
   before_create :attach_to_webmaster
 
-  def self.count_between from, to
+  def self.total from, to
     if from && to
       self.where(created_at:from..to).length
     else

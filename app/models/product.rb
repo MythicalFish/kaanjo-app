@@ -16,7 +16,8 @@ class Product < ActiveRecord::Base
       joins(  :reactions ).
       joins(  "LEFT JOIN reaction_types ON reactions.reaction_type_id = reaction_types.id" ).
       where(  "reactions.created_at" => from..to ).
-      group(  "reactions.reaction_type_id" )
+      group(  "reactions.reaction_type_id" ).
+      order(  "count DESC")
   end
 
   private
