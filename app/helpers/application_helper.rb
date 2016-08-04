@@ -44,12 +44,6 @@ module ApplicationHelper
     devise_mapping.to
   end
 
-  def ctr(impressions,reactions)
-    ctr = ((reactions.to_f / impressions.to_f) * 100).round(3) 
-    return 0 unless ctr > 0
-    ctr
-  end
-
   def body_class
     unless current_user
       'bg-intro'

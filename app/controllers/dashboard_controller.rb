@@ -5,9 +5,13 @@ class DashboardController < ApplicationController
     if admin?
       render 'dashboard/for_admin'
     elsif webmaster?
-      @impression_count = current_webmaster.impression_count(from_date,to_date)
-      @reaction_total = current_webmaster.reaction_total(from_date,to_date)
-      @reaction_counts = current_webmaster.reaction_counts(from_date,to_date)
+      w = current_webmaster
+      f = from_date
+      t = to_date
+      @impression_count = w.impressions.count_between f, t
+      @reaction_total =   w.reactions.count_between f, t
+      @reaction_counts =  w.reactions.type_counts_between f, t
+      @products =         w.products.top_by_reaction_type f, t
       render 'dashboard/for_webmaster'
     else
       raise "Neither admin nor webmaster"

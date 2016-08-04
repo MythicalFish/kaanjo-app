@@ -12,26 +12,6 @@ class Webmaster < User
 
   default_scope { where('admin = ?', false) }
 
-  def impression_count from, to
-    impressions.where(created_at:from..to).length
-  end
-
-  def reaction_total from, to
-    reactions.where(created_at:from..to).length
-  end
-
-  def reaction_counts from, to
-    ReactionType.select( 
-      "name," <<
-      "COUNT(reactions.id) AS count" ).
-      joins(:reactions).
-      where(
-        "reactions.webmaster_id" => self.id,
-        "reactions.created_at" => from..to
-      ).
-      group("reaction_types.id")
-  end
-
   protected
 
   def sanitize_website_url
