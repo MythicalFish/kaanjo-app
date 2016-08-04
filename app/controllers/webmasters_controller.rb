@@ -75,7 +75,10 @@ class WebmastersController < ApplicationController
   end
 
   def webmaster_params
-    params.require(:webmaster).permit(:email, :password, :first_name, :last_name, :website_url, :website_name)
+    params.require(:webmaster).permit(
+      :email, :password, :first_name, :last_name, :website_url, :website_name, 
+      :title, :address1, :address2 ,:city, :postcode, :country, :phone
+    )
   end
 
   def enforce_admin
