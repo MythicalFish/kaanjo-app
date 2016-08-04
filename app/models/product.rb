@@ -20,6 +20,13 @@ class Product < ActiveRecord::Base
       order(  "count DESC")
   end
 
+  def devices
+    Impression.
+      where( :product_id => id ).
+      group( :device_type ).
+      count
+  end
+
   private
 
   def generate_sid

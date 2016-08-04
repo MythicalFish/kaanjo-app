@@ -37,6 +37,15 @@ Webmaster.create([
   { email:'webmaster20@site20.com', password:'test1234',     website_url: 'http://site20.com',            website_name: 'Site 20', first_name: 'Webmaster',   last_name: 'Twenty' }
 ])
 
+CUSTOMER_IDS = [123,456,789,111,222,333]
+
+DEVICES = [
+  'device1',
+  'device2',
+  'device3',
+  'device4'
+]
+
 Webmaster.all.each do |w|
 
   w.products.create([
@@ -51,16 +60,15 @@ Webmaster.all.each do |w|
 
   w.products.all.each do |p|
 
-    customer_ids = [123,456,789,111,222,333]
 
     rand(51..400).times do
       t = Time.now - rand(0..172800)
-      p.impressions.create(customer_id:customer_ids.sample,created_at:t)
+      p.impressions.create(customer_id:CUSTOMER_IDS.sample,device_type:DEVICES.sample,created_at:t)
     end
 
     rand(2..20).times do
       t = Time.now - rand(0..172800)
-      p.reactions.create(reaction_type_id: rand(1..4),customer_id:customer_ids.sample,created_at:t)
+      p.reactions.create(reaction_type_id: rand(1..4),customer_id:CUSTOMER_IDS.sample,created_at:t)
     end
 
   end

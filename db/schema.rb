@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160731113508) do
+ActiveRecord::Schema.define(version: 20160804092612) do
 
   create_table "customers", force: :cascade do |t|
     t.string "sid",        limit: 255, null: false
@@ -29,14 +29,16 @@ ActiveRecord::Schema.define(version: 20160731113508) do
   add_index "customers", ["sid"], name: "index_customers_on_sid", using: :btree
 
   create_table "impressions", force: :cascade do |t|
-    t.integer  "product_id",   limit: 4,             null: false
-    t.integer  "customer_id",  limit: 4,             null: false
-    t.datetime "created_at",                         null: false
-    t.integer  "webmaster_id", limit: 4, default: 0
+    t.integer  "product_id",   limit: 4,               null: false
+    t.integer  "customer_id",  limit: 4,               null: false
+    t.datetime "created_at",                           null: false
+    t.integer  "webmaster_id", limit: 4,   default: 0
+    t.string   "device_type",  limit: 255
   end
 
   add_index "impressions", ["created_at"], name: "index_impressions_on_created_at", using: :btree
   add_index "impressions", ["customer_id"], name: "index_impressions_on_customer_id", using: :btree
+  add_index "impressions", ["device_type"], name: "index_impressions_on_device_type", using: :btree
   add_index "impressions", ["product_id"], name: "index_impressions_on_product_id", using: :btree
   add_index "impressions", ["webmaster_id"], name: "index_impressions_on_webmaster_id", using: :btree
 
@@ -58,14 +60,16 @@ ActiveRecord::Schema.define(version: 20160731113508) do
   end
 
   create_table "reactions", force: :cascade do |t|
-    t.datetime "created_at",                             null: false
-    t.integer  "reaction_type_id", limit: 4,             null: false
-    t.integer  "customer_id",      limit: 4,             null: false
+    t.datetime "created_at",                               null: false
+    t.integer  "reaction_type_id", limit: 4,               null: false
+    t.integer  "customer_id",      limit: 4,               null: false
     t.integer  "product_id",       limit: 4
-    t.integer  "webmaster_id",     limit: 4, default: 0
+    t.integer  "webmaster_id",     limit: 4,   default: 0
+    t.string   "device_type",      limit: 255
   end
 
   add_index "reactions", ["customer_id"], name: "index_reactions_on_customer_id", using: :btree
+  add_index "reactions", ["device_type"], name: "index_reactions_on_device_type", using: :btree
   add_index "reactions", ["product_id"], name: "index_reactions_on_product_id", using: :btree
   add_index "reactions", ["reaction_type_id"], name: "index_reactions_on_reaction_type_id", using: :btree
   add_index "reactions", ["webmaster_id"], name: "index_reactions_on_webmaster_id", using: :btree
