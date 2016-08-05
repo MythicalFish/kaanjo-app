@@ -39,13 +39,6 @@ Webmaster.create([
 
 CUSTOMER_IDS = [123,456,789,111,222,333]
 
-DEVICES = [
-  'device1',
-  'device2',
-  'device3',
-  'device4'
-]
-
 Webmaster.all.each do |w|
 
   w.products.create([
@@ -63,7 +56,7 @@ Webmaster.all.each do |w|
 
     rand(51..400).times do
       t = Time.now - rand(0..172800)
-      p.impressions.create(customer_id:CUSTOMER_IDS.sample,device_type:DEVICES.sample,created_at:t)
+      p.impressions.create(customer_id:CUSTOMER_IDS.sample,device_type:"Seeded",created_at:t)
     end
 
     rand(2..20).times do

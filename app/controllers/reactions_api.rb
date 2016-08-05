@@ -25,6 +25,20 @@ class ReactionsApi < WebsocketRails::BaseController
 
   # Customers
 
+  def find_customer
+
+    @customer = Customer.find_by_sid(message[:id])
+
+    if @customer
+      sesh :customer_id, @customer.id
+      trigger_success
+    else
+      trigger_failure
+    end
+
+  end
+
+
   def create_customer
     
     return if sesh[:customer_id]
@@ -41,7 +55,17 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def create_impression
-    customer.impressions.create!
+
+    impression = product.impressions.create(
+      customer_id: customer.id,
+      device_type: message[:device]
+    )
+    
+    if impression
+      trigger_success({:id => impression.id})
+    else
+      trigger_failure({:errors => impression.errors})
+    end
   end
 
   # Products
