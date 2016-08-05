@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804092612) do
+ActiveRecord::Schema.define(version: 20160805055242) do
 
   create_table "customers", force: :cascade do |t|
     t.string "sid",        limit: 255, null: false
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20160804092612) do
     t.string   "url",          limit: 255, null: false
     t.integer  "webmaster_id", limit: 4,   null: false
     t.datetime "created_at",               null: false
-    t.string   "sid",          limit: 255
+    t.string   "sid",          limit: 255, null: false
   end
 
   add_index "products", ["created_at"], name: "index_products_on_created_at", using: :btree
@@ -102,11 +102,13 @@ ActiveRecord::Schema.define(version: 20160804092612) do
     t.string   "postcode",               limit: 255
     t.string   "country",                limit: 255
     t.string   "phone",                  limit: 255
+    t.string   "sid",                    limit: 255
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["sid"], name: "index_users_on_sid", using: :btree
   add_index "users", ["website_url"], name: "index_users_on_website_url", using: :btree
 
 end

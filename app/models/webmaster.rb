@@ -1,6 +1,7 @@
 class Webmaster < User
 
-  include ReactionQueries
+  include SharedQueries
+  include SharedMethods
 
   has_many :reactions, :foreign_key => "webmaster_id"
   has_many :customers
@@ -8,6 +9,7 @@ class Webmaster < User
   has_many :impressions
   has_many :reactions
 
+  before_create :assign_sid 
   before_validation :sanitize_website_url
 
   default_scope { where('admin = ?', false) }

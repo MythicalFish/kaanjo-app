@@ -1,4 +1,4 @@
-module ReactionQueries
+module SharedQueries
   extend ActiveSupport::Concern
   included do
 

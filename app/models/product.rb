@@ -1,11 +1,12 @@
 class Product < ActiveRecord::Base
 
-  include ReactionQueries
+  include SharedQueries
+  include SharedMethods
 
   has_many :impressions
   has_many :reactions
   belongs_to :webmaster
-  before_create :generate_sid 
+  before_create :assign_sid 
 
   scope :by_date, -> { order('created_at DESC') }
 
@@ -41,15 +42,6 @@ class Product < ActiveRecord::Base
       order(  "count DESC").
       first
 
-  end
-
-  private
-
-  def generate_sid
-    begin
-      secure_id = SecureRandom.hex(12)
-    end while Product.where(:sid => secure_id).exists?
-    self.sid = secure_id
   end
 
 end

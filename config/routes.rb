@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   end
 
-  get '/:id', to: 'pages#show'
+  get '/setup', to: 'pages#show'
   
   
 end
