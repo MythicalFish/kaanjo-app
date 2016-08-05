@@ -7,7 +7,7 @@ class ReactionsApi < WebsocketRails::BaseController
   # Webmasters
 
   def find_webmaster
-    puts message
+
     @webmaster = Webmaster.find_by_sid(message[:key])
     
     if @webmaster
@@ -36,12 +36,13 @@ class ReactionsApi < WebsocketRails::BaseController
   # Products
 
   def find_product
+    
+    @webmaster = Webmaster.find(controller_store[:webmaster_id])
 
-    @product = webmaster.products.find_by_name(message[:product_name])
+    @product = @webmaster.products.find_by_name(message[:product])
 
     if @product
       trigger_success({
-        data: @product.reaction_totals
       })
     else
       trigger_failure({ errors: @product.errors })
