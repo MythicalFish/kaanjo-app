@@ -29,6 +29,22 @@ class Product < ActiveRecord::Base
       count
   end
 
+  def reaction_total type = nil
+    if type
+      self.reactions.where(reaction_type:type).length
+    else
+      self.reactions.length
+    end
+  end
+
+  def reaction_totals
+    r = {}
+    ReactionType.all.each do |type|
+      r[type.name] = self.reaction_total(type)
+    end
+    r
+  end
+
   def device_stats from, to
 
     select(   "products.*, 

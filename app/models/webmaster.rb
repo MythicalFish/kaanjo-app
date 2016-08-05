@@ -14,7 +14,7 @@ class Webmaster < User
 
   default_scope { where('admin = ?', false) }
 
-  protected
+  private
 
   def sanitize_website_url
     return if website_url

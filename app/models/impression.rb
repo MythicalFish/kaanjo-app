@@ -8,7 +8,7 @@ class Impression < ActiveRecord::Base
   validates :product_id, presence: true
   validates :customer_id, presence: true
 
-  before_create :attach_to_webmaster
+  before_create :associate_webmaster
 
   def self.total from, to
     if from && to
@@ -20,7 +20,7 @@ class Impression < ActiveRecord::Base
 
   private
 
-  def attach_to_webmaster
+  def associate_webmaster
     if self.product
       self.webmaster = self.product.webmaster
     else
