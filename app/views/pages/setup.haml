@@ -13,3 +13,13 @@
   %code.mb3
     = render partial:'shared/html'
   %p= "Don't forget to change the <b>data-product</b> attribute for each product - all of the data recorded will be associated with these values.".html_safe
+
+  %h3.mt4 Important!
+  %p 
+    Your settings currently allow for products to be 
+    %u automatically created 
+    based on the HTML you provide above.
+  %p If Kaanjo can't find a product with the name you provide (in the above example "Your awesome product"), it will create it for you.
+  Once you're satisfied that all of your products have been created, you should
+  %a{href:edit_user_registration_path} disable product creation
+  until you need to add more.

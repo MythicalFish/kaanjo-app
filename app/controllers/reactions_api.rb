@@ -73,13 +73,23 @@ class ReactionsApi < WebsocketRails::BaseController
   def find_product
     
     @product = webmaster.products.find_by_name(message[:product])
+    created = false
+
+    if !@product && webmaster.creation_enabled?
+      @product = webmaster.products.create({
+        name: message[:product],
+        url: message[:url]
+      })
+      created = true
+    end
 
     if @product
       sesh :product_id, @product.id
       trigger_success({
         data: {
           reactions: @product.reaction_totals
-        }
+        },
+        created: created
       })
     else
       trigger_failure({ errors: @product.errors })

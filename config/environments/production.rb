@@ -80,7 +80,7 @@ Rails.application.configure do
   # Enable websocket-rails to work
   config.middleware.delete Rack::Lock
 
-  config.action_mailer.default_url_options = { :host => 'reactions.vertaxe.com' }
+  config.action_mailer.default_url_options = { :host => 'kaanjo.co' }
 
 
 end

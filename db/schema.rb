@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160805075747) do
+ActiveRecord::Schema.define(version: 20160808082907) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "sid",              limit: 255,             null: false
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20160805075747) do
     t.string   "sid",                    limit: 255
     t.integer  "throttle_index_1",       limit: 4,   default: 0
     t.datetime "throttle_timer_1"
+    t.boolean  "creation_enabled",                   default: true
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
