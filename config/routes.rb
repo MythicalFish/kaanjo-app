@@ -19,10 +19,10 @@ Rails.application.routes.draw do
     get    'signup/cancel' => 'devise/registrations#cancel', :as => :cancel_user_registration 
     post   'login' => 'devise/sessions#create', :as => :user_session
     delete 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session
-    delete 'account' => 'devise/registrations#destroy'
+    delete 'signup' => 'devise/registrations#destroy'
     post   'signup' => 'devise/registrations#create', :as => :user_registration 
-    patch  'account' => 'devise/registrations#update'
-    put    'account' => 'devise/registrations#update'
+    patch  'signup' => 'devise/registrations#update'
+    put    'signup' => 'devise/registrations#update'
 
   end
 
