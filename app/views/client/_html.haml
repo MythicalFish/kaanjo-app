@@ -1,8 +1,39 @@
 - ReactionType.all.each do |r|
-  %button{type:'button', onclick:"Kaanjo.react(#{r.id})"}= r.name
+  %button{type:'button', onclick:"Kaanjo.react(#{r.id})"}
+    %img{src:"./emoticons/#{r.id}.svg"}
+    %label= r.name
 
 :scss
   #kaanjo {
+    background: #333;
+    padding: 15px;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    button {
+      cursor: pointer;
+      text-align: center;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: #999;
+      display: inline-block;
+      img {
+        -webkit-transition: all .3s;
+        transition: all .3s;
+        width: 50px;
+        display: inline-block;
+      }
+      label {
+        display: block;
+      }
+    }
+    button:hover {
+      img {
+        -ms-transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+      }
+    }
     button:not(:last-child) {
       margin-right: 10px;
     }

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reactions test page</title>
+  <link rel="stylesheet" href="./style.css">
+  <script>
+    (function() {
+    var v = document.createElement("script");
+    //v.src = "http://kaanjo.co/plugin.js";
+    v.src = "http://localhost:3000/plugin.js";
+    var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(v, s);
+    })();
+  </script>
+</head>
+<body>
+
+<h2>Test product</h2>
+<div id="kaanjo" data-product="Test product" data-key="d8202b0b3c1c2d3284ec181c"></div>
+
+</body>
+</html>

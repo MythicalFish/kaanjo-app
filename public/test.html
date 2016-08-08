@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reactions test page</title>
+  <link rel="stylesheet" href="./test/style.css">
+  <script>
+    (function() {
+    var v = document.createElement("script");
+    //v.src = "http://kaanjo.co/plugin.js";
+    v.src = "http://localhost:3000/plugin.js";
+    var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(v, s);
+    })();
+  </script>
+</head>
+<body>
+  <div class="container p2">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="p2 md-p3 bg-white">
+          <h2>Test product</h2>
+          <div class="bg-blue py4">
+            <div class="py4">
+            </div>
+          </div>
+          <div id="kaanjo" data-product="Test product" data-key="d8202b0b3c1c2d3284ec181c"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="p2 md-p3 bg-white">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat est sed sollicitudin aliquet. Donec quam urna, aliquam ullamcorper commodo vitae, blandit vel libero. Nam turpis nunc, tincidunt id velit vitae, feugiat convallis metus.
+          <ul class="mt3">
+            <li>Lorem ipsum dolor sit amet</li>
+            <li>Lorem ipsum dolor sit amet</li>
+            <li>Lorem ipsum dolor sit amet</li>
+            <li>Lorem ipsum dolor sit amet</li>
+            <li>Lorem ipsum dolor sit amet</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
