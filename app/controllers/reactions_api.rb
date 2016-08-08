@@ -105,9 +105,9 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def get_html
-    s = render_to_string('shared/_html', :layout => false, :locals => { :layout => nil })
-    success(s) if s
-    failure(s) unless s
+    html = render_to_string('client/_html.haml', :layout => false, :locals => { :x => nil })
+    success(html) if html
+    failure(html) unless html
   end
 
   private
