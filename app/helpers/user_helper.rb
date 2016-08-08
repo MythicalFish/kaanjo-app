@@ -13,11 +13,11 @@ module UserHelper
   end
 
   def admin?
-    !current_admin ? false : true
+    current_admin ? true : false
   end
 
   def webmaster?
-    !current_webmaster ? false : true
+    current_webmaster ? true : false
   end
 
 end  

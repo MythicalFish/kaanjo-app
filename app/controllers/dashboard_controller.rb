@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
   def show
     @title = 'Dashboard'
     if admin?
-      render 'dashboard/for_admin'
+      render 'dashboard/for_admin' and return
     elsif webmaster?
       w = current_webmaster
       f = from_date
