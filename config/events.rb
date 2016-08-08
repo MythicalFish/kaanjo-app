@@ -9,12 +9,12 @@ WebsocketRails::EventMap.describe do
 
   namespace :customer do
     subscribe :find, :to => ReactionsApi, :with_method => :find_customer
-    subscribe :create, :to => ReactionsApi, :with_method => :create_customer
     subscribe :impress, :to => ReactionsApi, :with_method => :create_impression
   end
 
   namespace :product do
     subscribe :find, :to => ReactionsApi, :with_method => :find_product
+    subscribe :get_html, :to => ReactionsApi, :with_method => :get_html
   end
   
 end

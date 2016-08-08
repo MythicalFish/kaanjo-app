@@ -10,7 +10,11 @@ class Customer < ActiveRecord::Base
   before_create :throttle_creation
 
   def reacted_to? product
-    reactions.where(product:product).any? ? true : false
+    reactions.find_by_product_id(product.id) ? true : false
+  end
+
+  def reaction_to product
+    reactions.find_by_product_id(product.id)
   end
 
   private

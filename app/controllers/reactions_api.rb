@@ -17,9 +17,9 @@ class ReactionsApi < WebsocketRails::BaseController
 
     if @webmaster
       sesh :webmaster_id, @webmaster.id
-      trigger_success(info("Found webmaster: #{@webmaster.website_name}"))
+      success("Found webmaster: #{@webmaster.website_name}")
     else
-      trigger_failure(info("Webmaster not found: #{@webmaster.website_name}"))
+      failure("Webmaster not found: #{@webmaster.website_name}")
     end
 
   end
@@ -41,12 +41,12 @@ class ReactionsApi < WebsocketRails::BaseController
 
     if @customer
       sesh :customer_id, @customer.id
-      trigger_success(info(
+      success(
         sid: @customer.sid,
         msg: msg
-      ))
+      )
     else
-      trigger_failure(info(@customer.errors))
+      failure(@customer.errors)
     end
 
   end
@@ -54,9 +54,9 @@ class ReactionsApi < WebsocketRails::BaseController
   def create_impression
 
     if customer.reacted_to? product
-      trigger_success(info({
-        :msg => "Customer already reacted to this product."
-      })) and return
+      success(
+        "Customer already reacted to this product."
+      ) and return
     end
 
     impression = product.impressions.create(
@@ -65,11 +65,9 @@ class ReactionsApi < WebsocketRails::BaseController
     )
     
     if impression
-      trigger_success(info({
-        :msg => "Created impression: #{impression.id}"
-      }))
+      success("Created impression: #{impression.id}")
     else
-      trigger_failure(info(impression.errors))
+      failure(impression.errors)
     end
   end
 
@@ -93,23 +91,28 @@ class ReactionsApi < WebsocketRails::BaseController
       
       sesh :product_id, @product.id
 
-      #####if @product.customer
-
-      trigger_success(info(
+      success(
         data: {
-          reactions: @product.reaction_totals
+          reactions: @product.reaction_totals,
+          customer_reaction: customer.reaction_to(@product)
         },
         msg: msg
-      ))
+      )
     else
-      trigger_failure(info(@product.errors))
+      failure(@product.errors)
     end
     
   end
 
+  def get_html
+    s = render_to_string('shared/_html', :layout => false, :locals => { :layout => nil })
+    success(s) if s
+    failure(s) unless s
+  end
+
   private
 
-  def info msg
+  def response msg
     if sesh[:test_mode]
       if msg.is_a?(String) or msg.is_a?(Array)
         {msg:msg}
@@ -117,6 +120,14 @@ class ReactionsApi < WebsocketRails::BaseController
         msg
       end
     end
+  end
+
+  def success msg
+    trigger_success(response(msg))
+  end
+
+  def failure msg
+    trigger_failure(response(msg))
   end
 
   def throttle_actions
@@ -131,7 +142,7 @@ class ReactionsApi < WebsocketRails::BaseController
     elsif time < customer.throttle_timer_1 && index_limit > customer.throttle_index_1
       throttle_increment
     else
-      trigger_failure(info({ errors: 'too many requests' }))
+      failure 'Too many requests'
     end
 
   end
