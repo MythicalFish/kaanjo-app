@@ -11,24 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808082907) do
+ActiveRecord::Schema.define(version: 20160808095213) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "sid",              limit: 255,             null: false
-    t.string   "ip",               limit: 255
-    t.string   "browser",          limit: 255
-    t.string   "device",           limit: 255
     t.string   "ip_address",       limit: 255
-    t.string   "location",         limit: 255
     t.integer  "throttle_index_1", limit: 4,   default: 0
     t.datetime "throttle_timer_1"
     t.integer  "webmaster_id",     limit: 4,               null: false
   end
 
-  add_index "customers", ["browser"], name: "index_customers_on_browser", using: :btree
-  add_index "customers", ["device"], name: "index_customers_on_device", using: :btree
   add_index "customers", ["ip_address"], name: "index_customers_on_ip_address", using: :btree
-  add_index "customers", ["location"], name: "index_customers_on_location", using: :btree
   add_index "customers", ["sid"], name: "index_customers_on_sid", using: :btree
   add_index "customers", ["webmaster_id"], name: "index_customers_on_webmaster_id", using: :btree
 

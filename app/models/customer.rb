@@ -9,6 +9,10 @@ class Customer < ActiveRecord::Base
   before_create :assign_sid
   before_create :throttle_creation
 
+  def reacted_to? product
+    reactions.where(product:product).any? ? true : false
+  end
+
   private
 
   def throttle_creation

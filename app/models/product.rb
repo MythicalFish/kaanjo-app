@@ -5,6 +5,7 @@ class Product < ActiveRecord::Base
 
   has_many :impressions
   has_many :reactions
+  has_many :customers, through: :impressions
   belongs_to :webmaster
   before_create :assign_sid 
 
