@@ -27,3 +27,5 @@
 
 /shared/*
 .sass-cache
+/shared/
+	
