@@ -4,9 +4,6 @@ class ReactionsApi < WebsocketRails::BaseController
   before_action :set_vars
 
   def initialize_session
-    set :webmaster_id, nil
-    set :product_id, nil
-    set :customer_id, nil
     set :test_mode, true
   end
 
@@ -27,7 +24,7 @@ class ReactionsApi < WebsocketRails::BaseController
     @webmaster = Webmaster.find_by_sid(message[:wid])
 
     if @webmaster
-      set :webmaster_id, @webmaster.id
+      set :webmaster, @webmaster
       msg "Webmaster found: #{@webmaster.sid}"
     else
       failure("Webmaster not found: #{@webmaster.website_name}")
@@ -38,6 +35,7 @@ class ReactionsApi < WebsocketRails::BaseController
   # Customers
 
   def find_customer
+
     @customer = Customer.find_by_sid(message[:cid])
 
     if !@customer
@@ -51,7 +49,7 @@ class ReactionsApi < WebsocketRails::BaseController
     end
 
     if @customer
-      set :customer_id, @customer.id
+      set :customer, @customer
     else
       failure(@customer.errors)
     end
@@ -59,8 +57,13 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def impress
+    
+    set :device, message[:device]
+    @reaction = @customer.reaction_to(@product)
+    set :reaction, @reaction
+    set :reaction_type, @reaction.type
 
-    if @customer.reacted_to? @product
+    if @reaction
       msg "Impression not created (customer already reacted)"
       return
     end
@@ -71,7 +74,6 @@ class ReactionsApi < WebsocketRails::BaseController
     )
     
     if impression
-      set :device, message[:device]
       msg "Impression created"
     else
       failure(impression.errors)
@@ -81,28 +83,28 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def react
 
-    reaction = @customer.reaction_to(@product)
-
-    if reaction
-      reaction.reaction_type_id = message[:id]
-      if reaction.save
+    if @reaction
+      @reaction.reaction_type_id = message[:id]
+      if @reaction.save
         success("Reaction updated")
       else
-        failure(reaction.errors)
+        failure(@reaction.errors)
       end
     else
 
-      reaction = Reaction.create(
+      @reaction = Reaction.create(
         reaction_type_id: message[:id],
         customer_id: @customer.id,
         product_id: @product.id,
         device_type: @device
       )
 
-      if reaction
+      set :reaction, @reaction
+
+      if @reaction
         success("Reaction created")
       else
-        failure(reaction.errors)
+        failure(@reaction.errors)
       end
 
     end
@@ -123,8 +125,9 @@ class ReactionsApi < WebsocketRails::BaseController
     else
       msg "Product found: #{@product.name}"
     end
+
     if @product
-      set :product_id, @product.id
+      set :product, @product
     else
       failure(@product.errors)
     end
@@ -132,7 +135,7 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def html
-    html = render_to_string('client/_html.haml', :layout => false, :locals => { :x => nil })
+    html = render_to_string('client/_html.haml', :layout => false, :locals => { :reaction_type => @reaction_type })
     success(html) if html
     failure(html) unless html
   end
@@ -158,8 +161,9 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def msg msg
-    @response = "" unless @response
-    @response << "#{msg}\n"
+    @response = {} unless @response
+    @response[:msg] = '' unless @response[:msg]
+    @response[:msg] << "#{msg}\n"
   end
 
   def throttle
@@ -200,10 +204,12 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def set_vars
-    @customer = Customer.find_by_id(set[:customer_id])
-    @webmaster = Webmaster.find_by_id(set[:webmaster_id])
-    @product = Product.find_by_id(set[:product_id])
-    @device = set[:device]
+    @customer =      set[:customer]
+    @webmaster =     set[:webmaster]
+    @product =       set[:product]
+    @device =        set[:device]
+    @reaction =      set[:reaction]
+    @reaction_type = set[:reaction_type]
   end
 
 end

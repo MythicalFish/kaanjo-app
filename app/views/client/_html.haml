@@ -1,5 +1,7 @@
+- @reaction_type = reaction_type
+
 - ReactionType.all.each do |r|
-  %button{type:'button', onclick:"Kaanjo.react(#{r.id})"}
+  %button{type:'button', onclick:"Kaanjo.react(#{r.id})", class:button_class(r)}
     %img{src:"./emoticons/#{r.id}.svg"}
     %label= r.name
 
@@ -36,5 +38,8 @@
     }
     button:not(:last-child) {
       margin-right: 10px;
+    }
+    button.selected {
+      opacity: 0.5;
     }
   }
