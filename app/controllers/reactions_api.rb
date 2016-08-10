@@ -1,10 +1,10 @@
 class ReactionsApi < WebsocketRails::BaseController
 
+  before_action :set_vars # <-- first!
   before_action :throttle
-  before_action :set_vars
 
   def initialize_session
-    set :test_mode, true
+    set(:test_mode, ENV['RACK_ENV'] == 'development' ? true : false)
   end
 
   def initialize_client
@@ -136,15 +136,15 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def html
     html = render_to_string('client/_html.haml', :layout => false, :locals => { :reaction_type => @reaction_type })
-    success(html) if html
-    failure(html) unless html
+    trigger_success(html) if html
+    failure unless html
   end
 
   private
 
   def response msg
     if set[:test_mode]
-      if msg.is_a?(String) or msg.is_a?(Array)
+      if msg.is_a?(String)
         {msg:msg}
       else
         msg
@@ -178,7 +178,7 @@ class ReactionsApi < WebsocketRails::BaseController
     elsif time < @customer.throttle_timer_1 && index_limit > @customer.throttle_index_1
       throttle_increment
     else
-      failure 'Too many requests'
+      failure # Too many requests
     end
 
   end

@@ -1,7 +1,7 @@
 - @reaction_type = reaction_type
 
 - ReactionType.all.each do |r|
-  %button{type:'button', onclick:"Kaanjo.react(#{r.id})", class:button_class(r)}
+  %button{type:'button', onclick:"Kaanjo.react(#{r.id})", class:button_class(r), id:"kaanjo-reaction#{r.id}"}
     %img{src:"./emoticons/#{r.id}.svg"}
     %label= r.name
 
@@ -12,21 +12,23 @@
     border-radius: 2px;
     -webkit-border-radius: 2px;
     button {
-      cursor: pointer;
-      text-align: center;
-      border: 0;
-      padding: 0;
-      background: transparent;
-      color: #999;
-      display: inline-block;
+      outline: none!important;
+      box-shadow: none!important;
+      cursor: pointer!important;
+      text-align: center!important;
+      border: 0!important;
+      padding: 0!important;
+      background: transparent!important;
+      color: #999!important;
+      display: inline-block!important;
       img {
         -webkit-transition: all .3s;
         transition: all .3s;
-        width: 50px;
-        display: inline-block;
+        width: 50px!important;
+        display: inline-block!important;
       }
       label {
-        display: block;
+        display: block!important;
       }
     }
     button:hover {
@@ -39,7 +41,7 @@
     button:not(:last-child) {
       margin-right: 10px;
     }
-    button.selected {
+    button.kaanjo-selected {
       opacity: 0.5;
     }
   }

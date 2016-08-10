@@ -199,22 +199,63 @@ var Kaanjo = {
     }
 
     Kaanjo.request('init', {
-      wid: Kaanjo.attributes['key'],
-      cid: Kaanjo.cookies.get('kaanjo_cid'),
+      wid: Kaanjo.attributes.key,
       pid: Kaanjo.attributes.product,
+      cid: Kaanjo.cookies.get('kaanjo_cid'),
       url: window.location.href,
       device: detectBrowser(navigator.userAgent).name
     }, function (success) {
-      console.log(success.msg);
+      Kaanjo.log('Kaanjo initialized');
+      Kaanjo.log(success.msg);
       if (success.cid) Kaanjo.cookies.set('kaanjo_cid', success.cid);
       Kaanjo.get_html();
     }, function (fail) {
-      console.log(fail.msg);
+      Kaanjo.log(fail.msg);
     });
+  },
+  react: function react(reaction_id) {
+    Kaanjo.request('react', {
+      id: reaction_id
+    }, function (success) {
+      Kaanjo.log(success.msg);
+      Kaanjo.select(reaction_id);
+    }, function (fail) {
+      Kaanjo.log(fail.msg);
+    });
+  },
+  select: function select(id) {
+    var buttons = document.getElementsByClassName('kaanjo-reaction');
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = buttons[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var button = _step.value;
+
+        button.classList.remove('kaanjo-selected');
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    e = document.getElementById('kaanjo-reaction' + id);
+    e.classList.add('kaanjo-selected');
   },
   get_html: function get_html() {
     Kaanjo.request('html', {}, function (html) {
-      Kaanjo.hook.innerHTML = html.msg;
+      Kaanjo.hook.innerHTML = html;
     });
   },
 
@@ -223,15 +264,6 @@ var Kaanjo = {
 
   request: function request(action, data, success, fail) {
     Kaanjo.socket.trigger(action, data, success, fail);
-  },
-  react: function react(reaction_id) {
-    Kaanjo.request('react', {
-      id: reaction_id
-    }, function (success) {
-      console.log(success.msg);
-    }, function (fail) {
-      console.log(fail.msg);
-    });
   },
   valid: function valid(hook) {
 
@@ -257,12 +289,14 @@ var Kaanjo = {
   attributes: {
     key: null,
     product: null
-  }
+  },
 
+  log: function log(msg) {
+    if (msg) console.log(msg);
+  }
 };
 
 Kaanjo.socket.on_open = function (data) {
-  console.log('Connection established: ' + data.connection_id);
   setTimeout(function () {
     Kaanjo.init();
   }, 500);
