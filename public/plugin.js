@@ -184,6 +184,10 @@ function detectBrowser(userAgentString) {
 'use strict';
 
 var Kaanjo = {
+
+  socket: new WebSocketRails('localhost:3000/websocket'),
+  //socket: new WebSocketRails('kaanjo.co/websocket'),
+
   init: function init() {
 
     Kaanjo.hook = document.getElementById("kaanjo");
@@ -194,72 +198,22 @@ var Kaanjo = {
       Kaanjo.attributes[attribute] = Kaanjo.hook.getAttribute('data-' + attribute);
     }
 
-    Kaanjo.webmaster.init(function () {
-      Kaanjo.customer.init(function () {
-        Kaanjo.product.init(function () {
-          Kaanjo.request('customer.impress', {
-            device: detectBrowser(navigator.userAgent).name
-          }, function (success) {
-            console.log(success.msg);
-            Kaanjo.get_html();
-          });
-        });
-      });
+    Kaanjo.request('init', {
+      wid: Kaanjo.attributes['key'],
+      cid: Kaanjo.cookies.get('kaanjo_cid'),
+      pid: Kaanjo.attributes.product,
+      url: window.location.href,
+      device: detectBrowser(navigator.userAgent).name
+    }, function (success) {
+      console.log(success.msg);
+      if (success.cid) Kaanjo.cookies.set('kaanjo_cid', success.cid);
+      Kaanjo.get_html();
+    }, function (fail) {
+      console.log(fail.msg);
     });
   },
-
-
-  webmaster: {
-    init: function init(cb) {
-      Kaanjo.request('webmaster.find', {
-        key: Kaanjo.attributes['key']
-      }, function (success) {
-        console.log(success.msg);
-        cb();
-      }, function (fail) {
-        console.log(fail.msg);
-      });
-    }
-  },
-
-  customer: {
-    init: function init(cb) {
-
-      params = { id: null };
-
-      Kaanjo.customer.id = Kaanjo.cookies.get('kaanjo_cid');
-      if (Kaanjo.customer.id) {
-        params.id = Kaanjo.customer.id;
-      }
-
-      Kaanjo.request('customer.find', params, function (success) {
-        Kaanjo.cookies.set('kaanjo_cid', success.sid);
-        Kaanjo.customer.id = success.sid;
-        console.log(success.msg);
-        cb();
-      }, function (fail) {
-        console.log(fail.msg);
-      });
-    }
-  },
-
-  product: {
-    init: function init(cb) {
-      Kaanjo.request('product.find', {
-        product: Kaanjo.attributes.product,
-        url: window.location.href
-      }, function (success) {
-        Kaanjo.product.data = success.data;
-        console.log(success.msg);
-        cb();
-      }, function (fail) {
-        console.log(fail.msg);
-      });
-    }
-  },
-
   get_html: function get_html() {
-    Kaanjo.request('product.get_html', {}, function (html) {
+    Kaanjo.request('html', {}, function (html) {
       Kaanjo.hook.innerHTML = html.msg;
     });
   },
@@ -267,16 +221,17 @@ var Kaanjo = {
 
   cookies: Cookies.noConflict(),
 
-  socket: new WebSocketRails('localhost:3000/websocket'),
-  //socket: new WebSocketRails('kaanjo.co/websocket'),
-
   request: function request(action, data, success, fail) {
     Kaanjo.socket.trigger(action, data, success, fail);
   },
   react: function react(reaction_id) {
-    Kaanjo.request('customer.react', {
+    Kaanjo.request('react', {
       id: reaction_id
-    }, function (success) {});
+    }, function (success) {
+      console.log(success.msg);
+    }, function (fail) {
+      console.log(fail.msg);
+    });
   },
   valid: function valid(hook) {
 

@@ -10,15 +10,25 @@ class ReactionsApi < WebsocketRails::BaseController
     set :test_mode, true
   end
 
+  def initialize_client
+
+    find_webmaster
+    find_customer
+    find_product
+    impress
+    success @response
+
+  end
+
   # Webmasters
 
   def find_webmaster
 
-    @webmaster = Webmaster.find_by_sid(message[:key])
+    @webmaster = Webmaster.find_by_sid(message[:wid])
 
     if @webmaster
       set :webmaster_id, @webmaster.id
-      success("Found webmaster: #{@webmaster.website_name}")
+      msg "Webmaster found: #{@webmaster.sid}"
     else
       failure("Webmaster not found: #{@webmaster.website_name}")
     end
@@ -28,24 +38,20 @@ class ReactionsApi < WebsocketRails::BaseController
   # Customers
 
   def find_customer
-
-    @customer = Customer.find_by_sid(message[:id])
+    @customer = Customer.find_by_sid(message[:cid])
 
     if !@customer
       @customer = Customer.create(
         webmaster: @webmaster
       )
-      msg = "Created customer: #{@customer.sid}"
+      @response[:cid] = @customer.sid
+      msg "Customer created: #{@customer.sid}"
     else
-      msg = "Found customer: #{@customer.sid}"
+      msg "Customer found: #{@customer.sid}"
     end
 
     if @customer
       set :customer_id, @customer.id
-      success(
-        sid: @customer.sid,
-        msg: msg
-      )
     else
       failure(@customer.errors)
     end
@@ -55,9 +61,8 @@ class ReactionsApi < WebsocketRails::BaseController
   def impress
 
     if @customer.reacted_to? @product
-      success(
-        "Customer already reacted to this product."
-      ) and return
+      msg "Impression not created (customer already reacted)"
+      return
     end
 
     impression = @product.impressions.create(
@@ -67,23 +72,39 @@ class ReactionsApi < WebsocketRails::BaseController
     
     if impression
       set :device, message[:device]
-      success("Created impression: #{impression.id}")
+      msg "Impression created"
     else
       failure(impression.errors)
     end
+
   end
 
   def react
-    reaction = Reaction.create(
-      reaction_type_id: message[:id],
-      customer: @customer,
-      product: @product,
-      device_type: @device
-    )
+
+    reaction = @customer.reaction_to(@product)
+
     if reaction
-      success("Created reaction: #{reaction.name}")
+      reaction.reaction_type_id = message[:id]
+      if reaction.save
+        success("Reaction updated")
+      else
+        failure(reaction.errors)
+      end
     else
-      failure(impression.errors)
+
+      reaction = Reaction.create(
+        reaction_type_id: message[:id],
+        customer_id: @customer.id,
+        product_id: @product.id,
+        device_type: @device
+      )
+
+      if reaction
+        success("Reaction created")
+      else
+        failure(reaction.errors)
+      end
+
     end
   end
 
@@ -91,35 +112,26 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_product
     
-    @product = @webmaster.products.find_by_name(message[:product])
+    @product = @webmaster.products.find_by_name(message[:pid])
 
     if !@product && @webmaster.creation_enabled?
       @product = @webmaster.products.create({
         name: message[:product],
         url: message[:url]
       })
-      msg = "Created product: #{@product.name}"
+      msg "Product created: #{@product.name}"
     else
-      msg = "Found product: #{@product.name}"
+      msg "Product found: #{@product.name}"
     end
     if @product
-      
       set :product_id, @product.id
-
-      success(
-        data: {
-          reactions: @product.reaction_totals,
-          customer_reaction: @customer.reaction_to(@product)
-        },
-        msg: msg
-      )
     else
       failure(@product.errors)
     end
     
   end
 
-  def get_html
+  def html
     html = render_to_string('client/_html.haml', :layout => false, :locals => { :x => nil })
     success(html) if html
     failure(html) unless html
@@ -143,6 +155,11 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def failure msg
     trigger_failure(response(msg))
+  end
+
+  def msg msg
+    @response = "" unless @response
+    @response << "#{msg}\n"
   end
 
   def throttle
