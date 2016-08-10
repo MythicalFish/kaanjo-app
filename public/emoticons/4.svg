@@ -1,1 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 5.8208332 5.8208335"><defs><linearGradient id="0" x1="488.2" y1="547.74" x2="488.11" y2="537.68" gradientUnits="userSpaceOnUse"><stop stop-color="#c9dfa5"/><stop offset="1" stop-color="#e6ffbd"/></linearGradient></defs><g transform="translate(0-291.18)"><g transform="matrix(.29032 0 0 .29032 2.065 208.71)"><circle r="5.5" cy="542.35" cx="488.27" fill="url(#0)" transform="matrix(1.49127 0 0 1.49127-725.23-514.71)"/><path d="m1.455 298.59c.476-1.323 2.476-1.323 2.91 0" fill="none" fill-rule="evenodd" stroke="#414141" stroke-linejoin="round" stroke-linecap="round" stroke-width=".503"/></g><g transform="translate(-4.785.127)" fill="#414141"><path d="m6.197 293.7c-.023 0-.045.009-.062.026-.035.034-.035.09 0 .125l.114.114-.114.114c-.035.034-.035.09 0 .125.035.034.09.034.125 0l.114-.114.114.114c.035.034.09.034.125 0 .035-.034.035-.09 0-.125l-.114-.114.114-.114c.035-.034.035-.09 0-.125-.017-.017-.04-.026-.062-.026-.023 0-.045.009-.062.026l-.114.114-.114-.114c-.017-.017-.04-.026-.062-.026"/><path d="m8.843 293.7c-.023 0-.045.009-.062.026-.035.034-.035.09 0 .125l.114.114-.114.114c-.035.034-.035.09 0 .125.035.034.09.034.125 0l.114-.114.114.114c.035.034.09.034.125 0 .035-.034.035-.09 0-.125l-.114-.114.114-.114c.035-.034.035-.09 0-.125-.017-.017-.04-.026-.062-.026-.023 0-.045.009-.062.026l-.114.114-.114-.114c-.017-.017-.04-.026-.062-.026"/></g></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-586 348 106 106"
+	 style="enable-background:new -586 348 106 106;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFDA6A;}
+	.st1{fill:#1A3A5E;}
+	.st2{fill:#DD4B75;}
+</style>
+<g id="FB-emojii-Freebies" sketch:type="MSPage">
+	<g id="sad" transform="translate(-347.000000, -347.000000)" sketch:type="MSArtboardGroup">
+		<g transform="translate(347.058824, 347.017544)" sketch:type="MSLayerGroup">
+			<g id="emojii" sketch:type="MSShapeGroup">
+				<ellipse id="body" class="st0" cx="-533.1" cy="401" rx="52.9" ry="52.9"/>
+			</g>
+		</g>
+	</g>
+</g>
+<g>
+	<rect x="-557.3" y="386.2" class="st1" width="48.5" height="43.2"/>
+	<rect x="-536" y="386.2" class="st2" width="5.3" height="43.2"/>
+	<rect x="-557.3" y="405.4" class="st2" width="48.5" height="5.3"/>
+	<path class="st2" d="M-532.6,386.3h-10.1c0,0-8.6-2.4-7.6-9.9c1.4-10.3,13.2-7,17.8,0L-532.6,386.3z M-536.1,377.3
+		c-1.7-3.1-7.9-5.8-10.5-1.3c-1.2,2.1,0.5,5.2,3.7,6.6c1.7,0.7,8,1.3,8,1.3S-534.9,379.5-536.1,377.3z"/>
+	<path class="st2" d="M-533.7,376.4c4.6-7,16.4-10.3,17.8,0c1,7.5-7.6,9.9-7.6,9.9h-10.1L-533.7,376.4z M-531.3,383.9
+		c0,0,6.3-0.6,8.1-1.3c3.2-1.3,4.9-4.5,3.7-6.6c-2.7-4.6-8.9-1.8-10.6,1.3C-531.4,379.5-531.3,383.9-531.3,383.9z"/>
+</g>
+</svg>
