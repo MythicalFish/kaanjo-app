@@ -82,6 +82,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { :host => 'kaanjo.co' }
 
+  config.site_url = 'kaanjo.co'
 
 end
 

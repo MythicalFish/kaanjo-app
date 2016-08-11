@@ -44,6 +44,8 @@ Rails.application.configure do
   # Enable websocket-rails to work
   config.middleware.delete Rack::Lock
 
+  config.site_url = 'localhost:3000'
+
 end
 
 ActiveRecordQueryTrace.enabled = true

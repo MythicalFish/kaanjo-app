@@ -11,8 +11,7 @@ module ClientHelper
   end
 
   def site_url
-    url = request.host
-    url << ':3000' if url == 'localhost'
+    Rails.configuration.site_url
   end
 
 end
