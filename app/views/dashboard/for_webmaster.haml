@@ -10,12 +10,15 @@
   .row.col-xs-12
     .col.col-md-6.center
       .md-mr1
-        .p2.md-p3.b1.b0-bottom
-          %h4.m0 Total impressions
-          .h2= @impression_total
+        .row.b1.b0-bottom
+          .col-md-6.p2.md-p3
+            %h4.m0 Total impressions
+            .h2= @impression_total
+          .col-md-6.p2.md-p3
+            %h4.m0 Total reactions
+            .h2= @reaction_total
         .p2.md-p3.lg-p4.bg-aqua.white
-          %h3.m0.upcase Total reactions
-          .h1= @reaction_total
+          .h1= "CTR: #{@total_ctr}"
         %table
           - @reaction_counts.each do |r|
             %tr
