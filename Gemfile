@@ -29,5 +29,6 @@ group :development do
   gem 'html2haml'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'active_record_query_trace'
 end
 

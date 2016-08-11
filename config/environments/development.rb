@@ -45,3 +45,5 @@ Rails.application.configure do
   config.middleware.delete Rack::Lock
 
 end
+
+ActiveRecordQueryTrace.enabled = true

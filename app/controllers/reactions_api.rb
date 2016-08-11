@@ -21,7 +21,7 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_webmaster
 
-    @webmaster = Webmaster.find_by_sid(message[:wid])
+    @webmaster = Webmaster.find_by_sid(message[:w_sid])
 
     if @webmaster
       set :webmaster, @webmaster
@@ -36,13 +36,13 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_customer
 
-    @customer = Customer.find_by_sid(message[:cid])
+    @customer = Customer.find_by_sid(message[:c_sid])
 
     if !@customer
       @customer = Customer.create(
         webmaster: @webmaster
       )
-      @response[:cid] = @customer.sid
+      @response[:c_sid] = @customer.sid
       msg "Customer created: #{@customer.sid}"
     else
       msg "Customer found: #{@customer.sid}"
@@ -61,7 +61,8 @@ class ReactionsApi < WebsocketRails::BaseController
     set :device, message[:device]
     @reaction = @customer.reaction_to(@product)
     set :reaction, @reaction
-    set :reaction_type, @reaction.type
+    @reaction_type = @reaction ? @reaction.type : nil
+    set :reaction_type, @reaction_type
 
     if @reaction
       msg "Impression not created (customer already reacted)"
@@ -114,11 +115,11 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_product
     
-    @product = @webmaster.products.find_by_name(message[:pid])
+    @product = @webmaster.products.find_by_name(message[:p_sid])
 
     if !@product && @webmaster.creation_enabled?
       @product = @webmaster.products.create({
-        name: message[:product],
+        name: message[:p_sid],
         url: message[:url]
       })
       msg "Product created: #{@product.name}"

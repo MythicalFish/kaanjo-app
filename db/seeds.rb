@@ -70,6 +70,7 @@ end
 ReactionType.create([
   { name: 'Like' },
   { name: 'Love' },
-  { name: 'Meh' },
-  { name: 'Hate' }
+  { name: 'Happy owner' },
+  { name: 'Nice gift' },
+  { name: 'So-so' }
 ])
