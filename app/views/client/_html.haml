@@ -21,21 +21,50 @@
       background: transparent!important;
       color: #999!important;
       display: inline-block!important;
+      position: relative!important;
       img {
-        -webkit-transition: all .3s;
-        transition: all .3s;
-        width: 50px!important;
+        -webkit-transition: all .2s;
+        transition: all .2s;
+        width: 100%!important;
+        max-width: 40px!important;
         display: inline-block!important;
       }
       label {
         display: block!important;
+        left: 50%;
+        position: absolute;
+        text-align: center;
+        bottom: 100%;
+        transform: translateX(-50%);
+        background-color: rgba(10,10,10,.95) !important;
+        color: #ddd !important;
+        border: 1px solid #444 !important;
+        border-radius: 10px;
+        box-sizing: border-box;
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 20px;
+        opacity: 0;
+        overflow: hidden;
+        padding: 0 8px;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        transition: all .05s;
+        -webkit-transition: all .05s;
+        white-space: -moz-nowrap;
+        white-space: -o-nowrap;
+        white-space: nowrap;
       }
     }
     button:hover {
       img {
-        -ms-transform: scale(1.2);
-        -webkit-transform: scale(1.2);
-        transform: scale(1.2);
+        -ms-transform: scale(1.2) translate(0,-10%);
+        -webkit-transform: scale(1.2) translate(0,-10%);
+        transform: scale(1.2) translate(0,-10%);
+      }
+      label {
+        opacity: 1;
+        bottom: 115%;
       }
     }
     button:not(:last-child) {

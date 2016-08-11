@@ -1,26 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-586 348 106 106"
-	 style="enable-background:new -586 348 106 106;" xml:space="preserve">
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="-1171.9 696 105.8 105.8" style="enable-background:new -1171.9 696 105.8 105.8;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#FFDA6A;}
 </style>
-<title>sad</title>
-<desc>Created with Sketch.</desc>
-<g id="FB-emojii-Freebies" sketch:type="MSPage">
-	<g id="sad" transform="translate(-347.000000, -347.000000)" sketch:type="MSArtboardGroup">
-		<g transform="translate(347.058824, 347.017544)" sketch:type="MSLayerGroup">
-			<g id="emojii" sketch:type="MSShapeGroup">
-				<ellipse id="body" class="st0" cx="-533.1" cy="400.9" rx="52.9" ry="52.9"/>
-				<g id="expression" transform="translate(17.647059, 36.438596)">
-					<path d="M-573.8,364.9c3.6,0,6.5-3.2,6.5-7.1c0-3.9-2.9-7.1-6.5-7.1s-6.5,3.2-6.5,7.1C-580.3,361.7-577.4,364.9-573.8,364.9z
-						 M-527.9,364.9c3.6,0,6.5-3.2,6.5-7.1c0-3.9-2.9-7.1-6.5-7.1s-6.5,3.2-6.5,7.1C-534.4,361.7-531.5,364.9-527.9,364.9z
-						 M-534.7,384.7c-3.4-5.7-9.4-9.2-16.1-9.2c-6.7,0-12.9,3.6-16.2,9.2c-0.7,1.1-0.3,2.6,0.8,3.2c1.1,0.7,2.6,0.3,3.2-0.8
-						c2.5-4.2,7.1-6.9,12.2-6.9c5,0,9.6,2.6,12.1,6.9c0.7,1.1,2.1,1.5,3.2,0.8C-534.4,387.2-534.1,385.8-534.7,384.7z"/>
-				</g>
-			</g>
-		</g>
-	</g>
-</g>
+<ellipse id="body" class="st0" cx="-1119" cy="748.9" rx="52.9" ry="52.9"/>
+<path d="M-1142.1,749.4c3.6,0,6.5-3.2,6.5-7.1c0-3.9-2.9-7.1-6.5-7.1s-6.5,3.2-6.5,7.1S-1145.7,749.4-1142.1,749.4z M-1096.2,749.4
+	c3.6,0,6.5-3.2,6.5-7.1c0-3.9-2.9-7.1-6.5-7.1s-6.5,3.2-6.5,7.1S-1099.8,749.4-1096.2,749.4z M-1103,769.2
+	c-3.4-5.7-9.4-9.2-16.1-9.2s-12.9,3.6-16.2,9.2c-0.7,1.1-0.3,2.6,0.8,3.2c1.1,0.7,2.6,0.3,3.2-0.8c2.5-4.2,7.1-6.9,12.2-6.9
+	c5,0,9.6,2.6,12.1,6.9c0.7,1.1,2.1,1.5,3.2,0.8C-1102.7,771.7-1102.4,770.3-1103,769.2z"/>
 </svg>
