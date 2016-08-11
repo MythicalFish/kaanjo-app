@@ -1,0 +1,4 @@
+#kaanjo-status
+  %img.kaanjo-status-icon{src:emoticon_url(@reaction_type)}
+  - count = @product.reaction_total @reaction_type
+  = "You and #{count} others feel this way."

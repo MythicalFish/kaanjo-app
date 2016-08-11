@@ -206,8 +206,8 @@ var Kaanjo = {
       device: detectBrowser(navigator.userAgent).name
     }, function (success) {
       Kaanjo.log('Kaanjo initialized');
-      Kaanjo.log(success.msg);
-      if (success.cid) Kaanjo.cookies.set('kaanjo_cid', success.cid);
+      if (success.msg) Kaanjo.log(success.msg);
+      if (success.c_sid) Kaanjo.cookies.set('kaanjo_cid', success.c_sid);
       Kaanjo.get_html();
     }, function (fail) {
       Kaanjo.log(fail.msg);

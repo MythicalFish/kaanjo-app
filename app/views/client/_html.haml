@@ -1,14 +1,43 @@
+- @product = product
 - @reaction_type = reaction_type
+
+#kaanjo-title
+  How does this item make you feel?
 
 - ReactionType.all.each do |r|
   %button{type:'button', onclick:"Kaanjo.react(#{r.id})", class:button_class(r), id:"kaanjo-reaction#{r.id}"}
-    %img{src:"./emoticons/#{r.id}.svg"}
-    %label= r.name
+    %img{src:emoticon_url(r)}
+    %label
+      .kaanjo-bubble= r.name
+
+- if @reaction_type
+  = render partial: 'client/status'
 
 :scss
+  #kaanjo-title {
+    font-size: 18px;
+    color: #444;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  #kaanjo-status {
+    margin-top: 10px;
+    color: #444!important;
+    line-height: 1!important;
+    .kaanjo-status-icon {
+      display: inline-block!important;
+      width: 18px!important;
+      margin-right: 4px!important;
+      position: relative!important;
+      top: 3px!important;
+    }
+  }
   #kaanjo {
-    background: #333;
-    padding: 15px;
+    margin-top: 30px;
+    text-align: center!important;
+    background: #FFF;
+    border: 1px solid #DDD;
+    padding: 20px;
     border-radius: 2px;
     -webkit-border-radius: 2px;
     button {
@@ -22,19 +51,31 @@
       color: #999!important;
       display: inline-block!important;
       position: relative!important;
+      line-height: 0!important;
+      -webkit-transition: all .2s;
+      transition: all .2s;
       img {
-        -webkit-transition: all .2s;
-        transition: all .2s;
         width: 100%!important;
         max-width: 40px!important;
         display: inline-block!important;
       }
       label {
+        display: none!important;
+        position: absolute!important;
+        top: -70%!important;
+        right: 0!important;
+        bottom: 0!important;
+        left: 0!important;
+        cursor: pointer!important;
+        margin: 0!important;
+        padding: 0!important;
+      }
+      .kaanjo-bubble {
         display: block!important;
-        left: 50%;
         position: absolute;
+        left: 50%;
+        top: 0;
         text-align: center;
-        bottom: 100%;
         transform: translateX(-50%);
         background-color: rgba(10,10,10,.95) !important;
         color: #ddd !important;
@@ -49,22 +90,20 @@
         padding: 0 8px;
         text-decoration: none;
         text-overflow: ellipsis;
-        transition: all .05s;
-        -webkit-transition: all .05s;
         white-space: -moz-nowrap;
         white-space: -o-nowrap;
         white-space: nowrap;
       }
     }
-    button:hover {
-      img {
-        -ms-transform: scale(1.2) translate(0,-10%);
-        -webkit-transform: scale(1.2) translate(0,-10%);
-        transform: scale(1.2) translate(0,-10%);
-      }
+    button:not(.kaanjo-selected):hover {
+      -ms-transform: scale(1.2) translate(0,-10%);
+      -webkit-transform: scale(1.2) translate(0,-10%);
+      transform: scale(1.2) translate(0,-10%);
       label {
+        display: block!important;
+      }
+      .kaanjo-bubble {
         opacity: 1;
-        bottom: 115%;
       }
     }
     button:not(:last-child) {

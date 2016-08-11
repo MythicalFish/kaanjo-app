@@ -59,10 +59,7 @@ class ReactionsApi < WebsocketRails::BaseController
   def impress
     
     set :device, message[:device]
-    @reaction = @customer.reaction_to(@product)
-    set :reaction, @reaction
-    @reaction_type = @reaction ? @reaction.type : nil
-    set :reaction_type, @reaction_type
+    set_reaction @customer.reaction_to(@product)
 
     if @reaction
       msg "Impression not created (customer already reacted)"
@@ -87,6 +84,7 @@ class ReactionsApi < WebsocketRails::BaseController
     if @reaction
       @reaction.reaction_type_id = message[:id]
       if @reaction.save
+        set_reaction @reaction
         success("Reaction updated")
       else
         failure(@reaction.errors)
@@ -100,7 +98,7 @@ class ReactionsApi < WebsocketRails::BaseController
         device_type: @device
       )
 
-      set :reaction, @reaction
+      set_reaction @reaction
 
       if @reaction
         success("Reaction created")
@@ -136,7 +134,7 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def html
-    html = render_to_string('client/_html.haml', :layout => false, :locals => { :reaction_type => @reaction_type })
+    html = render_to_string('client/_html.haml', :layout => false, :locals => { :reaction_type => @reaction_type, :product => @product })
     trigger_success(html) if html
     failure unless html
   end
@@ -211,6 +209,13 @@ class ReactionsApi < WebsocketRails::BaseController
     @device =        set[:device]
     @reaction =      set[:reaction]
     @reaction_type = set[:reaction_type]
+  end
+
+  def set_reaction reaction
+    @reaction = reaction
+    set :reaction, @reaction
+    @reaction_type = @reaction ? @reaction.type : nil
+    set :reaction_type, @reaction_type
   end
 
 end
