@@ -10,8 +10,9 @@
     %label
       .kaanjo-bubble= r.name
 
-- if @reaction_type
-  = render partial: 'client/status'
+#kaanjo-status
+  - if @reaction_type
+    = render partial: 'client/status', locals: { reaction_type: @reaction_type, product: @product }
 
 :scss
   #kaanjo-title {

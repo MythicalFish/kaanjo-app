@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808095213) do
+ActiveRecord::Schema.define(version: 20160811111024) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "sid",              limit: 255,             null: false
@@ -53,7 +53,9 @@ ActiveRecord::Schema.define(version: 20160808095213) do
   add_index "products", ["webmaster_id"], name: "index_products_on_webmaster_id", using: :btree
 
   create_table "reaction_types", force: :cascade do |t|
-    t.string "name", limit: 255, null: false
+    t.string "name",          limit: 255,                                                            null: false
+    t.string "message",       limit: 255, default: "Thanks! You and {number} others feel this way."
+    t.string "message_first", limit: 255, default: "Thanks! You are the first to feel this way."
   end
 
   create_table "reactions", force: :cascade do |t|

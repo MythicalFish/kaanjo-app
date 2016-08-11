@@ -133,8 +133,14 @@ class ReactionsApi < WebsocketRails::BaseController
     
   end
 
-  def html
-    html = render_to_string('client/_html.haml', :layout => false, :locals => { :reaction_type => @reaction_type, :product => @product })
+  def get_buttons
+    html = render_to_string('client/_buttons.haml', :layout => false, :locals => { :reaction_type => @reaction_type, :product => @product })
+    trigger_success(html) if html
+    failure unless html
+  end
+
+  def get_status
+    html = render_to_string('client/_status.haml', :layout => false, :locals => { :reaction_type => @reaction_type, :product => @product })
     trigger_success(html) if html
     failure unless html
   end

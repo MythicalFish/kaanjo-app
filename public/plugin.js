@@ -208,7 +208,7 @@ var Kaanjo = {
       Kaanjo.log('Kaanjo initialized');
       if (success.msg) Kaanjo.log(success.msg);
       if (success.c_sid) Kaanjo.cookies.set('kaanjo_cid', success.c_sid);
-      Kaanjo.get_html();
+      Kaanjo.render_buttons();
     }, function (fail) {
       Kaanjo.log(fail.msg);
     });
@@ -252,10 +252,16 @@ var Kaanjo = {
 
     e = document.getElementById('kaanjo-reaction' + id);
     e.classList.add('kaanjo-selected');
+    Kaanjo.render_status();
   },
-  get_html: function get_html() {
-    Kaanjo.request('html', {}, function (html) {
+  render_buttons: function render_buttons() {
+    Kaanjo.request('get_buttons', {}, function (html) {
       Kaanjo.hook.innerHTML = html;
+    });
+  },
+  render_status: function render_status() {
+    Kaanjo.request('get_status', {}, function (html) {
+      document.getElementById('kaanjo-status').innerHTML = html;
     });
   },
 
