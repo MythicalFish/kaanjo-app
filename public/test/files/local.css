@@ -1,0 +1,20 @@
+.saved-address .remove_shipping_address {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+.saved-address .address-action-btn a {
+	display: block;
+}
+/* wishlist */
+.wishlist-content .wishlistpage_header {
+	padding: 0 0 40px;
+}
+.wishlist-content  .wishlistitems .wishlistsharing {
+	top: 43px;
+}
+
+.hotspots .innercard .add-to-cart span {
+	font-size: 15px;
+	line-height: 16px;
+}
