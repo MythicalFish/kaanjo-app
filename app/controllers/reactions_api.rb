@@ -8,7 +8,6 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def initialize_client
-    byebug
     find_webmaster
     find_customer
     find_product
