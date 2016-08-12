@@ -8,6 +8,7 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def initialize_client
+    byebug
     find_webmaster
     find_customer
     find_product
@@ -159,11 +160,11 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def success msg
-    trigger_success(response(msg))
+    trigger_success(msg)
   end
 
   def failure msg
-    trigger_failure(response(msg))
+    trigger_failure(msg)
   end
 
   def msg msg
