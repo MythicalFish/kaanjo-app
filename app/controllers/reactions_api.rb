@@ -8,12 +8,77 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def initialize_client
-
     find_webmaster
     find_customer
     find_product
     impress
     success @response
+  end
+
+  def react
+
+    if @reaction
+      @reaction.reaction_type_id = message[:id]
+      if @reaction.save
+        set_reaction @reaction
+        success("Reaction updated")
+      else
+        failure(@reaction.errors)
+      end
+    else
+
+      @reaction = Reaction.create(
+        reaction_type_id: message[:id],
+        customer_id: @customer.id,
+        product_id: @product.id,
+        device_type: @device
+      )
+
+      set_reaction @reaction
+
+      if @reaction
+        success("Reaction created")
+      else
+        failure(@reaction.errors)
+      end
+
+    end
+  end
+
+  def get_buttons
+    html = render_to_string('client/_buttons.haml', :layout => false, :locals => { :reaction_type => @reaction_type, :product => @product })
+    trigger_success(html) if html
+    failure unless html
+  end
+
+  def get_status
+    html = render_to_string('client/_status.haml', :layout => false, :locals => { :reaction_type => @reaction_type, :product => @product })
+    trigger_success(html) if html
+    failure unless html
+  end
+
+  private
+
+  def impress
+    
+    set :device, message[:device]
+    set_reaction @customer.reaction_to(@product)
+
+    if @reaction
+      msg "Impression not created (customer already reacted)"
+      return
+    end
+
+    impression = @product.impressions.create(
+      customer_id: @customer.id,
+      device_type: message[:device]
+    )
+    
+    if impression
+      msg "Impression created"
+    else
+      failure(impression.errors)
+    end
 
   end
 
@@ -56,59 +121,6 @@ class ReactionsApi < WebsocketRails::BaseController
 
   end
 
-  def impress
-    
-    set :device, message[:device]
-    set_reaction @customer.reaction_to(@product)
-
-    if @reaction
-      msg "Impression not created (customer already reacted)"
-      return
-    end
-
-    impression = @product.impressions.create(
-      customer_id: @customer.id,
-      device_type: message[:device]
-    )
-    
-    if impression
-      msg "Impression created"
-    else
-      failure(impression.errors)
-    end
-
-  end
-
-  def react
-
-    if @reaction
-      @reaction.reaction_type_id = message[:id]
-      if @reaction.save
-        set_reaction @reaction
-        success("Reaction updated")
-      else
-        failure(@reaction.errors)
-      end
-    else
-
-      @reaction = Reaction.create(
-        reaction_type_id: message[:id],
-        customer_id: @customer.id,
-        product_id: @product.id,
-        device_type: @device
-      )
-
-      set_reaction @reaction
-
-      if @reaction
-        success("Reaction created")
-      else
-        failure(@reaction.errors)
-      end
-
-    end
-  end
-
   # Products
 
   def find_product
@@ -133,19 +145,8 @@ class ReactionsApi < WebsocketRails::BaseController
     
   end
 
-  def get_buttons
-    html = render_to_string('client/_buttons.haml', :layout => false, :locals => { :reaction_type => @reaction_type, :product => @product })
-    trigger_success(html) if html
-    failure unless html
-  end
 
-  def get_status
-    html = render_to_string('client/_status.haml', :layout => false, :locals => { :reaction_type => @reaction_type, :product => @product })
-    trigger_success(html) if html
-    failure unless html
-  end
 
-  private
 
   def response msg
     if set[:test_mode]
@@ -202,9 +203,9 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def set k = nil, v = nil
     if k && v
-      controller_store[k] = v
+      connection_store[k] = v
     else
-      controller_store
+      connection_store
     end
   end
 
