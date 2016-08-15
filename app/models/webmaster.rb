@@ -10,16 +10,28 @@ class Webmaster < User
   has_many :reactions
 
   before_create :assign_sid 
-  before_validation :sanitize_website_url
+  before_save :sanitize_website_url
 
   default_scope { where('admin = ?', false) }
 
   private
 
   def sanitize_website_url
-    return if website_url
+    
+    if website_url.include?('http://')
+      protocol = 'http://'
+    elsif website_url.include?('https://')
+      protocol = 'https://'
+    else
+      protocol = 'http://'
+      url = "http://#{website_url}"
+      self.website_url = url
+    end
+
     uri = URI.parse(self.website_url)
-    self.website_url = uri.host.gsub('\Awww\.', '')
+    url = protocol << uri.host.sub('www.', '')
+    self.website_url = url
+
   end
 
 end
