@@ -15,6 +15,9 @@
         = f.label :last_name
         = f.text_field :last_name
     .mb3
+      = f.label :title
+      = f.text_field :title
+    .mb3
       = f.label :email
       = f.email_field :email
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
@@ -27,6 +30,27 @@
       .mb3
         = f.label :website_url
         = f.text_field :website_url
+
+    - if webmaster?
+      .mb3
+        = f.label :address1
+        = f.text_field :address1
+      .mb3
+        = f.label :address2
+        = f.text_field :address2
+      .mb3
+        = f.label :city
+        = f.text_field :city
+      .mb3
+        = f.label :postcode
+        = f.text_field :postcode
+      .mb3
+        = f.label :country
+        = f.text_field :country
+      .mb3
+        = f.label :phone
+        = f.text_field :phone
+
     .mb4.p3.bg-gray-lightest
       .mb3
         %b Change password
