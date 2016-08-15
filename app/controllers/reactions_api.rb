@@ -4,7 +4,7 @@ class ReactionsApi < WebsocketRails::BaseController
   before_action :throttle
 
   def initialize_session
-    set(:test_mode, ENV['RACK_ENV'] == 'development' ? true : false)
+    set(:test_mode, test_mode?)
   end
 
   def initialize_client
@@ -57,8 +57,6 @@ class ReactionsApi < WebsocketRails::BaseController
     failure unless html
   end
 
-  private
-
   def impress
     
     set :device, message[:device]
@@ -88,9 +86,8 @@ class ReactionsApi < WebsocketRails::BaseController
 
     @webmaster = Webmaster.find_by_sid(message[:w_sid])
 
-    if @webmaster
+    if webmaster_valid?
       set :webmaster, @webmaster
-      msg "Webmaster found: #{@webmaster.sid}"
     else
       failure("Webmaster not found: #{@webmaster.website_name}")
     end
@@ -145,11 +142,11 @@ class ReactionsApi < WebsocketRails::BaseController
     
   end
 
-
+  private
 
 
   def response msg
-    if set[:test_mode]
+    if test_mode?
       if msg.is_a?(String)
         {msg:msg}
       else
@@ -162,7 +159,7 @@ class ReactionsApi < WebsocketRails::BaseController
     trigger_success(msg)
   end
 
-  def failure msg
+  def failure msg = nil
     trigger_failure(msg)
   end
 
@@ -223,6 +220,28 @@ class ReactionsApi < WebsocketRails::BaseController
     set :reaction, @reaction
     @reaction_type = @reaction ? @reaction.type : nil
     set :reaction_type, @reaction_type
+  end
+
+  def webmaster_valid?
+    if @webmaster.nil?
+      failure # Webmaster not found
+    elsif request.env['HTTP_ORIGIN'] != @webmaster.website_url
+      failure # URLs must match
+    else
+      msg "Webmaster validated: #{@webmaster.website_url}"
+      return true
+    end
+  end
+
+  def test_mode?
+    if \
+      set[:test_mode] == true ||\
+      ENV['RACK_ENV'] == 'development' ||\
+      request.env['HTTP_ORIGIN'] == 'http://kaanjo.co'
+        return true
+    else
+      return false
+    end
   end
 
 end

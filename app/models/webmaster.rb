@@ -30,6 +30,7 @@ class Webmaster < User
 
     uri = URI.parse(self.website_url)
     url = protocol << uri.host.sub('www.', '')
+    url = url << ':3000' if url.include?('localhost')
     self.website_url = url
 
   end
