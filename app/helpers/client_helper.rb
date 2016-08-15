@@ -7,7 +7,7 @@ module ClientHelper
   end
 
   def emoticon_url reaction_type
-    "http://#{site_url}/emoticons/#{reaction_type.id}.svg"
+    "http://#{site_url}/images/emoticons/#{reaction_type.id}.svg"
   end
 
   def site_url
