@@ -91,7 +91,7 @@ Rails.application.configure do
     :enable_starttls_auto => true
   }
 
-  config.site_url = 'kaanjo.co'
+  config.site_url = 'dashboard.kaanjo.co'
 
 end
 
