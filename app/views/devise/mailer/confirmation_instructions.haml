@@ -1,4 +1,26 @@
-%p
-  Welcome #{@email}!
-%p You can confirm your account email through the link below:
-%p= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token)
+- url = confirmation_url(@resource,confirmation_token:@token)
+
+%p 
+  Hi #{@resource.first_name},
+  %br
+  Welcome and thanks for signing up at Kaanjo.
+  %br
+  Please click on the following link to confirm your account:
+
+%p 
+  %a{href:url} Confirm your account
+
+%p 
+  Or, paste this link into your browser: 
+  %br
+  = url
+
+%p 
+  So then, you can access your dashboard and get started with Kaanjo. 
+  %br  
+  If you need help with anything, want to share your feedback or report bugs, feel free to can contact us at support@kaanjo.com.
+
+%p 
+  Cheers,
+  %br
+  %b The Kaanjo team
