@@ -37,6 +37,11 @@ Webmaster.create([
   { email:'webmaster20@site20.com', password:'test1234',     website_url: 'http://site20.com',            website_name: 'Site 20', first_name: 'Webmaster',   last_name: 'Twenty' }
 ])
 
+User.all.each do |u|
+  u.confirmed_at = Time.now
+  u.save
+end
+
 CUSTOMER_IDS = [123,456,789,111,222,333]
 
 Webmaster.all.each do |w|
