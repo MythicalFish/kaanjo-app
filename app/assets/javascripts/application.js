@@ -18,5 +18,6 @@
 
 //= require app
 //= require datepicker
+//= require flash
 //= require vendor/jquery-date-range-picker/jquery.daterangepicker
 
