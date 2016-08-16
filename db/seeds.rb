@@ -39,7 +39,7 @@ Webmaster.create([
 
 User.all.each do |u|
   u.confirmed_at = Time.now
-  u.save
+  u.save(validate:false)
 end
 
 CUSTOMER_IDS = [123,456,789,111,222,333]
