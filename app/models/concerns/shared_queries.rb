@@ -4,10 +4,15 @@ module SharedQueries
 
     def self.with_counts(opts = {from:nil, to:nil, order: 'impression_count', direction:'DESC'})
 
-      group_model = 'products'
-      group_model = 'users' if self.model_name.collection == 'webmasters'
+      if self.model_name.collection == 'webmasters'
+        table = 'users' 
+        foreign_key = 'webmaster_id'
+      else
+        table = 'products'
+        foreign_key = 'product_id'
+      end
 
-      query = "#{group_model}.*" <<
+      query = "#{table}.*" <<
         ",COUNT(distinct impressions.id) AS impression_count" <<
         ",COUNT(distinct reactions.id) AS reaction_total"
 
@@ -21,13 +26,14 @@ module SharedQueries
       end
       
       select(query).
-        joins(:reactions).
-        joins(:impressions).
-        group("#{group_model}.id").
+        joins("LEFT OUTER JOIN reactions ON #{table}.id = reactions.#{foreign_key}").
+        joins("LEFT OUTER JOIN impressions ON #{table}.id = impressions.#{foreign_key}").
         where(
-          "reactions.created_at" => opts[:from]..opts[:to],
-          "impressions.created_at" => opts[:from]..opts[:to]
-        ).order("#{opts[:order]} #{opts[:direction]}")
+          "(reactions.created_at BETWEEN '#{opts[:from]}' AND '#{opts[:to]}')" <<
+          " AND (impressions.created_at BETWEEN '#{opts[:from]}' AND '#{opts[:to]}')"
+        ).
+        group("#{table}.id").
+        order("#{opts[:order]} #{opts[:direction]}")
 
     end
 

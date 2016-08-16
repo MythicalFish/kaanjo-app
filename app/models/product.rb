@@ -30,7 +30,7 @@ class Product < ActiveRecord::Base
       count
   end
 
-  def reaction_total type = nil
+  def get_reaction_total type = nil
     if type
       self.reactions.where(reaction_type:type).length
     else
@@ -38,10 +38,10 @@ class Product < ActiveRecord::Base
     end
   end
 
-  def reaction_totals
+  def get_reaction_totals
     r = {}
     ReactionType.all.each do |type|
-      r[type.name] = self.reaction_total(type)
+      r[type.name] = self.get_reaction_total(type)
     end
     r
   end
