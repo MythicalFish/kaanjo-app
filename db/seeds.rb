@@ -15,7 +15,7 @@ a = Admin.new({ email:'adrien_lepert@yahoo.fr', password:'test1234', first_name:
 a.save!(validate:false)
 
 Webmaster.create([
-  { email:'webmaster1@site1.com', password:'test1234',       website_url: 'http://site1.com',             website_name: 'Site 1', first_name: 'Webmaster',   last_name: 'One' },
+  { email:'adidas@test.com', password:'test1234', website_url: 'http://localhost:3000', website_name: 'Adidas', first_name: 'Adidas', last_name: 'Test', sid: '7a9fddb8909b897e3bd07dea' },
   { email:'jake@demo-shop.vertaxe.com', password:'test1234', website_url: 'http://demo-shop.vertaxe.com', website_name: 'Demo Shop', first_name: 'Jake',        last_name: 'Broughton' },
   { email:'jake@localhost:8000', password:'test1234',        website_url: 'http://localhost:8000',        website_name: 'localhost', first_name: 'Jake',        last_name: 'Broughton' },
   { email:'webmaster4@site4.com', password:'test1234',       website_url: 'http://site4.com',             website_name: 'Site 4', first_name: 'Webmaster',   last_name: 'Four' },
