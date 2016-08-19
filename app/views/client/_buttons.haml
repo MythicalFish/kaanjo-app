@@ -1,8 +1,11 @@
 - @product = product
 - @reaction_type = reaction_type
 
-%a#kaanjo-info{href:'http://kaanjo.co',title:'Powered by Kaanjo',target:'_blank'}
+#kaanjo-info
   %img{src:static_asset_url('info.svg')}
+  #kaanjo-info-bubble
+    Powered by 
+    %a{href:'http://kaanjo.co',target:'_blank'} Kaanjo
 
 #kaanjo-title
   How does this item make you feel?

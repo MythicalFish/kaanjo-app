@@ -29,6 +29,35 @@
       -webkit-transform: scale(1.2) translate(0,-10%);
       transform: scale(1.2) translate(0,-10%);
     }
+    #kaanjo-info-bubble {
+      opacity: 1!important;
+      -ms-transform: scale(1);
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+  }
+  #kaanjo-info-bubble {
+    -ms-transform: scale(0);
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    -webkit-transition: opacity .2s;
+    transition: opacity .2s;
+    opacity: 0!important;
+    position: absolute!important;
+    bottom: -100%!important;
+    right: 0!important;
+    background: #0097d6!important;
+    color: #FFF!important;
+    padding: 18px!important;
+    text-overflow: ellipsis!important;
+    white-space: -moz-nowrap!important;
+    white-space: -o-nowrap!important;
+    white-space: nowrap!important;
+    a {
+      color: #FFF!important;
+      font-weight: bold;
+      text-decoration: underline;
+    }
   }
   #kaanjo-status {
     margin-top: 10px!important;
