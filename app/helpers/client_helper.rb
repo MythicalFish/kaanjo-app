@@ -10,6 +10,10 @@ module ClientHelper
     "http://#{site_url}/images/emoticons/#{reaction_type.id}.svg"
   end
 
+  def static_asset_url filename
+    "http://#{site_url}/images/#{filename}"
+  end
+
   def site_url
     Rails.configuration.site_url
   end

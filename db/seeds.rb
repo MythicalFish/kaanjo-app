@@ -95,7 +95,7 @@ ReactionType.create([
   },
   { 
     name: 'So-so',
-    message: 'Thanks! our opinion matters. Your feedback enables us to improve our services.',
-    message_first: 'Thanks! Your opinion matters. Your feedback enables us to improve our services.'
+    message: 'Thanks! Your opinion matters. Your feedback enables us to improve our service.',
+    message_first: 'Thanks! Your opinion matters. Your feedback enables us to improve our service.'
   }
 ])
