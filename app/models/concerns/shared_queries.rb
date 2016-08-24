@@ -15,6 +15,7 @@ module SharedQueries
       query = "#{table}.*" <<
         ",COUNT(distinct impressions.id) AS impression_count" <<
         ",COUNT(distinct reactions.id) AS reaction_total"
+        #"IFNULL(impression_count,0) AS "
 
       if opts[:order] == 'total_ctr'
         query <<
@@ -26,12 +27,24 @@ module SharedQueries
       end
       
       select(query).
-        joins("LEFT OUTER JOIN reactions ON #{table}.id = reactions.#{foreign_key}").
-        joins("LEFT OUTER JOIN impressions ON #{table}.id = impressions.#{foreign_key}").
-        where(
-          "(reactions.created_at BETWEEN '#{opts[:from]}' AND '#{opts[:to]}')" <<
-          " AND (impressions.created_at BETWEEN '#{opts[:from]}' AND '#{opts[:to]}')"
-        ).
+        joins("
+          LEFT JOIN (
+            SELECT * FROM
+            impressions
+            WHERE
+            impressions.created_at BETWEEN '#{opts[:from]}' AND '#{opts[:to]}'
+          ) AS impressions
+          ON #{table}.id = impressions.#{foreign_key}
+        ").
+        joins("
+          LEFT JOIN (
+            SELECT * FROM
+            reactions
+            WHERE
+            reactions.created_at BETWEEN '#{opts[:from]}' AND '#{opts[:to]}'
+          ) AS reactions
+          ON #{table}.id = reactions.#{foreign_key}
+        ").
         group("#{table}.id").
         order("#{opts[:order]} #{opts[:direction]}")
 
