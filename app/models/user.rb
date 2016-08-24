@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
          :confirmable
 
   validates :first_name, length: {minimum: 2, maximum: 12}
-  validates :last_name, length: {minimum: 2, maximum: 20}
-  validates :website_url, length: {minimum: 6, maximum: 25}
-  validates :website_name, length: {minimum: 3, maximum: 25}
+  validates :last_name, length: {minimum: 2, maximum: 30}
+  validates :website_url, length: {minimum: 6, maximum: 60}
+  validates :website_name, length: {minimum: 3, maximum: 60}
 
   def webmaster?
     !admin?
