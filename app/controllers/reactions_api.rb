@@ -237,7 +237,7 @@ class ReactionsApi < WebsocketRails::BaseController
     if \
       set[:test_mode] == true ||\
       ENV['RACK_ENV'] == 'development' ||\
-      request.env['HTTP_ORIGIN'] == 'http://kaanjo.co'
+      request.env['HTTP_ORIGIN'] == 'http://dashboard.kaanjo.co'
         return true
     else
       return false
