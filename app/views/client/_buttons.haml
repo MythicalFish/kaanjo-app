@@ -1,11 +1,11 @@
 - @product = product
 - @reaction_type = reaction_type
 
-#kaanjo-info
-  %img{src:static_asset_url('info.svg')}
-  #kaanjo-info-bubble
-    Powered by 
-    %a{href:'http://kaanjo.co',target:'_blank'} Kaanjo
+//#kaanjo-info
+//  %img{src:static_asset_url('info.svg')}
+//  #kaanjo-info-bubble
+//    Powered by 
+//    %a{href:'http://kaanjo.co',target:'_blank'} Kaanjo
 
 #kaanjo-title
   How does this item make you feel?
@@ -20,8 +20,8 @@
   - if @reaction_type
     = render partial: 'client/status', locals: { reaction_type: @reaction_type, product: @product }
 
-//#kaanjo-copyright
-//  Powered by: 
-//  %a{href:'http://kaanjo.co',target:'_blank'} Kaanjo
+#kaanjo-copyright
+  Powered by: 
+  %a{href:'http://kaanjo.co',target:'_blank'} Kaanjo
 
 = render partial: 'client/style'
