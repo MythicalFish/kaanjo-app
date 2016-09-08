@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160811111024) do
+ActiveRecord::Schema.define(version: 20160908084720) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "sid",              limit: 255,             null: false
@@ -26,11 +26,11 @@ ActiveRecord::Schema.define(version: 20160811111024) do
   add_index "customers", ["webmaster_id"], name: "index_customers_on_webmaster_id", using: :btree
 
   create_table "impressions", force: :cascade do |t|
-    t.integer  "product_id",   limit: 4,               null: false
-    t.integer  "customer_id",  limit: 4,               null: false
-    t.datetime "created_at",                           null: false
+    t.integer  "product_id",   limit: 4,                       null: false
+    t.integer  "customer_id",  limit: 4,                       null: false
+    t.datetime "created_at",                                   null: false
     t.integer  "webmaster_id", limit: 4,   default: 0
-    t.string   "device_type",  limit: 255
+    t.string   "device_type",  limit: 255, default: "Unknown"
   end
 
   add_index "impressions", ["created_at"], name: "index_impressions_on_created_at", using: :btree
@@ -59,12 +59,12 @@ ActiveRecord::Schema.define(version: 20160811111024) do
   end
 
   create_table "reactions", force: :cascade do |t|
-    t.datetime "created_at",                               null: false
-    t.integer  "reaction_type_id", limit: 4,               null: false
-    t.integer  "customer_id",      limit: 4,               null: false
+    t.datetime "created_at",                                       null: false
+    t.integer  "reaction_type_id", limit: 4,                       null: false
+    t.integer  "customer_id",      limit: 4,                       null: false
     t.integer  "product_id",       limit: 4
     t.integer  "webmaster_id",     limit: 4,   default: 0
-    t.string   "device_type",      limit: 255
+    t.string   "device_type",      limit: 255, default: "Unknown"
   end
 
   add_index "reactions", ["customer_id"], name: "index_reactions_on_customer_id", using: :btree
