@@ -7,6 +7,11 @@
     = current_user.name
     .h5.aqua
       = current_user.subtitle
+  %ul
+    %li
+      %a{href:root_path,class:cp(root_path)}
+        %i.fa.fa-dashboard.mr1
+        Dashboard
 
   - if current_user.admin?
     = render partial: 'shared/sidebar/for_admin'
