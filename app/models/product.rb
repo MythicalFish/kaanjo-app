@@ -23,13 +23,6 @@ class Product < ActiveRecord::Base
       limit(  10 )
   end 
 
-  def devices
-    Impression.
-      where( :product_id => id ).
-      group( :device_type ).
-      count
-  end
-
   def get_reaction_total type = nil
     if type
       self.reactions.where(reaction_type:type).length
@@ -46,18 +39,29 @@ class Product < ActiveRecord::Base
     r
   end
 
-  def device_stats from, to
+  def device_stats opts = { from: Time.now.beginning_of_day, to: Time.now.end_of_day }
 
-    select(   "products.*, 
-              COUNT(impressions.id) AS impressions_count,
-              COUNT(reactions.id) AS reactions_total," ).
-      joins(  :reactions ).
-      joins(  "LEFT JOIN reaction_types ON reactions.reaction_type_id = reaction_types.id" ).
-      where(  "products.id" => id,
-              "reactions.created_at" => from..to ).
-      group(  "reactions.reaction_type_id" ).
-      order(  "count DESC").
-      first
+    Impression.select("
+        impressions.*, 
+        COUNT(distinct impressions.id) AS impression_count,
+        COUNT(distinct reactions.id) AS reaction_count"
+      ).
+      joins("
+        LEFT JOIN (
+          SELECT * FROM 
+            reactions
+          WHERE 
+            reactions.created_at BETWEEN '#{opts[:from]}' AND '#{opts[:to]}'
+        ) AS reactions
+        ON 
+          reactions.product_id = #{id} AND
+          reactions.device_type = impressions.device_type
+      ").
+      where(
+        "impressions.product_id" => id,
+        "impressions.created_at" => opts[:from]..opts[:to]
+      ).
+      group(  "impressions.device_type" )
 
   end
 
