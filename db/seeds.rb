@@ -43,6 +43,7 @@ User.all.each do |u|
 end
 
 CUSTOMER_IDS = [123,456,789,111,222,333]
+DEVICES = ['Test device 1','Test device 2','Test device 3']
 
 Webmaster.all.each do |w|
 
@@ -61,12 +62,12 @@ Webmaster.all.each do |w|
 
     rand(51..400).times do
       t = Time.now - rand(0..172800)
-      p.impressions.create(customer_id:CUSTOMER_IDS.sample,device_type:"Seeded",created_at:t)
+      p.impressions.create(customer_id:CUSTOMER_IDS.sample,device_type:DEVICES.sample,created_at:t)
     end
 
     rand(2..20).times do
       t = Time.now - rand(0..172800)
-      p.reactions.create(reaction_type_id: rand(1..4),customer_id:CUSTOMER_IDS.sample,created_at:t)
+      p.reactions.create(reaction_type_id: rand(1..4),customer_id:CUSTOMER_IDS.sample,created_at:t,device_type:DEVICES.sample)
     end
 
   end
