@@ -2,7 +2,13 @@ module SharedQueries
   extend ActiveSupport::Concern
   included do
 
-    def self.with_counts(opts = {from:nil, to:nil, order: 'impression_count', direction:'DESC'})
+    def self.with_counts(
+      opts = {
+        from: Time.now.beginning_of_day, 
+        to: Time.now.end_of_day, 
+        order: 'impression_count', 
+        direction: 'DESC'
+      })
 
       if self.model_name.collection == 'webmasters'
         table = 'users' 
@@ -15,7 +21,6 @@ module SharedQueries
       query = "#{table}.*" <<
         ",COUNT(distinct impressions.id) AS impression_count" <<
         ",COUNT(distinct reactions.id) AS reaction_total"
-        #"IFNULL(impression_count,0) AS "
 
       if opts[:order] == 'total_ctr'
         query <<
