@@ -46,11 +46,6 @@ class WebmastersController < ApplicationController
 
   end
 
-  def product
-    @webmaster = Webmaster.find(params[:id])
-    @product = @webmaster.products.find(params[:product_id])
-  end
-
   def create
     @webmaster = Webmaster.new(webmaster_params)
     @webmaster.confirmed_at = Time.now

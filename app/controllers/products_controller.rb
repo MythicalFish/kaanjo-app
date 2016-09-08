@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find_by_sid(params[:sid])
     @title = @product.name
+    @devices = @product.device_stats(from:from_date,to:to_date)
   end
 
 end

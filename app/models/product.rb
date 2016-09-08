@@ -41,11 +41,15 @@ class Product < ActiveRecord::Base
 
   def device_stats opts = { from: Time.now.beginning_of_day, to: Time.now.end_of_day }
 
-    Impression.select("
-        impressions.*, 
-        COUNT(distinct impressions.id) AS impression_count,
-        COUNT(distinct reactions.id) AS reaction_count"
-      ).
+    query = "impressions.*" << 
+      ",COUNT(distinct impressions.id) AS impression_count" <<
+      ",COUNT(distinct reactions.id) AS reaction_total"
+
+    ReactionType.all.each do |type|
+      query << ",COUNT(distinct case when reactions.reaction_type_id = #{type.id} then reactions.id end) AS type_count_#{type.id}"
+    end
+
+    Impression.select(query).
       joins("
         LEFT JOIN (
           SELECT * FROM 
