@@ -15,5 +15,13 @@ module ReactionSorting
       args
     end
 
+    def the_order
+      attribute = 'impression_count'
+      attribute = params[:a] if params[:a]
+      direction = 'DESC'
+      direction = 'ASC' if args[:d] == 'up'
+      "#{attribute} #{direction}"
+    end
+
   end
 end

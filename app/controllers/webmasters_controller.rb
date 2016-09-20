@@ -8,7 +8,8 @@ class WebmastersController < ApplicationController
 
   def index
     @title = "Webmasters"
-    @webmasters = Webmaster.with_counts(reaction_sorting)
+    #@webmasters = Webmaster.with_counts(reaction_sorting)
+    @webmasters = Webmaster.all.order(the_order)
   end
 
   def show
@@ -17,7 +18,7 @@ class WebmastersController < ApplicationController
     @products = @webmaster.products.with_counts(reaction_sorting)
   end
 
-  def edit 
+  def edit
     @webmaster = Webmaster.find(params[:id])
     @title = @webmaster.name
   end
@@ -71,7 +72,7 @@ class WebmastersController < ApplicationController
 
   def webmaster_params
     params.require(:webmaster).permit(
-      :email, :password, :first_name, :last_name, :website_url, :website_name, 
+      :email, :password, :first_name, :last_name, :website_url, :website_name,
       :title, :address1, :address2 ,:city, :postcode, :country, :phone
     )
   end

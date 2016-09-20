@@ -4,7 +4,7 @@ Rails.application.configure do
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
-  config.cache_classes = false
+  config.cache_classes = true
 
   # Do not eager load code on boot.
   config.eager_load = false
@@ -51,7 +51,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address => "email-smtp.eu-west-1.amazonaws.com",
     :port => 587, # Port 25 is throttled on AWS
-    :user_name => "AKIAJ7VZWLP7ET3ARQGA", 
+    :user_name => "AKIAJ7VZWLP7ET3ARQGA",
     :password => "Ag1AnGoHqdme/PZCKkq+AwOKmg0pnGsjgLeHEMki8//u",
     :authentication => :login,
     :enable_starttls_auto => true

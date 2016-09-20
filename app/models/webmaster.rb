@@ -24,7 +24,7 @@ class Webmaster < User
       "/webmaster-#{id}" <<
       "/#{association_name}_count" <<
       "/type-#{type}" <<
-      "/#{opts[:day].to_s}"
+      "/#{opts[:day].to_s}" # TODO: dont cache current day
 
     Rails.cache.fetch(key) do
       from = opts[:day].beginning_of_day
@@ -48,8 +48,12 @@ class Webmaster < User
     total_for reactions, opts
   end
 
-  def impression_total opts = { from: Date.today, to: Date.today }
+  def impression_total opts = { type: false, from: Date.today, to: Date.today }
     total_for impressions, opts
+  end
+
+  def ctr opts = { from: Date.today, to: Date.today }
+    ctr = ((reactions.to_f / impressions.to_f) * 100).round(2)
   end
 
   private
