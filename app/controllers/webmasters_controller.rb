@@ -9,7 +9,7 @@ class WebmastersController < ApplicationController
   def index
     @title = "Webmasters"
     #@webmasters = Webmaster.with_counts(reaction_sorting)
-    @webmasters = Webmaster.all.order(the_order)
+    @webmasters = Webmaster.with_totals
   end
 
   def show
