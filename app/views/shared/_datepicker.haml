@@ -3,11 +3,11 @@
     = selected_date[:label]
     %i.fa.fa-angle-down.ml1.gray-light
   %ul.hide
-    %li
-      %a.range-selector Custom range
     - dates.each do |key,date|
       - next if selected_date == date
       - next if key == 'range'
       %li
         %a{href:url_for(t:key)}
           = date[:label]
+    %li
+      %a.range-selector Custom range

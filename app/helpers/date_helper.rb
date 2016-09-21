@@ -2,21 +2,25 @@ module DateHelper
  
   def from_date
     if selected_date[:secs] == 'today'
-      Time.now.beginning_of_day
+      Date.today
+    elsif selected_date[:secs] == 'yesterday'
+      Date.yesterday
     elsif selected_date[:secs] == 'range'
-      Time.parse(session[:f])
+      Date.parse(session[:f])
     else
-      Time.now - selected_date[:secs]
+      (Time.now - selected_date[:secs]).to_date
     end
   end
 
   def to_date
     if selected_date[:secs] == 'today'
-      Time.now.end_of_day
+      Date.today
+    elsif selected_date[:secs] == 'yesterday'
+      Date.yesterday
     elsif selected_date[:secs] == 'range'
-      Time.parse(session[:u])
+      Date.parse(session[:u])
     else
-      Time.now
+      Date.today
     end
   end
 
@@ -35,15 +39,12 @@ module DateHelper
 
   def dates
     {
-      'today' =>  { label: "Today (#{Time.now.strftime('%e %b')})", secs: 'today' },
-      'range' =>  { label: "#{session[:f]} - #{session[:u]}",  secs: 'range' },
-      '05' =>     { label: 'Last 30 minutes',  secs: 60*30 },
-      '1'  =>     { label: 'Last hour',   secs: 60*60 },
-      '3'  =>     { label: 'Last 3 hours',  secs: 60*60*3 },
-      '6'  =>     { label: 'Last 6 hours',  secs: 60*60*6 },
-      '12' =>     { label: 'Last 12 hours', secs: 60*60*12 },
-      '24' =>     { label: 'Last 24 hours', secs: 60*60*24 },
-      '48' =>     { label: 'Last 48 hours', secs: 60*60*48 }
+      'today' =>      { label: "Today (#{Date.today.strftime('%e %b')})", secs: 'today' },
+      'yesterday' =>  { label: "Yesterday", secs: 'yesterday' },
+      '3days' =>      { label: 'Last 3 days', secs: 60*60*24*3 },
+      '7days' =>      { label: 'Last 7 days', secs: 60*60*24*7 },
+      '30days' =>     { label: 'Last 30 days', secs: 60*60*24*30 },
+      'range' =>      { label: "#{session[:f]} - #{session[:u]}",  secs: 'range' }
     }
   end
 
