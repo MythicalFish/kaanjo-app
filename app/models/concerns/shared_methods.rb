@@ -44,9 +44,9 @@ module SharedMethods
       if opts[:day] == Date.today
         cache_opts[:expires_in] = 1.minute
       end
-
+      puts 'x'
       Rails.cache.fetch(key,cache_opts) do
-
+        puts "not cached"
         from = opts[:day].beginning_of_day
         to = opts[:day].end_of_day
         args = { created_at: from..to }
