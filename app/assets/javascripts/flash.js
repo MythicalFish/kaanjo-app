@@ -1,5 +1,6 @@
-document.addEventListener("turbolinks:load", function() {
-
+//document.addEventListener("turbolinks:load", function() {
+$(document).ready(function(){
+  
   var notice = $('.flash');
 
   if(notice.is('*')) {
