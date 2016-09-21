@@ -1,5 +1,5 @@
 %img.kaanjo-status-icon{src:emoticon_url(reaction_type)}
-- number = product.get_reaction_total(reaction_type) - 1
+- number = product.reaction_total
 - if number == 0
   = reaction_type.message_first
 - else

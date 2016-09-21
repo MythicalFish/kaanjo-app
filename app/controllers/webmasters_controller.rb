@@ -8,14 +8,13 @@ class WebmastersController < ApplicationController
 
   def index
     @title = "Webmasters"
-    #@webmasters = Webmaster.with_counts(reaction_sorting)
-    @webmasters = Webmaster.with_totals
+    @webmasters = Webmaster.with_totals(reaction_sorting)
   end
 
   def show
     @webmaster = Webmaster.find(params[:id])
     @title = "Webmaster: #{@webmaster.name}"
-    @products = @webmaster.products.with_counts(reaction_sorting)
+    @products = @webmaster.products.with_totals(reaction_sorting)
   end
 
   def edit

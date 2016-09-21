@@ -67,7 +67,7 @@ Webmaster.all.each do |w|
 
     rand(2..20).times do
       t = Time.now - rand(0..172800)
-      p.reactions.create(reaction_type_id: rand(1..4),customer_id:CUSTOMER_IDS.sample,created_at:t,device_type:DEVICES.sample)
+      p.reactions.create(reaction_type_id: rand(1..5),customer_id:CUSTOMER_IDS.sample,created_at:t,device_type:DEVICES.sample)
     end
 
   end

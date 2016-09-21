@@ -3,24 +3,22 @@ module ReactionSorting
   included do
 
     def reaction_sorting
+
+      order_by = :impression_total
+      order_by = params[:a].to_sym if params[:a]
+
+      direction = 'DESC'
+      direction = 'ASC' if params[:d] == 'asc'
+
       args = {
         from: from_date,
-        to: to_date
+        to: to_date,
+        order_by: order_by,
+        direction: direction
       }
 
-      args[:order] = params[:a] if params[:a]
-      args[:direction] = params[:d] if params[:d]
-      args[:direction] = 'ASC' if args[:direction] == 'up'
-      args[:direction] = 'DESC' if args[:direction] == 'down'
       args
-    end
 
-    def the_order
-      attribute = 'impression_count'
-      attribute = params[:a] if params[:a]
-      direction = 'DESC'
-      direction = 'ASC' if args[:d] == 'up'
-      "#{attribute} #{direction}"
     end
 
   end

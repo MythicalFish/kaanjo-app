@@ -1,6 +1,5 @@
 class Product < ActiveRecord::Base
 
-  include SharedQueries
   include SharedMethods
 
   has_many :impressions
@@ -23,30 +22,21 @@ class Product < ActiveRecord::Base
       limit(  10 )
   end 
 
-  def get_reaction_total type = nil
-    if type
-      self.reactions.where(reaction_type:type).length
-    else
-      self.reactions.length
-    end
-  end
+  def device_stats opts = {}
 
-  def get_reaction_totals
-    r = {}
-    ReactionType.all.each do |type|
-      r[type.name] = self.get_reaction_total(type)
-    end
-    r
-  end
-
-  def device_stats opts = { from: Time.now.beginning_of_day, to: Time.now.end_of_day }
+    opts = { 
+      from: Time.now.beginning_of_day, 
+      to: Time.now.end_of_day,
+      order_by: 'impression_total',
+      direction: 'DESC' 
+      }.merge(opts)
 
     query = "impressions.*" << 
-      ",COUNT(distinct impressions.id) AS impression_count" <<
+      ",COUNT(distinct impressions.id) AS impression_total" <<
       ",COUNT(distinct reactions.id) AS reaction_total"
 
     ReactionType.all.each do |type|
-      query << ",COUNT(distinct case when reactions.reaction_type_id = #{type.id} then reactions.id end) AS type_count_#{type.id}"
+      query << ",COUNT(distinct case when reactions.reaction_type_id = #{type.id} then reactions.id end) AS type_total_#{type.id}"
     end
 
     Impression.select(query).
@@ -65,7 +55,8 @@ class Product < ActiveRecord::Base
         "impressions.product_id" => id,
         "impressions.created_at" => opts[:from]..opts[:to]
       ).
-      group(  "impressions.device_type" )
+      group("impressions.device_type").
+      order("#{opts[:order_by]} #{opts[:direction]}")
 
   end
 

@@ -2,12 +2,12 @@ module SortingHelper
 
   def sort_link attribute, label
     
-    direction = 'down'
-    link_class = 'sorter-down'
+    direction = 'asc'
+    link_class = 'sorter-desc'
 
-    if params[:d] == 'down'
-      direction = 'up'
-      link_class = 'sorter-up'
+    if params[:d] == 'asc'
+      direction = 'desc'
+      link_class = 'sorter-asc'
     end
 
     if params[:a] == attribute

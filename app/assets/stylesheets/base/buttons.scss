@@ -28,17 +28,17 @@ a {
   color: $blue;
   text-decoration: none;
 }
-.sorter-up,.sorter-down {
+.sorter-asc,.sorter-desc {
   color: inherit;
 }
-.sorter-up::after,.sorter-down::after {
+.sorter-asc::after,.sorter-desc::after {
   @extend .fa;
   margin-left: $space-1;
   color: rgba(0,0,0,0.4);
   content: "\f107";
 }
-.sorter-up.current::after {
+.sorter-asc.current::after {
   content: "\f106";
 }
-.sorter-down::after {
+.sorter-desc::after {
 }

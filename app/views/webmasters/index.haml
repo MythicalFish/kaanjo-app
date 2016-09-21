@@ -25,7 +25,7 @@
       %td
         = sort_link('reaction_total', 'Total Reactions')
       %td
-        = sort_link('total_ctr', 'Total CTR')
+        = sort_link('ctr', 'Total CTR')
       %td
         Actions
   - @webmasters.each do |w|
@@ -44,7 +44,7 @@
       %td
         = w.reaction_total
       %td
-        = ctr_for w
+        = "#{w.ctr}%"
       %td
         %a{href:edit_webmaster_url(w)} Edit
   

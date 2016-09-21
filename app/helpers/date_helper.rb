@@ -1,5 +1,5 @@
 module DateHelper
-  
+ 
   def from_date
     if selected_date[:secs] == 'today'
       Time.now.beginning_of_day

@@ -2,11 +2,13 @@ module SharedQueries
   extend ActiveSupport::Concern
   included do
 
+    # Deprecated
+
     def self.with_counts(
       opts = {
         from: Time.now.beginning_of_day, 
         to: Time.now.end_of_day, 
-        order: 'impression_count', 
+        order: 'impression_total', 
         direction: 'DESC'
       })
 
@@ -19,7 +21,7 @@ module SharedQueries
       end
 
       query = "#{table}.*" <<
-        ",COUNT(distinct impressions.id) AS impression_count" <<
+        ",COUNT(distinct impressions.id) AS impression_total" <<
         ",COUNT(distinct reactions.id) AS reaction_total"
 
       if opts[:order] == 'total_ctr'
@@ -28,7 +30,7 @@ module SharedQueries
       end
 
       ReactionType.all.each do |type|
-        query << ",COUNT(distinct case when reactions.reaction_type_id = #{type.id} then reactions.id end) AS type_count_#{type.id}"
+        query << ",COUNT(distinct case when reactions.reaction_type_id = #{type.id} then reactions.id end) AS type_total_#{type.id}"
       end
       
       select(query).
@@ -51,7 +53,7 @@ module SharedQueries
           ON #{table}.id = reactions.#{foreign_key}
         ").
         group("#{table}.id").
-        order("#{opts[:order]} #{opts[:direction]}")
+        order("#{opts[:order_by]} #{opts[:direction]}")
 
     end
 

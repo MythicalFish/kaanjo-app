@@ -21,11 +21,11 @@
   %thead        
     %tr
       %td
-        = sort_link('device', 'Device type')
+        = sort_link('device_type', 'Device type')
       %td
-        = sort_link('impression_count', 'Impressions')
+        = sort_link('impression_total', 'Impressions')
       - ReactionType.all.each do |r|
-        %td= sort_link("type_count_#{r.id}", r.name)
+        %td= sort_link("type_total_#{r.id}", r.name)
       %td
         = sort_link('reaction_total', 'Total reactions')
   %tbody
@@ -34,9 +34,9 @@
         %td
           %span.pl3.pr2
             = i.device_type
-        %td= i.impression_count
+        %td= i.impression_total
         - ReactionType.all.each do |r|
-          %td= i.attributes["type_count_#{r.id}"]
+          %td= i.attributes["type_total_#{r.id}"]
         %td= i.reaction_total
         
   
