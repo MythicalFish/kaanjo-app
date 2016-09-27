@@ -25,7 +25,5 @@ module ReactionsAdmin
 
     config.site_name = 'Kaanjo'
 
-    config.cache_store = :redis_store, "redis://localhost:6379/0/cache", { expires_in: 0 }
-
   end
 end

@@ -23,7 +23,6 @@ gem 'cancancan', '~> 1.10'
 gem 'puma'
 gem 'faye-websocket', '0.10.0'
 gem 'websocket-rails'
-gem 'redis-rails', '~> 4'
 
 group :development do
   gem 'byebug'

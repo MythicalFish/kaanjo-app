@@ -30,7 +30,7 @@ module SharedMethods
 
       opts = { type: false, day: Date.today }.merge(opts)
 
-      type = opts[:type] ? opts[:type] : 'all'
+      type = opts[:type] ? opts[:type].id : 'all'
       association_name = association.model_name.collection
 
       key = "" <<
@@ -42,17 +42,15 @@ module SharedMethods
       cache_opts = {}
 
       if opts[:day] == Date.today
-        cache_opts[:expires_in] = 1.minute
+        cache_opts[:expires_in] = 10.minutes
       end
-      puts 'x'
+
       Rails.cache.fetch(key,cache_opts) do
-        puts "not cached"
         from = opts[:day].beginning_of_day
         to = opts[:day].end_of_day
         args = { created_at: from..to }
         args[:reaction_type] = opts[:type] if opts[:type]
-        return association.where(args).length
-
+        association.where(args).length
       end
 
     end
@@ -60,17 +58,31 @@ module SharedMethods
     def get_total_for association, opts = {}
 
       opts = { type: false, from: Date.today, to: Date.today }.merge(opts)
-      opts[:from] = opts[:from].to_date unless opts[:from].is_a? Date
-      opts[:to] = opts[:to].to_date unless opts[:to].is_a? Date
 
-      total = 0
-
-      (opts[:from]..opts[:to]).each do |day|
-        total += get_count_for(association, { type: opts[:type], day: day })
+      if opts[:to] == Date.today && opts[:from] != Date.today
+        opts[:to] = Date.yesterday
+        today = get_count_for(association, { type: opts[:type], day: Date.today })
+        rest = get_total_for(association,opts)
+        return today + rest
       end
 
-      total
+      type = opts[:type] ? opts[:type].id : 'all'
+      association_name = association.model_name.collection
+      
+      key = "" <<
+        "/////#{model_name.collection}-#{id}" <<
+        "/#{association_name}_total" <<
+        "/type-#{type}" <<
+        "/from-#{opts[:from].to_s}_to-#{opts[:to].to_s}" 
 
+      Rails.cache.fetch(key) do
+        c = 0
+        (opts[:from]..opts[:to]).each do |day|
+          c += get_count_for(association, { type: opts[:type], day: day })
+        end
+        c
+      end
+      
     end
 
     def get_reaction_total opts = {}
