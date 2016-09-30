@@ -83,11 +83,12 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'kaanjo.co' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => "email-smtp.eu-west-1.amazonaws.com",
-    :port => 587,
-    :user_name => "AKIAJBZIAAUUP5GHIGZA", 
-    :password => "AisxXfs2mSa/IBL9+dIehAJMg+UDfuY7mA4QRSHbcNi3",
-    :authentication => :login,
+    :address        => 'smtp.gmail.com',
+    :domain         => 'mail.google.com',
+    :port           => 587,
+    :user_name      => 'hi@kaanjo.co',
+    :password       => 'i=XFjMx8M',
+    :authentication => :plain,
     :enable_starttls_auto => true
   }
 
