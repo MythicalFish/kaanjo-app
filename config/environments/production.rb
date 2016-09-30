@@ -80,7 +80,7 @@ Rails.application.configure do
   # Enable websocket-rails to work
   config.middleware.delete Rack::Lock
 
-  config.action_mailer.default_url_options = { :host => 'kaanjo.co' }
+  config.action_mailer.default_url_options = { :host => 'dashboard.kaanjo.co' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address        => 'smtp.gmail.com',
