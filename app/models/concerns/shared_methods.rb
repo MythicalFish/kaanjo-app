@@ -99,6 +99,14 @@ module SharedMethods
       ctr
     end
 
+    def assign_sid
+      return if self.sid
+      begin
+        secure_id = SecureRandom.hex(12)
+      end while Product.where(:sid => secure_id).exists?
+      self.sid = secure_id
+    end
+
     private
 
     def setup_totals
@@ -115,14 +123,6 @@ module SharedMethods
         )
       end
 
-    end
-
-    def assign_sid
-      return if self.sid
-      begin
-        secure_id = SecureRandom.hex(12)
-      end while Product.where(:sid => secure_id).exists?
-      self.sid = secure_id
     end
 
   end
