@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
-  
-  include SharedMethods
-  
+    
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
@@ -27,6 +25,16 @@ class User < ActiveRecord::Base
     else
       website_name
     end
+  end
+
+  private
+
+  def assign_sid
+    return if self.sid
+    begin
+      secure_id = SecureRandom.hex(12)
+    end while Product.where(:sid => secure_id).exists?
+    self.sid = secure_id
   end
 
 end
