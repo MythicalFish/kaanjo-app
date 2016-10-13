@@ -1,18 +1,15 @@
 class DashboardController < ApplicationController
 
+  include ReactionSorting
+
   def show
     @title = 'Dashboard'
-    f = from_date
-    t = to_date
     if admin?
       dashboard_for_admin and return
     elsif webmaster?
-      w = current_webmaster
-      @impression_total = w.impressions.total f,t
-      @reaction_total =   w.reactions.total   f,t
-      @reaction_counts =  w.reactions.counts  f,t
-      @total_ctr = calculate_ctr(@reaction_total, @impression_total).to_s << '%'
-      @products =  w.products.top_by_type     f,t
+      @webmaster = current_webmaster
+      @webmaster.setup_totals(reaction_sorting)
+      @products =  @webmaster.products.top_by_type from_date, to_date
       render 'dashboard/for_webmaster'
     else
       render 'devise/sessions/new', locals: { resource: User.new }
