@@ -18,7 +18,7 @@
           %a{href:product_path(p.sid)}= p.name
         %td= p.impression_total
         - ReactionType.all.each do |r|
-          %td= p.attributes["type_total_#{r.id}"]
+          %td= p.send("type_total_#{r.id}")
         %td= p.reaction_total
         %td
           = "#{p.ctr}%"

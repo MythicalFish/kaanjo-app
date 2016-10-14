@@ -13,17 +13,28 @@
         .row.b1.b0-bottom
           .col-md-6.p2.md-p3
             %h4.m0 Total impressions
-            .h2= @impression_total
+            .h2= @webmaster.impression_total
           .col-md-6.p2.md-p3
             %h4.m0 Total reactions
-            .h2= @reaction_total
+            .h2= @webmaster.reaction_total
         .p2.md-p3.lg-p4.bg-aqua.white
-          .h1= "CTR: #{@total_ctr}"
+          .h1= "CTR: #{@webmaster.ctr}%"
         %table
-          - @reaction_counts.each do |r|
-            %tr
-              %td= r.name
-              %td= r.count
+          %tr
+            %td= ReactionType.find(1).name
+            %td= @webmaster.type_total_1
+          %tr
+            %td= ReactionType.find(2).name
+            %td= @webmaster.type_total_2
+          %tr
+            %td= ReactionType.find(3).name
+            %td= @webmaster.type_total_3
+          %tr
+            %td= ReactionType.find(4).name
+            %td= @webmaster.type_total_4
+          %tr
+            %td= ReactionType.find(5).name
+            %td= @webmaster.type_total_5
     .col.col-md-6
       .md-ml1
         %table

@@ -2,7 +2,6 @@ module SharedMethods
   extend ActiveSupport::Concern
   included do
 
-
     after_find :setup_totals
 
     attr_accessor :reaction_total, :impression_total, :ctr, 
@@ -70,7 +69,7 @@ module SharedMethods
       association_name = association.model_name.collection
       
       key = "" <<
-        "/////#{model_name.collection}-#{id}" <<
+        "/#{model_name.collection}-#{id}" <<
         "/#{association_name}_total" <<
         "/type-#{type}" <<
         "/from-#{opts[:from].to_s}_to-#{opts[:to].to_s}" 
@@ -107,19 +106,19 @@ module SharedMethods
       self.sid = secure_id
     end
 
-    private
 
-    def setup_totals
+    def setup_totals opts = {}
 
-      #@reaction_total = self.get_reaction_total(@@opts)
-      instance_variable_set("@reaction_total",self.get_reaction_total(@@opts))
-      @impression_total = self.get_impression_total(@@opts)
-      @ctr = self.get_ctr(@@opts)
+      opts = @@opts.merge(opts)
+
+      @reaction_total = self.get_reaction_total(opts)
+      @impression_total = self.get_impression_total(opts)
+      @ctr = self.get_ctr(opts)
 
       ReactionType.all.each do |t|
         instance_variable_set(
           "@type_total_#{t.id}",
-          self.get_reaction_total({type:t}.merge(@@opts))
+          self.get_reaction_total({type:t}.merge(opts))
         )
       end
 
