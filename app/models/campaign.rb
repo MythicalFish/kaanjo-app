@@ -14,6 +14,8 @@ class Campaign < ActiveRecord::Base
 
   default_scope { where('is_default = ? AND deleted = ?', false, false) }
 
+  validate :number_of_reaction_types
+
   def self.new_from_default id = 1
     attributes = DefaultCampaign.find(id).dup.attributes
     attributes[:relative_id] = nil
@@ -28,6 +30,11 @@ class Campaign < ActiveRecord::Base
   def set_relative_id
     id = webmaster.campaigns.last.try(:relative_id) || 0
     self.relative_id = id + 1
+  end
+
+  def number_of_reaction_types
+    errors.add(:reaction_types, "Max 6 reactions") if reaction_types.size > 6
+    errors.add(:reaction_types, "Min 2 reactions") if reaction_types.size < 2
   end
 
 end
