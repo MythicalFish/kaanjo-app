@@ -14,16 +14,16 @@
 ActiveRecord::Schema.define(version: 20161015091928) do
 
   create_table "campaigns", force: :cascade do |t|
-    t.integer  "relative_id",  limit: 4,                     null: false
-    t.integer  "webmaster_id", limit: 4,     default: 0
+    t.integer  "relative_id",  limit: 4,                   null: false
+    t.integer  "webmaster_id", limit: 4,   default: 0
     t.string   "name",         limit: 255
-    t.text     "description",  limit: 65535
+    t.string   "description",  limit: 255
     t.string   "site_path",    limit: 255
-    t.boolean  "enabled",                    default: false
+    t.boolean  "enabled",                  default: false
     t.date     "start_date"
     t.date     "end_date"
     t.string   "question",     limit: 255
-    t.boolean  "is_default",                 default: false
+    t.boolean  "is_default",               default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

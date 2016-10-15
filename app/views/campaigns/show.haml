@@ -1,43 +1,7 @@
 - content_for(:header) do
-  - if current_user.admin?
-    %i.fa.fa-user.mr1
-    %a{href:'/'} Webmasters
-    %a{href:edit_webmaster_path(@product.webmaster)}= @product.webmaster.name
-    %a{href:webmaster_path(@product.webmaster)} Products
-    = @product.name
-  - else
-    %a{href:'/products'} Products
-    = @product.name
+  %i.fa.fa-diamond.mr1
+  %a{href:campaigns_path} Campaigns
+  = @campaign.name
 
-- content_for(:actions) do
-  %a{href:@product.url,target:'_blank'} View product
-    
-.flex
-  %header.flex-auto
-    Activity Overview
-  .flex-none
-    = render partial: 'shared/datepicker'
-%table
-  %thead        
-    %tr
-      %td
-        = sort_link('device_type', 'Device type')
-      %td
-        = sort_link('impression_total', 'Impressions')
-      - ReactionType.all.each do |r|
-        %td= sort_link("type_total_#{r.id}", r.name)
-      %td
-        = sort_link('reaction_total', 'Total reactions')
-  %tbody
-    - @devices.each do |i|
-      %tr
-        %td
-          %span.pl3.pr2
-            = i.device_type
-        %td= i.impression_total
-        - ReactionType.all.each do |r|
-          %td= i.attributes["type_total_#{r.id}"]
-        %td= i.reaction_total
-        
   
 

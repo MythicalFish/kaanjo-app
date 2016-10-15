@@ -1,0 +1,20 @@
+.mb2
+  = f.label :name
+  = f.text_field :name
+.mb2
+  = f.label :question
+  = f.text_field :question
+.mb2
+  = f.label :site_path
+  = f.text_field :site_path
+.mb2.row
+  .col-md-6
+    = f.label :start_date
+    = f.date_field :start_date
+  .col-md-6
+    = f.label :end_date
+    = f.date_field :end_date
+.mb2
+  = f.label :reaction_types
+  = render partial: 'reaction_type_selector', locals: {f:f}
+

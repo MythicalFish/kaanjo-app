@@ -12,10 +12,6 @@ class Campaign < ActiveRecord::Base
 
   default_scope { where('is_default = ?', false) }
 
-  def find id
-    find_by_relative_id id
-  end
-
   def self.new_from_default id = 1
     attributes = DefaultCampaign.find(id).dup.attributes
     attributes[:relative_id] = nil

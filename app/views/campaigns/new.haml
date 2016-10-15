@@ -1,0 +1,10 @@
+- content_for(:header) do
+  %i.fa.fa-diamond.mr1
+  %a{href:campaigns_path} Campaigns
+  New campaign
+
+.container-narrow.p2.md-p3.lg-p4.bg-white
+  = form_for(Campaign.new) do |f|
+    = render partial: 'form', locals: {f:f}
+    .actions
+      = f.submit "Create"
