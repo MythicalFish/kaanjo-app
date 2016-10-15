@@ -1,6 +1,7 @@
 class Webmaster < User
 
   include SharedMethods
+  include Calculator
 
   has_many :reactions, :foreign_key => "webmaster_id"
   has_many :customers

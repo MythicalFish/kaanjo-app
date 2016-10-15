@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
 
   include SharedMethods
+  include Calculator
 
   has_many :impressions
   has_many :reactions

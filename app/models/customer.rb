@@ -1,6 +1,7 @@
 class Customer < ActiveRecord::Base
 
   include SharedMethods
+  include Calculator
 
   belongs_to :webmaster
   has_many :impressions

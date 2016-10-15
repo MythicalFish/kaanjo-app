@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161015091928) do
+ActiveRecord::Schema.define(version: 20161015202637) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "relative_id",  limit: 4,                   null: false
@@ -57,6 +57,18 @@ ActiveRecord::Schema.define(version: 20161015091928) do
   add_index "customers", ["sid"], name: "index_customers_on_sid", using: :btree
   add_index "customers", ["webmaster_id"], name: "index_customers_on_webmaster_id", using: :btree
 
+  create_table "emoticons", force: :cascade do |t|
+    t.string   "default_label",      limit: 255, null: false
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
+    t.string   "sid",                limit: 255, null: false
+  end
+
+  add_index "emoticons", ["default_label"], name: "index_emoticons_on_default_label", using: :btree
+  add_index "emoticons", ["sid"], name: "index_emoticons_on_sid", using: :btree
+
   create_table "impressions", force: :cascade do |t|
     t.integer  "product_id",   limit: 4,                       null: false
     t.integer  "customer_id",  limit: 4,                       null: false
@@ -87,10 +99,19 @@ ActiveRecord::Schema.define(version: 20161015091928) do
   add_index "products", ["webmaster_id"], name: "index_products_on_webmaster_id", using: :btree
 
   create_table "reaction_types", force: :cascade do |t|
-    t.string "name",          limit: 255,                                                            null: false
-    t.string "message",       limit: 255, default: "Thanks! You and {number} others feel this way."
-    t.string "message_first", limit: 255, default: "Thanks! You are the first to feel this way."
+    t.string   "name",                  limit: 255,                                                            null: false
+    t.string   "message",               limit: 255, default: "Thanks! You and {number} others feel this way."
+    t.string   "message_first",         limit: 255, default: "Thanks! You are the first to feel this way."
+    t.string   "emoticon_file_name",    limit: 255
+    t.string   "emoticon_content_type", limit: 255
+    t.integer  "emoticon_file_size",    limit: 4
+    t.datetime "emoticon_updated_at"
+    t.integer  "emoticon_id",           limit: 4
+    t.boolean  "is_default",                        default: false
   end
+
+  add_index "reaction_types", ["emoticon_id"], name: "index_reaction_types_on_emoticon_id", using: :btree
+  add_index "reaction_types", ["is_default"], name: "index_reaction_types_on_is_default", using: :btree
 
   create_table "reactions", force: :cascade do |t|
     t.datetime "created_at",                                       null: false

@@ -1,6 +1,7 @@
 class Campaign < ActiveRecord::Base
 
   include SharedMethods
+  include Calculator
   include CampaignValidator
 
   belongs_to :webmaster
