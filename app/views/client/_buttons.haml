@@ -14,7 +14,7 @@
   %button{type:'button', onclick:"Kaanjo.react(#{r.id})", class:button_class(r), id:"kaanjo-reaction#{r.id}"}
     %img{src:emoticon_url(r)}
     %label
-      .kaanjo-bubble= r.name
+      .kaanjo-bubble= r.label
 
 #kaanjo-status
   - if @reaction_type

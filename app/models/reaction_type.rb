@@ -1,6 +1,6 @@
 class ReactionType < ActiveRecord::Base
 
-  has_one :emoticon
+  belongs_to :emoticon
   has_many :reactions
 
 end

@@ -21,7 +21,7 @@
       %td
         = sort_link('impression_total', 'Impressions')
       - ReactionType.all.each do |r|
-        %td= r.name
+        %td= r.label
       %td
         = sort_link('reaction_total', 'Total Reactions')
       %td
