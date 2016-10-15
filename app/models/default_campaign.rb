@@ -1,4 +1,7 @@
-class DefaultCampaign < Campaign
+class DefaultCampaign < ActiveRecord::Base
+
+  self.table_name = 'campaigns'
+  has_and_belongs_to_many :reaction_types, foreign_key: 'campaign_id'
 
   default_scope { where('is_default = ?', true) }
   before_create :set_as_default

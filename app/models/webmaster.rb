@@ -15,13 +15,14 @@ class Webmaster < User
 
   default_scope { where('admin = ?', false) }
 
+  def create_default_campaign
+    unless campaigns.any?
+      campaigns << DefaultCampaign.first.dup
+    end
+  end
+
   private
 
-  def create_default_campaign
-
-    #self.campaigns.create()
-
-  end
 
   def sanitize_website_url
 
