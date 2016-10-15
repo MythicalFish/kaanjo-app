@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908084720) do
+ActiveRecord::Schema.define(version: 20161014162040) do
+
+  create_table "campaigns", force: :cascade do |t|
+    t.integer  "webmaster_id", limit: 4
+    t.string   "title",        limit: 255
+    t.text     "description",  limit: 65535
+    t.string   "site_path",    limit: 255
+    t.boolean  "status"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "question",     limit: 255
+    t.integer  "sid",          limit: 4,     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "campaigns", ["created_at"], name: "index_campaigns_on_created_at", using: :btree
+  add_index "campaigns", ["sid"], name: "index_campaigns_on_sid", using: :btree
+  add_index "campaigns", ["status"], name: "index_campaigns_on_status", using: :btree
+  add_index "campaigns", ["webmaster_id"], name: "index_campaigns_on_webmaster_id", using: :btree
 
   create_table "customers", force: :cascade do |t|
     t.string   "sid",              limit: 255,             null: false
@@ -67,6 +86,7 @@ ActiveRecord::Schema.define(version: 20160908084720) do
     t.string   "device_type",      limit: 255, default: "Unknown"
   end
 
+  add_index "reactions", ["created_at"], name: "index_reactions_on_created_at", using: :btree
   add_index "reactions", ["customer_id"], name: "index_reactions_on_customer_id", using: :btree
   add_index "reactions", ["device_type"], name: "index_reactions_on_device_type", using: :btree
   add_index "reactions", ["product_id"], name: "index_reactions_on_product_id", using: :btree

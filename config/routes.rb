@@ -2,9 +2,8 @@ Rails.application.routes.draw do
   
   root to: 'dashboard#show'
 
-  get '/products/:sid', to: 'products#show', as: 'product'
-  resources :products, except: 'show'
-
+  resources :products
+  resources :campaigns
   resources :webmasters
   resources :admins, except: [:show]
 
