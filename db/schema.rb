@@ -11,26 +11,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014162040) do
+ActiveRecord::Schema.define(version: 20161015091928) do
 
   create_table "campaigns", force: :cascade do |t|
-    t.integer  "webmaster_id", limit: 4
+    t.integer  "relative_id",  limit: 4,                     null: false
+    t.integer  "webmaster_id", limit: 4,     default: 0
     t.string   "title",        limit: 255
     t.text     "description",  limit: 65535
     t.string   "site_path",    limit: 255
-    t.boolean  "status"
+    t.boolean  "enabled",                    default: false
     t.date     "start_date"
     t.date     "end_date"
     t.string   "question",     limit: 255
-    t.integer  "sid",          limit: 4,     null: false
+    t.boolean  "is_default",                 default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "campaigns", ["created_at"], name: "index_campaigns_on_created_at", using: :btree
-  add_index "campaigns", ["sid"], name: "index_campaigns_on_sid", using: :btree
-  add_index "campaigns", ["status"], name: "index_campaigns_on_status", using: :btree
+  add_index "campaigns", ["enabled"], name: "index_campaigns_on_enabled", using: :btree
+  add_index "campaigns", ["is_default"], name: "index_campaigns_on_is_default", using: :btree
+  add_index "campaigns", ["relative_id"], name: "index_campaigns_on_relative_id", using: :btree
   add_index "campaigns", ["webmaster_id"], name: "index_campaigns_on_webmaster_id", using: :btree
+
+  create_table "campaigns_reaction_types", id: false, force: :cascade do |t|
+    t.integer "campaign_id",      limit: 4, null: false
+    t.integer "reaction_type_id", limit: 4, null: false
+  end
+
+  add_index "campaigns_reaction_types", ["campaign_id"], name: "index_campaigns_reaction_types_on_campaign_id", using: :btree
+  add_index "campaigns_reaction_types", ["reaction_type_id"], name: "index_campaigns_reaction_types_on_reaction_type_id", using: :btree
 
   create_table "customers", force: :cascade do |t|
     t.string   "sid",              limit: 255,             null: false
@@ -38,8 +48,10 @@ ActiveRecord::Schema.define(version: 20161014162040) do
     t.integer  "throttle_index_1", limit: 4,   default: 0
     t.datetime "throttle_timer_1"
     t.integer  "webmaster_id",     limit: 4,               null: false
+    t.integer  "campaign_id",      limit: 4,               null: false
   end
 
+  add_index "customers", ["campaign_id"], name: "index_customers_on_campaign_id", using: :btree
   add_index "customers", ["ip_address"], name: "index_customers_on_ip_address", using: :btree
   add_index "customers", ["sid"], name: "index_customers_on_sid", using: :btree
   add_index "customers", ["webmaster_id"], name: "index_customers_on_webmaster_id", using: :btree
@@ -50,8 +62,10 @@ ActiveRecord::Schema.define(version: 20161014162040) do
     t.datetime "created_at",                                   null: false
     t.integer  "webmaster_id", limit: 4,   default: 0
     t.string   "device_type",  limit: 255, default: "Unknown"
+    t.integer  "campaign_id",  limit: 4,                       null: false
   end
 
+  add_index "impressions", ["campaign_id"], name: "index_impressions_on_campaign_id", using: :btree
   add_index "impressions", ["created_at"], name: "index_impressions_on_created_at", using: :btree
   add_index "impressions", ["customer_id"], name: "index_impressions_on_customer_id", using: :btree
   add_index "impressions", ["device_type"], name: "index_impressions_on_device_type", using: :btree
@@ -84,8 +98,10 @@ ActiveRecord::Schema.define(version: 20161014162040) do
     t.integer  "product_id",       limit: 4
     t.integer  "webmaster_id",     limit: 4,   default: 0
     t.string   "device_type",      limit: 255, default: "Unknown"
+    t.integer  "campaign_id",      limit: 4,                       null: false
   end
 
+  add_index "reactions", ["campaign_id"], name: "index_reactions_on_campaign_id", using: :btree
   add_index "reactions", ["created_at"], name: "index_reactions_on_created_at", using: :btree
   add_index "reactions", ["customer_id"], name: "index_reactions_on_customer_id", using: :btree
   add_index "reactions", ["device_type"], name: "index_reactions_on_device_type", using: :btree

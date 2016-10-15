@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find_by_sid(params[:sid])
+    @product = Product.find_by_sid(params[:id])
     @title = @product.name
     @devices = @product.device_stats(reaction_sorting)
   end

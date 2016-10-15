@@ -1,7 +1,5 @@
 class Product < ActiveRecord::Base
 
-  self.primary_key = 'sid'
-
   include SharedMethods
 
   has_many :impressions

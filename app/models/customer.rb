@@ -1,7 +1,5 @@
 class Customer < ActiveRecord::Base
 
-  self.primary_key = 'sid'
-
   include SharedMethods
 
   belongs_to :webmaster

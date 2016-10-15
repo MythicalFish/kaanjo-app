@@ -7,13 +7,21 @@ class Webmaster < User
   has_many :products
   has_many :impressions
   has_many :reactions
+  has_many :campaigns
 
   before_create :assign_sid
   before_save :sanitize_website_url
+  after_create :create_default_campaign
 
   default_scope { where('admin = ?', false) }
 
   private
+
+  def create_default_campaign
+
+    #self.campaigns.create()
+
+  end
 
   def sanitize_website_url
 

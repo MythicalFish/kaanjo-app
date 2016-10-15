@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'dashboard#show'
 
   resources :products
-  resources :campaigns
+  resources :campaigns 
   resources :webmasters
   resources :admins, except: [:show]
 
