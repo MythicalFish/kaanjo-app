@@ -3,7 +3,7 @@ task seed_campaigns: :environment do
   DefaultCampaign.all.delete_all
   
   DefaultCampaign.create([
-    { title: 'Default 1', enabled: true, question: 'How does this item make you feel?' }
+    { name: 'Default 1', enabled: true, question: 'How does this item make you feel?' }
   ])
 
   reation_type_associations = {

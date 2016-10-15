@@ -1,5 +1,7 @@
 class CampaignsController < ApplicationController
 
+  respond_to :html
+
   def index
     @title = "Campaigns"
     @campaigns = current_webmaster.campaigns
@@ -21,7 +23,7 @@ class CampaignsController < ApplicationController
 
   def update
 
-    @campaign = current_webmaster.campaigns.find_by_relative_id(params[:id])
+    @campaign = current_webmaster.campaigns.find(params[:id])
 
     if @campaign.update_attributes(campaign_params)
       flash[:notice] = 'Campaign updated'
@@ -29,7 +31,7 @@ class CampaignsController < ApplicationController
       flash[:alert] = "Error: #{@campaign.errors.full_messages.to_sentence}"
     end
 
-    redirect_to edit_campaign_path(@campaign)
+    redirect_to edit_campaign_path(@campaign.relative_id)
 
   end
 
@@ -44,11 +46,18 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def destroy
+    @campaign = current_webmaster.campaigns.find_by_relative_id(params[:id])
+    @campaign.update_attributes(deleted:true)
+    flash[:notice] = 'Campaign deleted'
+    redirect_to campaigns_path
+  end
+
   private
 
   def campaign_params
     params.require(:campaign).permit(
-      :name, :description, :question, :site_path, :enabled, :start_date, :end_date
+      :name, :description, :question, :site_path, :enabled, :start_date, :end_date, :reaction_type_ids => []
     )
   end
 

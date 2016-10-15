@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20161015091928) do
     t.boolean  "is_default",               default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",                  default: false
   end
 
   add_index "campaigns", ["created_at"], name: "index_campaigns_on_created_at", using: :btree

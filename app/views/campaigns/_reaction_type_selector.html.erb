@@ -2,7 +2,6 @@
 <%= f.collection_select( 
   :reaction_type_ids, 
   ReactionType.all, :id, :name, {   
-    :selected => selected, 
-    :include_blank => true
+    :selected => selected
   },{ :multiple => true } 
 ) %>

@@ -1,6 +1,7 @@
 class Campaign < ActiveRecord::Base
 
   include SharedMethods
+  include CampaignValidator
 
   belongs_to :webmaster
   has_many :products
@@ -10,7 +11,7 @@ class Campaign < ActiveRecord::Base
 
   before_create :set_relative_id
 
-  default_scope { where('is_default = ?', false) }
+  default_scope { where('is_default = ? AND deleted = ?', false, false) }
 
   def self.new_from_default id = 1
     attributes = DefaultCampaign.find(id).dup.attributes
@@ -24,7 +25,7 @@ class Campaign < ActiveRecord::Base
   private
 
   def set_relative_id
-    id = webmaster.campaigns.last.try(:id) || 0
+    id = webmaster.campaigns.last.try(:relative_id) || 0
     self.relative_id = id + 1
   end
 

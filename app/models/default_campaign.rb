@@ -1,5 +1,7 @@
 class DefaultCampaign < ActiveRecord::Base
 
+  include CampaignValidator
+
   self.table_name = 'campaigns'
   has_and_belongs_to_many :reaction_types, foreign_key: 'campaign_id'
 
