@@ -17,4 +17,12 @@ task seed_campaigns: :environment do
     campaign.save
   end
 
+  #
+
+  Campaign.all.delete_all
+
+  Webmaster.all.each do |w|
+    w.create_default_campaign
+  end
+
 end

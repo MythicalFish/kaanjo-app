@@ -17,7 +17,8 @@ class Webmaster < User
 
   def create_default_campaign
     unless campaigns.any?
-      campaigns << DefaultCampaign.first.dup
+      campaigns << Campaign.new_from_default(1)
+      save
     end
   end
 

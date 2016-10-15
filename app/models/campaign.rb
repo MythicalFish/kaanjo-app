@@ -1,5 +1,7 @@
 class Campaign < ActiveRecord::Base
 
+  include SharedMethods
+
   belongs_to :webmaster
   has_many :products
   has_many :impressions
@@ -12,6 +14,15 @@ class Campaign < ActiveRecord::Base
 
   def find id
     find_by_relative_id id
+  end
+
+  def self.new_from_default id = 1
+    attributes = DefaultCampaign.find(id).dup.attributes
+    attributes[:relative_id] = nil
+    attributes[:webmaster_id] = nil
+    attributes[:is_default] = false
+    attributes[:enabled] = false
+    Campaign.new(attributes)
   end
 
   private

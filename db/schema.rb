@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20161015091928) do
   create_table "campaigns", force: :cascade do |t|
     t.integer  "relative_id",  limit: 4,                     null: false
     t.integer  "webmaster_id", limit: 4,     default: 0
-    t.string   "title",        limit: 255
+    t.string   "name",         limit: 255
     t.text     "description",  limit: 65535
     t.string   "site_path",    limit: 255
     t.boolean  "enabled",                    default: false

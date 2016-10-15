@@ -1,8 +1,23 @@
 - content_for(:header) do
   Campaigns   
 
-.flex
-  %header.flex-auto
-    Activity Overview
-  .flex-none
-    = render partial: 'shared/datepicker'
+%table
+  %thead        
+    %tr
+      %td
+        = sort_link('name', 'Campaign name')
+      %td
+        = sort_link('impression_total', 'Impressions')
+      %td
+        = sort_link('reaction_total', 'Total reactions')
+      %td 
+        = sort_link('ctr', 'CTR')
+  %tbody
+    - @campaigns.each do |c|
+      %tr
+        %td
+          %a{href:campaign_path(c.relative_id)}= c.name
+        %td= c.impression_total
+        %td= c.reaction_total
+        %td= "#{c.ctr}%"
+    
