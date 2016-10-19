@@ -1,8 +1,0 @@
-- selected = @campaign.try(:reaction_type_ids) || []
-
-- selected.each do |id|
-  - reaction_type = ReactionType.find(id)
-  .emoticon
-    = f.check_box :reaction_type_ids, {multiple:true, checked:true}, id, nil
-    %img{src:reaction_type.image_url}
-  

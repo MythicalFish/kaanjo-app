@@ -1,23 +1,24 @@
-//document.addEventListener("turbolinks:load", function() {
-$(document).ready(function(){
+$(document).ready(function () {
   
-  if(!$('.datepicker').is('*'))
+  app.datepicker = $('.datepicker');
+
+  if (!$('.datepicker').is('*'))
     return;
 
-  app.datepicker = $('.datepicker').first();
-
-  $('*').on('click', function() {
-    if( !$(this).is( '.datepicker *' ) )
-      $('.datepicker ul:not(.hide)').addClass('hide');
+  $('*').on('click', function () {
+    if (!$(this).is('.datepicker *'))
+      app.datepicker.find('ul:not(.hide)').addClass('hide');
   });
 
-  $('body').on('click', '.datepicker span', function() {
-    setTimeout(function() {
+  $('body').on('click', '.datepicker span', function () {
+    setTimeout(function () {
       app.datepicker.find('ul').removeClass('hide');
-    },50);
+    }, 50);
   });
+  
+  app.rangepicker = $('.datepicker .range-selector');
 
-  $('.datepicker .range-selector').dateRangePicker({}).
+  app.rangepicker.dateRangePicker({}).
   bind('datepicker-change',function(e,o) {
     from = o.value.split(' to ')[0];
     until = o.value.split(' to ')[1];

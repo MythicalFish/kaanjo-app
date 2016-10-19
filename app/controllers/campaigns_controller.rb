@@ -13,8 +13,14 @@ class CampaignsController < ApplicationController
   end
 
   def edit
+
     @campaign = current_webmaster.campaigns.find_by_relative_id(params[:id])
+
+    @selected_emoticons = @campaign.try(:reaction_type_ids) || []
+    @unselected_emoticons = ReactionType.all.ids - @selected_emoticons
+
     @title = @campaign.name
+
   end
 
   def new
@@ -36,7 +42,12 @@ class CampaignsController < ApplicationController
   end
 
   def create
+    
     @campaign = current_webmaster.campaigns.new(campaign_params)
+    
+    @selected_emoticons = []
+    @unselected_emoticons = ReactionType.all.ids
+
     if @campaign.save
       flash[:notice] = "Campaign created"
       redirect_to campaigns_path

@@ -14,7 +14,7 @@ class Product < ActiveRecord::Base
   def self.top_by_type from,to
     select(   "products.*,
               COUNT(distinct reactions.id) AS count,
-              reaction_types.name AS type_name").
+              reaction_types.label AS type_label").
       joins(  "LEFT JOIN reactions ON reactions.product_id = products.id" ).
       joins(  "LEFT JOIN reaction_types ON reactions.reaction_type_id = reaction_types.id" ).
       where(  "reactions.created_at" => from..to, ).

@@ -13,13 +13,13 @@
         = sort_link('ctr', 'CTR')
   %tbody
     - products.each do |p|
-        %tr
-          %td
-            %a{href:product_path(p.sid)}= p.name
-          %td= p.impression_total
-          - ReactionType.all.each do |r|
-            %td= p.send("type_total_#{r.id}")
-          %td= p.reaction_total
-          %td
-            = "#{p.ctr}%"
-      
+      %tr
+        %td
+          %a{href:product_path(p.sid)}= p.name
+        %td= p.impression_total
+        - ReactionType.all.each do |r|
+          %td= p.send("type_total_#{r.id}")
+        %td= p.reaction_total
+        %td
+          = "#{p.ctr}%"
+    

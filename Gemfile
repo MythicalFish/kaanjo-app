@@ -25,6 +25,7 @@ gem 'faye-websocket', '0.10.0'
 gem 'websocket-rails'
 
 group :development do
+  gem 'shog'
   gem 'byebug'
   gem 'html2haml'
   gem 'web-console', '~> 2.0'

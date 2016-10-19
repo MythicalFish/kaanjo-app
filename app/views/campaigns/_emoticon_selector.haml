@@ -1,0 +1,16 @@
+#emoticon-selection
+
+  - @selected_emoticons.each do |id|
+    - reaction_type = ReactionType.find(id)
+    .emoticon{'data-id':id}
+      = f.check_box :reaction_type_ids, {multiple:true, checked:true}, id, nil
+      %img{src:reaction_type.image_url}
+    
+  - @unselected_emoticons.each do |id|
+    - reaction_type = ReactionType.find(id)
+    .emoticon.hide{'data-id':id}
+      = f.check_box :reaction_type_ids, {multiple:true, checked:false}, id, nil
+      %img{src:reaction_type.image_url}
+  
+%button{type:'button',onclick:"app.modal.show('#emoticon-library')"}
+  %i.fa.fa-plus

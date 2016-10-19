@@ -1,0 +1,21 @@
+.modal {
+  position: fixed;
+  background: rgba(0,151,214,0.8);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  @extend .flex;
+  @extend .items-middle;
+  opacity: 0;
+  z-index: 2;
+  transition: all .5s;
+  -webkit-transition: all .5s;
+  .modal-box {
+    padding: $space-3;
+    background: $white;
+    transition: all .5s;
+    -webkit-transition: all .5s;
+    opacity: 0;
+  }
+}

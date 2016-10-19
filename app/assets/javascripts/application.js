@@ -18,5 +18,7 @@
 //= require app
 //= require datepicker
 //= require flash
+//= require modal
+//= require emoticons
 //= require vendor/jquery-date-range-picker/jquery.daterangepicker
 
