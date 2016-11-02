@@ -1,4 +1,8 @@
-app.emoticons = {
+app.campaign = {
+
+  populate: function (id) {
+    alert(id);
+  },
 
   add: function (id) {
     e = $('#emoticon-selection').find('.emoticon[data-id="' + id + '"]');

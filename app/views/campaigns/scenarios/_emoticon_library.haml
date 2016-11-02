@@ -1,6 +1,6 @@
 #emoticon-library.modal.hide
   .modal-box
-    - @unselected_emoticons.each do |id|
+    - @unselected_emoticons.try(:each) do |id|
       - reaction_type = ReactionType.find(id)
-      %button.emoticon{onclick:"app.emoticons.add(#{id})"}
+      %button.emoticon{onclick:""}
         %img{src:reaction_type.image_url}

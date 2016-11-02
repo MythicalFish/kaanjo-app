@@ -1,3 +1,6 @@
+.step:not(:first-child) {
+  display: none;
+}
 header {
   background: $gray-lightest;
   padding: $space-3;

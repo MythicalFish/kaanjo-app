@@ -20,5 +20,6 @@
 //= require flash
 //= require modal
 //= require campaign
+//= require navigation
 //= require vendor/jquery-date-range-picker/jquery.daterangepicker
 

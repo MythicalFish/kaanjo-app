@@ -1,0 +1,14 @@
+#emoticon-selection
+
+  - @selected_emoticons.try(:each) do |id|
+    - r = ReactionType.find(id)
+    = render partial: 'campaigns/scenarios/emoticon', locals: { r:r, f:f, checked:true }
+    
+  - @unselected_emoticons.try(:each) do |id|
+    - r = ReactionType.find(id)
+    = render partial: 'campaigns/scenarios/emoticon', locals: { r:r, f:f, checked:false }
+
+= render partial: 'campaigns/scenarios/form'
+    
+%button{type:'button',onclick:"app.modal.show('#emoticon-library')"}
+  %i.fa.fa-plus
