@@ -1,7 +1,9 @@
 app.campaign = {
 
   populate: function (id) {
-    alert(id);
+    var c = $('.campaign-template[data-id="' + id + '"]');
+    if (!c.length > 0) return;
+    console.log('found');
   },
 
   add: function (id) {

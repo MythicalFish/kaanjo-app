@@ -28,7 +28,7 @@
 
     - DefaultCampaign.all.each do |c|
       .b1.mt3
-        .flex.items-center
+        .campaign-template.flex.items-center{data:{id:c.id}}
           .flex-auto.p2.br1
             %h4= c.name
             = render partial: 'campaigns/scenarios/emoticons_static', locals: {campaign:c}
