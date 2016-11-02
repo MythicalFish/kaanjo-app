@@ -35,24 +35,24 @@
 @import "basscss/responsive-margin";
 @import "basscss/responsive-padding";
 
-@import "utilities/flexboxgrid";
-@import "utilities/fontawesome";
-@import "utilities/layout";
+@import "base/layout";
+@import "base/typography";
+
 @import "utilities/mixins";
-@import "utilities/backgrounds";
 @import "utilities/colors";
 @import "utilities/widths";
 @import "utilities/borders";
-@import "utilities/modal";
 
-@import "base/buttons";
-@import "base/fonts";
-@import "base/forms";
-@import "base/typography";
-@import "base/tables";
-@import "base/emoticons";
+@import "components/flexboxgrid";
+@import "components/modal";
+@import "components/layout";
+@import "components/backgrounds";
+@import "components/fontawesome";
+@import "components/buttons";
+@import "components/fonts";
+@import "components/forms";
+@import "components/tables";
+@import "components/emoticons";
+@import "components/datepicker";
+@import "components/flash";
 
-@import "app/general";
-@import "app/layout";
-@import "app/ui";
-@import "app/app";

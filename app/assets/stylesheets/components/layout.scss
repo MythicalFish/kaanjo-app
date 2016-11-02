@@ -1,3 +1,10 @@
+header {
+  background: $gray-lightest;
+  padding: $space-3;
+  text-transform: uppercase;
+  @extend .b1-bottom;
+  line-height: 1;
+}
 .container {
   width: 100%!important;
   max-width: 1200px!important;

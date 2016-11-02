@@ -1,5 +1,17 @@
+* {
+  outline: 0!important;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+html, body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
 body {
   background-color: #f1f1f1;
+  color: $gray-darker;
+  margin: 0;
 }
 #logo {
   background: $aqua;
