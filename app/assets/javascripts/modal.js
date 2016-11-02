@@ -9,3 +9,8 @@ app.modal = {
     setTimeout(function () { $(target).addClass('hide'); }, 1050);
   }
 }
+
+$(document).on('click', '.modal', function (e) {
+  if($(e.target).is('.modal'))
+    app.modal.hide($(this));
+});

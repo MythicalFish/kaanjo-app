@@ -1,5 +1,8 @@
-.emoticon {
+.emoticon, .emoticon:focus {
   display: inline-block;
+  background: none;
+  padding: 0;
+  outline: none;
   input {
     display: none;
   }
@@ -8,4 +11,7 @@
     height: auto;
     max-width: 65px;
   }
+}
+.emoticon-form {
+  display: none;
 }

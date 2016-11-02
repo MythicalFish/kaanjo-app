@@ -1,0 +1,5 @@
+#emoticon-attributes
+  - ReactionType.all.each do |r|
+    .emoticon-form{'data-id':r.id}
+      = text_field_tag 'reaction_type_label', r.label
+      = text_field_tag 'reaction_type_message', r.message
