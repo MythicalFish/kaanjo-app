@@ -7,10 +7,17 @@ namespace :emoticons do
 
     Dir.glob("#{Rails.root}/lib/assets/emoticons/*.svg") do |image|
       emoticon = Emoticon.create({
-        default_label: File.basename(image),
+        label: File.basename(image),
         image: File.new(image, "r")
       })
-      puts "created emoticon: #{emoticon.default_label}"
+      puts "created emoticon: #{emoticon.label}"
+    end
+
+    labels = ['Like','Love','Happy','Meh','Nice Gift']
+
+    Emoticon.all.limit(5).each_with_index do |e,i|
+      e.label = labels[i]
+      e.save
     end
 
   end

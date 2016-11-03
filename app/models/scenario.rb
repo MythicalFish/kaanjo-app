@@ -6,7 +6,7 @@ class Scenario < ActiveRecord::Base
   has_many :impressions
 
   def label
-    read_attribute(:label) || emoticon.label
+    read_attribute(:label) || emoticon.try(:label)
   end
 
   def self.default_set

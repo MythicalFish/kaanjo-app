@@ -2,12 +2,21 @@
 
   %h3 Your scenarios
 
-  .tabs
-    - @scenarios.each do |scenario|
-      - f.fields_for :scenarios, scenario do |ff|
-        asdas
-        .tab 
-          asdasd
+  .row
+
+    - @campaign.scenarios.try(:each) do |scenario|
+      .col-xs-3 
+        = f.fields_for :scenarios, scenario do |ff|
+          = ff.hidden_field :campaign_id
+          = ff.hidden_field :emoticon_id, class: 'emoticon_id'
+          %img{src:scenario.image_url}
+          %label= scenario.label
+
+    - (6 - @campaign.scenarios.length).times do  
+      = f.fields_for :scenarios, Scenario.new do |ff|
+        .col-xs-3
+          = ff.hidden_field :campaign_id, value: @campaign.id
+          = ff.hidden_field :id, value: nil
           %img{src:''}
           %label
     

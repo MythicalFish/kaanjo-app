@@ -13,20 +13,13 @@ class CampaignsController < ApplicationController
   end
 
   def edit
-
     @campaign = current_webmaster.campaigns.find_by_relative_id(params[:id])
     @title = @campaign.name
-    @scenarios = @campaign.scenarios
-
   end
 
   def new
-    @title = "New campaign"
     @campaign = Campaign.new
-    @scenarios = []
-    Scenario.default_set.each do |r|
-      @scenarios << r.dup
-    end
+    @title = "New campaign"
   end
 
   def update
