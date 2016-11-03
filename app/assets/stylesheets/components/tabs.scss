@@ -1,0 +1,6 @@
+.tabs {
+  @extend .flex;
+}
+.tab-content:not(:first-child) {
+  display: none;
+}

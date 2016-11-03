@@ -12,6 +12,18 @@
     max-width: 65px;
   }
 }
-.emoticon-form {
-  display: none;
+.emoticon-selector {
+  text-align: center;
+  button {
+    padding: 0;
+    display: inline-block;
+    outline: none;
+    text-align: center;
+    background-image: image-url('ui/add.svg');
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 80%;
+    @extend .vw-sq5;
+  }
 }

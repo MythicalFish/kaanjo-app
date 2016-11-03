@@ -2,26 +2,27 @@
 
   %h3 Your scenarios
 
-  .row
+  .tabs
+
+    - i = 0
 
     - @campaign.scenarios.try(:each) do |scenario|
-      .col-xs-3 
+      - i = i + 1
+      .tab{data:{target:i}} 
         = f.fields_for :scenarios, scenario do |ff|
-          = ff.hidden_field :campaign_id
-          = ff.hidden_field :emoticon_id, class: 'emoticon_id'
-          %img{src:scenario.image_url}
-          %label= scenario.label
+          = render partial: 'campaigns/scenarios/emoticon_selector', locals: { ff:ff, scenario:scenario }
+          - content_for :emoticon_form do
+            .tab-content{data:{id:i}} 
+              = render partial: 'campaigns/scenarios/emoticon_form', locals: { ff:ff, scenario:scenario }
 
-    - (6 - @campaign.scenarios.length).times do  
-      = f.fields_for :scenarios, Scenario.new do |ff|
-        .col-xs-3
-          = ff.hidden_field :campaign_id, value: @campaign.id
-          = ff.hidden_field :id, value: nil
-          %img{src:''}
-          %label
-    
-          .tab-content{data:{id:1}}
+    - (5 - @campaign.scenarios.length).times do
+      - i = i + 1
+      .tab{data:{target:i}}  
+        = f.fields_for :scenarios, Scenario.new do |ff|
+          = render partial: 'campaigns/scenarios/emoticon_selector', locals: { ff:ff, scenario:Scenario.new }
+          - content_for :emoticon_form do
+            .tab-content{data:{id:i}} 
+              = render partial: 'campaigns/scenarios/emoticon_form', locals: { ff:ff, scenario:Scenario.new }
 
-    
-%button{type:'button',onclick:"app.modal.show('#emoticon-library')"}
-  %i.fa.fa-plus
+  .tab-contents
+    = content_for :emoticon_form

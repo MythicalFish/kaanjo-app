@@ -14,7 +14,7 @@ class Scenario < ActiveRecord::Base
   end
 
   def image_url
-    emoticon.image.url
+    emoticon.image.url if emoticon
   end
   
 end

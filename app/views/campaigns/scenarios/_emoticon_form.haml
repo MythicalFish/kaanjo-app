@@ -1,5 +1,1 @@
-#emoticon-attributes
-  - Scenario.all.each do |r|
-    .emoticon-form{'data-id':r.id}
-      = text_field_tag 'scenario_label', r.label
-      = text_field_tag 'scenario_message', r.message
+= ff.text_field :label
