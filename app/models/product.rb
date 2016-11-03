@@ -14,9 +14,9 @@ class Product < ActiveRecord::Base
   def self.top_by_type from,to
     select(   "products.*,
               COUNT(distinct reactions.id) AS count,
-              reaction_types.label AS type_label").
+              scenarios.label AS type_label").
       joins(  "LEFT JOIN reactions ON reactions.product_id = products.id" ).
-      joins(  "LEFT JOIN reaction_types ON reactions.reaction_type_id = reaction_types.id" ).
+      joins(  "LEFT JOIN scenarios ON reactions.scenario_id = scenarios.id" ).
       where(  "reactions.created_at" => from..to, ).
       order(  "count DESC" ).
       group(  "products.id").
@@ -36,8 +36,8 @@ class Product < ActiveRecord::Base
       ",COUNT(distinct impressions.id) AS impression_total" <<
       ",COUNT(distinct reactions.id) AS reaction_total"
 
-    ReactionType.all.each do |type|
-      query << ",COUNT(distinct case when reactions.reaction_type_id = #{type.id} then reactions.id end) AS type_total_#{type.id}"
+    Scenario.all.each do |type|
+      query << ",COUNT(distinct case when reactions.scenario_id = #{type.id} then reactions.id end) AS type_total_#{type.id}"
     end
 
     Impression.select(query).

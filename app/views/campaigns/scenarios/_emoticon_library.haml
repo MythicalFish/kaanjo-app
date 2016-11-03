@@ -1,6 +1,6 @@
 #emoticon-library.modal.hide
   .modal-box
     - @unselected_emoticons.try(:each) do |id|
-      - reaction_type = ReactionType.find(id)
+      - scenario = Scenario.find(id)
       %button.emoticon{onclick:""}
-        %img{src:reaction_type.image_url}
+        %img{src:scenario.image_url}

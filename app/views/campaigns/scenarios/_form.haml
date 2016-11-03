@@ -1,5 +1,18 @@
-#emoticon-attributes
-  - ReactionType.all.each do |r|
-    .emoticon-form{'data-id':r.id}
-      = text_field_tag 'reaction_type_label', r.label
-      = text_field_tag 'reaction_type_message', r.message
+#scenarios
+
+  %h3 Your scenarios
+
+  .tabs
+    - @scenarios.each do |scenario|
+      - f.fields_for :scenarios, scenario do |ff|
+        asdas
+        .tab 
+          asdasd
+          %img{src:''}
+          %label
+    
+          .tab-content{data:{id:1}}
+
+    
+%button{type:'button',onclick:"app.modal.show('#emoticon-library')"}
+  %i.fa.fa-plus

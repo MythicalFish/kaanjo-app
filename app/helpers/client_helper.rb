@@ -2,12 +2,12 @@ module ClientHelper
   
   def button_class r
     c = "kaanjo-reaction"
-    c << " kaanjo-selected" if r == @reaction_type
+    c << " kaanjo-selected" if r == @scenario
     c
   end
 
-  def emoticon_url reaction_type
-    "http://#{site_url}/images/emoticons/#{reaction_type.id}.svg"
+  def emoticon_url scenario
+    "http://#{site_url}/images/emoticons/#{scenario.id}.svg"
   end
 
   def static_asset_url filename

@@ -48,7 +48,7 @@ module Calculator
         from = opts[:day].beginning_of_day
         to = opts[:day].end_of_day
         args = { created_at: from..to }
-        args[:reaction_type] = opts[:type] if opts[:type]
+        args[:scenario] = opts[:type] if opts[:type]
         association.where(args).length
       end
 
@@ -106,7 +106,7 @@ module Calculator
       @impression_total = self.get_impression_total(opts)
       @ctr = self.get_ctr(opts)
 
-      ReactionType.all.each do |t|
+      Scenario.all.each do |t|
         instance_variable_set(
           "@type_total_#{t.id}",
           self.get_reaction_total({type:t}.merge(opts))

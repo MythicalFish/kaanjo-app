@@ -1,13 +1,21 @@
 app.campaign = {
 
-  populate: function (id) {
+  clone: function (id) {
+    
     var c = $('.campaign-template[data-id="' + id + '"]');
+    
     if (!c.length > 0) return;
-    console.log('found');
+
+    $('#campaign_question').val(c.attr('data-question'));
+
+    c.find('.emoticon').each(function (i,e) {
+      console.log(e);
+    });
+    
   },
 
   add: function (id) {
-    e = $('#emoticon-selection').find('.emoticon[data-id="' + id + '"]');
+    var e = $('#emoticon-selection').find('.emoticon[data-id="' + id + '"]');
     e.removeClass('hide');
     e.find('input[type="checkbox"]').prop('checked', true);
     app.modal.hide('#emoticon-library');

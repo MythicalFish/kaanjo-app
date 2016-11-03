@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161015213254) do
+ActiveRecord::Schema.define(version: 20161103045458) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "relative_id",  limit: 4,                   null: false
@@ -35,14 +35,6 @@ ActiveRecord::Schema.define(version: 20161015213254) do
   add_index "campaigns", ["relative_id"], name: "index_campaigns_on_relative_id", using: :btree
   add_index "campaigns", ["webmaster_id"], name: "index_campaigns_on_webmaster_id", using: :btree
 
-  create_table "campaigns_reaction_types", id: false, force: :cascade do |t|
-    t.integer "campaign_id",      limit: 4, null: false
-    t.integer "reaction_type_id", limit: 4, null: false
-  end
-
-  add_index "campaigns_reaction_types", ["campaign_id"], name: "index_campaigns_reaction_types_on_campaign_id", using: :btree
-  add_index "campaigns_reaction_types", ["reaction_type_id"], name: "index_campaigns_reaction_types_on_reaction_type_id", using: :btree
-
   create_table "customers", force: :cascade do |t|
     t.string   "sid",              limit: 255,             null: false
     t.string   "ip_address",       limit: 255
@@ -58,15 +50,16 @@ ActiveRecord::Schema.define(version: 20161015213254) do
   add_index "customers", ["webmaster_id"], name: "index_customers_on_webmaster_id", using: :btree
 
   create_table "emoticons", force: :cascade do |t|
-    t.string   "default_label",      limit: 255, null: false
+    t.string   "label",              limit: 255, null: false
     t.string   "image_file_name",    limit: 255
     t.string   "image_content_type", limit: 255
     t.integer  "image_file_size",    limit: 4
     t.datetime "image_updated_at"
     t.string   "sid",                limit: 255, null: false
+    t.string   "message",            limit: 255
   end
 
-  add_index "emoticons", ["default_label"], name: "index_emoticons_on_default_label", using: :btree
+  add_index "emoticons", ["label"], name: "index_emoticons_on_label", using: :btree
   add_index "emoticons", ["sid"], name: "index_emoticons_on_sid", using: :btree
 
   create_table "impressions", force: :cascade do |t|
@@ -98,25 +91,14 @@ ActiveRecord::Schema.define(version: 20161015213254) do
   add_index "products", ["sid"], name: "index_products_on_sid", using: :btree
   add_index "products", ["webmaster_id"], name: "index_products_on_webmaster_id", using: :btree
 
-  create_table "reaction_types", force: :cascade do |t|
-    t.string  "label",         limit: 255,                                                            null: false
-    t.string  "message",       limit: 255, default: "Thanks! You and {number} others feel this way."
-    t.string  "message_first", limit: 255, default: "Thanks! You are the first to feel this way."
-    t.integer "emoticon_id",   limit: 4
-    t.boolean "is_default",                default: false
-  end
-
-  add_index "reaction_types", ["emoticon_id"], name: "index_reaction_types_on_emoticon_id", using: :btree
-  add_index "reaction_types", ["is_default"], name: "index_reaction_types_on_is_default", using: :btree
-
   create_table "reactions", force: :cascade do |t|
-    t.datetime "created_at",                                       null: false
-    t.integer  "reaction_type_id", limit: 4,                       null: false
-    t.integer  "customer_id",      limit: 4,                       null: false
-    t.integer  "product_id",       limit: 4
-    t.integer  "webmaster_id",     limit: 4,   default: 0
-    t.string   "device_type",      limit: 255, default: "Unknown"
-    t.integer  "campaign_id",      limit: 4,                       null: false
+    t.datetime "created_at",                                   null: false
+    t.integer  "scenario_id",  limit: 4,                       null: false
+    t.integer  "customer_id",  limit: 4,                       null: false
+    t.integer  "product_id",   limit: 4
+    t.integer  "webmaster_id", limit: 4,   default: 0
+    t.string   "device_type",  limit: 255, default: "Unknown"
+    t.integer  "campaign_id",  limit: 4,                       null: false
   end
 
   add_index "reactions", ["campaign_id"], name: "index_reactions_on_campaign_id", using: :btree
@@ -124,8 +106,20 @@ ActiveRecord::Schema.define(version: 20161015213254) do
   add_index "reactions", ["customer_id"], name: "index_reactions_on_customer_id", using: :btree
   add_index "reactions", ["device_type"], name: "index_reactions_on_device_type", using: :btree
   add_index "reactions", ["product_id"], name: "index_reactions_on_product_id", using: :btree
-  add_index "reactions", ["reaction_type_id"], name: "index_reactions_on_reaction_type_id", using: :btree
+  add_index "reactions", ["scenario_id"], name: "index_reactions_on_scenario_id", using: :btree
   add_index "reactions", ["webmaster_id"], name: "index_reactions_on_webmaster_id", using: :btree
+
+  create_table "scenarios", force: :cascade do |t|
+    t.string  "label",       limit: 255
+    t.string  "message",     limit: 255, default: "Thanks! You and {number} others feel this way."
+    t.integer "emoticon_id", limit: 4
+    t.boolean "is_default",              default: false
+    t.integer "campaign_id", limit: 4
+  end
+
+  add_index "scenarios", ["campaign_id"], name: "index_scenarios_on_campaign_id", using: :btree
+  add_index "scenarios", ["emoticon_id"], name: "index_scenarios_on_emoticon_id", using: :btree
+  add_index "scenarios", ["is_default"], name: "index_scenarios_on_is_default", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false

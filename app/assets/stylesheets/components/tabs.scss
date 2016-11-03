@@ -1,0 +1,5 @@
+.tab {
+  display: inline-block;
+  @extend .p2;
+  text-align: center;
+}

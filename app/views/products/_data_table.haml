@@ -5,7 +5,7 @@
         = sort_link('name', 'Product name')
       %td
         = sort_link('impression_total', 'Impressions')
-      - ReactionType.all.each do |r|
+      - Scenario.all.each do |r|
         %td= sort_link("type_total_#{r.id}", r.label)
       %td
         = sort_link('reaction_total', 'Total reactions')
@@ -17,7 +17,7 @@
         %td
           %a{href:product_path(p.sid)}= p.name
         %td= p.impression_total
-        - ReactionType.all.each do |r|
+        - Scenario.all.each do |r|
           %td= p.send("type_total_#{r.id}")
         %td= p.reaction_total
         %td

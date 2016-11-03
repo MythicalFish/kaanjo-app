@@ -4,7 +4,7 @@ class Emoticon < ActiveRecord::Base
 
   before_create :assign_sid
 
-  has_many :reaction_types
+  has_many :scenarios
 
   has_attached_file :image,
     url: "/emoticons/:sid.:extension",

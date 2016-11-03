@@ -29,8 +29,8 @@ module SharedQueries
           ",(COUNT(distinct reactions.id) / COUNT(distinct impressions.id)) * 100 AS total_ctr"
       end
 
-      ReactionType.all.each do |type|
-        query << ",COUNT(distinct case when reactions.reaction_type_id = #{type.id} then reactions.id end) AS type_total_#{type.id}"
+      Scenario.all.each do |type|
+        query << ",COUNT(distinct case when reactions.scenario_id = #{type.id} then reactions.id end) AS type_total_#{type.id}"
       end
       
       select(query).

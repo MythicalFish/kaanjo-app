@@ -2,17 +2,17 @@ class Reaction < ActiveRecord::Base
 
   belongs_to :webmaster
   belongs_to :product
-  belongs_to :reaction_type
+  belongs_to :scenario
   belongs_to :customer
 
   validates :webmaster_id, presence: true
   validates :product_id, presence: true
-  validates :reaction_type_id, presence: true
+  validates :scenario_id, presence: true
   validates :customer_id, presence: true
 
   before_create :attach_to_webmaster
 
-  alias_method :type, :reaction_type
+  alias_method :type, :scenario
 
   def self.total from, to
     if from && to
@@ -23,11 +23,11 @@ class Reaction < ActiveRecord::Base
   end
 
   def self.counts from, to
-    select( "reaction_types.*, 
+    select( "scenarios.*, 
             COUNT(reactions.id) AS count" ).
-    joins(  :reaction_type ).
+    joins(  :scenario ).
     where(  "reactions.created_at" => from..to ).
-    group(  "reaction_types.id" )
+    group(  "scenarios.id" )
   end
 
   private

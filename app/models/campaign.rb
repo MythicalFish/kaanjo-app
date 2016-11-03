@@ -8,13 +8,14 @@ class Campaign < ActiveRecord::Base
   has_many :products
   has_many :impressions
   has_many :reactions
-  has_and_belongs_to_many :reaction_types
-
+  has_many :scenarios
+  accepts_nested_attributes_for :scenarios
+  
   before_create :set_relative_id
 
   default_scope { where('is_default = ? AND deleted = ?', false, false) }
 
-  validate :number_of_reaction_types
+  validate :number_of_scenarios
 
   def self.new_from_default id = 1
     attributes = DefaultCampaign.find(id).dup.attributes
@@ -32,9 +33,9 @@ class Campaign < ActiveRecord::Base
     self.relative_id = id + 1
   end
 
-  def number_of_reaction_types
-    errors.add(:reaction_types, "Max 6 reactions") if reaction_types.size > 6
-    errors.add(:reaction_types, "Min 2 reactions") if reaction_types.size < 2
+  def number_of_scenarios
+    errors.add(:scenarios, "Max 6 reactions") if scenarios.size > 6
+    errors.add(:scenarios, "Min 2 reactions") if scenarios.size < 2
   end
 
 end

@@ -24,7 +24,7 @@
         = sort_link('device_type', 'Device type')
       %td
         = sort_link('impression_total', 'Impressions')
-      - ReactionType.all.each do |r|
+      - Scenario.all.each do |r|
         %td= sort_link("type_total_#{r.id}", r.label)
       %td
         = sort_link('reaction_total', 'Total reactions')
@@ -35,7 +35,7 @@
           %span.pl3.pr2
             = i.device_type
         %td= i.impression_total
-        - ReactionType.all.each do |r|
+        - Scenario.all.each do |r|
           %td= i.attributes["type_total_#{r.id}"]
         %td= i.reaction_total
         

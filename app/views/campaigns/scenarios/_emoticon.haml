@@ -1,4 +1,4 @@
 - classname = checked ? '' : 'hide'
 %button.emoticon{type:'button', 'data-id':r.id, class:classname, onclick: ""}
-  = f.check_box :reaction_type_ids, {multiple:true, checked:checked}, r.id, nil
+  = f.check_box :scenario_ids, {multiple:true, checked:checked}, r.id, nil
   %img{src:r.image_url}

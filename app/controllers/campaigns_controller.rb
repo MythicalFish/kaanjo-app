@@ -15,16 +15,18 @@ class CampaignsController < ApplicationController
   def edit
 
     @campaign = current_webmaster.campaigns.find_by_relative_id(params[:id])
-
-    @selected_emoticons = @campaign.try(:reaction_type_ids) || []
-    @unselected_emoticons = ReactionType.all.ids - @selected_emoticons
-
     @title = @campaign.name
+    @scenarios = @campaign.scenarios
 
   end
 
   def new
     @title = "New campaign"
+    @campaign = Campaign.new
+    @scenarios = []
+    Scenario.default_set.each do |r|
+      @scenarios << r.dup
+    end
   end
 
   def update
@@ -46,7 +48,7 @@ class CampaignsController < ApplicationController
     @campaign = current_webmaster.campaigns.new(campaign_params)
     
     @selected_emoticons = []
-    @unselected_emoticons = ReactionType.all.ids
+    @unselected_emoticons = Scenario.all.ids
 
     if @campaign.save
       flash[:notice] = "Campaign created"
@@ -68,7 +70,7 @@ class CampaignsController < ApplicationController
 
   def campaign_params
     params.require(:campaign).permit(
-      :name, :description, :question, :site_path, :enabled, :start_date, :end_date, :reaction_type_ids => []
+      :name, :description, :question, :site_path, :enabled, :start_date, :end_date, :scenario_ids => []
     )
   end
 

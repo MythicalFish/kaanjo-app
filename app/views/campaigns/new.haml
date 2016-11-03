@@ -28,17 +28,17 @@
 
     - DefaultCampaign.all.each do |c|
       .b1.mt3
-        .campaign-template.flex.items-center{data:{id:c.id}}
+        .campaign-template.flex.items-center{data:{id:c.id,question:c.question}}
           .flex-auto.p2.br1
             %h4= c.name
             = render partial: 'campaigns/scenarios/emoticons_static', locals: {campaign:c}
           .flex-none.p2
-            %button{onclick:"app.step('#customize');app.campaign.populate(#{c.id})"}
+            %button{onclick:"app.step('#customize');app.campaign.clone(#{c.id})"}
               Select
 
   #customize.step
 
-    = form_for(Campaign.new) do |f|
+    = form_for(@campaign) do |f|
       = render partial: 'form', locals: {f:f}
       .actions
         = f.submit "Create"

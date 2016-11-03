@@ -1,5 +1,5 @@
 - @product = product
-- @reaction_type = reaction_type
+- @scenario = scenario
 
 //#kaanjo-info
 //  %img{src:static_asset_url('info.svg')}
@@ -10,15 +10,15 @@
 #kaanjo-title
   How does this item make you feel?
 
-- ReactionType.all.each do |r|
+- Scenario.all.each do |r|
   %button{type:'button', onclick:"Kaanjo.react(#{r.id})", class:button_class(r), id:"kaanjo-reaction#{r.id}"}
     %img{src:emoticon_url(r)}
     %label
       .kaanjo-bubble= r.label
 
 #kaanjo-status
-  - if @reaction_type
-    = render partial: 'client/status', locals: { reaction_type: @reaction_type, product: @product }
+  - if @scenario
+    = render partial: 'client/status', locals: { scenario: @scenario, product: @product }
 
 #kaanjo-copyright
   Powered by: 

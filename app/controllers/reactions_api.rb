@@ -18,7 +18,7 @@ class ReactionsApi < WebsocketRails::BaseController
   def react
 
     if @reaction
-      @reaction.reaction_type_id = message[:id]
+      @reaction.scenario_id = message[:id]
       if @reaction.save
         set_reaction @reaction
         success("Reaction updated")
@@ -28,7 +28,7 @@ class ReactionsApi < WebsocketRails::BaseController
     else
 
       @reaction = Reaction.create(
-        reaction_type_id: message[:id],
+        scenario_id: message[:id],
         customer_id: @customer.id,
         product_id: @product.id,
         device_type: @device
@@ -46,13 +46,13 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def get_buttons
-    html = render_to_string('client/_buttons.haml', :layout => false, :locals => { :reaction_type => @reaction_type, :product => @product })
+    html = render_to_string('client/_buttons.haml', :layout => false, :locals => { :scenario => @scenario, :product => @product })
     trigger_success(html) if html
     failure unless html
   end
 
   def get_status
-    html = render_to_string('client/_status.haml', :layout => false, :locals => { :reaction_type => @reaction_type, :product => @product })
+    html = render_to_string('client/_status.haml', :layout => false, :locals => { :scenario => @scenario, :product => @product })
     trigger_success(html) if html
     failure unless html
   end
@@ -212,14 +212,14 @@ class ReactionsApi < WebsocketRails::BaseController
     @product =       set[:product]
     @device =        set[:device]
     @reaction =      set[:reaction]
-    @reaction_type = set[:reaction_type]
+    @scenario = set[:scenario]
   end
 
   def set_reaction reaction
     @reaction = reaction
     set :reaction, @reaction
-    @reaction_type = @reaction ? @reaction.type : nil
-    set :reaction_type, @reaction_type
+    @scenario = @reaction ? @reaction.type : nil
+    set :scenario, @scenario
   end
 
   def webmaster_valid?
