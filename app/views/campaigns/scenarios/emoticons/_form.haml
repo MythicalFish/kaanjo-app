@@ -1,0 +1,17 @@
+
+.tab{data:{target:i}}
+
+  = f.fields_for :scenarios, scenario do |ff|
+
+    = ff.hidden_field :campaign_id
+    = ff.hidden_field :emoticon_id, class: 'emoticon_id'
+
+    - style = scenario.image_url ? "background-image: url('#{scenario.image_url}')" : ''
+
+    .emoticon-selector
+      %button{type:'button', onclick: "", style: style}
+      %label= scenario ? scenario.label : ''
+
+    - content_for :emoticon_fields do
+      .tab-content{data:{id:i}} 
+        = ff.text_field :label

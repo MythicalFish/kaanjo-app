@@ -7,22 +7,12 @@
     - i = 0
 
     - @campaign.scenarios.try(:each) do |scenario|
-      - i = i + 1
-      .tab{data:{target:i}} 
-        = f.fields_for :scenarios, scenario do |ff|
-          = render partial: 'campaigns/scenarios/emoticon_selector', locals: { ff:ff, scenario:scenario }
-          - content_for :emoticon_form do
-            .tab-content{data:{id:i}} 
-              = render partial: 'campaigns/scenarios/emoticon_form', locals: { ff:ff, scenario:scenario }
+      - i += 1
+      = render partial: 'campaigns/scenarios/emoticons/form', locals: { f:f, i:i, scenario:scenario }
 
     - (5 - @campaign.scenarios.length).times do
-      - i = i + 1
-      .tab{data:{target:i}}  
-        = f.fields_for :scenarios, Scenario.new do |ff|
-          = render partial: 'campaigns/scenarios/emoticon_selector', locals: { ff:ff, scenario:Scenario.new }
-          - content_for :emoticon_form do
-            .tab-content{data:{id:i}} 
-              = render partial: 'campaigns/scenarios/emoticon_form', locals: { ff:ff, scenario:Scenario.new }
+      - i += 1
+      = render partial: 'campaigns/scenarios/emoticons/form', locals: { f:f, i:i, scenario:Scenario.new }
 
   .tab-contents
-    = content_for :emoticon_form
+    = content_for :emoticon_fields
