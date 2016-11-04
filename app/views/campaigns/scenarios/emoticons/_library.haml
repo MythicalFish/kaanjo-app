@@ -1,6 +1,5 @@
-#emoticon-library.modal.hide
-  .modal-box
-    - @unselected_emoticons.try(:each) do |id|
-      - scenario = Scenario.find(id)
-      %button.emoticon{onclick:""}
-        %img{src:scenario.image_url}
+#emoticon-library
+  .row
+    - Emoticon.library.each do |e|
+      .emoticon.col-xs-6.col-sm-4.col-md-3{onclick:"app.emoticon.select(#{e.id})",data:{id:e.id,label:e.label}}
+        %img{src:e.image.url}

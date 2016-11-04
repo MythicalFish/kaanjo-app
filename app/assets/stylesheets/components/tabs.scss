@@ -1,15 +1,17 @@
 .tabs {
   @extend .flex;
-  @extend .bb1;
   .tab {
     @extend .flex-auto;
-    transform: translateY(1px);
-    background-color: $white;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-top: 1px solid transparent;
     @extend .bb1;
+    text-align: center;
+    cursor: pointer;
   }
   .tab.tab-active {
     @extend .b1;
-    @extend .bb0;
+    border-bottom: 1px solid transparent;
   }
 }
 .tab-content:not(.tab-active) {

@@ -12,14 +12,14 @@
     .row
       .col-xs-12.col-md-6
         %h2 Template
-        Select from a list of predefined emoticons or case scenarios and customize it to your needs.
+        %p Select from a list of predefined emoticons or case scenarios and customize it to your needs.
         %button{onclick:"app.step('#select-template')"}
           Choose template
 
       .col-xs-12.col-md-6
         %h2 Custom
-        Upload your own emoticons and customize the messages.
-        %button{onclick:"app.step('#customize');"}
+        %p Upload your own emoticons and customize the messages.
+        %button{onclick:"app.step('#design');"}
           I will do it
 
   #select-template.step
@@ -28,19 +28,18 @@
 
     - DefaultCampaign.all.each do |c|
       .b1.mt3
-        .campaign-template.flex.items-center{data:{id:c.id,question:c.question}}
+        .campaign-template.flex.items-center{data:{id:c.id,social_proof:c.social_proof}}
           .flex-auto.p2.br1
-            %h4= c.name
+            %h4.question= c.question
             = render partial: 'campaigns/scenarios/emoticons/set', locals: {campaign:c}
           .flex-none.p2
-            %button{onclick:"app.step('#customize');app.campaign.clone_template(#{c.id})"}
+            %button{onclick:"app.step('#design');app.campaign.clone_template(#{c.id})"}
               Select
 
-  #customize.step
+  = form_for(@campaign) do |f|
+    
+    #design.step
 
-    = form_for(@campaign) do |f|
+      %h1 Design
+
       = render partial: 'form', locals: {f:f}
-      .actions
-        = f.submit "Create"
-
-= render partial: 'campaigns/scenarios/emoticons/library'

@@ -6,7 +6,8 @@ namespace :default_campaigns do
     c = DefaultCampaign.create( 
       name: 'Default 1', 
       enabled: true, 
-      question: 'How does this item make you feel?'
+      question: 'How does this item make you feel?',
+      social_proof: 'Already {count} people have shared their opinion with {company}.'
     )
 
     c.scenarios.create([

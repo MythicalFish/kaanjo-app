@@ -24,6 +24,12 @@ button:focus {
   padding: 0.8rem;
   font-size: $h5;
 }
+.btn-inline {
+  padding: 0;
+  line-height: inhering;
+  background: none;
+  color: $aqua;
+}
 a {
   color: $blue;
   text-decoration: none;

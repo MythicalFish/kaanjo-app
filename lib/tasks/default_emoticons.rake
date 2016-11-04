@@ -1,5 +1,4 @@
-namespace :emoticons do
-
+namespace :default_emoticons do
   task reset: :environment do 
 
     Emoticon.all.delete_all
@@ -8,7 +7,8 @@ namespace :emoticons do
     Dir.glob("#{Rails.root}/lib/assets/emoticons/*.svg") do |image|
       emoticon = Emoticon.create({
         label: File.basename(image),
-        image: File.new(image, "r")
+        image: File.new(image, "r"),
+        is_default: true
       })
       puts "created emoticon: #{emoticon.label}"
     end

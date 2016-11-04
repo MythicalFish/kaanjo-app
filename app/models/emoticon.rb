@@ -12,6 +12,10 @@ class Emoticon < ActiveRecord::Base
 
   validates_attachment :image, content_type: { content_type: /\Aimage\/.*\Z/ }
 
+  def self.library
+    where(is_default:true)
+  end
+
   private
 
 end

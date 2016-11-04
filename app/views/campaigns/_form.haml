@@ -1,19 +1,14 @@
-.mb2
-  = f.label :name
+.mb3
+  = f.label :name, "Name your campaign"
   = f.text_field :name
-.mb2
-  = f.label :question
+.mb3
+  = f.label :social_proof, "Social proof sentence"
+  = f.text_field :social_proof
+.mb3
+  = f.label :question, "Your question or message"
   = f.text_field :question
-.mb2
-  = f.label :site_path
-  = f.text_field :site_path
-.mb2.row
-  .col-md-6
-    = f.label :start_date
-    = f.date_field :start_date
-  .col-md-6
-    = f.label :end_date
-    = f.date_field :end_date
-.mb2
+.mb3
   = render partial: 'campaigns/scenarios/form', locals: {f:f}
 
+- content_for :modal do
+  = render partial: 'campaigns/scenarios/emoticons/library'

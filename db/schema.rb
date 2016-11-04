@@ -11,25 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103045458) do
+ActiveRecord::Schema.define(version: 20161104063955) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "relative_id",  limit: 4,                   null: false
     t.integer  "webmaster_id", limit: 4,   default: 0
-    t.string   "name",         limit: 255
+    t.string   "name",         limit: 255,                 null: false
     t.string   "description",  limit: 255
     t.string   "site_path",    limit: 255
     t.boolean  "enabled",                  default: false
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "question",     limit: 255
+    t.string   "question",     limit: 255,                 null: false
     t.boolean  "is_default",               default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "deleted",                  default: false
+    t.string   "social_proof", limit: 255,                 null: false
   end
 
   add_index "campaigns", ["created_at"], name: "index_campaigns_on_created_at", using: :btree
+  add_index "campaigns", ["deleted"], name: "index_campaigns_on_deleted", using: :btree
   add_index "campaigns", ["enabled"], name: "index_campaigns_on_enabled", using: :btree
   add_index "campaigns", ["is_default"], name: "index_campaigns_on_is_default", using: :btree
   add_index "campaigns", ["relative_id"], name: "index_campaigns_on_relative_id", using: :btree
@@ -50,15 +52,17 @@ ActiveRecord::Schema.define(version: 20161103045458) do
   add_index "customers", ["webmaster_id"], name: "index_customers_on_webmaster_id", using: :btree
 
   create_table "emoticons", force: :cascade do |t|
-    t.string   "label",              limit: 255, null: false
+    t.string   "label",              limit: 255,                 null: false
     t.string   "image_file_name",    limit: 255
     t.string   "image_content_type", limit: 255
     t.integer  "image_file_size",    limit: 4
     t.datetime "image_updated_at"
-    t.string   "sid",                limit: 255, null: false
+    t.string   "sid",                limit: 255,                 null: false
     t.string   "message",            limit: 255
+    t.boolean  "is_default",                     default: false
   end
 
+  add_index "emoticons", ["is_default"], name: "index_emoticons_on_is_default", using: :btree
   add_index "emoticons", ["label"], name: "index_emoticons_on_label", using: :btree
   add_index "emoticons", ["sid"], name: "index_emoticons_on_sid", using: :btree
 
@@ -155,6 +159,7 @@ ActiveRecord::Schema.define(version: 20161103045458) do
     t.boolean  "creation_enabled",                   default: true
   end
 
+  add_index "users", ["admin"], name: "index_users_on_admin", using: :btree
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
