@@ -1,0 +1,13 @@
+.scenario-form {
+  .scenario-create {
+    display: none;
+  }
+  &.scenario-disabled {
+    .scenario-fields {
+      display: none;
+    }
+    .scenario-create {
+      display: block;
+    }
+  }
+}

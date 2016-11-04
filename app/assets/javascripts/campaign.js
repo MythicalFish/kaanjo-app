@@ -9,33 +9,54 @@ app.campaign = {
     $('#campaign_question').val(c.attr('data-question'));
 
     c.find('.emoticon').each(function (i, e) {
-      app.emoticon.clone($(e));
+      var emoticon = $(e);
+      app.scenario.populateForm({
+        position: i,
+        id: emoticon.attr('data-id'),
+        label: emoticon.attr('data-label'),
+        message: emoticon.attr('data-message'),
+        img_src: emoticon.find('img').attr('src')
+      });
     });
     
   },
 
 }
 
-app.emoticon = {
+app.scenario = {
 
-  clone: function (emoticon) {
+  target_tab: function (pos) { return $('.emoticon-selector[data-position="' + pos + '"]'); },
+  target_form: function (pos) { return $('.scenario-form[data-position="' + pos + '"]'); },
+
+  populateForm: function (attr) {
+
+    tab = app.scenario.target_tab(attr.position);    
+    form = app.scenario.target_form(attr.position);    
     
-    position =  emoticon.attr('data-position');
-    id =        emoticon.attr('data-id');
-    label =     emoticon.attr('data-label');
-    message =   emoticon.attr('data-message');
-    img_src =   emoticon.find('img').attr('src');
+    tab.find('img').attr('src', attr.img_src);
+    tab.find('label').html(attr.label);
 
-    target_tab =  $('.emoticon-selector[data-position="' + position + '"]');
-    target_form = $('.emoticon-form[data-position="' + position + '"]');
+    form.find('input.label').val(attr.label);
+    form.find('input.message').val(attr.message);
+    form.find('input.emoticon_id').val(attr.id);
 
-    target_tab.find('button').css('background-image', 'url("' + img_src + '")');
-    target_tab.find('label').html(label);
+  },
 
-    target_form.find('input.label').val(label);
-    target_form.find('input.message').val(message);
-    target_form.find('input.emoticon_id').val(id);
+  emptyForm: function (position) {
+    
+    app.scenario.populateForm({
+      position: position,
+      id: null,
+      label: null,
+      message: null,
+      img_src: null
+    });
 
+  },
+
+  drop: function (position) {
+    app.scenario.emptyForm(position);
+    app.scenario.target_form(position).addClass('scenario-disabled');
   }
 
 }

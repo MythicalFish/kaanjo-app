@@ -3,28 +3,21 @@
   background: none;
   padding: 0;
   outline: none;
+  border: none;
   input {
     display: none;
   }
-  img {
-    width: 100%;
-    height: auto;
-    max-width: 65px;
-  }
-}
-.emoticon-selector {
-  text-align: center;
-  button {
-    padding: 0;
+  img, .emoticon-img {
     display: inline-block;
-    outline: none;
-    text-align: center;
+    width: 5em;
+    height: 5em;
+  }
+  .emoticon-img {
+    line-height: 0;
     background-image: image-url('ui/add.svg');
     background-color: transparent;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: 80%;
-    height: 6em;
-    width: 6em;
+    background-size: 95%;
   }
 }

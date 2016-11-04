@@ -1,13 +1,28 @@
 - state = i == 0 ? 'tab-active' : ''
-- style = scenario.image_url ? "background-image: url('#{scenario.image_url}')" : ''
 
-.tab.emoticon-selector{data:{position:i},class:state}
+%button.emoticon-selector.tab{type:'button',data:{position:i},class:state}
 
-  %button{type:'button', onclick: "", style: style}
-  %label= scenario ? scenario.label : ''
+  .emoticon
+    .emoticon-img
+      %img{src:scenario.try(:image_url)}
 
-  - content_for :emoticon_form do
-    .tab-content.emoticon-form{data:{position:i},class:state} 
+  %label.gray-dark= scenario ? scenario.label : ''
+
+- content_for :emoticon_form do
+  .tab-content.scenario-form{data:{position:i},class:state} 
+
+    .scenario-create
+
+      %button{type:'button',onclick:'app.scenario.addEmoticon(#{i});'}
+
+    .scenario-fields
+
+      %button{type:'button',onclick:"app.scenario.drop(#{i});"}
+        Remove scenario
+
+      %button{type:'button',onclick:'app.scenario.drop();'}
+        Change emoticon
+
       = f.fields_for :scenarios, scenario do |ff|
         
         = ff.hidden_field :campaign_id
