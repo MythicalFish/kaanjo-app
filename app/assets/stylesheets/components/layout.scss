@@ -5,7 +5,7 @@ header {
   background: $gray-lightest;
   padding: $space-3;
   text-transform: uppercase;
-  @extend .b1-bottom;
+  @extend .bb1;
   line-height: 1;
 }
 .container {

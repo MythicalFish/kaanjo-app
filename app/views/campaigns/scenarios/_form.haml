@@ -7,12 +7,12 @@
     - i = 0
 
     - @campaign.scenarios.try(:each) do |scenario|
-      - i += 1
       = render partial: 'campaigns/scenarios/emoticons/form', locals: { f:f, i:i, scenario:scenario }
+      - i += 1
 
     - (5 - @campaign.scenarios.length).times do
-      - i += 1
       = render partial: 'campaigns/scenarios/emoticons/form', locals: { f:f, i:i, scenario:Scenario.new }
+      - i += 1
 
-  .tab-contents
-    = content_for :emoticon_fields
+  .tab-contents.bx1.bb1.p2.md-p4
+    = content_for :emoticon_form

@@ -7,15 +7,14 @@ table {
     background: $gray-lightest;
     color: $gray-dark;
     text-transform: uppercase;
-    @extend .b2-bottom;
+    @extend .bb2;
   }
   tbody {
-    @extend .b1-left;
-    @extend .b1-right;
+    @extend .bx1;
     tr {
-      @extend .b1-bottom;
+      @extend .bb1;
       td:not(:last-child) {
-        @extend .b1-right;
+        @extend .br1;
       }
     }
   }

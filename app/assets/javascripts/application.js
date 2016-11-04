@@ -15,6 +15,7 @@
 //= require websocket_rails/main
 //= require moment
 
+//= require dev
 //= require app
 //= require datepicker
 //= require flash

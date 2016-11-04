@@ -1,6 +1,6 @@
 app.campaign = {
 
-  clone: function (id) {
+  clone_template: function (id) {
     
     var c = $('.campaign-template[data-id="' + id + '"]');
     
@@ -8,33 +8,34 @@ app.campaign = {
 
     $('#campaign_question').val(c.attr('data-question'));
 
-    c.find('.emoticon').each(function (i,e) {
-      console.log(e);
+    c.find('.emoticon').each(function (i, e) {
+      app.emoticon.clone($(e));
     });
     
   },
 
-  add: function (id) {
-    var e = $('#emoticon-selection').find('.emoticon[data-id="' + id + '"]');
-    e.removeClass('hide');
-    e.find('input[type="checkbox"]').prop('checked', true);
-    app.modal.hide('#emoticon-library');
-  },
+}
 
-  getReaction: function (id) {
+app.emoticon = {
 
-    $.ajax({
-      type: 'GET', url: '/get_reaction_data',
-      data: { id: id },
-      complete: function(r) {
-        console.log(JSON.parse(r.responseText));
-      }
-    });
+  clone: function (emoticon) {
+    
+    position =  emoticon.attr('data-position');
+    id =        emoticon.attr('data-id');
+    label =     emoticon.attr('data-label');
+    message =   emoticon.attr('data-message');
+    img_src =   emoticon.find('img').attr('src');
 
-  },
+    target_tab =  $('.emoticon-selector[data-position="' + position + '"]');
+    target_form = $('.emoticon-form[data-position="' + position + '"]');
 
-  showForm: function (id) {
-    $('.emoticon-form').hide();
-    $('.emoticon-form[data-id="' + id + '"]').show();
+    target_tab.find('button').css('background-image', 'url("' + img_src + '")');
+    target_tab.find('label').html(label);
+
+    target_form.find('input.label').val(label);
+    target_form.find('input.message').val(message);
+    target_form.find('input.emoticon_id').val(id);
+
   }
+
 }

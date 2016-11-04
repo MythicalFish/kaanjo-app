@@ -7,25 +7,25 @@
   .#{$namespace}b1 { border: $b1; }
   .#{$namespace}b2 { border: $b2; }
 
-  .#{$namespace}b0-top { border-top: 0}
-  .#{$namespace}b1-top { border-top: $b1; }
-  .#{$namespace}b2-top { border-top: $b2; }
+  .#{$namespace}bt0 { border-top: 0}
+  .#{$namespace}bt1 { border-top: $b1; }
+  .#{$namespace}bt2 { border-top: $b2; }
 
-  .#{$namespace}b0-right { border-right: 0}
-  .#{$namespace}b1-right { border-right: $b1; }
-  .#{$namespace}b2-right { border-right: $b2; }
+  .#{$namespace}br0 { border-right: 0}
+  .#{$namespace}br1 { border-right: $b1; }
+  .#{$namespace}br2 { border-right: $b2; }
 
-  .#{$namespace}b0-bottom { border-bottom: 0}
-  .#{$namespace}b1-bottom { border-bottom: $b1; }
-  .#{$namespace}b2-bottom { border-bottom: $b2; }
+  .#{$namespace}bb0 { border-bottom: 0}
+  .#{$namespace}bb1 { border-bottom: $b1; }
+  .#{$namespace}bb2 { border-bottom: $b2; }
 
-  .#{$namespace}b0-left { border-left: 0}
-  .#{$namespace}b1-left { border-left: $b1; }
-  .#{$namespace}b2-left { border-left: $b2; }
+  .#{$namespace}bl0 { border-left: 0}
+  .#{$namespace}bl1 { border-left: $b1; }
+  .#{$namespace}bl2 { border-left: $b2; }
 
-  .#{$namespace}b0-x { border-left: 0;   border-right: 0}
-  .#{$namespace}b1-x { border-left: $b1; border-right: $b1; }
-  .#{$namespace}b2-x { border-left: $b2; border-right: $b2; }
+  .#{$namespace}bx0 { border-left: 0;   border-right: 0}
+  .#{$namespace}bx1 { border-left: $b1; border-right: $b1; }
+  .#{$namespace}bx2 { border-left: $b2; border-right: $b2; }
   
 }
 

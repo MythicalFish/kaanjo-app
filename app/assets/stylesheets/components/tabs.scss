@@ -1,6 +1,17 @@
 .tabs {
   @extend .flex;
+  @extend .bb1;
+  .tab {
+    @extend .flex-auto;
+    transform: translateY(1px);
+    background-color: $white;
+    @extend .bb1;
+  }
+  .tab.tab-active {
+    @extend .b1;
+    @extend .bb0;
+  }
 }
-.tab-content:not(:first-child) {
+.tab-content:not(.tab-active) {
   display: none;
 }

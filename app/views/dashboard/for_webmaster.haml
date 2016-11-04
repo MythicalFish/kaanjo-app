@@ -1,5 +1,5 @@
 .flex.items-center.justify-end
-  .flex-auto.b1-bottom
+  .flex-auto.bb1
     .p2.md-p3.bold
       %i.fa.fa-dashboard.mr1
       Dashboard
@@ -10,7 +10,7 @@
   .row.col-xs-12
     .col.col-md-6.center
       .md-mr1
-        .row.b1.b0-bottom
+        .row.b1.bb0
           .col-md-6.p2.md-p3
             %h4.m0 Total impressions
             .h2= @webmaster.impression_total
@@ -41,7 +41,7 @@
           %thead
             %tr
               %td{colspan:2}
-                %h4.p2.m0.b1.b0-bottom Most reacted products
+                %h4.p2.m0.b1.bb0 Most reacted products
           - @products.each do |p|
             %tr
               %td

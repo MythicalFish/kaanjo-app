@@ -33,7 +33,7 @@
             %h4= c.name
             = render partial: 'campaigns/scenarios/emoticons/set', locals: {campaign:c}
           .flex-none.p2
-            %button{onclick:"app.step('#customize');app.campaign.clone(#{c.id})"}
+            %button{onclick:"app.step('#customize');app.campaign.clone_template(#{c.id})"}
               Select
 
   #customize.step

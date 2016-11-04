@@ -1,5 +1,5 @@
 %ul.m0.p0
-  - campaign.scenarios.each do |r|
-    %li.emoticon{data:{id:r.emoticon.id,label:r.label,message:r.message}}
+  - campaign.scenarios.each_with_index do |r,i|
+    %li.emoticon{data:{position:i,id:r.emoticon.id,label:r.label,message:r.message}}
       %img{src:r.image_url}
       %label= r.label

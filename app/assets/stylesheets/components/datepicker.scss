@@ -20,8 +20,8 @@
     border-right: 0;
     color: inherit;
     font-weight: normal;
-    @extend .b1-bottom;
-    @extend .b1-left;
+    @extend .bb1;
+    @extend .bl1;
     line-height: inherit;
     cursor: pointer;
   }
@@ -34,8 +34,8 @@
     left: 0;
     right: 0;
     background: $white;
-    @extend .b1-bottom;
-    @extend .b1-left;
+    @extend .bb1;
+    @extend .bl1;
     li {
       border-top: 1px solid $gray-lighterer;
     }

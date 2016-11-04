@@ -1,17 +1,20 @@
+- state = i == 0 ? 'tab-active' : ''
+- style = scenario.image_url ? "background-image: url('#{scenario.image_url}')" : ''
 
-.tab{data:{target:i}}
+.tab.emoticon-selector{data:{position:i},class:state}
 
-  = f.fields_for :scenarios, scenario do |ff|
+  %button{type:'button', onclick: "", style: style}
+  %label= scenario ? scenario.label : ''
 
-    = ff.hidden_field :campaign_id
-    = ff.hidden_field :emoticon_id, class: 'emoticon_id'
+  - content_for :emoticon_form do
+    .tab-content.emoticon-form{data:{position:i},class:state} 
+      = f.fields_for :scenarios, scenario do |ff|
+        
+        = ff.hidden_field :campaign_id
+        = ff.hidden_field :emoticon_id, class: 'emoticon_id'
+        
+        = ff.label :label
+        = ff.text_field :label, class: 'label'
 
-    - style = scenario.image_url ? "background-image: url('#{scenario.image_url}')" : ''
-
-    .emoticon-selector
-      %button{type:'button', onclick: "", style: style}
-      %label= scenario ? scenario.label : ''
-
-    - content_for :emoticon_fields do
-      .tab-content{data:{id:i}} 
-        = ff.text_field :label
+        = ff.label :message
+        = ff.text_field :message, class: 'message'
