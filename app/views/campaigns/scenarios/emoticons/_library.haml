@@ -1,5 +1,5 @@
 #emoticon-library
   .row
     - Emoticon.library.each do |e|
-      .emoticon.col-xs-6.col-sm-4.col-md-3{onclick:"app.emoticon.select(#{e.id})",data:{id:e.id,label:e.label}}
+      %button.emoticon.col-xs-6.col-sm-4.col-md-3{type:'button',onclick:"app.emoticon.select(#{e.id})",data:{id:e.id,label:e.label}}
         %img{src:e.image.url}

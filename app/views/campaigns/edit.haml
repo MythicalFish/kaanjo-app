@@ -1,13 +1,14 @@
 - content_for(:header) do
   %i.fa.fa-diamond.mr1
-  %a{href:campaigns_path} Campaigns
+  %a{href:campaigns_path} Edit campaign
   %a{href:campaign_path(@campaign)}= @campaign.name
   Edit
 
 .container-narrow.p2.md-p3.lg-p4.bg-white
   = form_for(@campaign) do |f|
-    = render partial: 'form', locals: {f:f}
+    = render partial: 'design_form', locals: {f:f}
+    = render partial: 'settings_form', locals: {f:f}
     .actions
       = f.submit "Update"
-      
-= render partial: 'campaigns/scenarios/emoticon_library'
+  
+  = render partial: 'shared/script', locals: { cid: @campaign.relative_id }

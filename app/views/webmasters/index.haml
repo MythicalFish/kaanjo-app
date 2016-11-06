@@ -20,8 +20,6 @@
         = sort_link('website_name', 'Website')
       %td
         = sort_link('impression_total', 'Impressions')
-      - Scenario.all.each do |r|
-        %td= r.label
       %td
         = sort_link('reaction_total', 'Total Reactions')
       %td
@@ -39,8 +37,6 @@
           %i.h4= w.website_url
       %td
         = w.impression_total
-      - Scenario.all.each do |r|
-        %td= w.send("type_total_#{r.id}")
       %td
         = w.reaction_total
       %td

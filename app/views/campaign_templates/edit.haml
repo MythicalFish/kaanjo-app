@@ -1,0 +1,7 @@
+- content_for(:header) do
+  %i.fa.fa-diamond.mr1
+  %a{href:campaign_templates_path} Campaigns
+  Edit campaign
+
+.container-narrow.p2.md-p3.lg-p4.bg-white
+  = render partial: 'form'

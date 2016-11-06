@@ -12,6 +12,7 @@
   .tab.tab-active {
     @extend .b1;
     border-bottom: 1px solid transparent;
+    cursor: default;
   }
 }
 .tab-content:not(.tab-active) {

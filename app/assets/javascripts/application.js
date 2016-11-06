@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require websocket_rails/main
 //= require moment
+//= require vendor/jquery-date-range-picker/jquery.daterangepicker
+//= require vendor/jquery.validate.min
 
 //= require dev
 //= require app
@@ -22,5 +24,4 @@
 //= require modal
 //= require campaign
 //= require navigation
-//= require vendor/jquery-date-range-picker/jquery.daterangepicker
 

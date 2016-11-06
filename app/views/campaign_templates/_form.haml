@@ -1,0 +1,5 @@
+= form_for(@campaign) do |f|
+  = render partial: 'design_form', locals: {f:f}
+  = render partial: 'settings_form', locals: {f:f}
+  .actions
+    = f.submit "Create"

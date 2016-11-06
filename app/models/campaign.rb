@@ -18,7 +18,7 @@ class Campaign < ActiveRecord::Base
   validate :number_of_scenarios
 
   def self.new_from_default id = 1
-    attributes = DefaultCampaign.find(id).dup.attributes
+    attributes = CampaignTemplate.find(id).dup.attributes
     attributes[:relative_id] = nil
     attributes[:webmaster_id] = nil
     attributes[:is_default] = false
@@ -29,13 +29,12 @@ class Campaign < ActiveRecord::Base
   private
 
   def set_relative_id
-    id = webmaster.campaigns.last.try(:relative_id) || 0
-    self.relative_id = id + 1
+    self.relative_id = webmaster.campaigns.length + 1
   end
 
   def number_of_scenarios
-    errors.add(:scenarios, "Max 6 reactions") if scenarios.size > 6
-    errors.add(:scenarios, "Min 2 reactions") if scenarios.size < 2
+    errors.add(:scenarios, "Max 6 scenarios") if scenarios.size > 6
+    errors.add(:scenarios, "Min 2 scenarios") if scenarios.size < 2
   end
 
 end

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :products
   resources :campaigns 
+  resources :campaign_templates 
   resources :webmasters
   resources :admins, except: [:show]
 

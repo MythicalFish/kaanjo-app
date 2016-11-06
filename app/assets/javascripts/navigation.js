@@ -1,18 +1,26 @@
-app.step = function(target) {
+
+$(document).on('click', '.step-take', function () {
+
+  step = $(this).parents('.step');
+
+  valid = true;  
+  
+  step.find('input').each(function () {
+    if (!valid) return;
+    if (!$(this).valid()) {
+      $(this).focus();
+      valid = false;
+    }
+  });
+
+  if (!valid) return;
+
+  target = $(this).attr('data-target');
+
+  if (!target) { target = step.next('.step'); }  
   $('.step').hide();
   $(target).show();
-}
 
-$(document).ready(function () {
-  $('.tab-state').change(function () {
-    $(this).parent().find('.state').each(function () {
-      if (this.checked) {
-        $(this).attr('aria-selected', 'true');
-      } else {
-        $(this).removeAttr('aria-selected');
-      }
-    });
-  });
 });
 
 $(document).on( 'click', '.tab', function () {

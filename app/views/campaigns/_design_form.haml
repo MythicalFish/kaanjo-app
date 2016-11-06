@@ -1,12 +1,9 @@
 .mb3
-  = f.label :name, "Name your campaign"
-  = f.text_field :name
-.mb3
   = f.label :social_proof, "Social proof sentence"
-  = f.text_field :social_proof
+  = f.text_field :social_proof, { required: true, minlength: 10, maxlength: 120 }
 .mb3
   = f.label :question, "Your question or message"
-  = f.text_field :question
+  = f.text_field :question, { required: true, minlength: 10, maxlength: 120 }
 .mb3
   = render partial: 'campaigns/scenarios/form', locals: {f:f}
 

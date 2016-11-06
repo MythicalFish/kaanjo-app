@@ -1,4 +1,4 @@
-.step:not(:first-child) {
+.step:not(:first-of-type) {
   display: none;
 }
 header {

@@ -5,41 +5,51 @@
 
 .container-narrow.p2.md-p3.lg-p4.bg-white
 
-  .step.center
-    
-    %h1 How would you like to create your emoticons?
-
-    .row
-      .col-xs-12.col-md-6
-        %h2 Template
-        %p Select from a list of predefined emoticons or case scenarios and customize it to your needs.
-        %button{onclick:"app.step('#select-template')"}
-          Choose template
-
-      .col-xs-12.col-md-6
-        %h2 Custom
-        %p Upload your own emoticons and customize the messages.
-        %button{onclick:"app.step('#design');"}
-          I will do it
-
-  #select-template.step
-
-    %h1.mb0 Select your template
-
-    - DefaultCampaign.all.each do |c|
-      .b1.mt3
-        .campaign-template.flex.items-center{data:{id:c.id,social_proof:c.social_proof}}
-          .flex-auto.p2.br1
-            %h4.question= c.question
-            = render partial: 'campaigns/scenarios/emoticons/set', locals: {campaign:c}
-          .flex-none.p2
-            %button{onclick:"app.step('#design');app.campaign.clone_template(#{c.id})"}
-              Select
-
   = form_for(@campaign) do |f|
+
+    #select-method.step.center
+      
+      %h1 How would you like to create your emoticons?
+
+      .row
+        .col-xs-12.col-md-6
+          %h2 Template
+          %p Select from a list of predefined emoticons or case scenarios and customize it to your needs.
+          %button.step-take{type:'button'}
+            Choose template
+
+        .col-xs-12.col-md-6
+          %h2 Custom
+          %p Upload your own emoticons and customize the messages.
+          %button.step-take{type:'button',data:{target:'#design'}}
+            I will do it
+
+    #select-template.step
+
+      %h1.mb0 Select your template
+
+      - CampaignTemplate.all.each do |c|
+        .b1.mt3
+          .campaign-template.flex.items-center{data:{id:c.id,social_proof:c.social_proof}}
+            .flex-auto.p2.br1
+              %h4.question= c.question
+              = render partial: 'campaigns/scenarios/emoticons/set', locals: {campaign:c}
+            .flex-none.p2
+              %button.step-take{type:'button',onclick:"app.campaign.clone_template(#{c.id})"}
+                Select
+
     
     #design.step
 
       %h1 Design
 
-      = render partial: 'form', locals: {f:f}
+      = render partial: 'design_form', locals: {f:f}
+
+      %button.step-take{type:'button'}
+        Next
+
+    #settings.step
+
+      = render partial: 'settings_form', locals: {f:f}
+
+      = f.submit "Create campaign"

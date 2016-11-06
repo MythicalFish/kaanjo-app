@@ -1,8 +1,8 @@
-namespace :reaction_types do
+namespace :scenarios do
 
   task reset: :environment do 
 
-    reaction_types = [
+    scenarios = [
       { 
         label: 'Like',
         message: 'Thanks! You and {number} others also liked this item.',
@@ -27,9 +27,9 @@ namespace :reaction_types do
     ]
 
     ReactionType.all.delete_all
-    ActiveRecord::Base.connection.execute('ALTER TABLE reaction_types AUTO_INCREMENT = 1')
+    ActiveRecord::Base.connection.execute('ALTER TABLE scenarios AUTO_INCREMENT = 1')
 
-    reaction_types.each_with_index do |r,i|
+    scenarios.each_with_index do |r,i|
       ReactionType.create({
         label: r[:label],
         message: r[:message],

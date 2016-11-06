@@ -1,9 +1,9 @@
 namespace :default_campaigns do
   task reset: :environment do 
     
-    DefaultCampaign.all.delete_all
+    CampaignTemplate.all.delete_all
 
-    c = DefaultCampaign.create( 
+    c = CampaignTemplate.create( 
       name: 'Default 1', 
       enabled: true, 
       question: 'How does this item make you feel?',
