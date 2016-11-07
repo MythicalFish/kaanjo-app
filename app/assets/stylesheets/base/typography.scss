@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
 body {
-  font-family: 'Source Sans Pro', sans-serif;
-  color: $gray-darkerer;
+  font-family: 'Lato', sans-serif;
+  color: $gray-dark;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-h1 { @extend .h1; }
+h1 { @extend .h1; color: $navy; }
 h2 { @extend .h2; }
 h3 { @extend .h3; }
 h5 { @extend .h4; }

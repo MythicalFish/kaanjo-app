@@ -1,0 +1,56 @@
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+  input[type="checkbox"] { @extend .hide; }
+  label { @extend .input; }
+  ul {
+    transition: transform .2s;
+    -webkit-transition: transform .2s;
+    transform: scaleY(0);
+    -webkit-transform: scaleY(0);
+    transform-origin: top;
+    -webkit-transform-origin: top;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background: $white;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: 120px;
+    white-space: nowrap;
+    @extend .b1;
+    border-radius: $border-radius;
+    -webkit-border-radius: $border-radius;
+    li {
+      opacity: 0;
+      transition: opacity .5s;
+      -webkit-transition: opacity .5s;
+      transition-delay: .2s;
+      -webkit-transition-delay: .2s; 
+      min-width: 100%;
+      border-bottom: 1px solid $gray-light;
+      a {
+        display: block;
+        padding: 15px;
+      }
+    }
+  }
+  input[type="checkbox"]:checked ~ ul {
+    transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+    display: block;
+    li {
+      opacity: 1;
+    }
+  }
+  &.right-align { 
+    ul {
+      left: auto;
+      right: 0;
+    }
+  }
+}

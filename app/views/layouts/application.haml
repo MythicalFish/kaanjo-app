@@ -1,20 +1,44 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
     %title= page_title
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
     = favicon_link_tag 'favicon.png'
     = csrf_meta_tags
-  %body.vh-ymin100.flex.flex-column.items-stretch{class:body_class}
-    .flex-auto.flex
-      %nav#sidebar.flex-none
-        = render partial: 'shared/sidebar'
-      .flex-auto.flex.flex-column
-        = render partial: 'shared/header'
-        = render partial: 'shared/flashes'
-        = yield
+
+  %body
+    .container
+      = render partial: 'shared/flashes'
+      #header.flex.justify-between.items-center.y5
+        
+        .flex.items-center
+          .x5
+            %img{src:image_url('logo.svg')}
+          - if webmaster?
+            .ml3.bl2.pl3.py1
+              = current_webmaster.website_url
+
+        .flex.items-end
+          - if webmaster?
+            %a.btn{href:new_campaign_path}
+              New Campaign
+          .dropdown.right-align.ml2
+            %label#avatar.round{for:'user-menu-toggle'}
+              = current_user.first_name[0]
+            %input#user-menu-toggle.hide{type:'checkbox'}
+            %ul#user-menu
+              %li
+                %a{href:edit_user_registration_path,class:cp(edit_user_registration_path)}
+                  Account settings
+                  %i.fa.fa-gear.ml1
+              %li
+                %a{href:destroy_user_session_path, 'data-method'=>'delete'} 
+                  Logout
+                  %i.fa.fa-sign-out.ml1
+
+      #body= yield
 
     #modal
       = content_for :modal

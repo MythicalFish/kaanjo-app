@@ -1,10 +1,7 @@
-- content_for(:header) do
-  %i.fa.fa-diamond.mr1
-  Campaigns   
-
-- content_for(:actions) do
-  %a{href:new_campaign_path}
-    Create
+%header.flex.justify-between.items-center.y5
+  %h1
+    Dashboard
+  = render partial: 'shared/datepicker'
 
 %table
   %thead        

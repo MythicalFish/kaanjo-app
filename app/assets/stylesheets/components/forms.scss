@@ -1,13 +1,14 @@
-input[type="text"],input[type="password"],input[type="email"],input[type="email"],input[type="tel"],input[type="search"],input[type="date"],select,textarea {
-  @extend .input;
-  border-radius: 0;
-  border: 0;
-  padding: 0.8rem 0;
+.input {
+  border: 1px solid $gray-light;
+  padding: 10px 15px;
   height: auto;
   margin: 0;
-  font-size: $h4;
-  border-bottom: 2px solid $gray-lighterer;
+  font-size: inherit;
   color: $gray-darker;
+  background-color: $gray-lighter;
+}
+input[type="text"],input[type="password"],input[type="email"],input[type="email"],input[type="tel"],input[type="search"],input[type="date"],select,textarea {
+  @extend .input;
 }
 textarea {
   @extend .textarea;
@@ -36,6 +37,6 @@ input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,
 code {
   display: block;
   @extend .p3;
-  background: $gray-lightest;
+  background: $gray-lighter;
   @extend .b1;
 }

@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
     elsif webmaster?
       dashboard_for_webmaster
     else
-      render 'devise/sessions/new', locals: { resource: User.new }
+      render 'devise/sessions/new', layout: 'island', locals: { resource: User.new }
     end
   end
 

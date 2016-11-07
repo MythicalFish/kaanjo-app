@@ -1,7 +1,7 @@
 @mixin borders($namespace) {
 
-  $b1: 1px solid $gray-lighterer;
-  $b2: 2px solid $gray-lighterer;
+  $b1: 1px solid $gray-light;
+  $b2: 2px solid $gray-light;
 
   .#{$namespace}b0 { border: 0}
   .#{$namespace}b1 { border: $b1; }
@@ -30,3 +30,12 @@
 }
 
 @include borders('');
+
+.rounded {
+  border-radius: 99px!important;
+  -webkit-border-radius: 99px!important;
+}
+.round {
+  border-radius: 100%!important;
+  -webkit-border-radius: 100%!important;
+}

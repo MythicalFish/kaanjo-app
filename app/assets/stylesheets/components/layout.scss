@@ -1,16 +1,9 @@
 .step:not(:first-of-type) {
   display: none;
 }
-header {
-  background: $gray-lightest;
-  padding: $space-3;
-  text-transform: uppercase;
-  @extend .bb1;
-  line-height: 1;
-}
 .container {
   width: 100%!important;
-  max-width: 1200px!important;
+  max-width: 1000px!important;
   padding-left: 0;
   padding-right: 0;
 }
@@ -29,4 +22,19 @@ header {
 .items-middle {
   @extend .items-center;
   @extend .justify-center;
+}
+.island {
+  width: 100%;
+  max-width: 300px;
+  padding: $space-2;
+  background: $white;
+  border-radius: $border-radius;
+  -webkit-border-radius: $border-radius;
+  @extend .b1;
+  text-align: center;
+}
+@media #{$breakpoint-sm} {
+  .island {
+    padding: $space-3;
+  }
 }
