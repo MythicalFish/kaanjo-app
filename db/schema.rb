@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107065013) do
+ActiveRecord::Schema.define(version: 20161107095619) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "relative_id",  limit: 4,                   null: false
@@ -43,10 +43,8 @@ ActiveRecord::Schema.define(version: 20161107065013) do
     t.integer  "throttle_index_1", limit: 4,   default: 0
     t.datetime "throttle_timer_1"
     t.integer  "webmaster_id",     limit: 4,               null: false
-    t.integer  "campaign_id",      limit: 4,               null: false
   end
 
-  add_index "customers", ["campaign_id"], name: "index_customers_on_campaign_id", using: :btree
   add_index "customers", ["ip_address"], name: "index_customers_on_ip_address", using: :btree
   add_index "customers", ["sid"], name: "index_customers_on_sid", using: :btree
   add_index "customers", ["webmaster_id"], name: "index_customers_on_webmaster_id", using: :btree

@@ -1,5 +1,6 @@
 - @product = product
 - @scenario = scenario
+- @campaign = campaign
 
 //#kaanjo-info
 //  %img{src:static_asset_url('info.svg')}
@@ -10,9 +11,9 @@
 #kaanjo-title
   How does this item make you feel?
 
-- Scenario.all.each do |r|
+- @campaign.scenarios.each do |r|
   %button{type:'button', onclick:"Kaanjo.react(#{r.id})", class:button_class(r), id:"kaanjo-reaction#{r.id}"}
-    %img{src:emoticon_url(r)}
+    %img{src:r.image_url}
     %label
       .kaanjo-bubble= r.label
 

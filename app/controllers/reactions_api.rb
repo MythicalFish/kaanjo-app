@@ -9,6 +9,7 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def initialize_client
     find_webmaster
+    find_campaign
     find_customer
     find_product
     impress
@@ -27,7 +28,7 @@ class ReactionsApi < WebsocketRails::BaseController
       end
     else
 
-      @reaction = Reaction.create(
+      @reaction = @campaign.reactions.create(
         scenario_id: message[:id],
         customer_id: @customer.id,
         product_id: @product.id,
@@ -46,13 +47,13 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def get_buttons
-    html = render_to_string('client/_buttons.haml', :layout => false, :locals => { :scenario => @scenario, :product => @product })
+    html = render_to_string('client/_buttons.haml', :layout => false, :locals => { :scenario => @scenario, :product => @product, :campaign => @campaign })
     trigger_success(html) if html
     failure unless html
   end
 
   def get_status
-    html = render_to_string('client/_status.haml', :layout => false, :locals => { :scenario => @scenario, :product => @product })
+    html = render_to_string('client/_status.haml', :layout => false, :locals => { :scenario => @scenario, :product => @product, :campaign => @campaign })
     trigger_success(html) if html
     failure unless html
   end
@@ -68,7 +69,8 @@ class ReactionsApi < WebsocketRails::BaseController
     end
 
     impression = @product.impressions.create(
-      customer_id: @customer.id,
+      customer: @customer,
+      campaign: @campaign,
       device_type: message[:device]
     )
     
@@ -93,6 +95,20 @@ class ReactionsApi < WebsocketRails::BaseController
     end
 
   end
+
+  # Campaigns
+
+  def find_campaign
+
+    @campaign = @webmaster.campaigns.find_by_relative_id(message[:w_cid])
+
+    if @campaign
+      set :campaign, @campaign
+    else
+      failure("Webmaster not found: #{@webmaster.website_name}")
+    end
+
+  end  
 
   # Customers
 
@@ -207,6 +223,7 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def set_vars
+    @campaign =      set[:campaign]
     @customer =      set[:customer]
     @webmaster =     set[:webmaster]
     @product =       set[:product]
