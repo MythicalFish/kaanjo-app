@@ -1,6 +1,7 @@
 class Reaction < ActiveRecord::Base
 
   belongs_to :webmaster
+  belongs_to :campaign
   belongs_to :product
   belongs_to :scenario
   belongs_to :customer

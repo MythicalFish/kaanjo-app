@@ -19,6 +19,7 @@ class ReactionsApi < WebsocketRails::BaseController
   def react
 
     if @reaction
+
       @reaction.scenario_id = message[:id]
       if @reaction.save
         set_reaction @reaction

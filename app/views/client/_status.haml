@@ -1,7 +1,3 @@
-%img.kaanjo-status-icon{src:emoticon_url(scenario)}
+%img.kaanjo-status-icon{src:scenario.image_url}
 - number = product.reaction_total
-- if number == 0
-  = scenario.message_first
-- else
-  = scenario.message.sub('{number}',number.to_s)
-
+= scenario.message.sub('{number}',number.to_s)
