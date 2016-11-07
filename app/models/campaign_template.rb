@@ -4,21 +4,16 @@ class CampaignTemplate < ActiveRecord::Base
 
   self.table_name = 'campaigns'
   has_many :scenarios, foreign_key: 'campaign_id'
+  accepts_nested_attributes_for :scenarios
 
   default_scope { where('is_default = ? AND deleted = ?', true, false) }
   before_create :set_as_default
-  before_create :set_relative_id
 
   private
 
   def set_as_default
     self.is_default = true
+    self.relative_id = 0
   end
-
-  def set_relative_id
-    id = CampaignTemplate.last.try(:id) || 0
-    self.relative_id = id + 1
-  end
-
 
 end

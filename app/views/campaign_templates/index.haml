@@ -19,8 +19,8 @@
         %td
           = c.name
         %td.right-align
-          %a.mr1{href:edit_campaign_template_path(c.relative_id),title:'Edit'}
+          %a.mr1{href:edit_campaign_template_path(c),title:'Edit'}
             %i.fa.fa-edit
-          %a.mr1{href:campaign_template_path(c.relative_id),title:'Delete',data:{method:'delete',confirm:"Are you sure you want to delete \'#{c.name}\'?"}}
+          %a.mr1{href:campaign_template_path(c),title:'Delete',data:{method:'delete',confirm:"Are you sure you want to delete \'#{c.name}\'?"}}
             %i.fa.fa-close
     

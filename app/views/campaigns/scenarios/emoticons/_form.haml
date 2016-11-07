@@ -1,6 +1,8 @@
 - state = i == 0 ? 'tab-active' : ''
+- enabled = scenario.enabled? ? '' : 'scenario-disabled'
+- classname = "#{state} #{enabled}"
 
-.emoticon-selector.tab.py2{data:{position:i},class:state}
+.scenario-selector.tab.py2{data:{position:i},class:classname}
 
   .emoticon
     .emoticon-img
@@ -10,34 +12,30 @@
 - content_for :emoticon_form do
   .tab-content.scenario-form{data:{position:i},class:state} 
 
-    .scenario-create
+    = f.fields_for :scenarios, scenario do |ff|
+      
+      = ff.hidden_field :id
+      = ff.hidden_field :campaign_id
+      = ff.hidden_field :enabled, class: 'scenario_enabled'
+      = ff.hidden_field :emoticon_id, class: 'scenario_emoticon-id'
 
-      %button.btn-inline{type:'button',onclick:'app.scenario.addEmoticon(#{i});'}
-
-    .scenario-fields
-
-      = f.fields_for :scenarios, scenario do |ff|
+      .mb3
+        = ff.label :emoticon
         
-        = ff.hidden_field :campaign_id
-        = ff.hidden_field :emoticon_id, class: 'scenario_emoticon-id'
+        %button.btn-inline{type:'button',onclick:"app.emoticon.upload(#{i});"}
+          Upload your own image
 
-        .mb3
-          = ff.label :emoticon
-          
-          %button.btn-inline{type:'button',onclick:"app.emoticon.upload(#{i});"}
-            Upload your own image
-
-          %button.btn-inline{type:'button',onclick:"app.emoticon.library(#{i});"}
-            Select from our library
-        
-        .mb3
-          = ff.label :label
-          = ff.text_field :label, class: 'scenario_label'
-        
-        .mb3
-          = ff.label :message
-          = ff.text_field :message, class: 'scenario_message'
-        
-        %button.btn-inline{type:'button',onclick:"app.scenario.drop(#{i});"}
-          %i.fa.fa-close.mr2
-          Remove scenario
+        %button.btn-inline{type:'button',onclick:"app.emoticon.library(#{i});"}
+          Select from our library
+      
+      .mb3
+        = ff.label :label
+        = ff.text_field :label, class: 'scenario_label'
+      
+      .mb3
+        = ff.label :message
+        = ff.text_field :message, class: 'scenario_message'
+      
+      %button.btn-inline{type:'button',onclick:"app.scenario.disable(#{i});"}
+        %i.fa.fa-close.mr2
+        Remove scenario

@@ -27,19 +27,29 @@ class CampaignsController < ApplicationController
 
     @campaign = find(params[:id])
 
-    if @campaign.update_attributes(campaign_params)
+    if scenarios_invalid?
+      flash[:alert] = "Error: You need at least 2 scenarios"
+    elsif @campaign.update_attributes(campaign_params)
       flash[:notice] = 'Campaign updated'
     else
       flash[:alert] = "Error: #{@campaign.errors.full_messages.to_sentence}"
     end
 
-    redirect_to edit_campaign_path(@campaign.relative_id)
+    if admin?
+      redirect_to edit_campaign_template_path(@campaign)
+    elsif webmaster?
+      redirect_to edit_campaign_path(@campaign)
+    end
 
   end
 
   def create
     
-    @campaign = find(campaign_params)
+    if admin?
+      @campaign = CampaignTemplate.new(campaign_params)
+    elsif webmaster?
+      @campaign = Template.new(campaign_params)
+    end
 
     if @campaign.save
       flash[:notice] = "Campaign created"
@@ -63,7 +73,7 @@ class CampaignsController < ApplicationController
 
   def find id
     if admin?
-      CampaignTemplate.find_by_relative_id(id)
+      CampaignTemplate.find(id)
     elsif webmaster?
       current_webmaster.campaigns.find_by_relative_id(id)
     end
@@ -78,10 +88,20 @@ class CampaignsController < ApplicationController
   end
 
   def campaign_params
-    params.require(:campaign).permit(
+    model_name = admin? ? :campaign_template : :campaign
+    params.require(model_name).permit(
       :name, :description, :question, :social_proof, :site_path, :enabled, :start_date, :end_date,
-      :scenarios_attributes => [ :label, :emoticon_id, :message ]
+      :scenarios_attributes => [ :id, :enabled, :label, :emoticon_id, :message ]
     )
+  end
+
+  def scenarios_invalid?
+    enabled_scenarios = 0
+    campaign_params[:scenarios_attributes].select do |k,s|
+      enabled_scenarios += 1 if s[:enabled] == 'true'
+    end
+    return false if enabled_scenarios >= 2
+    true
   end
 
 end

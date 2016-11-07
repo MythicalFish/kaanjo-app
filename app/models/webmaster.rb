@@ -12,16 +12,8 @@ class Webmaster < User
 
   before_create :assign_sid
   before_save :sanitize_website_url
-  after_create :create_default_campaign
 
   default_scope { where('admin = ?', false) }
-
-  def create_default_campaign
-    unless campaigns.any?
-      campaigns << Campaign.new_from_default(1)
-      save
-    end
-  end
 
   private
 

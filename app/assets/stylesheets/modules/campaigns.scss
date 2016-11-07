@@ -1,13 +1,12 @@
 .scenario-form {
-  .scenario-create {
+  &.scenario-disabled {
     display: none;
   }
-  &.scenario-disabled {
-    .scenario-fields {
-      display: none;
-    }
-    .scenario-create {
-      display: block;
+}
+.scenario-selector.scenario-disabled {
+  .emoticon {
+    img, label {
+      opacity: 0;
     }
   }
 }

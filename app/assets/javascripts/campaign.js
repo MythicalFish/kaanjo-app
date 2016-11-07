@@ -26,7 +26,7 @@ app.campaign = {
 
 app.scenario = {
 
-  tab: function (pos) { return $('.emoticon-selector[data-position="' + pos + '"]'); },
+  tab: function (pos) { return $('.scenario-selector[data-position="' + pos + '"]'); },
   form: function (pos) { return $('.scenario-form[data-position="' + pos + '"]'); },
 
   populateFields: function (attr) {
@@ -35,7 +35,11 @@ app.scenario = {
     form = app.scenario.form(attr.position);    
     
     tab.find('img').attr('src', attr.img_src);
+    tab.removeClass('scenario-disabled');
+    form.removeClass('scenario-disabled');
+
     form.find('input.scenario_emoticon-id').val(attr.id);
+    form.find('input.scenario_enabled').val(true);
 
     label1 = tab.find('label');
     if (label1.text().length == 0)
@@ -51,21 +55,9 @@ app.scenario = {
 
   },
 
-  emptyForm: function (position) {
-    
-    app.scenario.populateFields({
-      position: position,
-      id: null,
-      label: null,
-      message: null,
-      img_src: null
-    });
-
-  },
-
-  drop: function (position) {
-    app.scenario.emptyForm(position);
-    app.scenario.target_form(position).addClass('scenario-disabled');
+  disable: function (pos) {
+    app.scenario.tab(pos).addClass('scenario-disabled').find('img').attr('src','');
+    app.scenario.form(pos).addClass('scenario-disabled').find('input.scenario_enabled').val(false);
   }
 
 }
@@ -83,8 +75,6 @@ app.emoticon = {
   select: function(id) {
 
     e = $('#emoticon-library').find('.emoticon[data-id="' + id + '"]');      
-    console.log(e.find('img').attr('src'));
-    console.log(e.attr('data-label'));
       
     app.scenario.populateFields({
       position: $('.tab.tab-active').attr('data-position'),
@@ -99,3 +89,7 @@ app.emoticon = {
   }
 
 }
+
+$(document).on('click', '.scenario-selector.scenario-disabled', function() {
+  app.emoticon.library($(this).attr('data-position')); 
+});
