@@ -42,8 +42,10 @@ ActiveRecord::Schema.define(version: 20161109055149) do
     t.string   "ip_address",       limit: 255
     t.integer  "throttle_index_1", limit: 4,   default: 0
     t.datetime "throttle_timer_1"
+    t.integer  "campaign_id",      limit: 4
   end
 
+  add_index "customers", ["campaign_id"], name: "index_customers_on_campaign_id", using: :btree
   add_index "customers", ["ip_address"], name: "index_customers_on_ip_address", using: :btree
   add_index "customers", ["sid"], name: "index_customers_on_sid", using: :btree
 
@@ -63,6 +65,7 @@ ActiveRecord::Schema.define(version: 20161109055149) do
   add_index "emoticons", ["sid"], name: "index_emoticons_on_sid", using: :btree
 
   create_table "impressions", force: :cascade do |t|
+    t.integer  "product_id",  limit: 4,                       null: false
     t.integer  "customer_id", limit: 4,                       null: false
     t.datetime "created_at",                                  null: false
     t.string   "device_type", limit: 255, default: "Unknown"
@@ -71,6 +74,7 @@ ActiveRecord::Schema.define(version: 20161109055149) do
   add_index "impressions", ["created_at"], name: "index_impressions_on_created_at", using: :btree
   add_index "impressions", ["customer_id"], name: "index_impressions_on_customer_id", using: :btree
   add_index "impressions", ["device_type"], name: "index_impressions_on_device_type", using: :btree
+  add_index "impressions", ["product_id"], name: "index_impressions_on_product_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.string   "name",        limit: 255, null: false
@@ -89,12 +93,14 @@ ActiveRecord::Schema.define(version: 20161109055149) do
     t.datetime "created_at",                                  null: false
     t.integer  "scenario_id", limit: 4,                       null: false
     t.integer  "customer_id", limit: 4,                       null: false
+    t.integer  "product_id",  limit: 4
     t.string   "device_type", limit: 255, default: "Unknown"
   end
 
   add_index "reactions", ["created_at"], name: "index_reactions_on_created_at", using: :btree
   add_index "reactions", ["customer_id"], name: "index_reactions_on_customer_id", using: :btree
   add_index "reactions", ["device_type"], name: "index_reactions_on_device_type", using: :btree
+  add_index "reactions", ["product_id"], name: "index_reactions_on_product_id", using: :btree
   add_index "reactions", ["scenario_id"], name: "index_reactions_on_scenario_id", using: :btree
 
   create_table "scenarios", force: :cascade do |t|
@@ -149,163 +155,5 @@ ActiveRecord::Schema.define(version: 20161109055149) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["sid"], name: "index_users_on_sid", using: :btree
   add_index "users", ["website_url"], name: "index_users_on_website_url", using: :btree
-
-  create_table "wp_commentmeta", primary_key: "meta_id", force: :cascade do |t|
-    t.integer "comment_id", limit: 8,          default: 0, null: false
-    t.string  "meta_key",   limit: 255
-    t.text    "meta_value", limit: 4294967295
-  end
-
-  add_index "wp_commentmeta", ["comment_id"], name: "comment_id", using: :btree
-  add_index "wp_commentmeta", ["meta_key"], name: "meta_key", length: {"meta_key"=>191}, using: :btree
-
-  create_table "wp_comments", primary_key: "comment_ID", force: :cascade do |t|
-    t.integer  "comment_post_ID",      limit: 8,     default: 0,   null: false
-    t.text     "comment_author",       limit: 255,                 null: false
-    t.string   "comment_author_email", limit: 100,   default: "",  null: false
-    t.string   "comment_author_url",   limit: 200,   default: "",  null: false
-    t.string   "comment_author_IP",    limit: 100,   default: "",  null: false
-    t.datetime "comment_date",                                     null: false
-    t.datetime "comment_date_gmt",                                 null: false
-    t.text     "comment_content",      limit: 65535,               null: false
-    t.integer  "comment_karma",        limit: 4,     default: 0,   null: false
-    t.string   "comment_approved",     limit: 20,    default: "1", null: false
-    t.string   "comment_agent",        limit: 255,   default: "",  null: false
-    t.string   "comment_type",         limit: 20,    default: "",  null: false
-    t.integer  "comment_parent",       limit: 8,     default: 0,   null: false
-    t.integer  "user_id",              limit: 8,     default: 0,   null: false
-  end
-
-  add_index "wp_comments", ["comment_approved", "comment_date_gmt"], name: "comment_approved_date_gmt", using: :btree
-  add_index "wp_comments", ["comment_author_email"], name: "comment_author_email", length: {"comment_author_email"=>10}, using: :btree
-  add_index "wp_comments", ["comment_date_gmt"], name: "comment_date_gmt", using: :btree
-  add_index "wp_comments", ["comment_parent"], name: "comment_parent", using: :btree
-  add_index "wp_comments", ["comment_post_ID"], name: "comment_post_ID", using: :btree
-
-  create_table "wp_links", primary_key: "link_id", force: :cascade do |t|
-    t.string   "link_url",         limit: 255,      default: "",  null: false
-    t.string   "link_name",        limit: 255,      default: "",  null: false
-    t.string   "link_image",       limit: 255,      default: "",  null: false
-    t.string   "link_target",      limit: 25,       default: "",  null: false
-    t.string   "link_description", limit: 255,      default: "",  null: false
-    t.string   "link_visible",     limit: 20,       default: "Y", null: false
-    t.integer  "link_owner",       limit: 8,        default: 1,   null: false
-    t.integer  "link_rating",      limit: 4,        default: 0,   null: false
-    t.datetime "link_updated",                                    null: false
-    t.string   "link_rel",         limit: 255,      default: "",  null: false
-    t.text     "link_notes",       limit: 16777215,               null: false
-    t.string   "link_rss",         limit: 255,      default: "",  null: false
-  end
-
-  add_index "wp_links", ["link_visible"], name: "link_visible", using: :btree
-
-  create_table "wp_options", primary_key: "option_id", force: :cascade do |t|
-    t.string "option_name",  limit: 191,        default: "",    null: false
-    t.text   "option_value", limit: 4294967295,                 null: false
-    t.string "autoload",     limit: 20,         default: "yes", null: false
-  end
-
-  add_index "wp_options", ["option_name"], name: "option_name", unique: true, using: :btree
-
-  create_table "wp_postmeta", primary_key: "meta_id", force: :cascade do |t|
-    t.integer "post_id",    limit: 8,          default: 0, null: false
-    t.string  "meta_key",   limit: 255
-    t.text    "meta_value", limit: 4294967295
-  end
-
-  add_index "wp_postmeta", ["meta_key"], name: "meta_key", length: {"meta_key"=>191}, using: :btree
-  add_index "wp_postmeta", ["post_id"], name: "post_id", using: :btree
-
-  create_table "wp_posts", primary_key: "ID", force: :cascade do |t|
-    t.integer  "post_author",           limit: 8,          default: 0,         null: false
-    t.datetime "post_date",                                                    null: false
-    t.datetime "post_date_gmt",                                                null: false
-    t.text     "post_content",          limit: 4294967295,                     null: false
-    t.text     "post_title",            limit: 65535,                          null: false
-    t.text     "post_excerpt",          limit: 65535,                          null: false
-    t.string   "post_status",           limit: 20,         default: "publish", null: false
-    t.string   "comment_status",        limit: 20,         default: "open",    null: false
-    t.string   "ping_status",           limit: 20,         default: "open",    null: false
-    t.string   "post_password",         limit: 20,         default: "",        null: false
-    t.string   "post_name",             limit: 200,        default: "",        null: false
-    t.text     "to_ping",               limit: 65535,                          null: false
-    t.text     "pinged",                limit: 65535,                          null: false
-    t.datetime "post_modified",                                                null: false
-    t.datetime "post_modified_gmt",                                            null: false
-    t.text     "post_content_filtered", limit: 4294967295,                     null: false
-    t.integer  "post_parent",           limit: 8,          default: 0,         null: false
-    t.string   "guid",                  limit: 255,        default: "",        null: false
-    t.integer  "menu_order",            limit: 4,          default: 0,         null: false
-    t.string   "post_type",             limit: 20,         default: "post",    null: false
-    t.string   "post_mime_type",        limit: 100,        default: "",        null: false
-    t.integer  "comment_count",         limit: 8,          default: 0,         null: false
-  end
-
-  add_index "wp_posts", ["post_author"], name: "post_author", using: :btree
-  add_index "wp_posts", ["post_name"], name: "post_name", length: {"post_name"=>191}, using: :btree
-  add_index "wp_posts", ["post_parent"], name: "post_parent", using: :btree
-  add_index "wp_posts", ["post_type", "post_status", "post_date", "ID"], name: "type_status_date", using: :btree
-
-  create_table "wp_term_relationships", id: false, force: :cascade do |t|
-    t.integer "object_id",        limit: 8, default: 0, null: false
-    t.integer "term_taxonomy_id", limit: 8, default: 0, null: false
-    t.integer "term_order",       limit: 4, default: 0, null: false
-  end
-
-  add_index "wp_term_relationships", ["term_taxonomy_id"], name: "term_taxonomy_id", using: :btree
-
-  create_table "wp_term_taxonomy", primary_key: "term_taxonomy_id", force: :cascade do |t|
-    t.integer "term_id",     limit: 8,          default: 0,  null: false
-    t.string  "taxonomy",    limit: 32,         default: "", null: false
-    t.text    "description", limit: 4294967295,              null: false
-    t.integer "parent",      limit: 8,          default: 0,  null: false
-    t.integer "count",       limit: 8,          default: 0,  null: false
-  end
-
-  add_index "wp_term_taxonomy", ["taxonomy"], name: "taxonomy", using: :btree
-  add_index "wp_term_taxonomy", ["term_id", "taxonomy"], name: "term_id_taxonomy", unique: true, using: :btree
-
-  create_table "wp_termmeta", primary_key: "meta_id", force: :cascade do |t|
-    t.integer "term_id",    limit: 8,          default: 0, null: false
-    t.string  "meta_key",   limit: 255
-    t.text    "meta_value", limit: 4294967295
-  end
-
-  add_index "wp_termmeta", ["meta_key"], name: "meta_key", length: {"meta_key"=>191}, using: :btree
-  add_index "wp_termmeta", ["term_id"], name: "term_id", using: :btree
-
-  create_table "wp_terms", primary_key: "term_id", force: :cascade do |t|
-    t.string  "name",       limit: 200, default: "", null: false
-    t.string  "slug",       limit: 200, default: "", null: false
-    t.integer "term_group", limit: 8,   default: 0,  null: false
-  end
-
-  add_index "wp_terms", ["name"], name: "name", length: {"name"=>191}, using: :btree
-  add_index "wp_terms", ["slug"], name: "slug", length: {"slug"=>191}, using: :btree
-
-  create_table "wp_usermeta", primary_key: "umeta_id", force: :cascade do |t|
-    t.integer "user_id",    limit: 8,          default: 0, null: false
-    t.string  "meta_key",   limit: 255
-    t.text    "meta_value", limit: 4294967295
-  end
-
-  add_index "wp_usermeta", ["meta_key"], name: "meta_key", length: {"meta_key"=>191}, using: :btree
-  add_index "wp_usermeta", ["user_id"], name: "user_id", using: :btree
-
-  create_table "wp_users", primary_key: "ID", force: :cascade do |t|
-    t.string   "user_login",          limit: 60,  default: "", null: false
-    t.string   "user_pass",           limit: 255, default: "", null: false
-    t.string   "user_nicename",       limit: 50,  default: "", null: false
-    t.string   "user_email",          limit: 100, default: "", null: false
-    t.string   "user_url",            limit: 100, default: "", null: false
-    t.datetime "user_registered",                              null: false
-    t.string   "user_activation_key", limit: 255, default: "", null: false
-    t.integer  "user_status",         limit: 4,   default: 0,  null: false
-    t.string   "display_name",        limit: 250, default: "", null: false
-  end
-
-  add_index "wp_users", ["user_email"], name: "user_email", using: :btree
-  add_index "wp_users", ["user_login"], name: "user_login_key", using: :btree
-  add_index "wp_users", ["user_nicename"], name: "user_nicename", using: :btree
 
 end

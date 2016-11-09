@@ -36,14 +36,14 @@ w.campaigns.try(:each) do | c|
 
   puts "Creating customers (with multiple randomly associated products)"
   100.times do
-    customer = Customer.create
+    customer = c.customers.create
     customer.products << c.products.id.sample(rand(c.products.length))
   end
 
   puts "Creating impressions for above customers"
   c.customers.each do |customer|
     rand(1000).times do
-      
+
     end
   end
 

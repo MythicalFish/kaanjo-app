@@ -2,7 +2,8 @@ class RestructureAssociations < ActiveRecord::Migration
   def up
 
     remove_column :customers, :webmaster_id
-    add_column :customers, :campaign_id
+    add_column :customers, :campaign_id, :integer
+    add_index :customers, :campaign_id
 
     remove_column :impressions, :webmaster_id
     remove_column :impressions, :campaign_id
