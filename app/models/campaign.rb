@@ -5,10 +5,13 @@ class Campaign < ActiveRecord::Base
   include CampaignValidator
 
   belongs_to :webmaster
+  
   has_many :products
-  has_many :impressions
-  has_many :reactions
-  has_many :scenarios
+  has_many :customers
+  has_many :impressions,  :through => :products
+  has_many :reactions,    :through => :products
+
+  has_many :scenarios, :dependent => :destroy
   accepts_nested_attributes_for :scenarios
   
   before_create :set_relative_id

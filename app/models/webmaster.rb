@@ -3,12 +3,10 @@ class Webmaster < User
   include SharedMethods
   include Calculator
 
-  has_many :reactions, :foreign_key => "webmaster_id"
-  has_many :customers
-  has_many :products
-  has_many :impressions
-  has_many :reactions
   has_many :campaigns
+  has_many :products,    :through => :campaigns
+  has_many :impressions, :through => :products
+  has_many :reactions,   :through => :products
 
   before_create :assign_sid
   before_save :sanitize_website_url

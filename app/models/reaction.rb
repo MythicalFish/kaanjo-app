@@ -1,17 +1,8 @@
 class Reaction < ActiveRecord::Base
 
-  belongs_to :webmaster
-  belongs_to :campaign
   belongs_to :product
-  belongs_to :scenario
   belongs_to :customer
-
-  validates :webmaster_id, presence: true
-  validates :product_id, presence: true
-  validates :scenario_id, presence: true
-  validates :customer_id, presence: true
-
-  before_create :attach_to_webmaster
+  belongs_to :scenario
 
   alias_method :type, :scenario
 
@@ -31,14 +22,5 @@ class Reaction < ActiveRecord::Base
     group(  "scenarios.id" )
   end
 
-  private
-
-  def attach_to_webmaster
-    if self.product
-      self.webmaster = self.product.webmaster
-    else
-      raise "No product association found"
-    end
-  end
 
 end

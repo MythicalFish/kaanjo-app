@@ -3,10 +3,11 @@ class Product < ActiveRecord::Base
   include SharedMethods
   include Calculator
 
+  belongs_to :campaign
   has_many :impressions
   has_many :reactions
-  has_many :customers, through: :impressions
-  belongs_to :webmaster
+  has_many :customers, :through => :impressions
+
   before_create :assign_sid 
 
   scope :by_date, -> { order('created_at DESC') }

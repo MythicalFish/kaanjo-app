@@ -1,9 +1,9 @@
 class Scenario < ActiveRecord::Base
 
   belongs_to :campaign
-  belongs_to :emoticon
   has_many :reactions
-  has_many :impressions
+  belongs_to :emoticon
+
 
   def label
     read_attribute(:label) || emoticon.try(:label)
