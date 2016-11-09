@@ -6,42 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-puts 'seeding data'
-
-a = Admin.new({ email:'jake@freshsector.com', password:'test1234', first_name: 'Jake',        last_name: 'Broughton'  })
-a.save!(validate:false)
-
-a = Admin.new({ email:'adrien_lepert@yahoo.fr', password:'test1234', first_name: 'Adrien',        last_name: 'Lepert'  })
-a.save!(validate:false)
-
-Webmaster.create([
-  { email:'adidas@test.com', password:'test1234', website_url: 'http://localhost:3000', website_name: 'Adidas', first_name: 'Adidas', last_name: 'Test', sid: '7a9fddb8909b897e3bd07dea' },
-  { email:'jake@demo-shop.vertaxe.com', password:'test1234', website_url: 'http://demo-shop.vertaxe.com', website_name: 'Demo Shop', first_name: 'Jake',        last_name: 'Broughton' },
-  { email:'jake@localhost:8000', password:'test1234',        website_url: 'http://localhost:8000',        website_name: 'localhost', first_name: 'Jake',        last_name: 'Broughton' },
-  { email:'webmaster4@site4.com', password:'test1234',       website_url: 'http://site4.com',             website_name: 'Site 4', first_name: 'Webmaster',   last_name: 'Four' },
-  { email:'webmaster5@site5.com', password:'test1234',       website_url: 'http://site5.com',             website_name: 'Site 5', first_name: 'Webmaster',   last_name: 'Five' },
-  { email:'webmaster6@site6.com', password:'test1234',       website_url: 'http://site6.com',             website_name: 'Site 6', first_name: 'Webmaster',   last_name: 'Six' },
-  { email:'webmaster7@site7.com', password:'test1234',       website_url: 'http://site7.com',             website_name: 'Site 7', first_name: 'Webmaster',   last_name: 'Seven' },
-  { email:'webmaster8@site8.com', password:'test1234',       website_url: 'http://site8.com',             website_name: 'Site 8', first_name: 'Webmaster',   last_name: 'Eight' },
-  { email:'webmaster9@site9.com', password:'test1234',       website_url: 'http://site9.com',             website_name: 'Site 9', first_name: 'Webmaster',   last_name: 'Nine' },
-  { email:'webmaster10@site10.com', password:'test1234',     website_url: 'http://site10.com',            website_name: 'Site 10', first_name: 'Webmaster',   last_name: 'Ten' },
-  { email:'webmaster11@site11.com', password:'test1234',     website_url: 'http://site11.com',            website_name: 'Site 11', first_name: 'Webmaster',   last_name: 'Eleven' },
-  { email:'webmaster12@site12.com', password:'test1234',     website_url: 'http://site12.com',            website_name: 'Site 12', first_name: 'Webmaster',   last_name: 'Twelve' },
-  { email:'webmaster13@site13.com', password:'test1234',     website_url: 'http://site13.com',            website_name: 'Site 13', first_name: 'Webmaster',   last_name: 'Thirteen' },
-  { email:'webmaster14@site14.com', password:'test1234',     website_url: 'http://site14.com',            website_name: 'Site 14', first_name: 'Webmaster',   last_name: 'Fourteen' },
-  { email:'webmaster15@site15.com', password:'test1234',     website_url: 'http://site15.com',            website_name: 'Site 15', first_name: 'Webmaster',   last_name: 'Fifteen' },
-  { email:'webmaster16@site16.com', password:'test1234',     website_url: 'http://site16.com',            website_name: 'Site 16', first_name: 'Webmaster',   last_name: 'Sixteen' },
-  { email:'webmaster17@site17.com', password:'test1234',     website_url: 'http://site17.com',            website_name: 'Site 17', first_name: 'Webmaster',   last_name: 'Seventeen' },
-  { email:'webmaster18@site18.com', password:'test1234',     website_url: 'http://site18.com',            website_name: 'Site 18', first_name: 'Webmaster',   last_name: 'Eighteen' },
-  { email:'webmaster19@site19.com', password:'test1234',     website_url: 'http://site19.com',            website_name: 'Site 19', first_name: 'Webmaster',   last_name: 'Nineteen' },
-  { email:'webmaster20@site20.com', password:'test1234',     website_url: 'http://site20.com',            website_name: 'Site 20', first_name: 'Webmaster',   last_name: 'Twenty' }
-])
-
-User.all.each do |u|
-  u.confirmed_at = Time.now
-  u.save(validate:false)
-end
-
 CUSTOMER_IDS = [123,456,789,111,222,333]
 DEVICES = ['Test device 1','Test device 2','Test device 3']
 

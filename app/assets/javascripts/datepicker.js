@@ -1,5 +1,16 @@
 $(document).ready(function () {
   
+  
+  app.rangepicker = $('.datepicker .range-selector');
+
+  app.rangepicker.dateRangePicker({}).
+  bind('datepicker-change',function(e,o) {
+    from = o.value.split(' to ')[0];
+    until = o.value.split(' to ')[1];
+    window.location = window.location.href.split('?')[0] + '?t=range&f='+from+'&u='+until;
+  });
+  
+  /*
   app.datepicker = $('.datepicker');
 
   if (!$('.datepicker').is('*'))
@@ -15,14 +26,6 @@ $(document).ready(function () {
       app.datepicker.find('ul').removeClass('hide');
     }, 50);
   });
-  
-  app.rangepicker = $('.datepicker .range-selector');
-
-  app.rangepicker.dateRangePicker({}).
-  bind('datepicker-change',function(e,o) {
-    from = o.value.split(' to ')[0];
-    until = o.value.split(' to ')[1];
-    window.location = window.location.href.split('?')[0] + '?t=range&f='+from+'&u='+until;
-  });
+  */
 
 });

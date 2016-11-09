@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   include DateHelper
   include UserHelper
   include DataHelper
+  include ChartHelper
 
   protected
 

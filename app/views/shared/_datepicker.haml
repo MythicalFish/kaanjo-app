@@ -1,6 +1,7 @@
 .datepicker.dropdown
-  %label
+  %label{for:'datepicker-toggle'}
     = selected_date[:label]
+  %input#datepicker-toggle{type:'checkbox'}
   %ul
     - dates.each do |key,date|
       - next if selected_date == date
@@ -9,4 +10,4 @@
         %a{href:url_for(t:key)}
           = date[:label]
     %li
-      %a.range-selector Custom range
+      %a.range-selector{href:'#'} Custom range

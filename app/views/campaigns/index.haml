@@ -3,6 +3,10 @@
     Dashboard
   = render partial: 'shared/datepicker'
 
+%canvas#chart{width:'100%',height:'40px'}
+%script
+  = collection_to_chartjs(@campaigns).to_json
+
 %table
   %thead        
     %tr

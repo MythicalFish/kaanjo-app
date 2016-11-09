@@ -1,5 +1,6 @@
 
 .dropdown {
+  cursor: pointer;
   display: inline-block;
   position: relative;
   input[type="checkbox"] { @extend .hide; }
