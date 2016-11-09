@@ -1,7 +1,6 @@
 class Campaign < ActiveRecord::Base
 
   include SharedMethods
-  include Calculator
   include CampaignValidator
 
   belongs_to :webmaster
@@ -21,6 +20,7 @@ class Campaign < ActiveRecord::Base
   private
 
   def set_relative_id
+    raise "Campaign must have a webmaster" unless webmaster
     self.relative_id = webmaster.campaigns.length + 1
   end
 

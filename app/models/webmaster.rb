@@ -1,7 +1,6 @@
 class Webmaster < User
 
   include SharedMethods
-  include Calculator
 
   has_many :campaigns
   has_many :products,    :through => :campaigns

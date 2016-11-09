@@ -1,11 +1,10 @@
 class Customer < ActiveRecord::Base
 
   include SharedMethods
-  include Calculator
 
   belongs_to :campaign
   has_many :impressions
-  has_many :reactions
+  has_many :reactions, :through => :impressions
   has_many :products, :through => :impressions
 
   before_create :assign_sid
