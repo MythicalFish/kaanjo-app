@@ -1,8 +1,9 @@
 class Reaction < ActiveRecord::Base
 
-  belongs_to :product
-  belongs_to :customer
   belongs_to :scenario
+  belongs_to :impression
+
+  before_create :build_associations
 
   alias_method :type, :scenario
 
@@ -22,5 +23,12 @@ class Reaction < ActiveRecord::Base
     group(  "scenarios.id" )
   end
 
+  private
+
+  def build_associations
+    raise "An Impression must be associated for Reaction creation" unless impression
+    product_id = impression.product_id
+    customer_id = impression.customer_id
+  end
 
 end

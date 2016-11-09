@@ -11,7 +11,6 @@ Campaign.all.delete_all
 Impression.all.delete_all
 Reaction.all.delete_all
 
-DEVICES = ['Test device 1','Test device 2','Test device 3']
 PRODUCTS = [
   { name: 'Macbook Pro', url: 'https://www.amazon.co.uk/Apple-MacBook-Display-MJLQ2B-Storage/dp/B00Y98VHGK'},
   { name: 'Olympus Tough TG-4 Camera - Red', url: 'https://www.amazon.co.uk/Olympus-Tough-TG-4-Camera-Red/dp/B00VWJYJEG'},
@@ -26,25 +25,37 @@ w = Webmaster.first
 
 puts "Webmaster: #{w.name}"
 puts "Seeding #{w.campaigns.length} campaigns"
+puts ""
+puts ""
 
 w.campaigns.try(:each) do | c|
 
   puts "Seeding campaign #{c.name}"
+  puts ""
 
   puts "Creating products for campaign"
   c.products.create(PRODUCTS)
 
-  puts "Creating customers (with multiple randomly associated products)"
-  100.times do
-    customer = c.customers.create
-    customer.products << c.products.id.sample(rand(c.products.length))
+  puts "Creating customers for campaign"
+  100.times { c.customers.create }
+
+  puts "Creating impressions for above customers (with randomly associated products from above)"
+
+  product_ids = c.products.ids
+
+  c.customers.each do |customer|
+    impressions = []
+    rand(1000).times do
+      impressions << { product_id: product_ids.sample }
+    end
+    customer.impressions.create(impressions)
   end
 
-  puts "Creating impressions for above customers"
-  c.customers.each do |customer|
-    rand(1000).times do
+  puts "Creating reactions based on impressions"
 
-    end
+  c.customers.impressions.each do |impression|
+    next unless rand(10) < 2
+    impression.reaction.create
   end
 
 end
