@@ -56,7 +56,7 @@ namespace :data do
     scenario_ids = c.scenarios.ids
 
     c.impressions.each do |impression|
-      next unless rand(10) < 2
+      next unless rand(100) < 5
       Reaction.create({
         impression_id: impression.id,
         scenario_id: scenario_ids.sample
