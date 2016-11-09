@@ -18,6 +18,10 @@ class Customer < ActiveRecord::Base
     reactions.find_by_product_id(product.id)
   end
 
+  def webmaster
+    campaign.webmaster
+  end
+
   private
 
   def throttle_creation
@@ -36,6 +40,7 @@ class Customer < ActiveRecord::Base
   end
 
   def throttle_reset
+
     self.webmaster.update_attributes!(
       throttle_timer_1: Time.now + 60,
       throttle_index_1: 1

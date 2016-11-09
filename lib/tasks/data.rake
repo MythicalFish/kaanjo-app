@@ -16,51 +16,53 @@ namespace :data do
 
     w = Webmaster.first
 
+
     raise "At least 1 webmaster needed" unless w
     raise "At least 1 campaign needed" unless w.campaigns.any?
 
     puts ""
     puts ""
     puts "Webmaster: #{w.name}"
-    puts "Seeding #{w.campaigns.length} campaigns"
     puts ""
     puts ""
 
-    w.campaigns.try(:each) do | c|
+    c = w.campaigns.first
 
-      puts "Seeding campaign #{c.name}"
-      puts ""
+    puts "Seeding Campaign: #{c.name}"
+    puts ""
 
-      puts "Creating products for campaign"
-      c.products.create(PRODUCTS)
+    puts "Creating products for campaign"
+    c.products.create(PRODUCTS)
 
-      puts "Creating customers for campaign"
-      100.times { c.customers.create }
+    puts "Creating customers for campaign"
+    100.times { c.customers.create }
 
-      puts "Creating impressions for above customers (with randomly associated products from above)"
+    puts "Creating impressions for above customers (with randomly associated products from above)"
 
-      product_ids = c.products.ids
-      start_date = Date.today - 7
-      dates = (start_date..Date.today)
+    product_ids = c.products.ids
+    start_date = Date.today - 7
+    dates = (start_date..Date.today).to_a
 
-      c.customers.each do |customer|
-        impressions = []
-        rand(1000).times do
-          impressions << { product_id: product_ids.sample, created_at: dates.sample }
-        end
-        customer.impressions.create(impressions)
+    c.customers.each do |customer|
+      impressions = []
+      rand(100).times do
+        impressions << { product_id: product_ids.sample, created_at: dates.sample }
       end
-
-      puts "Creating reactions based on impressions"
-
-      scenario_ids = c.scenarios.ids
-
-      c.customers.impressions.each do |impression|
-        next unless rand(10) < 2
-        impression.reaction.create(scenario_id:scenario_ids.sample)
-      end
-
+      customer.impressions.create(impressions)
     end
+
+    puts "Creating reactions based on impressions"
+
+    scenario_ids = c.scenarios.ids
+
+    c.impressions.each do |impression|
+      next unless rand(10) < 2
+      Reaction.create({
+        impression_id: impression.id,
+        scenario_id: scenario_ids.sample
+      })
+    end
+
 
   end
 end 
