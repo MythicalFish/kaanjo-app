@@ -56,10 +56,11 @@ namespace :data do
     scenario_ids = c.scenarios.ids
 
     c.impressions.each do |impression|
-      next unless rand(100) < 5
+      next unless rand(100) < rand((2..5))
       Reaction.create({
         impression_id: impression.id,
-        scenario_id: scenario_ids.sample
+        scenario_id: scenario_ids.sample,
+        created_at: (impression.created_at + 10)
       })
     end
 
