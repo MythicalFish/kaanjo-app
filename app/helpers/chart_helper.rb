@@ -1,13 +1,24 @@
 module ChartHelper
 
-  def collection_to_chartjs collection
+  def chartjs_params_for collection, property = :ctr, label = 'CTR'
+    
+    c = collection.by_date(from:from_date,to:to_date)
+    
+    dates = []
+    values = []
+
+    c.each do |date,value|
+      dates << date
+      values << value[property]
+    end
+
     {
       type: 'line',
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: dates,
         datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          label: label,
+          data: values,
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',

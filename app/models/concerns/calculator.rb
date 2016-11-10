@@ -15,14 +15,43 @@ module Calculator
 
       collection = []
 
-      all.each do |w|
-        collection << w
+      all.each do |o|
+        collection << o
       end
 
       collection = collection.sort_by &@@opts[:order_by]
       collection.reverse! if @@opts[:direction] == 'DESC'
       collection
       
+    end
+
+    def self.by_date opts = {}
+
+      opts = {from:Date.today,to:Date.today}.merge(opts)
+
+      results = {}
+
+      (opts[:from]..opts[:to]).to_a.each do |date|
+        
+        d = date.to_s
+
+        results[d] = {
+          impression_total: 0,
+          reaction_total: 0,
+          ctr: 0
+        }
+
+        all.each do |o|
+          o.setup_totals(from:date,to:date)
+          results[d][:impression_total] += o.impression_total
+          results[d][:reaction_total] += o.reaction_total
+          results[d][:ctr] += o.ctr
+        end
+
+      end
+
+      results
+
     end
 
     def get_count_for association, opts = {}
@@ -106,9 +135,12 @@ module Calculator
       @impression_total = self.get_impression_total(opts)
       @ctr = self.get_ctr(opts)
 
-      Scenario.all.each do |t|
+      return unless model_name.collection == 'campaigns'
+
+      self.scenarios.all.each_with_index do |t,i|
+        i += 1
         instance_variable_set(
-          "@type_total_#{t.id}",
+          "@type_total_#{i}",
           self.get_reaction_total({type:t}.merge(opts))
         )
       end

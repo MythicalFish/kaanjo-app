@@ -1,0 +1,6 @@
+<canvas id="chart" width="100%" height="40px"></canvas>
+
+<script>
+  var chart_canvas = $('#chart');
+  var myChart = new Chart(chart_canvas, <%= chartjs_params_for(current_webmaster.campaigns).to_json.html_safe %>);
+</script>
