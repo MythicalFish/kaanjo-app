@@ -1,4 +1,17 @@
-<canvas id="chart" width="100%" height="40px"></canvas>
+<div class="bg-gray p2 flex justify-between">
+  <div class="dropdown">
+    <label for="chart-property">CTR</label>
+    <input type="checkbox" id="chart-property">
+    <ul>
+      <li>asdasd</li>
+      <li>asdasd</li>
+      <li>asdasd</li>
+    </ul>
+  </div>
+  <%= render partial: 'shared/datepicker' %>
+</div>
+
+<canvas id="chart" width="100%" height="40px" class="bg-gray-lighter"></canvas>
 
 <script>
   var chart_canvas = $('#chart');
