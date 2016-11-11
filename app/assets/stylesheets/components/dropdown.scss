@@ -4,7 +4,22 @@
   display: inline-block;
   position: relative;
   input[type="checkbox"] { @extend .hide; }
-  label { @extend .input; }
+  label { 
+    display: inline-block;
+    background: transparent;
+    padding: $space-2;
+    font-weight: inherit;
+    font-size: inherit;
+    color: inherit;
+    margin-bottom: 0;
+    &:after {
+      content: image_url('ui/dropdown.svg');
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-left: 6px;
+    }
+  }
   ul {
     transition: transform .2s;
     -webkit-transition: transform .2s;

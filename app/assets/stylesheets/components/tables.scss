@@ -4,14 +4,13 @@ table {
   border-spacing: 0;
   background: $white;
   thead {
-    background: $gray-lighter;
-    color: $gray-dark;
-    text-transform: uppercase;
-    @extend .bb2;
+    color: $navy;
+    font-weight: bold;
   }
   tbody {
     @extend .bx1;
     tr {
+      background: $gray-lighter;
       @extend .bb1;
       td:not(:last-child) {
         @extend .br1;

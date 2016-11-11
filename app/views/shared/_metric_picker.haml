@@ -1,0 +1,10 @@
+.dropdown
+  %label{for:'metric-toggle'}
+    = selected_metric[:label]
+  %input#metric-toggle{type:'checkbox'}
+  %ul
+    - metrics.each do |key,metric|
+      - next if selected_metric == metric
+      %li
+        %a{href:url_for(m:key)}
+          = metric[:label]

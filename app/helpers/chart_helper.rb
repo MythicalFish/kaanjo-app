@@ -1,7 +1,11 @@
 module ChartHelper
 
-  def chartjs_params_for collection, property = :ctr, label = 'CTR'
+  def chartjs_params_for collection
     
+    unless collection.try(:length).to_i >= 1
+      collection = Object.const_get(collection.model_name.name).where(id:collection.id)
+    end
+
     c = collection.by_date(from:from_date,to:to_date)
     
     dates = []
@@ -11,9 +15,8 @@ module ChartHelper
     gray = '#E9EDEF'
 
     c.each do |date,value|
-      dates << date
-      v = value[property]
-      values << v
+      dates << date 
+      values << value[selected_metric[:key]]
     end
 
     {
@@ -21,7 +24,7 @@ module ChartHelper
       data: {
         labels: dates,
         datasets: [{
-          label: label,
+          label: selected_metric[:label],
           data: values,
           backgroundColor: 'transparent',
           borderColor: gray,

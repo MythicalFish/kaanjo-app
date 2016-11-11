@@ -18,6 +18,11 @@ class Campaign < ActiveRecord::Base
 
   default_scope { where('is_default = ? AND deleted = ?', false, false) }
 
+  def status
+    return 'active' if enabled?
+    'inactive'
+  end
+  
   private
 
   def set_relative_id

@@ -1,7 +1,12 @@
-- content_for(:header) do
-  %i.fa.fa-diamond.mr1
-  %a{href:campaigns_path} Campaigns
-  = @campaign.name
+%header.flex.justify-between.items-center.y5
+  %div
+    %h1.inline-block
+      Dashboard
+    %div.inline-block
+      = @campaign.name
+  %div
+    %a.btn.bg-gray{href:edit_campaign_url(relative_id:@campaign.relative_id)}
+      %i.fa.fa-edit.mr1
+      Edit campaign
 
-  
-
+= render partial: 'shared/chart', locals: { collection: @campaign }

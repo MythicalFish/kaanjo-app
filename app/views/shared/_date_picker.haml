@@ -1,7 +1,7 @@
 .datepicker.dropdown
-  %label{for:'datepicker-toggle'}
+  %label{for:'date-toggle'}
     = selected_date[:label]
-  %input#datepicker-toggle{type:'checkbox'}
+  %input#date-toggle{type:'checkbox'}
   %ul
     - dates.each do |key,date|
       - next if selected_date == date

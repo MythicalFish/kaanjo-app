@@ -2,9 +2,9 @@
   %h1
     Dashboard
 
-= render partial: 'shared/chart'
+= render partial: 'shared/chart', locals: { collection: current_webmaster.campaigns }
 
-%table
+%table.mt3
   %thead        
     %tr
       %td
@@ -12,10 +12,12 @@
       %td
         = sort_link('impression_total', 'Impressions')
       %td
-        = sort_link('reaction_total', 'Total reactions')
+        = sort_link('reaction_total', 'Clicks')
       %td 
         = sort_link('ctr', 'CTR')
       %td
+        Status
+      %td.center
         Actions
   %tbody
     - @campaigns.each do |c|
@@ -25,9 +27,12 @@
         %td= c.impression_total
         %td= c.reaction_total
         %td= "#{c.ctr}%"
-        %td.right-align
-          %a.mr1{href:edit_campaign_path(c.relative_id),title:'Edit'}
+        %td= c.status
+        %td.center
+          %a{href:campaign_path(c.relative_id),title:'View'}
+            %i.fa.fa-eye
+          %a.mx1{href:edit_campaign_path(c.relative_id),title:'Edit'}
             %i.fa.fa-edit
-          %a.mr1{href:campaign_path(c.relative_id),title:'Delete',data:{method:'delete',confirm:"Are you sure you want to delete \'#{c.name}\'?"}}
+          %a{href:campaign_path(c.relative_id),title:'Delete',data:{method:'delete',confirm:"Are you sure you want to delete \'#{c.name}\'?"}}
             %i.fa.fa-close
     
