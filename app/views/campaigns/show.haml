@@ -10,3 +10,13 @@
       Edit campaign
 
 = render partial: 'shared/chart', locals: { collection: @campaign }
+
+%nav
+  %ul.list-inline
+    %li
+      %a{href:url_for('')} All reactions
+    - @campaign.scenarios.each do |s|
+      %li
+        %a.emoticon{href:url_for(scenario:s.id)}
+          %img{src:s.image_url}
+          %label= s.label
