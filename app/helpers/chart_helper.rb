@@ -1,6 +1,6 @@
 module ChartHelper
 
-  def chartjs_params_for collection
+  def linechart_params_for collection
     
     unless collection.try(:length).to_i >= 1
       collection = Object.const_get(collection.model_name.name).where(id:collection.id)
@@ -51,5 +51,42 @@ module ChartHelper
       }
     }
   end
+
+  def doughnut_params_for scenarios
+
+    labels = []
+    reaction_counts = []
+
+    scenarios.each do |s|
+      labels << s.label
+      reaction_counts << s.reactions.length
+    end
+
+    {
+      type: 'doughnut',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: reaction_counts,
+            backgroundColor: [
+              "#FF6384",
+              "#36A2EB",
+              "#FFCE56",
+              "#0EA0EB",
+              "#1F4C78"
+            ]
+          }
+        ]
+      },
+      options: {
+        cutoutPercentage: 75,
+        legend: {
+          display: false
+        }
+      }
+    }
+  end
+
 
 end

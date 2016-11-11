@@ -9,14 +9,54 @@
       %i.fa.fa-edit.mr1
       Edit campaign
 
-= render partial: 'shared/chart', locals: { collection: @campaign }
+= render partial: 'shared/charts/line_chart', locals: { collection: @campaign }
 
-%nav
-  %ul.list-inline
-    %li
-      %a{href:url_for('')} All reactions
-    - @campaign.scenarios.each do |s|
-      %li
-        %a.emoticon{href:url_for(scenario:s.id)}
-          %img{src:s.image_url}
-          %label= s.label
+.b1.p2.md-p4.bg-gray-lighter.my4.center
+  .row.middle-xs
+    .col-xs-6.col-md-3
+      = render partial: 'shared/charts/doughnut', locals: { collection: @campaign.scenarios }
+    .col-xs-6.col-md-3
+      .h3.blue= @campaign.impression_total
+      Impressions
+    .col-xs-6.col-md-3
+      .h3.blue= @campaign.reaction_total
+      Reactions
+    .col-xs-6.col-md-3
+      .h3.blue= @campaign.ctr
+      CTR
+
+.tabs
+  .tab.emoticon{data:{position:0}}
+    %img
+    %label All reactions
+  - @campaign.scenarios.each_with_index do |s,i|
+    .tab.emoticon{data:{position:(i+1)}}
+      %img{src:s.image_url}
+      %label= s.label
+
+.tab-contents
+  .tab-content.tab-active{data:{position:0}}
+    
+    %table
+      %thead
+        %tr
+          %td Product name
+          %td ID
+          %td Impressions
+          %td Reactions
+          %td Link
+      %tbody
+        - @campaign.products.with_totals(sorted).each do |p|
+          %tr
+            %td= p.name
+            %td= p.sid
+            %td= p.impression_total
+            %td= p.reaction_total
+            %td
+              %a{href:p.url}
+                %img.x2{src:image_url('ui/link.svg')}
+
+
+  - @campaign.scenarios.each_with_index do |s,i|
+    .tab-content{data:{position:(i+1)}}
+      = s.label

@@ -2,7 +2,7 @@
   %h1
     Dashboard
 
-= render partial: 'shared/chart', locals: { collection: current_webmaster.campaigns }
+= render partial: 'shared/charts/line_chart', locals: { collection: current_webmaster.campaigns }
 
 %table.mt3
   %thead        

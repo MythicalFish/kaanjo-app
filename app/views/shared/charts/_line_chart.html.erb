@@ -7,5 +7,5 @@
 
 <script>
   var chart_canvas = $('#chart');
-  var myChart = new Chart(chart_canvas, <%= chartjs_params_for(collection).to_json.html_safe %>);
+  var myChart = new Chart(chart_canvas, <%= linechart_params_for(collection).to_json.html_safe %>);
 </script>

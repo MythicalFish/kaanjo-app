@@ -9,6 +9,11 @@ module Calculator
 
     @@opts = { from: Date.today, to: Date.today }
 
+    def with_totals opts = {}
+      @@opts = @@opts.merge(opts)
+      Object.const_get(self.model_name.name).find(id)
+    end
+
     def self.with_totals opts = {}
 
       @@opts = @@opts.merge(opts)

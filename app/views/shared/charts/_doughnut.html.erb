@@ -1,0 +1,5 @@
+<canvas id="doughnut" width="100px" height="100px"></canvas>
+
+<script>
+  var doughnut = new Chart($('#doughnut'), <%= doughnut_params_for(collection).to_json.html_safe %>);
+</script>

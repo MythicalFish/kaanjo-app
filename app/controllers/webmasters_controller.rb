@@ -1,20 +1,18 @@
 class WebmastersController < ApplicationController
 
-  include ReactionSorting
-
   before_action :enforce_admin
 
   respond_to :html
 
   def index
     @title = "Webmasters"
-    @webmasters = Webmaster.with_totals(reaction_sorting)
+    @webmasters = Webmaster.with_totals(sorted)
   end
 
   def show
     @webmaster = Webmaster.find(params[:id])
     @title = "Webmaster: #{@webmaster.name}"
-    @products = @webmaster.products.with_totals(reaction_sorting)
+    @products = @webmaster.products.with_totals(sorted)
   end
 
   def edit

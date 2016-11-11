@@ -3,6 +3,7 @@ namespace :data do
 
     Impression.all.delete_all
     Reaction.all.delete_all
+    Product.all.delete_all
 
     PRODUCTS = [
       { name: 'Macbook Pro', url: 'https://www.amazon.co.uk/Apple-MacBook-Display-MJLQ2B-Storage/dp/B00Y98VHGK'},

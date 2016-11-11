@@ -8,7 +8,7 @@ class CampaignsController < ApplicationController
   end
 
   def show
-    @campaign = find(params[:id])
+    @campaign = find(params[:id]).with_totals(sorted)
     @title = @campaign.name
   end
 

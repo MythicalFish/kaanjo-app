@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   include DataHelper
   include ChartHelper
   include MetricHelper
+  include SortingHelper
 
   protected
 
