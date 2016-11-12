@@ -21,6 +21,13 @@ $(document).on('click', '.step-take', function () {
   $('.step').hide();
   $(target).show();
 
+  var progress = $('.progression');
+
+  if (progress.is('*')) {
+    var distance = parseInt(progress.attr('data-distance'));
+    progress.attr('data-distance', distance + 1);
+  }
+
 });
 
 $(document).on( 'click', '.tab', function () {

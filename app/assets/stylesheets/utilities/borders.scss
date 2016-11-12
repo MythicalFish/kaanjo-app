@@ -26,6 +26,10 @@
   .#{$namespace}bx0 { border-left: 0;   border-right: 0}
   .#{$namespace}bx1 { border-left: $b1; border-right: $b1; }
   .#{$namespace}bx2 { border-left: $b2; border-right: $b2; }
+
+  .#{$namespace}by0 { border-bottom: 0;   border-top: 0}
+  .#{$namespace}by1 { border-bottom: $b1; border-top: $b1; }
+  .#{$namespace}by2 { border-bottom: $b2; border-top: $b2; }
   
 }
 

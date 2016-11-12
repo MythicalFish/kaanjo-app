@@ -1,6 +1,7 @@
 !!!
 %html
   %head
+    %meta{:content => 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', :name => 'viewport'}
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
     %title= page_title
     = stylesheet_link_tag 'application', media: 'all'
@@ -9,36 +10,45 @@
     = csrf_meta_tags
 
   %body
-    .container
-      = render partial: 'shared/flashes'
-      #header.flex.justify-between.items-center.y5
-        
-        .flex.items-center
-          .x5
-            %img{src:image_url('logo.svg')}
-          - if webmaster?
-            .ml3.bl2.pl3.py1
-              = current_webmaster.website_url
 
-        .flex.items-end
-          - if webmaster?
-            %a.btn{href:new_campaign_path}
-              New Campaign
-          .dropdown.right-align.ml2
-            %label#avatar.round{for:'user-menu-toggle'}
-              = current_user.first_name[0]
-            %input#user-menu-toggle.hide{type:'checkbox'}
-            %ul#user-menu
-              %li
-                %a{href:edit_user_registration_path,class:cp(edit_user_registration_path)}
-                  Account settings
-                  %i.fa.fa-gear.ml1
-              %li
-                %a{href:destroy_user_session_path, 'data-method'=>'delete'} 
-                  Logout
-                  %i.fa.fa-sign-out.ml1
+    = render partial: 'shared/flashes'
 
-      #body= yield
+    #header
+      .container
+        .flex.justify-between.items-center.y5
+          
+          .flex.items-center
+            .x5
+              %img{src:image_url('logo.svg')}
+            - if webmaster?
+              .ml3.bl2.pl3.py1
+                = current_webmaster.nice_url
+
+          .flex.items-end
+            - if webmaster?
+              %a.btn.btn-blue{href:new_campaign_path}
+                New Campaign
+            - elsif admin?
+              %a.btn.btn-blue{href:new_campaign_template_path}
+                New Template
+            .dropdown.right-align.ml2
+              %label#avatar.round{for:'user-menu-toggle'}
+                .input.rounded.inline-block
+                  = current_user.first_name[0]
+              %input#user-menu-toggle.hide{type:'checkbox'}
+              %ul#user-menu
+                %li
+                  %a{href:edit_user_registration_path,class:cp(edit_user_registration_path)}
+                    Account settings
+                    %i.fa.fa-gear.ml1
+                %li
+                  %a{href:destroy_user_session_path, 'data-method'=>'delete'} 
+                    Logout
+                    %i.fa.fa-sign-out.ml1
+
+    = content_for :after_header
+
+    #body.container= yield
 
     #modal
       = content_for :modal

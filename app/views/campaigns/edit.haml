@@ -9,6 +9,6 @@
     = render partial: 'design_form', locals: {f:f}
     = render partial: 'settings_form', locals: {f:f}
     .actions
-      = f.submit "Update"
+      = f.submit "Update", class: 'btn btn-blue'
   
-  = render partial: 'shared/script', locals: { cid: @campaign.relative_id }
+  = render partial: 'client/script', locals: { cid: @campaign.relative_id }

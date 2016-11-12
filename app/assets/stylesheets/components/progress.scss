@@ -1,0 +1,37 @@
+.progression{
+  .milestone {
+    position: relative;
+    padding-top: 28px;
+    &:before {
+      display: block;
+      width: 18px;
+      height: 18px;
+      background-color: $gray;
+      border-radius: 100%;
+      -webkit-border-radius: 100%;
+      content: ' ';
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      position: absolute;
+    }
+    &:nth-child(1){
+      color: $blue;
+      &:before { background-color: $blue; }
+    }
+  }
+  &[data-distance="2"], &[data-distance="3"] { .milestone {
+    &:nth-child(2){
+      color: $blue;
+      &:before { background-color: $blue; }
+    }
+  } }
+  &[data-distance="3"] { .milestone {
+    &:nth-child(3){
+      color: $blue;
+      &:before { background-color: $blue; }
+    }
+  }}
+      
+}

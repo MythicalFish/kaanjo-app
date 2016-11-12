@@ -22,20 +22,22 @@
       .mb3
         = ff.label :emoticon
         
-        %button.btn-inline{type:'button',onclick:"app.emoticon.upload(#{i});"}
+        %button.btn{type:'button',onclick:"app.emoticon.upload(#{i});"}
+          %i.fa.fa-upload.mr1
           Upload your own image
 
-        %button.btn-inline{type:'button',onclick:"app.emoticon.library(#{i});"}
+        %button.btn{type:'button',onclick:"app.emoticon.library(#{i});"}
+          %i.fa.fa-th.mr1
           Select from our library
       
       .mb3
         = ff.label :label
-        = ff.text_field :label, class: 'scenario_label'
+        = ff.text_field :label, class: 'scenario_label', maxlength: 15
       
       .mb3
         = ff.label :message
-        = ff.text_field :message, class: 'scenario_message'
+        = ff.text_field :message, class: 'scenario_message', maxlength: 120
       
-      %button.btn-inline{type:'button',onclick:"app.scenario.disable(#{i});"}
+      %button.btn{type:'button',onclick:"app.scenario.disable(#{i});"}
         %i.fa.fa-close.mr2
         Remove scenario

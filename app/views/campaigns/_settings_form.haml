@@ -11,3 +11,6 @@
       = f.date_field :start_date
     .col-xs-12.col-sm-6
       = f.date_field :end_date
+.mb3
+  = f.label :enabled, "Campaign status"
+  = f.select :enabled, [['Active', true], ['Inactive', false]]

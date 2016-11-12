@@ -6,6 +6,7 @@
   font-size: inherit;
   color: $gray-darker;
   background-color: $gray-lighter;
+  display: initial;
 }
 input[type="text"],input[type="password"],input[type="email"],input[type="email"],input[type="tel"],input[type="search"],input[type="date"],select,textarea {
   @extend .input;

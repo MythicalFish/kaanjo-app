@@ -1,8 +1,8 @@
 .mb3
-  = f.label :social_proof, "Social proof sentence"
+  = f.label :social_proof, "Social proof sentence", class: 'h2 gray-darker'
   = f.text_field :social_proof, { required: true, minlength: 10, maxlength: 120 }
 .mb3
-  = f.label :question, "Your question or message"
+  = f.label :question, "Your question or message", class: 'h2 gray-darker'
   = f.text_field :question, { required: true, minlength: 10, maxlength: 120 }
 .mb3
   = render partial: 'campaigns/scenarios/form', locals: {f:f}

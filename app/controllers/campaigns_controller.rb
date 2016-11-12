@@ -25,7 +25,7 @@ class CampaignsController < ApplicationController
 
   def update
 
-    @campaign = find(params[:id])
+    @campaign = find(params[:id],false)
 
     if scenarios_invalid?
       flash[:alert] = "Error: You need at least 2 scenarios"
@@ -38,7 +38,7 @@ class CampaignsController < ApplicationController
     if admin?
       redirect_to edit_campaign_template_path(@campaign)
     elsif webmaster?
-      redirect_to edit_campaign_path(@campaign)
+      redirect_to edit_campaign_path(@campaign.relative_id)
     end
 
   end
@@ -48,7 +48,7 @@ class CampaignsController < ApplicationController
     if admin?
       @campaign = CampaignTemplate.new(campaign_params)
     elsif webmaster?
-      @campaign = Template.new(campaign_params)
+      @campaign = current_webmaster.campaigns.new(campaign_params)
     end
 
     if @campaign.save
@@ -71,11 +71,15 @@ class CampaignsController < ApplicationController
 
   private
 
-  def find id
+  def find id, relative = true
     if admin?
       CampaignTemplate.find(id)
     elsif webmaster?
-      current_webmaster.campaigns.find_by_relative_id(id)
+      if relative
+        current_webmaster.campaigns.find_by_relative_id(id)
+      else
+        current_webmaster.campaigns.find(id)
+      end
     end
   end
 

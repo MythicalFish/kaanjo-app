@@ -1,23 +1,36 @@
-- content_for(:header) do
-  %i.fa.fa-user.mr1
-  Webmasters    
+%header.flex.justify-between.items-center.y5
+  %div
+    %h1.inline-block
+      Dashboard
+    %div.inline-block
+      Website
 
-- content_for(:actions) do
-  %a{href:new_webmaster_path}
-    Create    
+.row.center.mb3
+  .col-xs-12.col-md-4
+    .p2.md-p4.bg-gray-lighter.b1
+      .h1.aqua.bold
+        = @impression_total
+      Impressions
+  .col-xs-12.col-md-4
+    .p2.md-p4.bg-gray-lighter.b1
+      .h1.aqua.bold
+        = @reaction_total
+      Clicks
+  .col-xs-12.col-md-4
+    .p2.md-p4.bg-gray-lighter.b1
+      .h1.aqua.bold
+        = "#{@ctr}%"
+      CTR
   
-.flex
-  %header.flex-auto
-    Activity Overview
-  .flex-none
-    = render partial: 'shared/date_picker'
-%table
+= render partial: 'shared/charts/line_chart', locals: { collection: Webmaster.all }
+
+%table.mt3
   %thead
     %tr
       %td
-        = sort_link('first_name', 'Name')
+        = sort_link('website_name', 'Company')
       %td
-        = sort_link('website_name', 'Website')
+        = sort_link('first_name', 'Name')
       %td
         = sort_link('impression_total', 'Impressions')
       %td
@@ -29,18 +42,18 @@
   - @webmasters.each do |w|
     %tr
       %td
-        %a{href:webmaster_path(w)}
-          = w.name
+        = w.website_name
       %td
-        %a{href:"http://#{w.website_url}"}
-          .gray-darker= w.website_name
-          %i.h4= w.website_url
+        = w.name
       %td
         = w.impression_total
       %td
         = w.reaction_total
       %td
         = "#{w.ctr}%"
-      %td
-        %a{href:edit_webmaster_url(w)} Edit
+      %td.right-align
+        %a.mr2{href:webmaster_url(w)}
+          %i.fa.fa-eye
+        %a{href:edit_webmaster_url(w)}
+          %i.fa.fa-edit
   

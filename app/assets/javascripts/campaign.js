@@ -93,3 +93,8 @@ app.emoticon = {
 $(document).on('click', '.scenario-selector.scenario-disabled', function() {
   app.emoticon.library($(this).attr('data-position')); 
 });
+
+$(document).on('change', 'input.scenario_label', function () {
+  var pos = $(this).parents('.scenario-form').attr('data-position');
+  $('.tab[data-position="' + pos + '"]').find('label').text($(this).val());
+});

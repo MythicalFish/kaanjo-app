@@ -11,9 +11,9 @@
 
 = render partial: 'shared/charts/line_chart', locals: { collection: @campaign }
 
-.b1.p2.md-p4.bg-gray-lighter.my4.center
+.b1.p2.md-p3.bg-gray-lighter.my4.center
   .row.middle-xs
-    .col-xs-6.col-md-3
+    .col-xs-6.col-md-2
       = render partial: 'shared/charts/doughnut', locals: { collection: @campaign.scenarios }
     .col-xs-6.col-md-3
       .h3.blue= @campaign.impression_total

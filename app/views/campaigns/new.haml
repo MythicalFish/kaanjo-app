@@ -1,55 +1,60 @@
-- content_for(:header) do
-  %i.fa.fa-diamond.mr1
-  %a{href:campaigns_path} Campaigns
-  New campaign
-
-.container-narrow.p2.md-p3.lg-p4.bg-white
-
-  = form_for(@campaign) do |f|
-
-    #select-method.step.center
-      
-      %h1 How would you like to create your emoticons?
-
+- content_for :after_header do
+  .progression.mb4.py3.by1.bg-gray-lighter{data:{distance:1}}
+    .container-narrower.center
       .row
-        .col-xs-12.col-md-6
-          %h2 Template
-          %p Select from a list of predefined emoticons or case scenarios and customize it to your needs.
-          %button.step-take{type:'button'}
-            Choose template
+        .col-xs-12.col-md-4.milestone
+          Template
+        .col-xs-12.col-md-4.milestone
+          Design
+        .col-xs-12.col-md-4.milestone
+          Setup
 
-        .col-xs-12.col-md-6
-          %h2 Custom
-          %p Upload your own emoticons and customize the messages.
-          %button.step-take{type:'button',data:{target:'#design'}}
-            I will do it
 
-    #select-template.step
 
-      %h1.mb0 Select your template
 
-      - CampaignTemplate.all.each do |c|
-        .b1.mt3
-          .campaign-template.flex.items-center{data:{id:c.id,social_proof:c.social_proof}}
-            .flex-auto.p2.br1
-              %h4.question= c.question
-              = render partial: 'campaigns/scenarios/emoticons/set', locals: {campaign:c}
-            .flex-none.p2
-              %button.step-take{type:'button',onclick:"app.campaign.clone_template(#{c.id})"}
-                Select
+= form_for(@campaign) do |f|
 
+  #select-method.step.center.container-narrow
     
-    #design.step
+    %h1.mb4 How would you like to create your emoticons?
 
-      %h1 Design
+    .row
+      .col-xs-12.col-md-6
+        %h2.aqua Template
+        %p.mb3 Select from a list of predefined emoticons or case scenarios and customize it to your needs.
+        %button.btn.btn-blue.step-take{type:'button'}
+          Choose template
 
-      = render partial: 'design_form', locals: {f:f}
+      .col-xs-12.col-md-6
+        %h2.aqua Custom
+        %p.mb3 Upload your own emoticons and customize the messages.
+        %button.btn.btn-blue.step-take{type:'button',data:{target:'#design'}}
+          I will do it
 
-      %button.step-take{type:'button'}
-        Next
+  #select-template.step.container-narrow
 
-    #settings.step
+    %h1.mb0 Select your template
 
-      = render partial: 'settings_form', locals: {f:f}
+    - CampaignTemplate.all.each do |c|
+      .b1.mt3
+        .campaign-template.flex.items-center{data:{id:c.id,social_proof:c.social_proof}}
+          .flex-auto.p2.br1
+            %h4.question= c.question
+            = render partial: 'campaigns/scenarios/emoticons/set', locals: {campaign:c}
+          .flex-none.p2
+            %button.btn.btn-blue.step-take{type:'button',onclick:"app.campaign.clone_template(#{c.id})"}
+              Select
 
-      = f.submit "Create campaign"
+  
+  #design.step.container-narrower
+
+    = render partial: 'design_form', locals: {f:f}
+
+    %button.btn.btn-blue.step-take{type:'button'}
+      Next
+
+  #settings.step
+
+    = render partial: 'settings_form', locals: {f:f}
+
+    = f.submit "Create campaign", class: 'btn btn-blue'

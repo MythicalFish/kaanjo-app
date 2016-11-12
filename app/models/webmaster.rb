@@ -1,6 +1,7 @@
 class Webmaster < User
 
   include SharedMethods
+  include Calculator
 
   has_many :campaigns
   has_many :products,    :through => :campaigns
@@ -11,6 +12,10 @@ class Webmaster < User
   before_save :sanitize_website_url
 
   default_scope { where('admin = ?', false) }
+
+  def nice_url
+    website_url.sub('http://','').sub('https://','').sub('www','')
+  end
 
   private
 
