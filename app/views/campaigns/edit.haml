@@ -10,5 +10,8 @@
     = render partial: 'settings_form', locals: {f:f}
     .actions
       = f.submit "Update", class: 'btn btn-blue'
-  
-  = render partial: 'client/script', locals: { cid: @campaign.relative_id }
+   
+  %code
+    = '<script>'
+    = render(partial: 'client/script', locals: { cid: @campaign.relative_id })
+    = '</script>'

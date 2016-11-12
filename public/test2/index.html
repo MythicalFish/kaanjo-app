@@ -4,17 +4,10 @@
   <body>
 
     <script>
-      (function() {
-      var campaign_id = 140;
-
-      var v = document.createElement("script");
-      v.async = true;
-      v.src = "http://dev.kaanjo.co/kaanjo.js";
-      v.id = 'kaanjo';
-      v.setAttribute("data-cid", campaign_id);
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(v, s);
-      })();
+    (function(e,m,o,j,i){s=m.createElement(o);
+    s.async=true;s.src=j;ss=m.getElementsByTagName(o)[0];
+    ss.parentNode.insertBefore(s,ss);e['kaanjo']={cid:i}}
+    )(window,document,'script','http://dev.kaanjo.co/plugin.js',4);
     </script>
 
     <div id="kaanjo-container" data-product="Test product 2" data-key="7a9fddb8909b897e3bd07dea"></div>
