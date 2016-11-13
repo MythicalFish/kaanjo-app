@@ -2,11 +2,10 @@ class Reaction < ActiveRecord::Base
 
   belongs_to :scenario
   belongs_to :impression
+  belongs_to :customer
+  belongs_to :product
 
   alias_method :type, :scenario
-
-  delegate :product, to: :impression
-  delegate :customer, to: :impression
 
   def self.total from, to
     if from && to

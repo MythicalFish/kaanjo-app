@@ -2,7 +2,7 @@ module ClientHelper
   
   def button_class r
     c = "kaanjo-reaction"
-    c << " kaanjo-selected" if r == @scenario
+    c << " kaanjo-selected" if r == @reaction.try(:scenario)
     c
   end
 

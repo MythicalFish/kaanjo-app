@@ -33,7 +33,9 @@ class ReactionsApi < WebsocketRails::BaseController
 
       @reaction = Reaction.create(
         scenario_id: message[:id],
-        impression_id: @impression.id
+        impression: @impression,
+        product: @product,
+        customer: @customer
       )
 
       set :reaction, @reaction

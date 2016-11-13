@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109084104) do
+ActiveRecord::Schema.define(version: 20161113071043) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "relative_id",  limit: 4,                   null: false
@@ -93,10 +93,14 @@ ActiveRecord::Schema.define(version: 20161109084104) do
     t.datetime "created_at",              null: false
     t.integer  "scenario_id",   limit: 4, null: false
     t.integer  "impression_id", limit: 4, null: false
+    t.integer  "product_id",    limit: 4, null: false
+    t.integer  "customer_id",   limit: 4, null: false
   end
 
   add_index "reactions", ["created_at"], name: "index_reactions_on_created_at", using: :btree
+  add_index "reactions", ["customer_id"], name: "index_reactions_on_customer_id", using: :btree
   add_index "reactions", ["impression_id"], name: "index_reactions_on_impression_id", using: :btree
+  add_index "reactions", ["product_id"], name: "index_reactions_on_product_id", using: :btree
   add_index "reactions", ["scenario_id"], name: "index_reactions_on_scenario_id", using: :btree
 
   create_table "scenarios", force: :cascade do |t|

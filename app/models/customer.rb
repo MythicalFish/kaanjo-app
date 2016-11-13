@@ -4,14 +4,14 @@ class Customer < ActiveRecord::Base
 
   belongs_to :campaign
   has_many :impressions
-  has_many :reactions, :through => :impressions
+  has_many :reactions
   has_many :products, :through => :impressions
 
   before_create :assign_sid
   before_create :throttle_creation
 
   def reaction_to product
-    impressions.find_by_product_id(product.id).try(:reaction)
+    reactions.find_by_product_id(product.id)
   end
 
   def reacted_to? product

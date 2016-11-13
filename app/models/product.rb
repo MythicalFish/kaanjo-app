@@ -5,7 +5,7 @@ class Product < ActiveRecord::Base
 
   belongs_to :campaign
   has_many :impressions
-  has_many :reactions, :through => :impressions
+  has_many :reactions
   has_many :customers, :through => :impressions
 
   before_create :assign_sid 

@@ -60,6 +60,8 @@ namespace :data do
       next unless rand(100) < rand((2..5))
       Reaction.create({
         impression_id: impression.id,
+        product_id: impression.product.id,
+        customer_id: impression.customer.id,
         scenario_id: scenario_ids.sample,
         created_at: (impression.created_at + 10)
       })
