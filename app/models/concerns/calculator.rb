@@ -7,7 +7,7 @@ module Calculator
     attr_accessor :reaction_total, :impression_total, :ctr, 
       :type_total_1, :type_total_2, :type_total_3, :type_total_4, :type_total_5
 
-    @@opts = { from: Date.new(2016), to: Date.today }
+    @@opts = { from: Date.new(2016,11), to: Date.today }
 
     def with_totals opts = {}
       @@opts = @@opts.merge(opts)

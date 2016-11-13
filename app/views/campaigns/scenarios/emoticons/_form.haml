@@ -22,9 +22,11 @@
       .mb3
         = ff.label :emoticon
         
-        %button.btn{type:'button',onclick:"app.emoticon.upload(#{i});"}
-          %i.fa.fa-upload.mr1
-          Upload your own image
+        .inline-block.relative
+          .btn
+            %i.fa.fa-upload.mr1
+            Upload your own
+          = ff.file_field :custom_emoticon, class: 'custom_emoticon absolute top-0 left-0 right-0 bottom-0 opa0'
 
         %button.btn{type:'button',onclick:"app.emoticon.library(#{i});"}
           %i.fa.fa-th.mr1

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161113071043) do
+ActiveRecord::Schema.define(version: 20161113095718) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "relative_id",  limit: 4,                   null: false
@@ -104,16 +104,22 @@ ActiveRecord::Schema.define(version: 20161113071043) do
   add_index "reactions", ["scenario_id"], name: "index_reactions_on_scenario_id", using: :btree
 
   create_table "scenarios", force: :cascade do |t|
-    t.string  "label",       limit: 255
-    t.string  "message",     limit: 255, default: "Thanks! You and {number} others feel this way."
-    t.integer "emoticon_id", limit: 4
-    t.boolean "enabled",                 default: false
-    t.integer "campaign_id", limit: 4
+    t.string   "label",                        limit: 255
+    t.string   "message",                      limit: 255, default: "Thanks! You and {number} others feel this way."
+    t.integer  "emoticon_id",                  limit: 4
+    t.boolean  "enabled",                                  default: false
+    t.integer  "campaign_id",                  limit: 4
+    t.string   "custom_emoticon_file_name",    limit: 255
+    t.string   "custom_emoticon_content_type", limit: 255
+    t.integer  "custom_emoticon_file_size",    limit: 4
+    t.datetime "custom_emoticon_updated_at"
+    t.string   "sid",                          limit: 255,                                                            null: false
   end
 
   add_index "scenarios", ["campaign_id"], name: "index_scenarios_on_campaign_id", using: :btree
   add_index "scenarios", ["emoticon_id"], name: "index_scenarios_on_emoticon_id", using: :btree
   add_index "scenarios", ["enabled"], name: "index_scenarios_on_enabled", using: :btree
+  add_index "scenarios", ["sid"], name: "index_scenarios_on_sid", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false

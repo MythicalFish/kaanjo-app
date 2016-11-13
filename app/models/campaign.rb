@@ -1,6 +1,5 @@
 class Campaign < ActiveRecord::Base
 
-  include SharedMethods
   include CampaignValidator
   include Calculator
 

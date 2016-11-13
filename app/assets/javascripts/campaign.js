@@ -98,3 +98,15 @@ $(document).on('change', 'input.scenario_label', function () {
   var pos = $(this).parents('.scenario-form').attr('data-position');
   $('.tab[data-position="' + pos + '"]').find('label').text($(this).val());
 });
+
+$(document).on('change', 'input.custom_emoticon', function () {
+  
+  var reader = new FileReader();
+  var pos = $(this).parents('.scenario-form').attr('data-position');
+
+  reader.onload = function (e) {
+    $('.tab[data-position="' + pos + '"]').find('img').attr('src',e.target.result);
+  };
+
+  reader.readAsDataURL(this.files[0]);
+});

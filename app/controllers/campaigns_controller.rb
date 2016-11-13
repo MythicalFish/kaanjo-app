@@ -95,7 +95,7 @@ class CampaignsController < ApplicationController
     model_name = admin? ? :campaign_template : :campaign
     params.require(model_name).permit(
       :name, :description, :question, :social_proof, :site_path, :enabled, :start_date, :end_date,
-      :scenarios_attributes => [ :id, :enabled, :label, :emoticon_id, :message ]
+      :scenarios_attributes => [ :id, :enabled, :label, :emoticon_id, :message, :custom_emoticon ]
     )
   end
 

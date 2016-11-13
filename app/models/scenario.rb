@@ -1,9 +1,18 @@
 class Scenario < ActiveRecord::Base
 
+  include SharedMethods
+
+  before_create :assign_sid
+
   belongs_to :campaign
   has_many :reactions
   belongs_to :emoticon
 
+  has_attached_file :custom_emoticon,
+    url: "/custom_emoticons/:sid.:extension",
+    path: ':rails_root/public/custom_emoticons/:sid.:extension'
+
+  validates_attachment :custom_emoticon, content_type: { content_type: /\Aimage\/.*\Z/ }
 
   def label
     read_attribute(:label) || emoticon.try(:label)
@@ -14,7 +23,11 @@ class Scenario < ActiveRecord::Base
   end
 
   def image_url
-    emoticon.image.url if emoticon
+    if custom_emoticon.present?
+      custom_emoticon.url
+    elsif emoticon
+      emoticon.image.url 
+    end
   end
   
 end

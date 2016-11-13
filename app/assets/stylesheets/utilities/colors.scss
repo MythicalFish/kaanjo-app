@@ -16,3 +16,11 @@
 .bg-darken-7 { background: $darken-7; }
 .bg-darken-8 { background: $darken-8; }
 .bg-darken-9 { background: $darken-9; }
+
+$opacities: 0,1,2,3,4,5,6,7,8,9;
+
+@each $o in $opacities {
+  $d: .1 * $o;
+  .opa#{$o} { opacity: $d; }
+  .black#{$o} { color: rgba(0,0,0,$d); }
+}
