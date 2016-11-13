@@ -1,6 +1,6 @@
-- @product = product
-- @scenario = scenario
 - @campaign = campaign
+- @product = product
+- @reaction = reaction
 
 //#kaanjo-info
 //  %img{src:static_asset_url('info.svg')}
@@ -9,7 +9,7 @@
 //    %a{href:'http://kaanjo.co',target:'_blank'} Kaanjo
 
 #kaanjo-title
-  How does this item make you feel?
+  = @campaign.question
 
 - @campaign.scenarios.each do |r|
   %button{type:'button', onclick:"Kaanjo.react(#{r.id})", class:button_class(r), id:"kaanjo-reaction#{r.id}"}
@@ -18,8 +18,8 @@
       .kaanjo-bubble= r.label
 
 #kaanjo-status
-  - if @scenario
-    = render partial: 'client/status', locals: { scenario: @scenario, product: @product }
+  - if @reaction
+    = render partial: 'client/status', locals: { reaction: @reaction, product: @product }
 
 #kaanjo-copyright
   Powered by: 

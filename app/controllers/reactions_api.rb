@@ -21,22 +21,22 @@ class ReactionsApi < WebsocketRails::BaseController
     if @reaction
 
       @reaction.scenario_id = message[:id]
+      
       if @reaction.save
-        set_reaction @reaction
+        set :reaction, @reaction
         success("Reaction updated")
       else
         failure(@reaction.errors)
       end
+
     else
 
-      @reaction = @campaign.reactions.create(
+      @reaction = Reaction.create(
         scenario_id: message[:id],
-        customer_id: @customer.id,
-        product_id: @product.id,
-        device_type: @device
+        impression_id: @impression.id
       )
 
-      set_reaction @reaction
+      set :reaction, @reaction
 
       if @reaction
         success("Reaction created")
@@ -48,13 +48,15 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def get_buttons
-    html = render_to_string('client/_buttons.haml', :layout => false, :locals => { :scenario => @scenario, :product => @product, :campaign => @campaign })
+    locals = { campaign: @campaign, product: @product, reaction: @reaction }
+    html = render_to_string('client/_buttons.haml', :layout => false, :locals => locals)
     trigger_success(html) if html
     failure unless html
   end
 
   def get_status
-    html = render_to_string('client/_status.haml', :layout => false, :locals => { :scenario => @scenario, :product => @product, :campaign => @campaign })
+    locals = { campaign: @campaign, product: @product, reaction: @reaction }
+    html = render_to_string('client/_status.haml', :layout => false, :locals => locals)
     trigger_success(html) if html
     failure unless html
   end
@@ -62,23 +64,26 @@ class ReactionsApi < WebsocketRails::BaseController
   def impress
     
     set :device, message[:device]
-    set_reaction @customer.reaction_to(@product)
+    @reaction = @customer.reaction_to(@product)
 
     if @reaction
+      set :reaction, @reaction
       msg "Impression not created (customer already reacted)"
       return
     end
 
-    impression = @product.impressions.create(
+    @impression = @product.impressions.create(
       customer: @customer,
-      campaign: @campaign,
+      product: @product,
       device_type: message[:device]
     )
     
-    if impression
+    set :impression, @impression
+
+    if @impression
       msg "Impression created"
     else
-      failure(impression.errors)
+      failure(@impression.errors)
     end
 
   end
@@ -118,9 +123,7 @@ class ReactionsApi < WebsocketRails::BaseController
     @customer = Customer.find_by_sid(message[:c_sid])
 
     if !@customer
-      @customer = Customer.create(
-        webmaster: @webmaster
-      )
+      @customer = @campaign.customers.create
       @response[:c_sid] = @customer.sid
       msg "Customer created: #{@customer.sid}"
     else
@@ -142,7 +145,7 @@ class ReactionsApi < WebsocketRails::BaseController
     @product = @webmaster.products.find_by_name(message[:p_sid])
 
     if !@product && @webmaster.creation_enabled?
-      @product = @webmaster.products.create({
+      @product = @campaign.products.create({
         name: message[:p_sid],
         url: message[:url]
       })
@@ -224,20 +227,13 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def set_vars
-    @campaign =      set[:campaign]
-    @customer =      set[:customer]
-    @webmaster =     set[:webmaster]
-    @product =       set[:product]
-    @device =        set[:device]
-    @reaction =      set[:reaction]
-    @scenario = set[:scenario]
-  end
-
-  def set_reaction reaction
-    @reaction = reaction
-    set :reaction, @reaction
-    @scenario = @reaction ? @reaction.type : nil
-    set :scenario, @scenario
+    @campaign =   set[:campaign]
+    @customer =   set[:customer]
+    @webmaster =  set[:webmaster]
+    @product =    set[:product]
+    @device =     set[:device]
+    @impression =   set[:impression]
+    @reaction =   set[:reaction]
   end
 
   def webmaster_valid?

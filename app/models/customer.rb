@@ -10,12 +10,12 @@ class Customer < ActiveRecord::Base
   before_create :assign_sid
   before_create :throttle_creation
 
-  def reacted_to? product
-    reactions.find_by_product_id(product.id) ? true : false
+  def reaction_to product
+    impressions.find_by_product_id(product.id).try(:reaction)
   end
 
-  def reaction_to product
-    reactions.find_by_product_id(product.id)
+  def reacted_to? product
+    reaction_to(product) ? true : false
   end
 
   def webmaster

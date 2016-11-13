@@ -5,6 +5,9 @@ class Reaction < ActiveRecord::Base
 
   alias_method :type, :scenario
 
+  delegate :product, to: :impression
+  delegate :customer, to: :impression
+
   def self.total from, to
     if from && to
       self.where(created_at:from..to).length

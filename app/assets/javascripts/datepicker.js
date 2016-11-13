@@ -3,6 +3,8 @@ $(document).ready(function () {
   
   app.rangepicker = $('.datepicker .range-selector');
 
+  if (!app.rangepicker.is('*')) return;
+
   app.rangepicker.dateRangePicker({}).
   bind('datepicker-change',function(e,o) {
     from = o.value.split(' to ')[0];
