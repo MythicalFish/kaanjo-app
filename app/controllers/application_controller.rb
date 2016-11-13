@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user_custom
   before_action :configure_permitted_parameters, if: :devise_controller?
   
-  layout :layout_by_resource
-
   include ApplicationHelper
   include DateHelper
   include UserHelper
@@ -25,14 +23,6 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user_custom
     authenticate_user! unless request.path == "/"
-  end
-
-  def layout_by_resource
-    if devise_controller?
-      'island'
-    else
-      'application'
-    end
   end
 
 end

@@ -25,5 +25,13 @@ module ReactionsAdmin
 
     config.site_name = 'Kaanjo'
 
+    config.to_prepare do
+      Devise::SessionsController.layout "island"
+      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "island" }
+      Devise::ConfirmationsController.layout "island"
+      Devise::UnlocksController.layout "island"            
+      Devise::PasswordsController.layout "island"        
+    end
+
   end
 end

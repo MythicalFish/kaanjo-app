@@ -4,7 +4,7 @@
   %i.fa.fa-gear.mr1
   Account settings
 
-.container-narrow.p2.md-p3.lg-p4.bg-white.flex-auto
+.container-narrower.p2.md-p3.lg-p4.bg-white.flex-auto
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
     = devise_error_messages!
     .mb3.row
@@ -51,19 +51,18 @@
         = f.label :phone
         = f.text_field :phone
 
-    .mb4.p3.bg-gray-lighter
       .mb3
-        %b Change password
+        = f.label :password, 'Change password'
         %i (leave blank for no change)
-      .mb3.row
-        .col-md-6
-          = f.password_field :password, autocomplete: "off", placeholder: "New password"
-        .col-md-6
-          = f.password_field :password_confirmation, autocomplete: "off", placeholder: "New password (again)"
+        .row
+          .col-md-6
+            = f.password_field :password, autocomplete: "off", placeholder: "New password"
+          .col-md-6
+            = f.password_field :password_confirmation, autocomplete: "off", placeholder: "New password (again)"
     .row
       .col-md-8
         = f.password_field :current_password, autocomplete: "off", placeholder: "Your current password (required)", required:'required'
       .col-md-4
-        %button.btn.btn-full{type:'submit'}
+        %button.btn.btn-blue.btn-full{type:'submit'}
           %i.fa.fa-save.mr1
           Update

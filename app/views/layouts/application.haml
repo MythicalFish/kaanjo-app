@@ -18,25 +18,33 @@
         .flex.justify-between.items-center.y5
           
           .flex.items-center
-            .x5
-              %img{src:image_url('logo.svg')}
+            .x5.lh0
+              %img.block{src:image_url('logo.svg')}
             - if webmaster?
-              .ml3.bl2.pl3.py1
+              .ml3.bl2.pl3.py1.lh1
                 = current_webmaster.nice_url
 
-          .flex.items-end
+          .flex.items-end.items-center
             - if webmaster?
               %a.btn.btn-blue{href:new_campaign_path}
                 New Campaign
             - elsif admin?
               %a.btn.btn-blue{href:new_campaign_template_path}
                 New Template
-            .dropdown.right-align.ml2
-              %label#avatar.round{for:'user-menu-toggle'}
-                .input.rounded.inline-block
+            .dropdown.right-align.ml1
+              %label#avatar{for:'user-menu-toggle'}
+                .input.round.center.inline-block
                   = current_user.first_name[0]
               %input#user-menu-toggle.hide{type:'checkbox'}
               %ul#user-menu
+                %li
+                  %a{href:'/',class:cp('/')}
+                    Campaigns
+                    %i.fa.fa-diamond.ml1
+                %li
+                  %a{href:'/setup',class:cp('/setup')}
+                    Setup
+                    %i.fa.fa-code.ml1
                 %li
                   %a{href:edit_user_registration_path,class:cp(edit_user_registration_path)}
                     Account settings

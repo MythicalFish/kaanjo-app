@@ -7,7 +7,7 @@
   .mb2
     = f.password_field :password, autocomplete: "off", placeholder: "Password"
   .mb2
-    = f.submit "Login", class: "btn btn-wide rounded"
+    = f.submit "Login", class: "btn btn-blue btn-wide rounded"
   - if devise_mapping.rememberable?
     .mb3.center
       = f.check_box :remember_me

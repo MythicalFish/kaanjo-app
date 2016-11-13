@@ -38,11 +38,6 @@
 @import "base/layout";
 @import "base/typography";
 
-@import "utilities/mixins";
-@import "utilities/colors";
-@import "utilities/widths";
-@import "utilities/borders";
-
 @import "components/flexboxgrid";
 @import "components/modal";
 @import "components/layout";
@@ -58,3 +53,9 @@
 @import "components/progress";
 
 @import "modules/campaigns";
+
+@import "utilities/mixins";
+@import "utilities/colors";
+@import "utilities/widths";
+@import "utilities/borders";
+@import "utilities/typography";
