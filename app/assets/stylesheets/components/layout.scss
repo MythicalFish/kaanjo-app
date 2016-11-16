@@ -32,15 +32,27 @@
 .island {
   width: 100%;
   max-width: 300px;
-  padding: $space-2;
+  padding: $space-3;
   background: $white;
   border-radius: $border-radius;
   -webkit-border-radius: $border-radius;
   @extend .b1;
   text-align: center;
 }
-@media #{$breakpoint-sm} {
-  .island {
-    padding: $space-3;
+.island-nav {
+  @extend .bb1;
+  text-align: center;
+  margin-bottom: $space-3;
+  margin-left: -$space-3;
+  margin-right: -$space-3;
+  span, a {
+    transform: translateY(1px);
+    -webkit-transform: translateY(1px);
+    display: inline-block;
+    color: $gray;
+    padding: $space-1;
+    &.island-nav-current {
+      border-bottom: 1px solid $aqua;
+    }
   }
 }

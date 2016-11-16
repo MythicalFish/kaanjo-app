@@ -13,38 +13,45 @@
 
     = render partial: 'shared/flashes'
 
-    #header
+    #header.bb1
       .container
         .flex.justify-between.items-center.y5
           
           .flex.items-center
             %a.block.x5.lh0{href:'/'}
               %img.block{src:image_url('logo.svg')}
+            .ml3.bl2.pl3.py1.lh1
             - if webmaster?
-              .ml3.bl2.pl3.py1.lh1
-                = current_webmaster.nice_url
+              = current_webmaster.nice_url
+            - elsif admin?
+              Admin (full access)
 
           .flex.items-end.items-center
-            - if webmaster?
-              %a.btn.btn-blue{href:new_campaign_path}
-                New Campaign
-            - elsif admin?
-              %a.btn.btn-blue{href:new_campaign_template_path}
-                New Template
+            = content_for :header
             .dropdown.right-align.ml1
-              %label#avatar{for:'user-menu-toggle'}
+              %label#avatar.pr0{for:'user-menu-toggle'}
                 .input.round.center.inline-block
                   = current_user.first_name[0]
               %input#user-menu-toggle.hide{type:'checkbox'}
               %ul#user-menu
-                %li
-                  %a{href:'/',class:cp('/')}
-                    Campaigns
-                    %i.fa.fa-diamond.ml1
-                %li
-                  %a{href:'/setup',class:cp('/setup')}
-                    Setup
-                    %i.fa.fa-code.ml1
+                - if webmaster?
+                  %li
+                    %a{href:'/',class:cp('/')}
+                      Campaigns
+                      %i.fa.fa-diamond.ml1
+                  %li
+                    %a{href:'/setup',class:cp('/setup')}
+                      Setup
+                      %i.fa.fa-code.ml1
+                - elsif admin?
+                  %li
+                    %a{href:'/',class:cp('/')}
+                      Webmasters
+                      %i.fa.fa-user.ml1
+                  %li
+                    %a{href:campaign_templates_path,class:cp(campaign_templates_path)}
+                      Campaign templates
+                      %i.fa.fa-diamond.ml1
                 %li
                   %a{href:edit_user_registration_path,class:cp(edit_user_registration_path)}
                     Account settings
@@ -56,7 +63,16 @@
 
     = content_for :after_header
 
-    #body.container= yield
+    #body{class:body_class}
+      .flex.justify-between.items-center.y5.my2.bb1
+        %ul#breadcrumbs
+          %li
+            %a{href:'/'} Dashboard
+          %li
+            = content_for :breadcrumbs
+        %div
+          = content_for :actions
+      = yield
 
     #modal
       = content_for :modal

@@ -4,6 +4,7 @@
   display: inline-block;
   position: relative;
   input[type="checkbox"] { @extend .hide; }
+  * { cursor: pointer!important; }
   label { 
     display: inline-block;
     background: transparent;
@@ -12,6 +13,7 @@
     font-size: inherit;
     color: inherit;
     margin-bottom: 0;
+    &.pr0 { padding-right: 0; }
     &:after {
       content: image_url('ui/dropdown.svg');
       display: inline-block;

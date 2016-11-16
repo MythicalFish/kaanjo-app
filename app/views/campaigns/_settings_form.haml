@@ -2,15 +2,16 @@
   = f.label :name, "Name your campaign"
   = f.text_field :name, { required: true, minlength: 3, maxlength: 30 }
 .mb3
+- unless f.object.model_name.name == 'CampaignTemplate'
   = f.label :name, "Describe your campaign (optional)"
   = f.text_area :description
-.mb3
-  = f.label :start_date, "Start/end date (optional)"
-  .row
-    .col-xs-12.col-sm-6
-      = f.date_field :start_date
-    .col-xs-12.col-sm-6
-      = f.date_field :end_date
+  .mb3
+    = f.label :start_date, "Start/end date (optional)"
+    .row
+      .col-xs-12.col-sm-6
+        = f.date_field :start_date
+      .col-xs-12.col-sm-6
+        = f.date_field :end_date
 .mb3
   = f.label :enabled, "Campaign status"
   = f.select :enabled, [['Active', true], ['Inactive', false]]

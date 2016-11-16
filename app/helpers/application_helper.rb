@@ -45,8 +45,10 @@ module ApplicationHelper
   end
 
   def body_class
-    unless current_user
-      'bg-intro'
+    if @body_class
+      @body_class
+    else 
+      'container'
     end
   end
 

@@ -1,26 +1,21 @@
-- content_for(:header) do
-  %i.fa.fa-diamond.mr1
-  Campaign Templates
-
 - content_for(:actions) do
-  %a{href:new_campaign_template_path}
-    Create
+  %a.btn.btn-blue{href:new_campaign_template_path}
+    %i.fa.fa-plus.mr1
+    New Template
 
-%table
-  %thead        
-    %tr
-      %td
-        = sort_link('name', 'Campaign name')
-      %td
-        Actions
-  %tbody
-    - @campaigns.each do |c|
-      %tr
-        %td
-          = c.name
-        %td.right-align
+- content_for(:breadcrumbs) do
+  Templates
+
+- @campaigns.each do |c|
+  .mt3
+    %h3= c.name
+    .b1.p2.bg-gray-lighter
+      .row
+        .col-xs-9.br1
+          = render partial: 'campaigns/scenarios/emoticons/set', locals: {campaign: c}
+        .col-xs-3
           %a.mr1{href:edit_campaign_template_path(c),title:'Edit'}
             %i.fa.fa-edit
           %a.mr1{href:campaign_template_path(c),title:'Delete',data:{method:'delete',confirm:"Are you sure you want to delete \'#{c.name}\'?"}}
             %i.fa.fa-close
-    
+

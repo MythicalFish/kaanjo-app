@@ -1,0 +1,21 @@
+#breadcrumbs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: $h1;
+  color: $navy;
+  font-weight: bold;
+  li {
+    display: inline-block;
+    a { color: inherit; }
+    &:not(:first-child) {
+      padding-left: $space-2;
+      opacity: 0.5;
+      &:before {
+        @extend .fa;
+        content: "\f105";
+        padding-right: $space-2;
+      }
+    }
+  }
+}

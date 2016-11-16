@@ -11,7 +11,7 @@
   }
   .tab.tab-active {
     @extend .b1;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid transparent!important;
     cursor: default;
   }
 }

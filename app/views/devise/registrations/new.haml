@@ -3,13 +3,15 @@
 - content_for :errors do
   = devise_error_messages!
 
-%h2 Sign up for Reactions
+%nav.island-nav
+  %a{href:new_session_path(resource_name)} Login
+  %span.island-nav-current Register
+
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  .mb2.row
-    .col-md-6
-      = f.text_field :first_name, required: true, autofocus: true, placeholder: "First name"
-    .col-md-6
-      = f.text_field :last_name, required: true, placeholder: "Last name"
+  .mb2
+    = f.text_field :first_name, required: true, autofocus: true, placeholder: "First name"
+  .mb2
+    = f.text_field :last_name, required: true, placeholder: "Last name"
   .mb2
     = f.text_field :website_name, required: true, placeholder: "Website name"
   .mb2
@@ -20,4 +22,10 @@
     = f.password_field :password, required: true, autocomplete: "off", placeholder: "Password"
   .mb2
     = f.password_field :password_confirmation, required: true, autocomplete: "off", placeholder: "Password (again)"
-  = f.submit "Sign up", class: "btn btn-blue btn-wide rounded"
+  .mb2
+    = f.submit "Sign up", class: "btn btn-blue btn-wide rounded"
+  .h5
+    By signing up you agree with our 
+    %a{href:'http://kaanjo.co/terms-conditions', target: '_blank'} Terms of Service 
+    and
+    %a{href:'http://kaanjo.co/privacy-policy', target: '_blank'} Privacy Policy

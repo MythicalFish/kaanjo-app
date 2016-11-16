@@ -7,4 +7,4 @@
   = form_for(@campaign) do |f|
     = render partial: 'design_form', locals: {f:f}
     = render partial: 'settings_form', locals: {f:f}
-    = f.submit "Create"
+    = f.submit "Create", class: 'btn btn-blue'

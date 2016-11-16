@@ -1,6 +1,6 @@
 class WebmastersController < ApplicationController
 
-  before_action :enforce_admin
+  include EnforceAdmin
 
   respond_to :html
 
@@ -72,12 +72,6 @@ class WebmastersController < ApplicationController
       :email, :password, :first_name, :last_name, :website_url, :website_name,
       :title, :address1, :address2 ,:city, :postcode, :country, :phone
     )
-  end
-
-  def enforce_admin
-    unless current_user && current_user.admin?
-      head(403)
-    end
   end
 
 end

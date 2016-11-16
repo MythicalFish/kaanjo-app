@@ -1,6 +1,6 @@
-%ul.m0.p0
+%ul.m0.p0.flex
   - campaign.scenarios.each_with_index do |r,i|
     - next unless r.emoticon
-    %li.emoticon{data:{position:i,id:r.emoticon.id,label:r.label,message:r.message}}
+    %li.emoticon.flex-auto{data:{position:i,id:r.emoticon.id,label:r.label,message:r.message}}
       %img{src:r.image_url}
       %label= r.label

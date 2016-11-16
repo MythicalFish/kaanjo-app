@@ -10,9 +10,11 @@
 }
 input[type="text"],input[type="password"],input[type="email"],input[type="email"],input[type="tel"],input[type="search"],input[type="date"],select,textarea {
   @extend .input;
+  cursor: text;
 }
 textarea {
   @extend .textarea;
+  cursor: text;
 }
 select {
   @extend .select;
@@ -33,7 +35,7 @@ label {
   color: $red;
 }
 input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,input[type="email"]:focus,input[type="tel"]:focus,input[type="search"]:focus,select:focus,textarea:focus {
-  border-color: $gray;
+  border-color: $gray-darker;
 }
 code {
   display: block;
@@ -41,3 +43,7 @@ code {
   background: $gray-lighter;
   @extend .b1;
 }
+::-webkit-input-placeholder { color: $gray-darker; }
+:-ms-input-placeholder { color: $gray-darker; }
+::-moz-placeholder { color: $gray-darker; opacity: 1; }
+:-moz-placeholder { color: $gray-darker; opacity: 1; }

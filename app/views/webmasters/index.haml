@@ -1,9 +1,3 @@
-%header.flex.justify-between.items-center.y5
-  %div
-    %h1.inline-block
-      Dashboard
-    %div.inline-block
-      Website
 
 .row.center.mb3
   .col-xs-12.col-md-4
@@ -37,7 +31,7 @@
         = sort_link('reaction_total', 'Total Reactions')
       %td
         = sort_link('ctr', 'Total CTR')
-      %td
+      %td.right-align
         Actions
   - @webmasters.each do |w|
     %tr

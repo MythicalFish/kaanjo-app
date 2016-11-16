@@ -13,11 +13,3 @@ body {
   color: $gray-darker;
   margin: 0;
 }
-#breadcrumbs {
-  a:after{
-    @extend .fa;
-    content: "\f105";
-    margin: 0 $space-2;
-    color: rgba(255,255,255,0.7);
-  }
-}

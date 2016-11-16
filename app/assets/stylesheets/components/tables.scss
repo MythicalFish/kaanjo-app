@@ -20,13 +20,4 @@ table {
   td {
     padding: $space-2;
   }
-  tr {
-    td:first-child {
-      padding:0;
-      a {
-        display: block;
-        padding: $space-2 $space-2 $space-2 $space-3;
-      }
-    }
-  }
 }

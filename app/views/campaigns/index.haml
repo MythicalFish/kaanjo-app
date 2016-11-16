@@ -1,6 +1,8 @@
-%header.flex.justify-between.items-center.y5
-  %h1
-    Dashboard
+- content_for :header do 
+  - if webmaster?
+    %a.btn.btn-blue{href:new_campaign_path}
+      %i.fa.fa-plus.mr1
+      New Campaign
 
 = render partial: 'shared/charts/line_chart', locals: { collection: current_webmaster.campaigns }
 
