@@ -4,18 +4,25 @@
     New Template
 
 - content_for(:breadcrumbs) do
-  Templates
+  %li
+    Templates
 
 - @campaigns.each do |c|
   .mt3
-    %h3= c.name
+    %h3
+      = c.name
+      %span.opa5.pl2
+        = c.question
     .b1.p2.bg-gray-lighter
       .row
         .col-xs-9.br1
           = render partial: 'campaigns/scenarios/emoticons/set', locals: {campaign: c}
         .col-xs-3
-          %a.mr1{href:edit_campaign_template_path(c),title:'Edit'}
-            %i.fa.fa-edit
-          %a.mr1{href:campaign_template_path(c),title:'Delete',data:{method:'delete',confirm:"Are you sure you want to delete \'#{c.name}\'?"}}
-            %i.fa.fa-close
+          .p2.flex.items-middle
+            .center
+              .mb1
+                = c.status
+              %a.btn.btn-gray{href:edit_campaign_template_path(c),title:'Edit'}
+                %i.fa.fa-edit.mr1
+                Edit
 

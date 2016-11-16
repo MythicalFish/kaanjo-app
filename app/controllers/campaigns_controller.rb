@@ -15,6 +15,7 @@ class CampaignsController < ApplicationController
   def edit
     @campaign = find(params[:id])
     @title = @campaign.name
+    @body_class = 'container-narrow'
   end
 
   def new

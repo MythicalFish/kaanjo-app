@@ -1,8 +1,12 @@
-- content_for :header do 
+- content_for :actions do 
   - if webmaster?
     %a.btn.btn-blue{href:new_campaign_path}
       %i.fa.fa-plus.mr1
       New Campaign
+
+- content_for :breadcrumbs do
+  %li
+    Campaigns
 
 = render partial: 'shared/charts/line_chart', locals: { collection: current_webmaster.campaigns }
 

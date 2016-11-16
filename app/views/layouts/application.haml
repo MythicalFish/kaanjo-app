@@ -65,11 +65,13 @@
 
     #body{class:body_class}
       .flex.justify-between.items-center.y5.my2.bb1
-        %ul#breadcrumbs
-          %li
-            %a{href:'/'} Dashboard
-          %li
+        - if content_for(:breadcrumbs)
+          %ul#breadcrumbs
+            %li
+              %a{href:'/'} Dashboard
             = content_for :breadcrumbs
+        - else
+          %div
         %div
           = content_for :actions
       = yield

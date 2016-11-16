@@ -1,13 +1,18 @@
-%header.flex.justify-between.items-center.y5
-  %div
-    %h1.inline-block
-      Dashboard
-    %div.inline-block
-      = @campaign.name
-  %div
-    %a.btn{href:edit_campaign_url(relative_id:@campaign.relative_id)}
-      %i.fa.fa-edit.mr1
-      Edit campaign
+      
+- content_for(:actions) do
+  %a.btn.mr3{href:new_campaign_path}
+    %i.fa.fa-plus.mr1
+    New Campaign
+  %a.btn{href:edit_campaign_path(@campaign.relative_id)}
+    %i.fa.fa-edit.mr1
+    Edit campaign
+
+- content_for(:breadcrumbs) do
+  %li
+    %a{href:campaigns_path}
+      Campaigns
+  %li
+    = @campaign.name
 
 = render partial: 'shared/charts/line_chart', locals: { collection: @campaign }
 

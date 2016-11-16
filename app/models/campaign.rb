@@ -1,5 +1,6 @@
 class Campaign < ActiveRecord::Base
 
+  include CampaignMethods
   include CampaignValidator
   include Calculator
 
@@ -16,11 +17,6 @@ class Campaign < ActiveRecord::Base
   before_create :set_relative_id
 
   default_scope { where('is_default = ? AND deleted = ?', false, false) }
-
-  def status
-    return 'active' if enabled?
-    'inactive'
-  end
   
   private
 

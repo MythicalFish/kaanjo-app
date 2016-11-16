@@ -1,5 +1,6 @@
 class CampaignTemplate < ActiveRecord::Base
 
+  include CampaignMethods
   include CampaignValidator
 
   self.table_name = 'campaigns'
