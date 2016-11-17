@@ -35,3 +35,21 @@ $(document).on( 'click', '.tab', function () {
   $(this).addClass('tab-active');
   target = $('.tab-content[data-position="' + $(this).attr('data-position') + '"]').addClass('tab-active');
 });
+
+app.clicked = false;
+
+$(document).on('click', 'body', function () {
+  
+  if (app.clicked) return;
+  app.clicked = true;
+
+  if (!$(this).parents('.dropdown').is('*')) {
+    
+    $('.dropdown input[type="checkbox"]').each(function () {
+      if ($(this).prop('checked'))
+        $(this).prop('checked', false);
+    });
+
+  }
+  setTimeout(function () { app.clicked = false; }, 50);
+});
