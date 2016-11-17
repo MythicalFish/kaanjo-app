@@ -8,15 +8,29 @@ class CampaignsController < ApplicationController
   end
 
   def show
-    @campaign = find(params[:id]).with_totals(sorted)
+    
+    if admin?
+      @campaign = Campaign.find(params[:id]).with_totals(sorted)
+    elsif webmaster?
+      @campaign = current_webmaster.campaigns.find_by_relative_id(params[:id]).with_totals(sorted)
+    end
+    
     @current_webmaster = @campaign.webmaster if admin?
     @title = @campaign.name
+
   end
 
   def edit
-    @campaign = find(params[:id])
+    
+    if admin?
+      @campaign = Campaign.find(params[:id])
+    elsif webmaster?
+      @campaign = current_webmaster.campaigns.find_by_relative_id(params[:id])
+    end
+
     @current_webmaster = @campaign.webmaster if admin?
     @title = @campaign.name
+
   end
 
   def new
@@ -26,7 +40,11 @@ class CampaignsController < ApplicationController
 
   def update
 
-    @campaign = find(params[:id])
+    if admin?
+      @campaign = Campaign.find(params[:id])
+    else
+      @campaign = current_webmaster.campaigns.find(params[:id])
+    end
 
     if scenarios_invalid?
       flash[:alert] = "Error: You need at least 2 scenarios"
@@ -37,48 +55,28 @@ class CampaignsController < ApplicationController
     end
 
     if admin?
-      redirect_to edit_campaign_template_path(@campaign)
-    elsif webmaster?
+      redirect_to edit_campaign_path(@campaign.id)
+    else
       redirect_to edit_campaign_path(@campaign.relative_id)
     end
+
 
   end
 
   def create
     
-    if admin?
-      @campaign = CampaignTemplate.new(campaign_params)
-    elsif webmaster?
-      @campaign = current_webmaster.campaigns.new(campaign_params)
-    end
+    @campaign = current_webmaster.campaigns.new(campaign_params)
 
     if @campaign.save
       flash[:notice] = "Campaign created"
-      redirect_to campaigns_path if webmaster?
-      redirect_to campaign_templates_path if admin?
+      redirect_to campaigns_path
     else
       flash[:alert] = "Campaign creation failed: #{@campaign.errors.full_messages.to_sentence}"
       respond_with @campaign, location: new_campaign_path
     end
   end
 
-  def destroy
-    @campaign = find(params[:id])
-    @campaign.update_attributes(deleted:true)
-    flash[:notice] = 'Campaign deleted'
-    redirect_to campaigns_path if webmaster?
-    redirect_to campaign_templates_path if admin?
-  end
-
   private
-
-  def find id
-    if admin?
-      Campaign.find(id)
-    elsif webmaster?
-      current_webmaster.campaigns.find_by_relative_id(id)
-    end
-  end
 
   def find_all
     if admin?
@@ -88,17 +86,16 @@ class CampaignsController < ApplicationController
     end
   end
 
-  def campaign_params
-    model_name = admin? ? :campaign_template : :campaign
-    params.require(model_name).permit(
+  def campaign_params model = :campaign
+    params.require(model).permit(
       :name, :description, :question, :social_proof, :site_path, :enabled, :start_date, :end_date,
       :scenarios_attributes => [ :id, :enabled, :label, :emoticon_id, :message, :custom_emoticon ]
     )
   end
 
-  def scenarios_invalid?
+  def scenarios_invalid? model = :campaign
     enabled_scenarios = 0
-    campaign_params[:scenarios_attributes].select do |k,s|
+    campaign_params(model)[:scenarios_attributes].select do |k,s|
       enabled_scenarios += 1 if s[:enabled] == 'true'
     end
     return false if enabled_scenarios >= 2

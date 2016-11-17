@@ -1,6 +1,6 @@
 .mb3
   = f.label :name, "Name your campaign"
-  = f.text_field :name, { required: true, minlength: 3, maxlength: 30 }
+  = f.text_field :name, { required: true, minlength: 3, maxlength: 70 }
 .mb3
 - unless f.object.model_name.name == 'CampaignTemplate'
   = f.label :name, "Describe your campaign (optional)"
