@@ -3,7 +3,9 @@ module ChartHelper
   def linechart_params_for collection
     
     unless collection.try(:length).to_i >= 1
-      collection = Object.const_get(collection.model_name.name).where(id:collection.id)
+      if collection.try(:id)
+        collection = Object.const_get(collection.model_name.name).where(id:collection.id)
+      end
     end
 
     c = collection.by_date(from:from_date,to:to_date)
