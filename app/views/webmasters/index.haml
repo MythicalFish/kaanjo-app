@@ -24,7 +24,7 @@
 
 %h1.mt4 Webmasters
 
-%table.mt3
+%table.my3
   %thead
     %tr
       %td
@@ -42,7 +42,8 @@
   - @webmasters.each do |w|
     %tr
       %td
-        = w.website_name
+        %a{href:webmaster_url(w)}
+          = w.website_name
       %td
         = w.name
       %td

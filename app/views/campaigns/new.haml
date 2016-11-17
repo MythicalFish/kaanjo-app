@@ -31,11 +31,11 @@
         %button.btn.btn-blue.step-take{type:'button',data:{target:'#design'}}
           I will do it
 
-  #select-template.step.container-narrow
+  #select-template.step.container-narrow.mb4
 
     %h1.mb0 Select your template
 
-    - CampaignTemplate.all.each do |c|
+    - CampaignTemplate.active.all.each do |c|
       .b1.mt3
         .campaign-template.flex.items-center{data:{id:c.id,social_proof:c.social_proof}}
           .flex-auto.p2.br1
@@ -46,7 +46,7 @@
               Select
 
   
-  #design.step.container-narrower
+  #design.step.container-narrower.mb4
 
     = render partial: 'design_form', locals: {f:f}
 

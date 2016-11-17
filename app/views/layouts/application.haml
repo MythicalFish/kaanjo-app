@@ -34,16 +34,7 @@
                   = current_user.first_name[0]
               %input#user-menu-toggle.hide{type:'checkbox'}
               %ul#user-menu
-                - if webmaster?
-                  %li
-                    %a{href:'/',class:cp('/')}
-                      Campaigns
-                      %i.fa.fa-diamond.ml1
-                  %li
-                    %a{href:'/setup',class:cp('/setup')}
-                      Setup
-                      %i.fa.fa-code.ml1
-                - elsif admin?
+                - if admin?
                   %li
                     %a{href:'/',class:cp('/')}
                       Webmasters
@@ -52,6 +43,15 @@
                     %a{href:campaign_templates_path,class:cp(campaign_templates_path)}
                       Campaign templates
                       %i.fa.fa-diamond.ml1
+                - elsif webmaster?
+                  %li
+                    %a{href:'/',class:cp('/')}
+                      Campaigns
+                      %i.fa.fa-diamond.ml1
+                  %li
+                    %a{href:'/setup',class:cp('/setup')}
+                      Setup
+                      %i.fa.fa-code.ml1
                 %li
                   %a{href:edit_user_registration_path,class:cp(edit_user_registration_path)}
                     Account settings
@@ -64,14 +64,12 @@
     = content_for :after_header
 
     #body{class:body_class}
-      .flex.justify-between.items-center.y5.my2.bb1
-        - if content_for(:breadcrumbs)
+      - if content_for(:breadcrumbs)
+        .flex.justify-between.items-center.y5.my2.bb1
           %ul#breadcrumbs
             = content_for :breadcrumbs
-        - else
           %div
-        %div
-          = content_for :actions
+            = content_for :actions
       = yield
 
     #modal

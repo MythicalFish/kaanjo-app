@@ -10,6 +10,8 @@ class CampaignTemplate < ActiveRecord::Base
   default_scope { where('is_default = ? AND deleted = ?', true, false) }
   before_create :set_as_default
 
+  scope :active, -> { where(enabled:true)}
+
   def to_campaign
     c = self.dup
     c.relative_id = nil

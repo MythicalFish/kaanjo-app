@@ -8,9 +8,16 @@ class CampaignTemplatesController < CampaignsController
     @body_class = 'container-narrow'
   end
 
-  def show
-    @campaign = CampaignTemplate.find(id)
+  def edit
+    @body_class = 'container-narrow'
+    @campaign = CampaignTemplate.find(params[:id])
     @title = @campaign.name
+  end
+
+  def new
+    @body_class = 'container-narrow'
+    @campaign = CampaignTemplate.new
+    @title = "New template"
   end
 
 end

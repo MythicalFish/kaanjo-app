@@ -20,8 +20,7 @@ class CampaignsController < ApplicationController
   end
 
   def new
-    @campaign = Campaign.new if webmaster?
-    @campaign = CampaignTemplate.new if admin?
+    @campaign = Campaign.new
     @title = "New campaign"
   end
 

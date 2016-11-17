@@ -1,8 +1,8 @@
 - content_for(:page_title) { "Account" }
 
-- content_for(:header) do
-  %i.fa.fa-gear.mr1
-  Account settings
+- content_for(:breadcrumbs) do
+  %li
+    Account settings
 
 .container-narrower.p2.md-p3.lg-p4.bg-white.flex-auto
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|

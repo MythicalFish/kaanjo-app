@@ -1,10 +1,14 @@
-- content_for(:header) do
-  %i.fa.fa-diamond.mr1
-  %a{href:campaign_templates_path} Campaigns
-  New Template
+- content_for(:breadcrumbs) do
+  %li
+    %a{href:campaign_templates_path}
+      Templates
+  %li
+    New
 
 .container-narrow.p2.md-p3.lg-p4.bg-white
   = form_for(@campaign) do |f|
     = render partial: 'design_form', locals: {f:f}
     = render partial: 'settings_form', locals: {f:f}
-    = f.submit "Create", class: 'btn btn-blue'
+    %button.btn.btn-blue{type:'submit'}
+      %i.fa.fa-save.mr1
+      Create

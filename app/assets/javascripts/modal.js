@@ -5,7 +5,6 @@ app.modal = {
     $('#modal').css('display', 'flex');
     $('#modal > div').css('display', '');
     $(target).css('display', 'block');
-    console.log($(target))
     setTimeout(function () {
       $('#modal').css('opacity', 1);
       $(target).delay(500).css('opacity', 1);

@@ -1,7 +1,9 @@
-- content_for(:header) do
-  %i.fa.fa-diamond.mr1
-  %a{href:campaign_templates_path} Campaigns
-  Edit campaign
+- content_for(:breadcrumbs) do
+  %li
+    %a{href:campaign_templates_path}
+      Templates
+  %li
+    = @campaign.name
 
 .container-narrow.p2.md-p3.lg-p4.bg-white
   = form_for(@campaign) do |f|
