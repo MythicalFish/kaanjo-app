@@ -1,0 +1,12 @@
+.dropdown
+  %label{for:"webmaster-toggle"}
+    = current_webmaster.display_name
+  %input{id:"webmaster-toggle",type:'checkbox'}
+  %ul.h4
+    %li
+      %a.bg-gray-lighter{href:webmaster_url(current_webmaster)}
+        = current_webmaster.display_name
+    - Webmaster.all.each do |w|
+      - next if w == current_webmaster
+      %li
+        %a{href:webmaster_url(w)}= w.display_name

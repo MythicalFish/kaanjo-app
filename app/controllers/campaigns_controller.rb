@@ -9,13 +9,14 @@ class CampaignsController < ApplicationController
 
   def show
     @campaign = find(params[:id]).with_totals(sorted)
+    @current_webmaster = @campaign.webmaster if admin?
     @title = @campaign.name
   end
 
   def edit
     @campaign = find(params[:id])
+    @current_webmaster = @campaign.webmaster if admin?
     @title = @campaign.name
-    @body_class = 'container-narrow'
   end
 
   def new
@@ -26,7 +27,7 @@ class CampaignsController < ApplicationController
 
   def update
 
-    @campaign = find(params[:id],false)
+    @campaign = find(params[:id])
 
     if scenarios_invalid?
       flash[:alert] = "Error: You need at least 2 scenarios"
@@ -72,15 +73,11 @@ class CampaignsController < ApplicationController
 
   private
 
-  def find id, relative = true
+  def find id
     if admin?
-      CampaignTemplate.find(id)
+      Campaign.find(id)
     elsif webmaster?
-      if relative
-        current_webmaster.campaigns.find_by_relative_id(id)
-      else
-        current_webmaster.campaigns.find(id)
-      end
+      current_webmaster.campaigns.find_by_relative_id(id)
     end
   end
 

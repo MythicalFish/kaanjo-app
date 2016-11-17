@@ -1,14 +1,1 @@
-- content_for(:header) do
-  %i.fa.fa-user.mr1
-  %a{href:'/'} Webmasters
-  = @webmaster.name
-
-- content_for(:actions) do   
-  %a{href:edit_webmaster_path(@webmaster)} Edit webmaster
-
-.flex
-  %header.flex-auto
-    = "Activity for #{@webmaster.name}"
-  .flex-none
-    = render partial: 'shared/date_picker'
-= render partial: 'products/data_table', locals: { products: @products }
+// campaigns/index

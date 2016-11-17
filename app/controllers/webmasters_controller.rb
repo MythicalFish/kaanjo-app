@@ -10,9 +10,10 @@ class WebmastersController < ApplicationController
   end
 
   def show
-    @webmaster = Webmaster.find(params[:id])
-    @title = "Webmaster: #{@webmaster.name}"
-    @products = @webmaster.products.with_totals(sorted)
+    @current_webmaster = Webmaster.find(params[:id])
+    @campaigns = @current_webmaster.campaigns
+    @title = "Webmaster: #{@current_webmaster.name}"
+    render 'campaigns/index'
   end
 
   def edit

@@ -1,12 +1,12 @@
-- content_for(:header) do
-  %i.fa.fa-user.mr1
-  %a{href:'/'} Webmasters
-  %a{href:webmaster_path(@webmaster)}= @webmaster.name
-  Edit
-
-- content_for(:actions) do   
-  %a{href:'/webmasters'} Cancel
-
+- content_for(:breadcrumbs) do
+  %li
+    %a{href:'/'} Webmasters
+  %li
+    %a{href:webmaster_path(@webmaster)}
+      = "#{@webmaster.website_name} (#{@webmaster.nice_url})"
+  %li
+    %i.fa.fa-edit.mr1
+    Edit
 
 
 .container-narrow.p2.md-p3.lg-p4.bg-white
@@ -22,4 +22,6 @@
         .col-md-6
           = f.password_field :password_confirmation, autocomplete: "off", placeholder: "New password (again)"
     .actions
-      = f.submit "Update"
+      %button.btn.btn-blue{type:'submit'}
+        %i.fa.fa-save.mr1
+        Save

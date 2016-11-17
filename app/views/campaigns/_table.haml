@@ -1,0 +1,18 @@
+%table
+  %thead
+    %tr
+      %td Product name
+      %td ID
+      %td Impressions
+      %td Reactions
+      %td Link
+  %tbody
+    - campaign.products.with_totals(sorted).each do |p|
+      %tr
+        %td= p.name
+        %td= p.sid
+        %td= p.impression_total
+        %td= p.reaction_total
+        %td
+          %a{href:p.url}
+            %img.x2{src:image_url('ui/link.svg')}

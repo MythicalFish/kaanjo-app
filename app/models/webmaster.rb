@@ -17,6 +17,10 @@ class Webmaster < User
     website_url.sub('http://','').sub('https://','').sub('www','')
   end
 
+  def display_name
+    "#{website_name} (#{nice_url})"
+  end
+
   private
 
 

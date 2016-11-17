@@ -9,6 +9,8 @@ module UserHelper
   def current_webmaster
     if current_user && current_user.webmaster?
       Webmaster.find(current_user.id)
+    elsif @current_webmaster
+      @current_webmaster
     end
   end
 

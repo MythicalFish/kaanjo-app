@@ -1,38 +1,58 @@
       
 - content_for(:actions) do
-  %a.btn.mr3{href:new_campaign_path}
-    %i.fa.fa-plus.mr1
-    New Campaign
-  %a.btn{href:edit_campaign_path(@campaign.relative_id)}
-    %i.fa.fa-edit.mr1
-    Edit campaign
+  - if admin?
+    %a.btn.btn-blue{href:edit_campaign_path(@campaign.id)}
+      %i.fa.fa-edit.mr1
+      Edit campaign
+  - elsif webmaster?
+    %a.btn.btn-blue{href:edit_campaign_path(@campaign.relative_id)}
+      %i.fa.fa-edit.mr1
+      Edit campaign
 
 - content_for(:breadcrumbs) do
-  %li
-    %a{href:campaigns_path}
-      Campaigns
-  %li
-    = @campaign.name
+  - if admin?
+    %li
+      %a{href:'/'}
+        Webmasters
+    %li
+      = render partial: 'shared/webmaster_selector'
+    %li
+      .dropdown
+        %label{for:"campaign-toggle"}
+          = @campaign.name
+        %input{id:"campaign-toggle",type:'checkbox'}
+        %ul
+          - current_webmaster.campaigns.each do |c|
+            - next if c == @campaign
+            %li
+              %a{href:campaign_url(c)}= c.name
+      
+  - elsif webmaster?
+    %li
+      %a{href:campaigns_path}
+        Campaigns
+    %li
+      = @campaign.name
 
 = render partial: 'shared/charts/line_chart', locals: { collection: @campaign }
 
-.b1.p2.md-p3.bg-gray-lighter.my4.center
+.b1.p2.md-p3.bg-gray-lighter.my4.center.h2
   .row.middle-xs
-    .col-xs-6.col-md-2
+    .col-xs-6.col-md-2.col-xs-offset-1
       = render partial: 'shared/charts/doughnut', locals: { collection: @campaign.scenarios }
     .col-xs-6.col-md-3
-      .h3.blue= @campaign.impression_total
+      .h1.bold.blue= @campaign.impression_total
       Impressions
     .col-xs-6.col-md-3
-      .h3.blue= @campaign.reaction_total
+      .h1.bold.blue= @campaign.reaction_total
       Reactions
     .col-xs-6.col-md-3
-      .h3.blue= @campaign.ctr
+      .h1.bold.blue= "#{@campaign.ctr}%"
       CTR
 
 .tabs
   .tab.emoticon{data:{position:0}}
-    %img
+    %img.opa0
     %label All reactions
   - @campaign.scenarios.each_with_index do |s,i|
     .tab.emoticon{data:{position:(i+1)}}
@@ -42,26 +62,8 @@
 .tab-contents.mb4
   .tab-content.tab-active{data:{position:0}}
     
-    %table
-      %thead
-        %tr
-          %td Product name
-          %td ID
-          %td Impressions
-          %td Reactions
-          %td Link
-      %tbody
-        - @campaign.products.with_totals(sorted).each do |p|
-          %tr
-            %td= p.name
-            %td= p.sid
-            %td= p.impression_total
-            %td= p.reaction_total
-            %td
-              %a{href:p.url}
-                %img.x2{src:image_url('ui/link.svg')}
+    = render partial: 'table', locals: {campaign: @campaign}
 
-
-  - @campaign.scenarios.each_with_index do |s,i|
+  - @campaign.scenarios.each_with_index do |c,i|
     .tab-content{data:{position:(i+1)}}
-      = s.label
+      

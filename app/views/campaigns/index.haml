@@ -1,12 +1,22 @@
 - content_for :actions do 
-  - if webmaster?
+  - if admin?
+    %a.btn.btn-blue{href:edit_webmaster_path(current_webmaster)}
+      %i.fa.fa-edit.mr1
+      Edit webmaster
+  - elsif webmaster?
     %a.btn.btn-blue{href:new_campaign_path}
       %i.fa.fa-plus.mr1
       New Campaign
 
 - content_for :breadcrumbs do
-  %li
-    Campaigns
+  - if admin?
+    %li
+      %a{href:'/'} Webmasters
+    %li
+      = render partial: 'shared/webmaster_selector'
+  - else
+    %li
+      Campaigns
 
 = render partial: 'shared/charts/line_chart', locals: { collection: current_webmaster.campaigns }
 
@@ -23,22 +33,22 @@
         = sort_link('ctr', 'CTR')
       %td
         Status
-      %td.center
+      %td.right-align
         Actions
   %tbody
     - @campaigns.each do |c|
+      - id = c.relative_id
+      - id = c.id if admin?
       %tr
         %td
-          %a{href:campaign_path(c.relative_id)}= c.name
+          %a{href:campaign_path(id)}= c.name
         %td= c.impression_total
         %td= c.reaction_total
         %td= "#{c.ctr}%"
         %td= c.status
-        %td.center
-          %a{href:campaign_path(c.relative_id),title:'View'}
+        %td.right-align
+          %a{href:campaign_path(id),title:'View'}
             %i.fa.fa-eye
-          %a.mx1{href:edit_campaign_path(c.relative_id),title:'Edit'}
+          %a.mx1{href:edit_campaign_path(id),title:'Edit'}
             %i.fa.fa-edit
-          %a{href:campaign_path(c.relative_id),title:'Delete',data:{method:'delete',confirm:"Are you sure you want to delete \'#{c.name}\'?"}}
-            %i.fa.fa-close
     

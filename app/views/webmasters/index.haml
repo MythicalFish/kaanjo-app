@@ -1,3 +1,7 @@
+- content_for(:breadcrumbs) do
+  %li
+    %a{href:'/'}
+      Master overview
 
 .row.center.mb3
   .col-xs-12.col-md-4
@@ -17,6 +21,8 @@
       CTR
   
 = render partial: 'shared/charts/line_chart', locals: { collection: Webmaster.all }
+
+%h1.mt4 Webmasters
 
 %table.mt3
   %thead

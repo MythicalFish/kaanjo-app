@@ -21,10 +21,10 @@
             %a.block.x5.lh0{href:'/'}
               %img.block{src:image_url('logo.svg')}
             .ml3.bl2.pl3.py1.lh1
-            - if webmaster?
-              = current_webmaster.nice_url
-            - elsif admin?
+            - if admin?
               Admin (full access)
+            - elsif webmaster?
+              = current_webmaster.nice_url
 
           .flex.items-end.items-center
             = content_for :header
@@ -67,8 +67,6 @@
       .flex.justify-between.items-center.y5.my2.bb1
         - if content_for(:breadcrumbs)
           %ul#breadcrumbs
-            %li
-              %a{href:'/'} Dashboard
             = content_for :breadcrumbs
         - else
           %div
