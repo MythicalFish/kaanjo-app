@@ -1,17 +1,17 @@
 .flash, #error_explanation {
-  padding: $space-2 $space-3;
-  background: $aqua;
+  padding: $space-2 $space-4;
+  background: $green;
   color: $white;
   font-weight: bold;
   z-index: 10;
-  position: absolute;
-  top: $space-3;
+  position: fixed;
+  top: 0;
   left: 0;
   margin-left: 50%;
   transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
-  border-radius: 2px;
-  -webkit-border-radius: 2px;
+  border-radius: 0 0 4px 4px;
+  -webkit-border-radius: 0 0 4px 4px;
   h2 {
     font-size: inherit;
   }
