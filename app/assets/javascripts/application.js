@@ -15,7 +15,7 @@
 //= require websocket_rails/main
 //= require moment
 //= require vendor/jquery-date-range-picker/jquery.daterangepicker
-//= require vendor/jquery.validate.min
+//= require vendor/jquery.validate
 //= require vendor/chart-js.min
 
 //= require dev
