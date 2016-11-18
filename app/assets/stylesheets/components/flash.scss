@@ -1,8 +1,17 @@
 .flash, #error_explanation {
-  padding: $space-2;
-  background: $lime;
-  color: rgba(0,0,0,0.65);
+  padding: $space-2 $space-3;
+  background: $aqua;
+  color: $white;
   font-weight: bold;
+  z-index: 10;
+  position: absolute;
+  top: $space-3;
+  left: 0;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
   h2 {
     font-size: inherit;
   }
@@ -15,6 +24,5 @@
   background: $orange;
 }
 .flash.success {
-  background: $lime;
-  color: rgba(0,0,0,0.65);
+  
 }

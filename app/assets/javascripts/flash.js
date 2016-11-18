@@ -5,7 +5,7 @@ $(document).ready(function(){
 
   if(notice.is('*')) {
     setTimeout(function() {
-      notice.slideUp();
+      notice.slideUp(100);
     },4000);
   }
 
