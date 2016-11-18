@@ -46,10 +46,15 @@ class CampaignsController < ApplicationController
       @campaign = current_webmaster.campaigns.find(params[:id])
     end
 
+    was_enabled = @campaign.enabled?
+
     if scenarios_invalid?
       flash[:alert] = "Error: You need at least 2 scenarios"
     elsif @campaign.update_attributes(campaign_params)
-      flash[:notice] = 'Campaign updated'
+      n = "Campaign updated"
+      e = @campaign.enabled?
+      n = "Great, your campaign is live!" if e and e != was_enabled 
+      flash[:notice] = n
     else
       flash[:alert] = "Error: #{@campaign.errors.full_messages.to_sentence}"
     end
@@ -68,7 +73,9 @@ class CampaignsController < ApplicationController
     @campaign = current_webmaster.campaigns.new(campaign_params)
 
     if @campaign.save
-      flash[:notice] = "Campaign created"
+      notice = "Campaign created"
+      notice = "Great, your campaign is live!" if @campaign.enabled?
+      flash[:notice] = notice
       redirect_to campaigns_path
     else
       flash[:alert] = "Campaign creation failed: #{@campaign.errors.full_messages.to_sentence}"
