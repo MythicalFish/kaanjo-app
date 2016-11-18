@@ -10,7 +10,9 @@
     = csrf_meta_tags
 
   %body.vh-ymin100.flex.items-middle.bg-gray-lighter
-    = content_for :errors
+
+    = render partial: 'shared/flashes'
+
     .island
       %img.x-max5.mb2{src:image_url('logo.svg')}
       = yield
