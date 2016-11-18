@@ -13,7 +13,7 @@
 
 - @campaign.scenarios.each do |s|
   %button{type:'button', onclick:"Kaanjo.react(#{s.id})", class:button_class(s), id:"kaanjo-reaction#{s.id}"}
-    %img{src:s.image_url}
+    %img{src:asset_url(s.image_url)}
     %label
       .kaanjo-bubble= s.label
 
