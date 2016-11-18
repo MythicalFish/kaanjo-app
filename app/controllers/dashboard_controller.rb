@@ -23,7 +23,11 @@ class DashboardController < ApplicationController
 
   def dashboard_for_webmaster
     @campaigns = current_webmaster.campaigns.with_totals(sorted)
-    render 'campaigns/index'
+    if @campaigns.length > 0
+      render 'campaigns/index'
+    else
+      redirect_to new_campaign_path
+    end
   end
 
 end
