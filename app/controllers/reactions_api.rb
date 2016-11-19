@@ -8,6 +8,7 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def initialize_client
+    Thread.new { EventMachine.run } unless EventMachine.reactor_running? && EventMachine.reactor_thread.alive?
     find_webmaster
     find_campaign
     find_customer
