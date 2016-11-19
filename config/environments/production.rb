@@ -95,3 +95,5 @@ Rails.application.configure do
   config.site_url = 'dashboard.kaanjo.co'
 
 end
+
+Thread.new { EventMachine.run } unless EventMachine.reactor_running? && EventMachine.reactor_thread.alive?
