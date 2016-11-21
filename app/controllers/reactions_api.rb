@@ -243,9 +243,9 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def webmaster_valid?
     if @webmaster.nil?
-      failure # Webmaster not found
+      failure("Webmaster not found") # Webmaster not found
     elsif request.env['HTTP_ORIGIN'] != @webmaster.website_url
-      failure # URLs must match
+      failure("URL mismatch") # URLs must match
     else
       msg "Webmaster validated: #{@webmaster.website_url}"
       return true
