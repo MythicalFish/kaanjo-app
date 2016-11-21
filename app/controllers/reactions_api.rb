@@ -21,7 +21,7 @@ class ReactionsApi < WebsocketRails::BaseController
 
     if @reaction
 
-      @reaction.scenario_id = @message[:id]
+      @reaction.scenario_id = message[:id]
       
       if @reaction.save
         set :reaction, @reaction
@@ -33,7 +33,7 @@ class ReactionsApi < WebsocketRails::BaseController
     else
 
       @reaction = Reaction.create(
-        scenario_id: @message[:id],
+        scenario_id: message[:id],
         impression: @impression,
         product: @product,
         customer: @customer
