@@ -11,11 +11,12 @@
 #kaanjo-title
   = @campaign.question
 
-- @campaign.scenarios.each do |s|
-  %button{type:'button', onclick:"Kaanjo.react(#{s.id})", class:button_class(s), id:"kaanjo-reaction#{s.id}"}
-    %img{src:"http://#{site_url}#{s.image_url}"}
-    %label
-      .kaanjo-bubble= s.label
+#kaanjo-buttons
+  - @campaign.scenarios.each do |s|
+    %button{type:'button', onclick:"Kaanjo.react(#{s.id})", class:button_class(s), id:"kaanjo-reaction#{s.id}"}
+      %img{src:"http://#{site_url}#{s.image_url}"}
+      %label
+        .kaanjo-bubble= s.label
 
 #kaanjo-status
   - if @reaction

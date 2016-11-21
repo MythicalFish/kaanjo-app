@@ -21,7 +21,7 @@ class ReactionsApi < WebsocketRails::BaseController
 
     if @reaction
 
-      @reaction.scenario_id = message[:id]
+      @reaction.scenario_id = @message[:id]
       
       if @reaction.save
         set :reaction, @reaction
@@ -33,7 +33,7 @@ class ReactionsApi < WebsocketRails::BaseController
     else
 
       @reaction = Reaction.create(
-        scenario_id: message[:id],
+        scenario_id: @message[:id],
         impression: @impression,
         product: @product,
         customer: @customer
@@ -66,7 +66,7 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def impress
     
-    set :device, message[:device]
+    set :device, @message[:device]
     @reaction = @customer.reaction_to(@product)
 
     if @reaction
@@ -78,7 +78,7 @@ class ReactionsApi < WebsocketRails::BaseController
     @impression = @product.impressions.create(
       customer: @customer,
       product: @product,
-      device_type: message[:device]
+      device_type: @message[:device]
     )
     
     set :impression, @impression
@@ -95,7 +95,7 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_webmaster
 
-    @webmaster = Webmaster.find_by_sid(message[:w_sid])
+    @webmaster = Webmaster.find_by_sid(@message[:w_sid])
 
     if webmaster_valid?
       set :webmaster, @webmaster
@@ -109,7 +109,7 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_campaign
 
-    @campaign = @webmaster.campaigns.find_by_relative_id(message[:w_cid])
+    @campaign = @webmaster.campaigns.find_by_relative_id(@message[:w_cid])
 
     if @campaign
       set :campaign, @campaign
@@ -123,7 +123,7 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_customer
 
-    @customer = Customer.find_by_sid(message[:c_sid])
+    @customer = Customer.find_by_sid(@message[:c_sid])
 
     if !@customer
       @customer = @campaign.customers.create
@@ -145,12 +145,12 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_product
     
-    @product = @webmaster.products.find_by_name(message[:p_sid])
+    @product = @webmaster.products.find_by_name(@message[:p_sid])
 
     if !@product && @webmaster.creation_enabled?
       @product = @campaign.products.create({
-        name: message[:p_sid],
-        url: message[:url]
+        name: @message[:p_sid],
+        url: @message[:url]
       })
       msg "Product created: #{@product.name}"
     else
@@ -230,6 +230,8 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def set_vars
+    set(:message,message) unless set[:message]
+    @message =    set[:message]
     @campaign =   set[:campaign]
     @customer =   set[:customer]
     @webmaster =  set[:webmaster]
