@@ -109,12 +109,12 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_campaign
 
-    @campaign = @webmaster.campaigns.find_by_relative_id(@message[:w_cid])
+    @campaign = @webmaster.campaigns.enabled.find_by_relative_id(@message[:w_cid])
 
     if @campaign
       set :campaign, @campaign
     else
-      failure("Webmaster not found: #{@webmaster.website_name}")
+      failure("No active campaign found for webmaster")
     end
 
   end  

@@ -18,6 +18,8 @@ class Campaign < ActiveRecord::Base
 
   default_scope { where('is_default = ? AND deleted = ?', false, false) }
   
+  scope :enabled, -> { where(enabled:true) }
+
   private
 
   def set_relative_id
