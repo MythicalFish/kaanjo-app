@@ -9,6 +9,8 @@
   font-weight: normal;
   color: $gray-dark;
   border: none;
+  transition: all .1s;
+  -webkit-transition: all .1s;
   &.btn-blue {
     color: $white;
     background: $aqua;
@@ -38,7 +40,7 @@ button:focus {
 }
 .btn.btn-lg {
   padding: 1.5rem;
-  font-size: $h4;
+  font-size: $h2;
   text-transform: uppercase;
 }
 .btn.btn-sm {
@@ -66,4 +68,8 @@ a {
 }
 .sorter-asc.current::after {
   content: "\f106";
+}
+.btn:hover {
+  transform: scale(1.01);
+  -webkit-transform: scale(1.01);
 }
