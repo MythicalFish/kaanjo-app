@@ -17,6 +17,7 @@
 //= require vendor/jquery-date-range-picker/jquery.daterangepicker
 //= require vendor/jquery.validate
 //= require vendor/chart-js.min
+//= require vendor/prism
 
 //= require dev
 //= require app

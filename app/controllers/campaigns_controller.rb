@@ -47,13 +47,15 @@ class CampaignsController < ApplicationController
     end
 
     was_enabled = @campaign.enabled?
+    just_activated = false
 
     if scenarios_invalid?
       flash[:alert] = "Error: You need at least 2 scenarios"
     elsif @campaign.update_attributes(campaign_params)
-      n = "Campaign updated"
       e = @campaign.enabled?
-      n = "Great, your campaign is live!" if e and e != was_enabled 
+      just_activated = true if e and e != was_enabled
+      n = "Campaign updated"
+      n = "Great, your campaign is live!" if just_activated  
       flash[:notice] = n
     else
       flash[:alert] = "Error: #{@campaign.errors.full_messages.to_sentence}"
@@ -61,10 +63,11 @@ class CampaignsController < ApplicationController
 
     if admin?
       redirect_to edit_campaign_path(@campaign.id)
+    elsif just_activated
+      redirect_to implement_campaign_path(@campaign.relative_id)
     else
       redirect_to edit_campaign_path(@campaign.relative_id)
     end
-
 
   end
 
@@ -76,11 +79,23 @@ class CampaignsController < ApplicationController
       notice = "Campaign created"
       notice = "Great, your campaign is live!" if @campaign.enabled?
       flash[:notice] = notice
-      redirect_to campaigns_path
+      redirect_to implement_campaign_path(@campaign.relative_id)
     else
       flash[:alert] = "Campaign creation failed: #{@campaign.errors.full_messages.to_sentence}"
       respond_with @campaign, location: new_campaign_path
     end
+  end
+
+  def implementation
+
+    if admin?
+      @campaign = Campaign.find(params[:id])
+    elsif webmaster?
+      @campaign = current_webmaster.campaigns.find_by_relative_id(params[:id])
+    end
+
+    @title = 'Campaign implementation'
+
   end
 
   private

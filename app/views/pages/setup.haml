@@ -9,11 +9,11 @@
   %p Setting up Reactions is quick & easy, all you need to do is place this script anywhere on your site:
   %code.mb3
     = '<script>'
-    = render partial:'client/script', locals: {cid:0}
+    = render partial:'campaigns/setup/code/script', locals: {cid:0}
     = '</script>'
   %p And on your product pages, place this HTML wherever you want the emoticons to appear:
   %code.mb3
-    = render partial:'client/html'
+    = render partial:'campaigns/setup/code/html'
   %p= "Don't forget to change the <b>data-product</b> attribute for each product - all of the data recorded will be associated with these values.".html_safe
 
   %h3.mt4 Important!
@@ -25,3 +25,6 @@
   Once you're satisfied that all of your products have been created, you should
   %a{href:edit_user_registration_path} disable product creation
   until you need to add more.
+
+  Min width for container: 130px;
+  No max width

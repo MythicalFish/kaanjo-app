@@ -1,0 +1,79 @@
+- content_for(:breadcrumbs) do
+  - if admin?
+    %li
+      %a{href:'/'}
+        Webmasters
+    %li
+      = render partial: 'shared/webmaster_selector'
+    %li
+      = "Implement campaign: #{@campaign.name}"
+  - elsif webmaster?
+    %li
+      %a{href:campaigns_path}
+        Campaigns
+    %li
+      %a{href:campaign_url(@campaign.relative_id)}= @campaign.name
+    %li
+      Implementation
+
+- content_for :actions do 
+  - id = @campaign.relative_id
+  - id = @campaign.id if admin?
+  %a.btn.mr1{href:campaign_url(id)}
+    %i.fa.fa-line-chart.mr1
+    View
+  %a.btn.mr1{href:edit_campaign_url(id)}
+    %i.fa.fa-edit.mr1
+    Edit
+
+
+.container-narrow.p2.md-p3.lg-p4.legible
+
+  
+  %h1.mb3
+    %i.fa.fa-code.mr2 
+    Implementation guide
+
+  - unless @campaign.enabled?
+    - id = @campaign.relative_id
+    - id = @campaign.id if admin?
+    .p2.bg-orange.white
+      This campaign won't work until you
+      %a.white.underline.bold{href:edit_campaign_url(id)} enable it.
+
+  %p.mb2 This is your script:
+  %pre
+    %code.language-html.mb3= render partial:'campaigns/implementation/script', locals: {cid:@campaign.relative_id}
+
+  %p Place it anywhere in your website's HTML, or include it using Google Tag Manager.
+
+  %p 
+    This campaign has an ID of
+    %span.hl= @campaign.relative_id
+    , which you can see at the end of the script. This means that the settings defined in this campaign will be used. If you'd like to run multiple different campaigns, you'll need to change this value (using your site's logic, or by defining different rules in Google Tag Manager). 
+
+  %p On its own, this script does nothing.
+  
+  %p It needs to know a few things, namely:
+  
+  %ul
+    %li The name of your product
+    %li Your unique ID
+    %li And where to display your emoticons!
+
+  %p 
+    This is where the 
+    %span.hl div 
+    tag comes in:     
+  
+  %pre
+    %code.language-html.mb3
+      = render partial:'campaigns/implementation/html'
+  %p
+    Place it where you'd like the emoticons to display, it should be at least 130px wide, and there should be room to grow vertically a little.
+    The emoticons will scale with the width of the container - so if they're too big, simply reduce the width!
+
+  %p 
+    Of course you'll also need to change the value of the
+    %span.hl data-product
+    attribute based on the product being displayed to your users. 

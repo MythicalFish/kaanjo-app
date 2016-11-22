@@ -12,23 +12,26 @@
       %a{href:campaigns_path}
         Campaigns
     %li
-      = "#{@campaign.name} (edit)"
+      %a{href:campaign_url(@campaign.relative_id)}= @campaign.name
+    %li
+      Edit
 
 - content_for :actions do 
-  - url = campaign_url(@campaign.relative_id)
-  - url = campaign_url(@campaign.id) if admin?
-  %a.btn.btn-blue{href:url}
-    %i.fa.fa-eye.mr1
-    View campaign
+  - id = @campaign.relative_id
+  - id = @campaign.id if admin?
+  %a.btn.mr1{href:campaign_url(id)}
+    %i.fa.fa-line-chart.mr1
+    View
+  %a.btn.mr1{href:implement_campaign_url(id)}
+    %i.fa.fa-code.mr1
+    Setup
 
-.container-narrow.p2.md-p3.lg-p4.bg-white
+.container-narrow.p2.md-p3.lg-p4
+
   = form_for(@campaign) do |f|
     = render partial: 'design_form', locals: {f:f}
     = render partial: 'settings_form', locals: {f:f}
     .actions
-      = f.submit "Update", class: 'btn btn-blue'
-   
-  %code
-    = '<script>'
-    = render(partial: 'client/script', locals: { cid: @campaign.relative_id })
-    = '</script>'
+      %button.btn.btn-blue.btn-lg.btn-full{type:'submit'}
+        %i.fa.fa-save.mr1
+        Update

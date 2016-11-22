@@ -37,12 +37,6 @@ label {
 input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,input[type="email"]:focus,input[type="tel"]:focus,input[type="search"]:focus,select:focus,textarea:focus {
   border-color: $gray-darker;
 }
-code {
-  display: block;
-  @extend .p3;
-  background: $gray-lighter;
-  @extend .b1;
-}
 ::-webkit-input-placeholder { color: $gray-darker; }
 :-ms-input-placeholder { color: $gray-darker; }
 ::-moz-placeholder { color: $gray-darker; opacity: 1; }

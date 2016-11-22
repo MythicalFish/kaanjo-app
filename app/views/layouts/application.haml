@@ -29,9 +29,9 @@
           .flex.items-end.items-center
             = content_for :header
             .dropdown.right-align.ml1
-              %label#avatar.pr0{for:'user-menu-toggle'}
-                .input.round.center.inline-block
-                  = current_user.first_name[0]
+              %label.pr0{for:'user-menu-toggle'}
+                .bg-gray-lighter.b1.round.center.inline-block.x3.y3.relative
+                  .middle.bold= current_user.first_name[0]
               %input#user-menu-toggle.hide{type:'checkbox'}
               %ul#user-menu
                 - if admin?
@@ -48,10 +48,6 @@
                     %a{href:'/',class:cp('/')}
                       Campaigns
                       %i.fa.fa-diamond.ml1
-                  %li
-                    %a{href:'/setup',class:cp('/setup')}
-                      Setup
-                      %i.fa.fa-code.ml1
                 %li
                   %a{href:edit_user_registration_path,class:cp(edit_user_registration_path)}
                     Account settings

@@ -1,13 +1,14 @@
       
 - content_for(:actions) do
-  - if admin?
-    %a.btn.btn-blue{href:edit_campaign_path(@campaign.id)}
-      %i.fa.fa-edit.mr1
-      Edit campaign
-  - elsif webmaster?
-    %a.btn.btn-blue{href:edit_campaign_path(@campaign.relative_id)}
-      %i.fa.fa-edit.mr1
-      Edit campaign
+  - id = @campaign.relative_id
+  - id = @campaign.id if admin?
+  %a.btn.mr1{href:implement_campaign_url(id)}
+    %i.fa.fa-code.mr1
+    Implement
+  %a.btn.mr1{href:edit_campaign_url(id)}
+    %i.fa.fa-edit.mr1
+    Edit
+
 
 - content_for(:breadcrumbs) do
   - if admin?

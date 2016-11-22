@@ -14,3 +14,19 @@ h6 { @extend .h6; }
 h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5 {
   margin-top: 0;
 }
+.legible {
+  font-size: 18px;
+  line-height: 1.5;
+  h1,.h1 { font-size: 26px; }
+  h2,.h2 { font-size: 24px; }
+  h3,.h3 { font-size: 22px; }
+}
+.hl {
+  display: inline-block;
+  background: rgba(0,0,0,0.05);
+  color: fuchsia;
+  padding: 0 5px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+}

@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root to: 'dashboard#show'
 
   resources :products
-  resources :campaigns 
+  resources :campaigns
+  get '/campaigns/:id/implementation', to: 'campaigns#implementation', as: 'implement_campaign'
   resources :campaign_templates 
   resources :webmasters
   resources :admins, except: [:show]
@@ -26,7 +27,7 @@ Rails.application.routes.draw do
 
   end
 
-  get '/setup', to: 'pages#show'
+  #get '/setup', to: 'pages#show'
   
   
 end
