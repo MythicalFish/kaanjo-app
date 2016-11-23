@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :products
   resources :campaigns
+  resources :emoticons
   get '/campaigns/:id/implementation', to: 'campaigns#implementation', as: 'implement_campaign'
   resources :campaign_templates 
   resources :webmasters

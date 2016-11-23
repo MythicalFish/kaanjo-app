@@ -1,0 +1,10 @@
+.mb4
+  %a.btn.btn-blue{href:new_emoticon_url}
+    New
+%ul
+  - @emoticons.each do |e|
+    %li
+      %a.emoticon{href:edit_emoticon_url(e)}
+        %img{src:e.image.url}
+        %label= e.label
+
