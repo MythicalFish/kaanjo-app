@@ -34,9 +34,9 @@ class ReactionsApi < WebsocketRails::BaseController
 
       @reaction = Reaction.create(
         scenario_id: message[:id],
-        impression: @impression,
-        product: @product,
-        customer: @customer
+        impression:  @impression,
+        product:     @product,
+        customer:    @customer
       )
 
       set :reaction, @reaction
@@ -95,7 +95,7 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_webmaster
 
-    @webmaster = Webmaster.find_by_sid(@message[:w_sid])
+    @webmaster = Webmaster.find_by_sid(@message[:webmaster_sid])
 
     if webmaster_valid?
       set :webmaster, @webmaster
@@ -109,7 +109,7 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_campaign
 
-    @campaign = @webmaster.campaigns.enabled.find_by_relative_id(@message[:w_cid])
+    @campaign = @webmaster.campaigns.enabled.find_by_relative_id(@message[:campaign_id])
 
     if @campaign
       set :campaign, @campaign
@@ -123,7 +123,7 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_customer
 
-    @customer = Customer.find_by_sid(@message[:c_sid])
+    @customer = Customer.find_by_sid(@message[:customer_sid])
 
     if !@customer
       @customer = @campaign.customers.create
@@ -144,13 +144,18 @@ class ReactionsApi < WebsocketRails::BaseController
   # Products
 
   def find_product
-    
-    @product = @webmaster.products.find_by_name(@message[:p_sid])
+
+    if @message[:product_sid].blank?
+      @product = @campaign.products.find_by_name(@message[:product_name])
+    else
+      @product = @campaign.products.find_by_sid(@message[:product_sid])
+    end
 
     if !@product && @webmaster.creation_enabled?
       @product = @campaign.products.create({
-        name: @message[:p_sid],
-        url: @message[:url]
+        name: @message[:product_name],
+        sid:  @message[:product_sid],
+        url:  @message[:url]
       })
       msg "Product created: #{@product.name}"
     else
@@ -237,7 +242,7 @@ class ReactionsApi < WebsocketRails::BaseController
     @webmaster =  set[:webmaster]
     @product =    set[:product]
     @device =     set[:device]
-    @impression =   set[:impression]
+    @impression = set[:impression]
     @reaction =   set[:reaction]
   end
 
