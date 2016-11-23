@@ -12,7 +12,7 @@
   = @campaign.question
 
 #kaanjo-buttons
-  - @campaign.scenarios.each do |s|
+  - @campaign.scenarios.enabled.each do |s|
     %button{type:'button', onclick:"Kaanjo.react(#{s.id})", class:button_class(s), id:"kaanjo-reaction#{s.id}"}
       %img{src:"http://#{site_url}#{s.image_url}"}
       %label

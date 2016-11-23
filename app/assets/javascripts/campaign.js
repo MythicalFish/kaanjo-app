@@ -31,15 +31,13 @@ app.scenario = {
 
   populateFields: function (attr) {
 
+    app.scenario.enable(attr.position);    
+    
     tab = app.scenario.tab(attr.position);    
     form = app.scenario.form(attr.position);    
-    
-    tab.find('img').attr('src', attr.img_src);
-    tab.removeClass('scenario-disabled');
-    form.removeClass('scenario-disabled');
 
+    tab.find('img').attr('src', attr.img_src);
     form.find('input.scenario_emoticon-id').val(attr.id);
-    form.find('input.scenario_enabled').val(true);
 
     label1 = tab.find('label');
     if (label1.text().length == 0)
@@ -58,15 +56,22 @@ app.scenario = {
   disable: function (pos) {
     app.scenario.tab(pos).addClass('scenario-disabled').find('img').attr('src','');
     app.scenario.form(pos).addClass('scenario-disabled').find('input.scenario_enabled').val(false);
+  },
+
+  enable: function (pos) {
+
+    tab = app.scenario.tab(pos);    
+    form = app.scenario.form(pos);    
+    
+    tab.removeClass('scenario-disabled');
+    form.removeClass('scenario-disabled');
+    form.find('input.scenario_enabled').val(true);
+
   }
 
 }
 
 app.emoticon = {
-
-  upload: function () {
-    
-  },
 
   library: function () {
     app.modal.show('#emoticon-library');
@@ -91,7 +96,9 @@ app.emoticon = {
 }
 
 $(document).on('click', '.scenario-selector.scenario-disabled', function() {
-  app.emoticon.library($(this).attr('data-position')); 
+  var pos = $(this).attr('data-position');
+  app.emoticon.library(pos); 
+  app.scenario.enable(pos);
 });
 
 $(document).on('change', 'input.scenario_label', function () {
@@ -102,7 +109,8 @@ $(document).on('change', 'input.scenario_label', function () {
 $(document).on('change', 'input.custom_emoticon', function () {
   
   var reader = new FileReader();
-  var pos = $(this).parents('.scenario-form').attr('data-position');
+  var form = $(this).parents('.scenario-form');
+  var pos = form.attr('data-position');
 
   reader.onload = function (e) {
     $('.tab[data-position="' + pos + '"]').find('img').attr('src',e.target.result);

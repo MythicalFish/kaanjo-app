@@ -14,6 +14,8 @@ class Scenario < ActiveRecord::Base
 
   validates_attachment :custom_emoticon, content_type: { content_type: /\Aimage\/.*\Z/ }
 
+  scope :enabled, -> { where(enabled:true) }
+
   def label
     read_attribute(:label) || emoticon.try(:label)
   end

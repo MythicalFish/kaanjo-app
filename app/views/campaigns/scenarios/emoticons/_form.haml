@@ -10,7 +10,7 @@
     %label= scenario.try(:label)
 
 - content_for :emoticon_form do
-  .tab-content.scenario-form{data:{position:i},class:state} 
+  .tab-content.scenario-form{data:{position:i},class:"#{state} #{enabled}"} 
 
     = f.fields_for :scenarios, scenario do |ff|
       
