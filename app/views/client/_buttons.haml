@@ -8,8 +8,9 @@
 //    Powered by 
 //    %a{href:'http://kaanjo.co',target:'_blank'} Kaanjo
 
-#kaanjo-title
-  = @campaign.question
+- unless @campaign.question.blank?
+  #kaanjo-title
+    = @campaign.question
 
 #kaanjo-buttons
   - @campaign.scenarios.enabled.each do |s|
