@@ -4,6 +4,10 @@
 .mb3
   = f.label :question, "Your question or message (optional)", class: 'h2 gray-darker'
   = f.text_field :question, { maxlength: 120 }
+  .opa8.mt1
+    Tip: use the 
+    %b {number}
+    token to display the number of reactions.
 .mb3
   = render partial: 'campaigns/scenarios/form', locals: {f:f}
 
