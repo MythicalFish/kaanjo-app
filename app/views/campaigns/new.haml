@@ -50,11 +50,14 @@
 
     = render partial: 'design_form', locals: {f:f}
 
-    %button.btn.btn-blue.step-take{type:'button'}
+    %button.btn.btn-blue.btn-lg.btn-full.step-take{type:'button'}
       Next
+      %i.fa.fa-arrow-right.ml1
 
   #settings.step.container-narrower
 
     = render partial: 'settings_form', locals: {f:f}
 
-    = f.submit "Create campaign", class: 'btn btn-blue'
+    %button.btn.btn-blue.btn-lg.btn-full{type:'submit'}
+      %i.fa.fa-save.mr1
+      Create campaign

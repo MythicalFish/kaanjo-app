@@ -9,6 +9,6 @@
   = form_for(@campaign) do |f|
     = render partial: 'design_form', locals: {f:f}
     = render partial: 'settings_form', locals: {f:f}
-    %button.btn.btn-blue{type:'submit'}
+    %button.btn.btn-blue.btn-lg.btn-full{type:'submit'}
       %i.fa.fa-save.mr1
       Create

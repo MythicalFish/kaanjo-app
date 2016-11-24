@@ -20,24 +20,33 @@
       = ff.hidden_field :emoticon_id, class: 'scenario_emoticon-id'
 
       .mb3
-        = ff.label :emoticon
-        
-        .inline-block.relative
-          .btn
-            %i.fa.fa-upload.mr1
-            Upload your own
-          = ff.file_field :custom_emoticon, class: 'custom_emoticon absolute top-0 left-0 right-0 bottom-0 opa0'
+        .flex.justify-between.mb2
+          = ff.label :emoticon, class: 'h3'       
+          %a{href:'http://emojione.com',target:'_blank'}
+            %i.fa.fa-search.mr1
+            Find emoticons on EmojiOne
+
+        - unless f.object.model_name.name == 'CampaignTemplate'
+          .inline-block.relative.mr2
+            .btn
+              %i.fa.fa-upload.mr1
+              Upload emoticon
+            = ff.file_field :custom_emoticon, class: 'custom_emoticon absolute top-0 left-0 right-0 bottom-0 opa0'
 
         %button.btn{type:'button',onclick:"app.emoticon.library(#{i});"}
           %i.fa.fa-th.mr1
-          Select from our library
+          Select emoticon
+
+
+        
+        
       
       .mb3
-        = ff.label :label
+        = ff.label :label, class: 'h3'
         = ff.text_field :label, class: 'scenario_label', maxlength: 15
       
       .mb3
-        = ff.label :message
+        = ff.label :message, class: 'h3'
         = ff.text_field :message, class: 'scenario_message', maxlength: 120
       
       %button.btn{type:'button',onclick:"app.scenario.disable(#{i});"}
