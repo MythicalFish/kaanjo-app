@@ -21,8 +21,9 @@ gem 'devise'
 gem 'cancancan', '~> 1.10'
 
 gem 'puma'
+gem 'websocket-rails'
+gem 'eventmachine'
 gem 'faye-websocket', '0.10.0'
-gem 'websocket-rails', branch: 'threadsocket-rails-sync'
 
 group :development do
   gem 'shog'
