@@ -228,6 +228,7 @@ DEPENDENCIES
   cancancan (~> 1.10)
   coffee-rails (~> 4.1.0)
   devise
+  eventmachine
   faye-websocket (= 0.10.0)
   haml-rails (~> 0.9)
   html2haml
