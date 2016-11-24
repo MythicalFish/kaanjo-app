@@ -1,5 +1,8 @@
 #emoticon-library
-  .row
-    - Emoticon.library.each do |e|
-      %button.emoticon.col-xs-6.col-sm-1.col-md-1{type:'button',onclick:"app.emoticon.select(#{e.id})",data:{id:e.id,label:e.label}}
-        %img{src:e.image.url}
+  - Emoticon.categories.each do |c,emoticons|
+    - next if emoticons.empty?
+    %h3= c 
+    .row.mb3
+      - emoticons.each do |e|
+        %button.emoticon.col-xs-1{type:'button',onclick:"app.emoticon.select(#{e.id})",data:{id:e.id,label:e.label}}
+          %img{src:e.image.url}

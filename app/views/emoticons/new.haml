@@ -1,2 +1,8 @@
-%h1 New
-= render partial: 'form'
+- content_for :breadcrumbs do
+  %li
+    %a{href:emoticons_path} Emoticons
+  %li
+    New
+
+.container-narrower
+  = render partial: 'form'

@@ -27,7 +27,7 @@ class EmoticonsController < ApplicationController
       flash[:alert] = "Error: #{@emoticon.errors.full_messages.to_sentence}"
     end
 
-    redirect_to edit_emoticon_path(@emoticon)
+    redirect_to emoticons_path
 
   end
 
@@ -48,7 +48,7 @@ class EmoticonsController < ApplicationController
   private
 
   def emoticon_params
-    params.require(:emoticon).permit(:label, :image)
+    params.require(:emoticon).permit(:label, :image, :category)
   end
 
 end

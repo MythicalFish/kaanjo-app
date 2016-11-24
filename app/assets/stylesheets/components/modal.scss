@@ -6,17 +6,28 @@
   left: 0;
   right: 0;
   display: none;
-  @extend .items-middle;
   opacity: 0;
   z-index: 2;
   transition: all .5s;
   -webkit-transition: all .5s;
+  padding: $space-3;
+  overflow-y: auto;
   > div {
+    margin-left: auto;
+    margin-right: auto;
     padding: $space-3;
     background: $white;
     transition: all .5s;
     -webkit-transition: all .5s;
     opacity: 0;
     max-width: 800px;
+    .emoticon {
+      padding: 5px;
+      border: none;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
   }
 }

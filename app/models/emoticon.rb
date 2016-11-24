@@ -12,8 +12,24 @@ class Emoticon < ActiveRecord::Base
 
   validates_attachment :image, content_type: { content_type: /\Aimage\/.*\Z/ }
 
-  def self.library
-    where(is_default:true)
+  def self.category_names
+    [
+      'Miscellaneous',
+      'Smileys',
+      'Emotions',
+      'Numbers',
+      'Flags'
+    ]
+  end
+
+  def self.categories
+    r = {}
+    category_names.each do |c|
+      next if c == 'Miscellaneous'
+      r[c] = Emoticon.where(category:c)
+    end
+    r['Miscellaneous'] = Emoticon.where(category:[nil,'Miscellaneous'])
+    r
   end
 
   private

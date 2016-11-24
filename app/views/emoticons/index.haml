@@ -1,10 +1,15 @@
-.mb4
+- content_for :actions do
   %a.btn.btn-blue{href:new_emoticon_url}
     New
-%ul
+
+- content_for :breadcrumbs do
+  %li
+    Emoticons
+
+.row
   - @emoticons.each do |e|
-    %li
+    .col-xs-1.p1
       %a.emoticon{href:edit_emoticon_url(e)}
         %img{src:e.image.url}
-        %label= e.label
+        %label.gray= e.label
 

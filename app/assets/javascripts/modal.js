@@ -2,7 +2,7 @@ app.modal = {
   
   show: function (target) {
     
-    $('#modal').css('display', 'flex');
+    $('#modal').css('display', 'block');
     $('#modal > div').css('display', '');
     $(target).css('display', 'block');
     setTimeout(function () {

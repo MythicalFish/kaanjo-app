@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124111904) do
+ActiveRecord::Schema.define(version: 20161124114321) do
 
   create_table "campaigns", force: :cascade do |t|
     t.integer  "relative_id",  limit: 4,                   null: false
@@ -58,8 +58,10 @@ ActiveRecord::Schema.define(version: 20161124111904) do
     t.string   "sid",                limit: 255,                 null: false
     t.string   "message",            limit: 255
     t.boolean  "is_default",                     default: false
+    t.string   "category",           limit: 255
   end
 
+  add_index "emoticons", ["category"], name: "index_emoticons_on_category", using: :btree
   add_index "emoticons", ["is_default"], name: "index_emoticons_on_is_default", using: :btree
   add_index "emoticons", ["label"], name: "index_emoticons_on_label", using: :btree
   add_index "emoticons", ["sid"], name: "index_emoticons_on_sid", using: :btree
