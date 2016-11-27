@@ -10,8 +10,7 @@ Rails.application.routes.draw do
   resources :webmasters
   resources :admins, except: [:show]
 
-  devise_for :users, :skip => [:sessions, :registrations]
-
+  devise_for :users, skip: [:sessions, :registrations], controllers: { confirmations: 'confirmations' }
   as :user do
 
     get    'login' => 'devise/sessions#new', :as => :new_user_session
