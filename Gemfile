@@ -34,3 +34,7 @@ group :development do
   gem 'active_record_query_trace'
 end
 
+group :production do
+  gem 'newrelic_rpm'
+end
+
