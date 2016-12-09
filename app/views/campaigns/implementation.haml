@@ -6,7 +6,7 @@
     %li
       = render partial: 'shared/webmaster_selector'
     %li
-      = "Implement campaign: #{@campaign.name}"
+      = "Implement campaign: #{@campaign.relative_id}"
   - elsif webmaster?
     %li
       %a{href:campaigns_path}
