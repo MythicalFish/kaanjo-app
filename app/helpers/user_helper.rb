@@ -19,6 +19,7 @@ module UserHelper
   end
 
   def webmaster?
+    return false if @current_webmaster
     current_webmaster ? true : false
   end
 
