@@ -41,29 +41,26 @@
       This campaign won't work until you
       %a.white.underline.bold{href:edit_campaign_url(id)} enable it.
 
-  %p.mb2 This is your script:
+  %p.mb2 This is your campaign script:
   %pre
     %code.language-html.mb3= render partial:'campaigns/implementation/script', locals: {cid:@campaign.relative_id}
 
-  %p Place it anywhere in your website's HTML, or include it using Google Tag Manager.
-
   %p 
-    This campaign has an ID of
-    %span.hl= @campaign.relative_id
-    , which you can see at the end of the script. This means that the settings defined in this campaign will be used. If you'd like to run multiple different campaigns, you'll need to change this value (using your site's logic, or by defining different rules in Google Tag Manager). 
+    Note: this script is for this campaign only
+    %b= "##{@campaign.relative_id} (#{@campaign.name})"  
+    
+  %p Place it anywhere in your website's HTML, or include it using Google Tag Manager (recommended if you run multiple campaigns). 
 
-  %p On its own, this script does nothing.
-  
-  %p It needs to know a few things, namely:
+  %p On its own, this script does nothing; it needs to know a few things, namely:
   
   %ul
-    %li Your Kaanjo ID
+    %li Your account ID
     %li Your product or article's title
     %li And where to display your emoticons!
 
   %p 
     This is where the 
-    %span.hl div 
+    %b div 
     tag comes in:     
   
   %pre

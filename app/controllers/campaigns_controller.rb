@@ -90,6 +90,7 @@ class CampaignsController < ApplicationController
 
     if admin?
       @campaign = Campaign.find(params[:id])
+      @current_webmaster = @campaign.webmaster
     elsif webmaster?
       @campaign = current_webmaster.campaigns.find_by_relative_id(params[:id])
     end
