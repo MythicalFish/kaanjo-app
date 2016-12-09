@@ -19,6 +19,10 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def react
 
+    unless message
+      failure('"react" action did not receive message (params)')
+    end
+
     if @reaction
 
       @reaction.scenario_id = message[:id]
@@ -188,6 +192,10 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def failure msg = nil
+    puts ''
+    puts 'API failure:'
+    puts msg
+    puts ''
     trigger_failure(msg)
   end
 
