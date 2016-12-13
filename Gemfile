@@ -22,8 +22,8 @@ gem 'cancancan', '~> 1.10'
 
 gem 'puma'
 gem 'websocket-rails'
-gem 'eventmachine'
 gem 'faye-websocket', '0.10.0'
+gem 'eventmachine'
 gem 'newrelic_rpm'
 
 group :development do
