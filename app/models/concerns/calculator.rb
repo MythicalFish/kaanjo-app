@@ -119,10 +119,12 @@ module Calculator
     end
 
     def get_reaction_total opts = {}
+      opts = @@opts.merge(opts)
       get_total_for reactions, opts
     end
 
     def get_impression_total opts = {}
+      opts = @@opts.merge(opts)
       get_total_for impressions, opts
     end
 
