@@ -19,7 +19,7 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def react
 
-    unless message
+    unless message && message.is_a?(Hash)
       failure('"react" action did not receive message (params)')
     end
 
