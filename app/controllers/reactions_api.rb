@@ -10,7 +10,9 @@ class ReactionsApi < WebsocketRails::BaseController
   def initialize_client
     Thread.new { EventMachine.run } unless EventMachine.reactor_running? && EventMachine.reactor_thread.alive?
     find_webmaster
+    failure('webmaster not found') unless set[:webmaster]
     find_campaign
+    failure('campaign not found') unless set[:campaign]
     find_customer
     find_product
     impress
@@ -126,6 +128,10 @@ class ReactionsApi < WebsocketRails::BaseController
   # Customers
 
   def find_customer
+
+    unless @campaign
+      failure('"@campaign" not set, but is required for "find_customer" action')
+    end
 
     @customer = Customer.find_by_sid(@message[:customer_sid])
 
