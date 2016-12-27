@@ -77,9 +77,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # Enable websocket-rails to work
-  config.middleware.delete Rack::Lock
-
   config.action_mailer.default_url_options = { :host => 'dashboard.kaanjo.co' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {

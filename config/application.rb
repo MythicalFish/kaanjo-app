@@ -33,5 +33,8 @@ module ReactionsAdmin
       Devise::PasswordsController.layout "island"        
     end
 
+    # Enable websocket-rails to work
+    config.middleware.delete Rack::Lock
+
   end
 end
