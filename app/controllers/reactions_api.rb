@@ -115,7 +115,7 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_campaign
 
-    @campaign = @webmaster.campaigns.enabled.find_by_relative_id(@message[:campaign_id])
+    @campaign = @webmaster.campaigns.running.find_by_relative_id(@message[:campaign_id])
 
     if @campaign
       set :campaign, @campaign

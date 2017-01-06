@@ -46,13 +46,13 @@ class CampaignsController < ApplicationController
       @campaign = current_webmaster.campaigns.find(params[:id])
     end
 
-    was_enabled = @campaign.enabled?
+    was_enabled = @campaign.running?
     just_activated = false
 
     if scenarios_invalid?
       flash[:alert] = "Error: You need at least 2 scenarios"
     elsif @campaign.update_attributes(campaign_params)
-      e = @campaign.enabled?
+      e = @campaign.running?
       just_activated = true if e and e != was_enabled
       n = "Campaign updated"
       n = "Great, your campaign is live!" if just_activated  
@@ -77,7 +77,7 @@ class CampaignsController < ApplicationController
 
     if @campaign.save
       notice = "Campaign created"
-      notice = "Great, your campaign is live!" if @campaign.enabled?
+      notice = "Great, your campaign is live!" if @campaign.running?
       flash[:notice] = notice
       redirect_to implement_campaign_path(@campaign.relative_id)
     else

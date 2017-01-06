@@ -34,7 +34,7 @@
     %i.fa.fa-code.mr2 
     Implementation guide
 
-  - unless @campaign.enabled?
+  - unless @campaign.running?
     - id = @campaign.relative_id
     - id = @campaign.id if admin?
     .p2.bg-orange.white

@@ -18,7 +18,26 @@ class Campaign < ActiveRecord::Base
 
   default_scope { where('is_default = ? AND deleted = ?', false, false) }
   
+  scope :running, -> { 
+    enabled.where(
+      "start_date IS NULL AND end_date IS NULL OR " <<
+      "start_date <= ? AND end_date IS NULL OR " <<
+      "start_date IS NULL AND end_date > ? OR " <<
+      "start_date <= ? AND end_date > ?",
+      Date.today,Date.today,Date.today,Date.today
+    ) 
+  }
+
   scope :enabled, -> { where(enabled:true) }
+
+  def running?
+    return false unless enabled?
+    return true if start_date.nil? && end_date.nil?
+    return true if start_date <= Date.today && end_date.nil?
+    return true if start_date.nil? && end_date > Date.today
+    return true if start_date <= Date.today && end_date > Date.today
+    return false
+  end
 
   private
 

@@ -20,7 +20,7 @@
 
 = render partial: 'shared/charts/line_chart', locals: { collection: current_webmaster.campaigns }
 
-%table.mt3
+%table.mt3.mb4
   %thead        
     %tr
       %td
@@ -45,7 +45,13 @@
         %td= c.impression_total
         %td= c.reaction_total
         %td= "#{c.ctr}%"
-        %td= c.status
+        %td
+          - if c.running?
+            .status-green
+              = c.status
+          - else 
+            .status
+              = c.status
         %td.right-align
           %a{href:campaign_path(id),title:'View'}
             %i.fa.fa-line-chart

@@ -3,8 +3,8 @@ module CampaignMethods
   included do
     
   def status
-    return 'active' if enabled?
-    'inactive'
+    return 'Running' if running?
+    'Not running'
   end
 
   end
