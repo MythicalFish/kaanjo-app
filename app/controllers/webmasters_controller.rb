@@ -11,8 +11,8 @@ class WebmastersController < ApplicationController
 
   def show
     @current_webmaster = Webmaster.find(params[:id])
-    @campaigns = @current_webmaster.campaigns
-    @title = "Webmaster: #{@current_webmaster.name}"
+    @campaigns = @current_webmaster.campaigns.with_totals(sorted)
+    @title = "Webmaster: #{@current_webmaster.website_name}"
     render 'campaigns/index'
   end
 

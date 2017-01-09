@@ -105,7 +105,7 @@ class CampaignsController < ApplicationController
     if admin?
       CampaignTemplate.all
     elsif webmaster?
-      current_webmaster.campaigns
+      current_webmaster.campaigns.with_totals(sorted)
     end
   end
 
