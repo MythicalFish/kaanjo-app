@@ -4,6 +4,7 @@ class Product < ActiveRecord::Base
   include Calculator
 
   belongs_to :campaign
+  has_many :scenarios, :through => :campaign
   has_many :impressions
   has_many :reactions
   has_many :customers, :through => :impressions

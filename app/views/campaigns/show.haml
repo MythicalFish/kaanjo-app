@@ -51,8 +51,8 @@
       .h1.bold.blue= "#{@campaign.ctr}%"
       CTR
 
-.tabs
-  .tab.emoticon{data:{position:0}}
+.tabs.mb2
+  .tab.tab-active.emoticon{data:{position:0}}
     %img.opa0
     %label All reactions
   - @campaign.scenarios.each_with_index do |s,i|
@@ -63,8 +63,9 @@
 .tab-contents.mb4
   .tab-content.tab-active{data:{position:0}}
     
-    = render partial: 'table', locals: {campaign: @campaign}
+    = render partial: 'table', locals: {campaign: @campaign, type: false}
 
   - @campaign.scenarios.each_with_index do |c,i|
     .tab-content{data:{position:(i+1)}}
+      = render partial: 'table', locals: {campaign: @campaign, type: i+1}
       

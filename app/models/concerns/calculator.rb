@@ -142,7 +142,7 @@ module Calculator
       @impression_total = self.get_impression_total(opts)
       @ctr = self.get_ctr(opts)
 
-      return unless model_name.collection == 'campaigns'
+      return unless self.try(:scenarios)
 
       self.scenarios.all.each_with_index do |t,i|
         i += 1

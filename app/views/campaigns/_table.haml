@@ -5,14 +5,20 @@
       %td Product name
       %td Impressions
       %td Reactions
+      %td CTR
       %td Link
   %tbody
     - campaign.products.with_totals(sorted).each do |p|
+      - if type
+        - reaction_total = p.send("type_total_#{type}")
+      - else
+        - reaction_total = p.reaction_total
       %tr
         %td= p.sid
         %td= p.name
         %td= p.impression_total
-        %td= p.reaction_total
+        %td= reaction_total
+        %td= "#{calculate_ctr(reaction_total,p.impression_total)}%"
         %td
           %a{href:p.url}
             %img.x2{src:image_url('ui/link.svg')}

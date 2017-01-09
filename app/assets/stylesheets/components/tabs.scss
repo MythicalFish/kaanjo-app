@@ -2,16 +2,12 @@
   @extend .flex;
   .tab {
     @extend .flex-auto;
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
-    border-top: 1px solid transparent;
-    @extend .bb1;
     text-align: center;
     cursor: pointer;
+    border: 2px solid transparent;
   }
   .tab.tab-active {
-    @extend .b1;
-    border-bottom: 1px solid transparent!important;
+    @extend .b2;
     cursor: default;
   }
 }
