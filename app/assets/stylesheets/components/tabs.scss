@@ -7,7 +7,7 @@
     border: 2px solid transparent;
   }
   .tab.tab-active {
-    @extend .b2;
+    border-color: #b2c9d4;
     cursor: default;
   }
 }

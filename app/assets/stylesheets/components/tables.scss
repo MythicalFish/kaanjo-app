@@ -6,18 +6,18 @@ table {
   thead {
     color: $navy;
     font-weight: bold;
-    @extend .bb2;
-    @extend .bt1;
+    @extend .by2;
     tr {
       background: $gray-light;
     }
   }
-  @extend .bx1;
+  tbody { border-top: 2px solid #b2c9d4; }
+  @extend .bx2;
   tr {
     background: $gray-lighter;
-    @extend .bb1;
+    @extend .bb2;
     td:not(:last-child) {
-      @extend .br1;
+      @extend .br2;
     }
   }
   td {

@@ -20,5 +20,5 @@
         %td= reaction_total
         %td= "#{calculate_ctr(reaction_total,p.impression_total)}%"
         %td
-          %a{href:p.url}
+          %a{href:p.url,target:'_blank'}
             %img.x2{src:image_url('ui/link.svg')}
