@@ -30,8 +30,6 @@
       .mb3
         = f.label :website_url
         = f.text_field :website_url
-
-    - if webmaster?
       .mb3
         = f.label :address1
         = f.text_field :address1
@@ -51,14 +49,14 @@
         = f.label :phone
         = f.text_field :phone
 
-      .mb3
-        = f.label :password, 'Change password'
-        %i (leave blank for no change)
-        .row
-          .col-md-6
-            = f.password_field :password, autocomplete: "off", placeholder: "New password"
-          .col-md-6
-            = f.password_field :password_confirmation, autocomplete: "off", placeholder: "New password (again)"
+    .mb3
+      = f.label :password, 'Change password'
+      %i (leave blank for no change)
+      .row
+        .col-md-6
+          = f.password_field :password, autocomplete: "off", placeholder: "New password"
+        .col-md-6
+          = f.password_field :password_confirmation, autocomplete: "off", placeholder: "New password (again)"
     .row
       .col-md-8
         = f.password_field :current_password, autocomplete: "off", placeholder: "Your current password (required)", required:'required'

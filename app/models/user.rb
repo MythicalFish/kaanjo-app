@@ -6,8 +6,18 @@ class User < ActiveRecord::Base
 
   validates :first_name, length: {minimum: 2, maximum: 12}
   validates :last_name, length: {minimum: 2, maximum: 30}
-  validates :website_url, length: {minimum: 6, maximum: 60}
-  validates :website_name, length: {minimum: 3, maximum: 60}
+
+  validate :webmaster_validations
+
+  def webmaster_validations
+    return if admin?
+    if website_url.length < 6 || website_url.length > 60
+      errors.add(:website_url,'Website URL must be between 6 and 60 characters')
+    end
+    if website_name.length < 3 || website_name.length > 60
+      errors.add(:website_name,'Website URL must be between 3 and 60 characters')
+    end
+  end
 
   before_create :assign_sid
 
