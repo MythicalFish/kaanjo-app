@@ -1,4 +1,4 @@
-%img.kaanjo-status-icon{src:"http://#{site_url}#{reaction.scenario.image_url}"}
-- number = product.get_reaction_total({type:reaction.scenario})
-- if reaction.scenario.message
-  = reaction.scenario.message.sub('{number}',number.to_s)
+- s = reaction.scenario
+%img.kaanjo-status-icon{src:"http://#{site_url}#{s.image_url}"}
+- if s.message
+  = s.message.sub('{number}',product.get_reaction_total({type:s}).to_s)
