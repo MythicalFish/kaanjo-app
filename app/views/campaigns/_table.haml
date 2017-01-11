@@ -2,23 +2,33 @@
   %thead
     %tr
       %td ID
-      %td Product name
-      %td Impressions
-      %td Reactions
-      %td CTR
+      %td= sort_link('name','Name')
+      %td= sort_link('impression_total','Impressions')
+      %td
+        - if type
+          Clicks
+        - else
+          = sort_link('reaction_total','Clicks')
+      %td
+        - if type
+          CTR
+        - else
+          = sort_link('ctr','CTR')
       %td Link
   %tbody
     - campaign.products.with_totals(sorted).each do |p|
       - if type
         - reaction_total = p.send("type_total_#{type}")
+        - ctr = p.send("type_ctr_#{type}")
       - else
         - reaction_total = p.reaction_total
+        - ctr = p.ctr
       %tr
         %td= p.sid
         %td= p.name
         %td= p.impression_total
         %td= reaction_total
-        %td= "#{calculate_ctr(reaction_total,p.impression_total)}%"
+        %td= "#{ctr}%"
         %td
           %a{href:p.url,target:'_blank'}
             %img.x2{src:image_url('ui/link.svg')}

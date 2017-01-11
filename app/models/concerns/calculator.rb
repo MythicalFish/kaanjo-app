@@ -5,7 +5,8 @@ module Calculator
     after_find :setup_totals
 
     attr_accessor :reaction_total, :impression_total, :ctr, 
-      :type_total_1, :type_total_2, :type_total_3, :type_total_4, :type_total_5
+      :type_total_1, :type_total_2, :type_total_3, :type_total_4, :type_total_5,
+      :type_ctr_1, :type_ctr_2, :type_ctr_3, :type_ctr_4, :type_ctr_5
 
     @@opts = { from: Date.new(2016,11), to: Date.today }
 
@@ -149,6 +150,10 @@ module Calculator
         instance_variable_set(
           "@type_total_#{i}",
           self.get_reaction_total({type:t}.merge(opts))
+        )
+        instance_variable_set(
+          "@type_ctr_#{i}",
+          ((instance_variable_get("@type_total_#{i}").to_f / @impression_total.to_f) * 100).round(2)
         )
       end
 
