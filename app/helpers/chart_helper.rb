@@ -17,7 +17,7 @@ module ChartHelper
     gray = '#E9EDEF'
 
     c.each do |date,value|
-      dates << date 
+      dates << Date.strptime(date).strftime('%b %d')
       values << value[selected_metric[:key]]
     end
 
