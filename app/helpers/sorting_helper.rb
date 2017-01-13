@@ -22,7 +22,7 @@ module SortingHelper
 
   def sorted
 
-    order_by = :impression_total
+    order_by = :ctr
     order_by = params[:a].to_sym if params[:a]
 
     direction = 'DESC'

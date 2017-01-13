@@ -1,22 +1,18 @@
+- sorting = sorted
+- if type && !params.key?(:a)
+  - sorting[:order_by] = "type_ctr_#{type}".to_sym
+
 %table
   %thead
     %tr
       %td ID
       %td= sort_link('name','Name')
       %td= sort_link('impression_total','Impressions')
-      %td
-        - if type
-          Clicks
-        - else
-          = sort_link('reaction_total','Clicks')
-      %td
-        - if type
-          CTR
-        - else
-          = sort_link('ctr','CTR')
+      %td= sort_link('reaction_total','Clicks')
+      %td= sort_link(nil,'CTR')
       %td Link
   %tbody
-    - campaign.products.with_totals(sorted).each do |p|
+    - campaign.products.with_totals(sorting).each do |p|
       - if type
         - reaction_total = p.send("type_total_#{type}")
         - ctr = p.send("type_ctr_#{type}")
