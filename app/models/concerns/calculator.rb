@@ -151,9 +151,10 @@ module Calculator
           "@type_total_#{i}",
           self.get_reaction_total({type:t}.merge(opts))
         )
+        ctr = ((instance_variable_get("@type_total_#{i}").to_f / @impression_total.to_f) * 100).round(2)
         instance_variable_set(
           "@type_ctr_#{i}",
-          ((instance_variable_get("@type_total_#{i}").to_f / @impression_total.to_f) * 100).round(2)
+          ctr.nan? ? Float(0) : ctr
         )
       end
 
