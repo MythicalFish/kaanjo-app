@@ -1,6 +1,7 @@
 GIT
   remote: git://github.com/vertaxe/websocket-rails.git
-  revision: fc84d6c65cedb3dfb4ea494e9436ffb596f54115
+  revision: 3616deb0150b2a5a0ca1e94298232b5249696e51
+  ref: 3616deb
   specs:
     websocket-rails (0.7.0)
       em-synchrony
