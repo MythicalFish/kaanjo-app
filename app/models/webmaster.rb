@@ -37,7 +37,8 @@ class Webmaster < User
     end
 
     uri = URI.parse(self.website_url)
-    url = protocol << uri.host.sub('www.', '')
+    #url = protocol << uri.host.sub('www.', '')
+    url = protocol << uri.host
     url = url << ':8000' if url.include?('localhost')
     self.website_url = url
 
