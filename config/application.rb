@@ -36,7 +36,7 @@ module ReactionsAdmin
     # Enable websocket-rails to work
     config.middleware.delete Rack::Lock
 
-    config.cache_store = :redis_store, "redis://localhost:6379/0/cache", { expires_in: 90.minutes }
+    config.cache_store = :redis_store, "redis://localhost:6379/0/cache", { expires_in: 48.hours }
 
   end
 end
