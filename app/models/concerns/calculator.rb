@@ -8,7 +8,7 @@ module Calculator
       :type_total_1, :type_total_2, :type_total_3, :type_total_4, :type_total_5,
       :type_ctr_1, :type_ctr_2, :type_ctr_3, :type_ctr_4, :type_ctr_5
 
-    @@opts = { from: Date.new(2016,11), to: Date.today }
+    @@opts = { from: Date.today, to: Date.today }
 
     def with_totals opts = {}
       @@opts = @@opts.merge(opts)
