@@ -11,23 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124114321) do
+ActiveRecord::Schema.define(version: 20170125153701) do
 
   create_table "campaigns", force: :cascade do |t|
-    t.integer  "relative_id",  limit: 4,                   null: false
-    t.integer  "webmaster_id", limit: 4,   default: 0
-    t.string   "name",         limit: 255,                 null: false
-    t.string   "description",  limit: 255
-    t.string   "site_path",    limit: 255
-    t.boolean  "enabled",                  default: false
+    t.integer  "relative_id",    limit: 4,                   null: false
+    t.integer  "webmaster_id",   limit: 4,   default: 0
+    t.string   "name",           limit: 255,                 null: false
+    t.string   "description",    limit: 255
+    t.string   "site_path",      limit: 255
+    t.boolean  "enabled",                    default: false
     t.date     "start_date"
     t.date     "end_date"
-    t.string   "question",     limit: 255,                 null: false
-    t.boolean  "is_default",               default: false
+    t.string   "question",       limit: 255,                 null: false
+    t.boolean  "is_default",                 default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "deleted",                  default: false
-    t.string   "social_proof", limit: 255,                 null: false
+    t.boolean  "deleted",                    default: false
+    t.string   "social_proof",   limit: 255,                 null: false
+    t.integer  "products_count", limit: 4
   end
 
   add_index "campaigns", ["created_at"], name: "index_campaigns_on_created_at", using: :btree
