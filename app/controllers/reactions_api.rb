@@ -162,6 +162,9 @@ class ReactionsApi < WebsocketRails::BaseController
     end
 
     if !@product && @webmaster.creation_enabled?
+      if @campaign.products.length > 300
+        failure "Product count exceeds 300, no more can be created"
+      end
       @product = @campaign.products.create({
         name: @message[:product_name],
         sid:  @message[:product_sid],

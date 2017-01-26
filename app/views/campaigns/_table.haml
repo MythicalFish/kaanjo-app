@@ -12,7 +12,7 @@
       %td= sort_link(nil,'CTR')
       %td Link
   %tbody
-    - campaign.products.with_totals(sorting).each do |p|
+    - campaign.products.limit(300).with_totals(sorting).each do |p|
       - if type
         - reaction_total = p.send("type_total_#{type}")
         - ctr = p.send("type_ctr_#{type}")
