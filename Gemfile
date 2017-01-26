@@ -26,8 +26,6 @@ gem 'faye-websocket', '0.10.0'
 gem 'eventmachine'
 gem 'newrelic_rpm'
 
-gem 'redis-rails', '~> 4'
-
 group :development do
   gem 'shog'
   gem 'byebug'
