@@ -73,7 +73,7 @@ module Calculator
         "/type-#{type}" <<
         "/#{opts[:day].to_s}"
 
-      cache_opts = {}
+      cache_opts = { expires_in: 14.days }
 
       if opts[:day] == Date.today
         cache_opts[:expires_in] = 10.minutes
