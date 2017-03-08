@@ -129,24 +129,26 @@ class ReactionsApi < WebsocketRails::BaseController
 
   def find_customer
 
-    unless @campaign
+    if @campaign
+
+      @customer = Customer.find_by_sid(@message[:customer_sid])
+
+      if !@customer
+        @customer = @campaign.customers.create
+        @response[:c_sid] = @customer.sid
+        msg "Customer created: #{@customer.sid}"
+      else
+        msg "Customer found: #{@customer.sid}"
+      end
+
+      if @customer
+        set :customer, @customer
+      else
+        failure(@customer.errors)
+      end
+
+    else
       failure('"@campaign" not set, but is required for "find_customer" action')
-    end
-
-    @customer = Customer.find_by_sid(@message[:customer_sid])
-
-    if !@customer
-      @customer = @campaign.customers.create
-      @response[:c_sid] = @customer.sid
-      msg "Customer created: #{@customer.sid}"
-    else
-      msg "Customer found: #{@customer.sid}"
-    end
-
-    if @customer
-      set :customer, @customer
-    else
-      failure(@customer.errors)
     end
 
   end
