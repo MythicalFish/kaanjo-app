@@ -14,9 +14,14 @@ class ReactionsApi < WebsocketRails::BaseController
     find_campaign
     failure('campaign not found') unless set[:campaign]
     find_customer
-    find_product
-    impress
-    success @response
+    if set[:customer]
+      find_product
+      impress
+      success @response
+    else
+      failure('customer not found')
+    end
+    # i'm aware the above is coded strangely but i just couldn't seem to kill a NilClass error...
   end
 
   def react
