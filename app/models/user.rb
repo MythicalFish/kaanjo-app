@@ -11,10 +11,10 @@ class User < ActiveRecord::Base
 
   def webmaster_validations
     return if admin?
-    if website_url.length < 6 || website_url.length > 60
+    if !website_url || website_url.length < 6 || website_url.length > 60
       errors.add(:website_url,'Website URL must be between 6 and 60 characters')
     end
-    if website_name.length < 3 || website_name.length > 60
+    if !website_name || website_name.length < 3 || website_name.length > 60
       errors.add(:website_name,'Website URL must be between 3 and 60 characters')
     end
   end
