@@ -30,3 +30,6 @@
 /shared/
 	
 /public/*
+
+# Ignore DB config
+/config/database.yml
