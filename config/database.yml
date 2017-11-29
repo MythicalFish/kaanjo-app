@@ -1,7 +1,7 @@
 default: &default
   adapter: mysql2
   encoding: utf8
-  database: reactions
+  database: kaanjo
   pool: 5
   username: root
   password:
@@ -11,8 +11,3 @@ development:
 
 production:
   <<: *default
-  database: <%= ENV['RDS_DB'] %>
-  username: <%= ENV['RDS_USER'] %>
-  password: <%= ENV['RDS_PASSWORD'] %>
-  host:     <%= ENV['RDS_ENDPOINT'] %>
-  port:     <%= ENV['RDS_PORT'] %>
