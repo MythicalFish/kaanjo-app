@@ -38,6 +38,11 @@ class Campaign < ActiveRecord::Base
     return true if start_date <= Date.today && end_date > Date.today
     return false
   end
+  
+  def status
+    return 'Running' if running?
+    'Not running'
+  end
 
   private
 
