@@ -29,10 +29,11 @@
 .sass-cache
 /shared/
 	
-/public/*
-
 # Ignore DB config
 /config/database.yml
 
 # Ignore Figaro
 /config/application.yml
+
+# Uploads
+/public/emoticons
