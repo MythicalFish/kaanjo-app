@@ -33,3 +33,6 @@
 
 # Ignore DB config
 /config/database.yml
+
+# Ignore Figaro
+/config/application.yml
