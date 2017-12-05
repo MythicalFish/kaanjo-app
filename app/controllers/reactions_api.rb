@@ -282,14 +282,7 @@ class ReactionsApi < WebsocketRails::BaseController
   end
 
   def test_mode?
-    if \
-      set[:test_mode] == true ||\
-      ENV['RACK_ENV'] == 'development' ||\
-      request.env['HTTP_ORIGIN'] == 'http://dashboard.kaanjo.co'
-        return true
-    else
-      return false
-    end
+    set[:test_mode] == true || ENV['RACK_ENV'] == 'development'
   end
 
 end

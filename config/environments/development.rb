@@ -49,7 +49,7 @@ Rails.application.configure do
     :address        => 'smtp.gmail.com',
     :domain         => 'mail.google.com',
     :port           => 587,
-    :user_name      => 'hi@kaanjo.co',
+    :user_name      => 'hi@ENV['KAANJO__DOMAIN']',
     :password       => 'i=XFjMx8M',
     :authentication => :plain,
     :enable_starttls_auto => true

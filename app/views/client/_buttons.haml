@@ -6,7 +6,7 @@
 //  %img{src:static_asset_url('info.svg')}
 //  #kaanjo-info-bubble
 //    Powered by 
-//    %a{href:'http://kaanjo.co',target:'_blank'} Kaanjo
+//    %a{href:'ENV['KAANJO__URL']',target:'_blank'} Kaanjo
 
 - unless @campaign.question.blank?
   #kaanjo-title
@@ -24,7 +24,7 @@
     = render partial: 'client/status', locals: { reaction: @reaction, product: @product }
 
 #kaanjo-power
-  %a{href:'http://kaanjo.co',target:'_blank'}
+  %a{href:ENV['KAANJO__URL'], target:'_blank'}
     %img{src:"http://#{site_url}#{image_path('powered-by.png')}"}
 
 = render partial: 'client/style'

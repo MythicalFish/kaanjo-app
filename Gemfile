@@ -24,7 +24,7 @@ gem 'puma'
 gem 'websocket-rails', github: 'vertaxe/websocket-rails', ref: '3616deb'
 gem 'faye-websocket', '0.10.0'
 gem 'eventmachine'
-gem 'newrelic_rpm'
+gem 'figaro'
 
 group :development do
   gem 'shog'

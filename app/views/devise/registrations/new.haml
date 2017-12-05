@@ -26,6 +26,6 @@
     = f.submit "Sign up", class: "btn btn-blue btn-wide rounded"
   .h5
     By signing up you agree with our 
-    %a{href:'http://kaanjo.co/terms-conditions', target: '_blank'} Terms of Service 
+    %a{href:"#{ENV['KAANJO__URL']}/terms-conditions", target: '_blank'} Terms of Service 
     and
-    %a{href:'http://kaanjo.co/privacy-policy', target: '_blank'} Privacy Policy
+    %a{href:"#{ENV['KAANJO__URL']}/privacy-policy", target: '_blank'} Privacy Policy
