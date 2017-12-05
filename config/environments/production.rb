@@ -77,6 +77,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.site_url = ENV['KAANJO_DASH__DOMAIN']
+  config.site_url = ENV['KAANJO__APP_DOMAIN']
 
 end
