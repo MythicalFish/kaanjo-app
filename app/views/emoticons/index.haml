@@ -10,9 +10,9 @@
   - next if emoticons.empty?
   %h3= c 
   .row.mb3
-    - emoticons.each do |e|
+    - emoticons.order(label: :asc).each do |e|
       .col-xs-1.p1
         %a.emoticon{href:edit_emoticon_url(e)}
-          %img{src:e.image.url}
+          %img.p1{src:e.image.url}
           %label.gray= e.label
 

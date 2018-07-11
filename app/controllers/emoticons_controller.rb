@@ -4,7 +4,6 @@ class EmoticonsController < ApplicationController
 
   def index
     @title = "Emoticons"
-    @emoticons = Emoticon.all
   end
 
   def edit

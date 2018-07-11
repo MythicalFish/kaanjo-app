@@ -1,7 +1,7 @@
 namespace :campaign_templates do
   task reset: :environment do 
     
-    CampaignTemplate.all.delete_all
+    CampaignTemplate.all.destroy_all
 
     c = CampaignTemplate.create( 
       name: 'Default 1', 
